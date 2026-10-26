@@ -1,14 +1,11 @@
-# Publishes the interactive simulator to GitHub Pages / Publica el simulador interactivo en GitHub Pages.
-# One-time setup / Configuración única: Settings → Pages → Build and deployment → Source: "GitHub Actions".
-# Private repos need a paid plan for Pages: the job is skipped unless the repo is public or the
-# repository variable PAGES_ENABLED is "true" (Settings → Secrets and variables → Actions → Variables).
-# Los repos privados necesitan un plan de pago para Pages: el trabajo se omite salvo que el repo sea
-# público o la variable PAGES_ENABLED valga "true".
+# Publishes the interactive simulator to GitHub Pages from the repository's default branch.
+# Publica el simulador interactivo en GitHub Pages desde la rama por defecto del repositorio.
+# If the first run cannot enable Pages by itself / Si la primera ejecución no puede activar Pages sola:
+# Settings → Pages → Build and deployment → Source: "GitHub Actions".
 name: Pages
 
 on:
   push:
-    branches: [main]
     paths: ["simulator/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 
@@ -23,7 +20,11 @@ concurrency:
 
 jobs:
   deploy:
-    if: ${{ !github.event.repository.private || vars.PAGES_ENABLED == 'true' }}
+    # Only the default branch deploys; private repos need PAGES_ENABLED=true (paid plan).
+    # Solo despliega la rama por defecto; los repos privados necesitan PAGES_ENABLED=true (plan de pago).
+    if: >-
+      github.ref_name == github.event.repository.default_branch &&
+      (!github.event.repository.private || vars.PAGES_ENABLED == 'true')
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -31,6 +32,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: simulator

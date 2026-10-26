@@ -18,7 +18,7 @@ When you finish a mock exam you see your score, the result **per topic** and a q
 
 - **Online (recommended, works on your phone):** the published version at the link Claude shared with you.
 - **Locally:** double-click `simulator/index.html` to open it in any browser (nothing to install).
-- **GitHub Pages:** the [`pages.yml`](../.github/workflows/pages.yml) workflow publishes the simulator at `https://frank1808k.github.io/blend360/` every time it changes on `main`. One-time setup: *Settings → Pages → Source: **GitHub Actions***. Your repository is **private**: on GitHub's free plan, Pages only works if you make it public. With GitHub Pro, create the variable `PAGES_ENABLED = true` (*Settings → Secrets and variables → Actions → Variables*). Until then, the workflow is skipped without failing.
+- **GitHub Pages:** [frank1808k.github.io/blend360](https://frank1808k.github.io/blend360/). The [`pages.yml`](../.github/workflows/pages.yml) workflow republishes it every time the simulator changes on the repository's default branch. If it ever stops publishing, check *Settings → Pages → Source: **GitHub Actions***.
 
 **Keyboard shortcuts:** `A`–`D` or `1`–`4` to answer, `←` `→` to move between questions, `T` to show the translation.
 
