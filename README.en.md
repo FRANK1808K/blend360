@@ -52,6 +52,7 @@ Every document exists in **English and Spanish**. The exercises and mock exams a
 | 07 | [Problem solving](07-resolucion-de-problemas/README.en.md) | The UMPIRE method, time management, logic, percentages, probability, statistics, business cases | Solved exercises |
 | 08 | [Statistics and machine learning](08-estadistica-y-ml/README.en.md) | Descriptive stats, probability, inference, **A/B tests**, regression, ML, metrics; a study route through your Drive notes | [25 questions](08-estadistica-y-ml/preguntas.en.md) + [from-scratch script](08-estadistica-y-ml/estadistica_ml_practica.py) |
 | EN | [Technical English (A2 → functional)](english/README.en.md) | Exam keywords, false friends, vocabulary, minimum grammar, interview | [Exercises](english/ejercicios-ingles.en.md) + [209 flashcards](flashcards/README.en.md) |
+| AI | [AWS AI Practitioner (AIF-C01)](aws-ai-practitioner/README.en.md) | 5 official domains (v1.1), Bedrock, SageMaker, responsible AI, governance, RAG lab, cheatsheets | [2 mock exams (130 questions)](aws-ai-practitioner/practice-questions/README.md) + [simulator](aws-ai-practitioner/simulator/README.md) + [109 flashcards](aws-ai-practitioner/flashcards/README.md) |
 
 ## Practice
 
@@ -83,6 +84,7 @@ blend360/
 ├── 04-algoritmos-y-estructuras/Algorithms and data structures: theory + 20 problems
 ├── 05-bases-de-datos/          Databases: theory
 ├── 06-aws/                     Cloud + data analytics + 30 questions
+├── aws-ai-practitioner/        Full AWS Certified AI Practitioner (AIF-C01) preparation
 ├── 07-resolucion-de-problemas/ Problem solving: method, logic, statistics, cases
 ├── 08-estadistica-y-ml/        Statistics, A/B tests and ML + 25 questions
 ├── english/                    Technical English for A2 speakers

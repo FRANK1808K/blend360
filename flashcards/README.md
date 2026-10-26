@@ -16,6 +16,8 @@
 | `razonamiento` | 7 | Reglas de razonamiento abstracto |
 | `estadistica_ml` | 24 | Estadística, pruebas A/B, machine learning y métricas |
 
+> 💡 **AWS Certified AI Practitioner:** para la certificación del 16 de noviembre, dispones además de las 109 tarjetas especializadas de AIF-C01 en [`aws-ai-practitioner/flashcards/aif-c01-flashcards.csv`](../aws-ai-practitioner/flashcards/README.md).
+
 ## Importar en Anki (gratis: [apps.ankiweb.net](https://apps.ankiweb.net/); en Android, AnkiDroid)
 
 1. Crea un mazo llamado **Blend360**.

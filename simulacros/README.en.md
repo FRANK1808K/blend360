@@ -8,6 +8,9 @@
 | [Abstract reasoning #1](simulacro-razonamiento-01.en.md) | 30 min | 30 questions: numbers, letters, dominoes, figures, matrices | Week 3, and again in week 7 |
 | [Interactive simulator](../simulator/README.en.md) | 30 / 50 min | Random question bank + **generated figures** + timer | From week 2, 2–3 times a week |
 | [AWS: 30 questions](../06-aws/preguntas.en.md) | 30 min | Cloud + data analytics on AWS | Week 2 (also useful for the AIF-C01) |
+| [AWS AI Practitioner: Mock Exam 01](../aws-ai-practitioner/practice-questions/en/mock-exam-01.md) | 90 min | 65 official AIF-C01 questions | Week 3 |
+| [AWS AI Practitioner: Mock Exam 02](../aws-ai-practitioner/practice-questions/en/mock-exam-02.md) | 90 min | 65 official AIF-C01 questions | Week 3 |
+| [AIF-C01 Interactive Simulator](../aws-ai-practitioner/simulator/README.md) | 90 min | 130 questions with timer and language switch | Week 3 |
 
 Each mock exam has a Spanish twin (`.md` without `.en`) with a **hidden Spanish translation under every question**. Take the English version when you want real exam conditions.
 

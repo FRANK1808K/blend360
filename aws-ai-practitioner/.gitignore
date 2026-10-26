@@ -1,0 +1,21 @@
+# Artefactos generados por los laboratorios (contienen ARNs e IDs de cuenta reales)
+labs/**/build/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node (herramientas de lint locales)
+node_modules/
+
+# Sistema / editores
+.DS_Store
+.idea/
+.vscode/
+
+# Credenciales: nunca deben versionarse
+.env
+*.pem
+credentials

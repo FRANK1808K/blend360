@@ -1099,6 +1099,18 @@ function homeView() {
         <p>${u("guideDesc")}</p>
         <a class="btn" href="${GUIDE_URL}${LANG === "en" ? "en/" : ""}" target="_blank" rel="noopener">${u("guideBtn")}</a>
       </article>
+      <article class="mode" style="border-color: #FF9900;">
+        <span class="ico" style="background: rgba(255, 153, 0, 0.15); color: #FF9900;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </span>
+        <h2>AWS AI Practitioner (AIF-C01)</h2>
+        <p class="meta">${LANG === "en" ? "130 questions · 2 mock exams · Guide" : "130 preguntas · 2 simulacros · Guía"}</p>
+        <p>${LANG === "en" ? "Official preparation: 5 domains, Bedrock, RAG, responsible AI, interactive simulator, and cheatsheets." : "Preparación oficial: 5 dominios, Bedrock, RAG, IA responsable, simulador interactivo y cheatsheets."}</p>
+        <div class="row" style="gap:8px;margin-top:4px;">
+          <a class="btn primary mini" href="aws-ai-practitioner/simulator/" target="_blank" rel="noopener">${LANG === "en" ? "Open Simulator ↗" : "Abrir Simulador ↗"}</a>
+          <a class="btn ghost mini" href="${GUIDE_URL}${LANG === "en" ? "en/aws-ai-practitioner/" : "aws-ai-practitioner/"}" target="_blank" rel="noopener">${LANG === "en" ? "Read Guide ↗" : "Ver Guía ↗"}</a>
+        </div>
+      </article>
       <article class="mode">
         <h3>${t("lastTitle")}</h3>
         ${hist.length ? `<div class="history">${hist.map(h => `<div><span>${esc(fmtDate(h.date))} · ${esc(t("modes")[h.mode] || h.mode)}</span><span>${esc(h.score)} · ${esc(h.time)}</span></div>`).join("")}</div>`

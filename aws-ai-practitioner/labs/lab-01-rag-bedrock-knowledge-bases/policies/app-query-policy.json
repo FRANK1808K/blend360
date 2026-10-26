@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "QueryKnowledgeBase",
+      "Effect": "Allow",
+      "Action": ["bedrock:Retrieve", "bedrock:RetrieveAndGenerate"],
+      "Resource": "arn:aws:bedrock:__REGION__:__ACCOUNT_ID__:knowledge-base/__KB_ID__"
+    },
+    {
+      "Sid": "InvokeGenerationModel",
+      "Effect": "Allow",
+      "Action": ["bedrock:InvokeModel", "bedrock:GetInferenceProfile"],
+      "Resource": [
+        "arn:aws:bedrock:*::foundation-model/amazon.nova-lite-v1:0",
+        "arn:aws:bedrock:__REGION__:__ACCOUNT_ID__:inference-profile/us.amazon.nova-lite-v1:0"
+      ]
+    }
+  ]
+}

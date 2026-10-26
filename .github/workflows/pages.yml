@@ -41,7 +41,10 @@ jobs:
           pip install --quiet -r guide/requirements.txt
           python scripts/build_guide.py --strict --out _site/guia
       - name: Add the simulator
-        run: cp -r simulator/. _site/
+        run: |
+          cp -r simulator/. _site/
+          mkdir -p _site/aws-ai-practitioner/simulator
+          cp -r aws-ai-practitioner/simulator/. _site/aws-ai-practitioner/simulator/
       - uses: actions/configure-pages@v5
         with:
           enablement: true

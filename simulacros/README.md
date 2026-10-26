@@ -8,6 +8,9 @@
 | [Razonamiento abstracto #1](simulacro-razonamiento-01.md) | 30 min | 30 preguntas: números, letras, dominós, figuras, matrices | Semana 3 y repetir en la semana 7 |
 | [Simulador interactivo](../simulator/README.md) | 30 / 50 min | Banco aleatorio + **figuras generadas** + cronómetro | Desde la semana 2, 2–3 veces por semana |
 | [AWS: 30 preguntas](../06-aws/preguntas.md) | 30 min | Nube + análisis de datos en AWS | Semana 2 (y te sirve para el AIF-C01) |
+| [AWS AI Practitioner: Simulacro 01](../aws-ai-practitioner/practice-questions/mock-exam-01.md) | 90 min | 65 preguntas oficiales AIF-C01 ([versión en inglés](../aws-ai-practitioner/practice-questions/en/mock-exam-01.md)) | Semana 3 |
+| [AWS AI Practitioner: Simulacro 02](../aws-ai-practitioner/practice-questions/mock-exam-02.md) | 90 min | 65 preguntas oficiales AIF-C01 ([versión en inglés](../aws-ai-practitioner/practice-questions/en/mock-exam-02.md)) | Semana 3 |
+| [Simulador interactivo AIF-C01](../aws-ai-practitioner/simulator/README.md) | 90 min | 130 preguntas con cronómetro y selector de idioma | Semana 3 |
 
 Las preguntas de cada simulacro están **en inglés**, como en el examen, con la **traducción al español escondida** debajo de cada una. Cada simulacro tiene además una versión 100 % en inglés (`.en.md`) para practicar en condiciones reales.
 

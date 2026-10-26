@@ -54,6 +54,7 @@ Cada documento existe **en español y en inglés**. Los ejercicios y simulacros 
 | 07 | [Resolución de problemas](07-resolucion-de-problemas/README.md) | Método UMPIRE, gestión del tiempo, lógica, porcentajes, probabilidad, estadística, casos de negocio | Ejercicios resueltos |
 | 08 | [Estadística y machine learning](08-estadistica-y-ml/README.md) | Descriptiva, probabilidad, inferencia, **pruebas A/B**, regresión, ML, métricas; ruta de estudio con tus apuntes de Drive | [25 preguntas](08-estadistica-y-ml/preguntas.md) + [script desde cero](08-estadistica-y-ml/estadistica_ml_practica.py) |
 | EN | [Inglés técnico (A2 → funcional)](english/README.md) | Palabras clave de los enunciados, falsos amigos, vocabulario, gramática mínima, entrevista | [Ejercicios](english/ejercicios-ingles.md) + [209 flashcards](flashcards/README.md) |
+| AI | [AWS AI Practitioner (AIF-C01)](aws-ai-practitioner/README.md) | 5 dominios oficiales (v1.1), Bedrock, SageMaker, IA responsable, gobernanza, lab RAG, cheatsheets | [2 simulacros (130 preguntas)](aws-ai-practitioner/practice-questions/README.md) + [simulador](aws-ai-practitioner/simulator/README.md) + [109 flashcards](aws-ai-practitioner/flashcards/README.md) |
 
 ## Practicar
 
@@ -85,6 +86,7 @@ blend360/
 ├── 04-algoritmos-y-estructuras/Teoría + 20 problemas
 ├── 05-bases-de-datos/          Teoría
 ├── 06-aws/                     Nube + análisis de datos + 30 preguntas
+├── aws-ai-practitioner/        Certificación AWS Certified AI Practitioner (AIF-C01 completa)
 ├── 07-resolucion-de-problemas/ Método, lógica, estadística, casos
 ├── 08-estadistica-y-ml/        Estadística, pruebas A/B y ML + 25 preguntas
 ├── english/                    Inglés técnico para A2

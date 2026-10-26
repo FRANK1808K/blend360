@@ -39,7 +39,7 @@ Oct 26 ───────────── Nov 16 │ Nov 17 ─────
 
 ## PHASE 1: AWS AIF-C01 + Blend360 base
 
-For AWS, use your repository **[AWS AI Practitioner in Spanish](https://github.com/FRANK1808K/AWS-IA-PRACTITIONER-EN-ESPA-OL)** (domains, mock exams and retake plan).
+For AWS, use the integrated module **[AWS AI Practitioner in Spanish](../aws-ai-practitioner/README.en.md)** ([domains](../aws-ai-practitioner/README.en.md#domains), [mock exams](../aws-ai-practitioner/practice-questions/README.md) and [retake plan](../aws-ai-practitioner/guides/retake-plan.md)).
 
 ### Week 1 · Oct 26 – Nov 1
 

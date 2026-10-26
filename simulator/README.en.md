@@ -19,6 +19,8 @@ A browser simulator for both parts of the test, with a **code lab for writing co
 
 When you finish a mock exam you see your score, the result **per topic** and a question-by-question review with explanations. Your last 8 attempts are saved in your browser.
 
+> 💡 **AWS AI Practitioner Simulator:** To practice the official AIF-C01 exam (65 questions, 90 minutes) with language switching and detailed rationales, visit the [AWS AI Practitioner Simulator](../aws-ai-practitioner/simulator/README.md).
+
 ## Code lab
 
 No options to choose from here: **you write the code**, run it, and the lab grades it. It uses the same exercises, solutions and tests as the repository ([`scripts/build_lab.py`](../scripts/build_lab.py) embeds them, and CI checks they are up to date).

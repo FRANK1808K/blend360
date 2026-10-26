@@ -99,6 +99,15 @@ plugins:
             Algoritmos: Algorithms
             AWS y bases de datos: AWS and databases
             Abrir el simulador ↗: Open the simulator ↗
+            AWS AI Practitioner (AIF-C01): AWS AI Practitioner (AIF-C01)
+            Certificación AIF-C01: AIF-C01 Certification
+            Novedades v1.1: v1.1 Updates
+            Dominio 1 · Fundamentos: Domain 1 · Fundamentals
+            Dominio 2 · GenAI: Domain 2 · GenAI
+            Dominio 3 · Modelos: Domain 3 · Models
+            Dominio 4 · Responsable: Domain 4 · Responsible AI
+            Dominio 5 · Seguridad: Domain 5 · Security
+            Laboratorio RAG: RAG Lab
 
 nav:
   - Inicio:
@@ -123,6 +132,17 @@ nav:
           - Fundamentos: 06-aws/index.md
           - Análisis de datos: 06-aws/analisis-de-datos.md
           - 30 preguntas: 06-aws/preguntas.md
+      - AWS AI Practitioner (AIF-C01):
+          - Certificación AIF-C01: aws-ai-practitioner/index.md
+          - Novedades v1.1: aws-ai-practitioner/domains/00-exam-guide-v1.1-changes.md
+          - Dominio 1 · Fundamentos: aws-ai-practitioner/domains/01-fundamentals-ai-ml/index.md
+          - Dominio 2 · GenAI: aws-ai-practitioner/domains/02-fundamentals-generative-ai/index.md
+          - Dominio 3 · Modelos: aws-ai-practitioner/domains/03-applications-foundation-models/index.md
+          - Dominio 4 · Responsable: aws-ai-practitioner/domains/04-responsible-ai/index.md
+          - Dominio 5 · Seguridad: aws-ai-practitioner/domains/05-security-compliance-governance/index.md
+          - Cheatsheets: aws-ai-practitioner/cheatsheets/index.md
+          - Simulacros: aws-ai-practitioner/practice-questions/index.md
+          - Laboratorio RAG: aws-ai-practitioner/labs/index.md
       - Resolución de problemas: 07-resolucion-de-problemas/index.md
       - Estadística y ML:
           - 08-estadistica-y-ml/index.md

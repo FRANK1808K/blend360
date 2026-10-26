@@ -16,6 +16,8 @@
 | `razonamiento` | 7 | Abstract reasoning rules |
 | `estadistica_ml` | 24 | Statistics, A/B tests, machine learning and metrics |
 
+> 💡 **AWS Certified AI Practitioner:** for the November 16 certification exam, you also have 109 specialized AIF-C01 flashcards in [`aws-ai-practitioner/flashcards/aif-c01-flashcards.csv`](../aws-ai-practitioner/flashcards/README.md).
+
 ## Importing into Anki (free: [apps.ankiweb.net](https://apps.ankiweb.net/); on Android, AnkiDroid)
 
 1. Create a deck called **Blend360**.

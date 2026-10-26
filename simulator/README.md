@@ -19,6 +19,8 @@ Simulador en el navegador para las dos partes de la prueba, con un **laboratorio
 
 Al terminar un simulacro ves tu puntaje, el resultado **por tema** y la revisión pregunta por pregunta con la explicación. Tus últimos 8 intentos se guardan en tu navegador.
 
+> 💡 **Simulador AWS AI Practitioner:** Para practicar el examen oficial AIF-C01 (65 preguntas, 90 minutos) con selector de idioma y explicaciones detalladas, visita el [simulador de AWS AI Practitioner](../aws-ai-practitioner/simulator/README.md).
+
 ## Laboratorio de código
 
 Aquí no eliges entre opciones: **escribes el código**, lo ejecutas y el laboratorio lo corrige. Usa los mismos ejercicios, soluciones y pruebas del repositorio (los incrusta [`scripts/build_lab.py`](../scripts/build_lab.py), y la CI comprueba que estén al día).

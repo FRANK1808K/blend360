@@ -1,0 +1,46 @@
+[
+  {
+    "Description": "Rol de servicio de la Knowledge Base: leer/escribir vectores",
+    "Rules": [
+      {
+        "ResourceType": "collection",
+        "Resource": ["collection/__COLLECTION_NAME__"],
+        "Permission": ["aoss:DescribeCollectionItems"]
+      },
+      {
+        "ResourceType": "index",
+        "Resource": ["index/__COLLECTION_NAME__/*"],
+        "Permission": [
+          "aoss:DescribeIndex",
+          "aoss:ReadDocument",
+          "aoss:WriteDocument",
+          "aoss:UpdateIndex"
+        ]
+      }
+    ],
+    "Principal": ["__KB_ROLE_ARN__"]
+  },
+  {
+    "Description": "Identidad del laboratorio: crear y administrar el indice vectorial",
+    "Rules": [
+      {
+        "ResourceType": "collection",
+        "Resource": ["collection/__COLLECTION_NAME__"],
+        "Permission": ["aoss:DescribeCollectionItems", "aoss:CreateCollectionItems", "aoss:UpdateCollectionItems"]
+      },
+      {
+        "ResourceType": "index",
+        "Resource": ["index/__COLLECTION_NAME__/*"],
+        "Permission": [
+          "aoss:CreateIndex",
+          "aoss:DescribeIndex",
+          "aoss:UpdateIndex",
+          "aoss:DeleteIndex",
+          "aoss:ReadDocument",
+          "aoss:WriteDocument"
+        ]
+      }
+    ],
+    "Principal": ["__ADMIN_PRINCIPAL_ARN__"]
+  }
+]

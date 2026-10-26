@@ -1,0 +1,9 @@
+[
+  {
+    "Description": "Lab: acceso publico al endpoint de la coleccion (autenticado con IAM SigV4)",
+    "Rules": [
+      { "ResourceType": "collection", "Resource": ["collection/__COLLECTION_NAME__"] }
+    ],
+    "AllowFromPublic": true
+  }
+]

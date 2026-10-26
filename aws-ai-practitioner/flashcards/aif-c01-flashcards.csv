@@ -1,0 +1,110 @@
+front,back,tags
+"Diferencia entre AI, ML, DL y GenAI",AI: disciplina amplia. ML: aprende de datos. DL: redes neuronales profundas. GenAI: DL que genera contenido nuevo.,AIF-C01 D1
+¿Qué es la IA agéntica?,"Sistemas que usan un FM para razonar, planificar, invocar herramientas y ejecutar acciones de varios pasos hacia un objetivo.",AIF-C01 D1 v1.1
+Parámetro vs. hiperparámetro,"Parámetro: se aprende al entrenar (pesos). Hiperparámetro: se fija antes de entrenar (learning rate, epochs, batch size).",AIF-C01 D1
+Overfitting: síntoma y remedio,"Train alto, validación bajo (alta varianza). Remedio: más datos, regularización, early stopping, menos complejidad.",AIF-C01 D1
+Underfitting: síntoma y remedio,"Train y validación bajos (alto sesgo). Remedio: modelo más complejo, más features, más entrenamiento.",AIF-C01 D1
+Aprendizaje supervisado,Datos etiquetados. Clasificación (categoría) o regresión (número).,AIF-C01 D1
+Aprendizaje no supervisado,"Sin etiquetas: clustering (k-means), reducción de dimensionalidad (PCA), anomalías (Random Cut Forest).",AIF-C01 D1
+Aprendizaje por refuerzo,"Un agente aprende por prueba y error maximizando recompensas en un entorno (robótica, juegos, DeepRacer).",AIF-C01 D1
+Fórmula de la precisión (precision),TP / (TP + FP). Priorízala cuando el falso positivo es caro (spam).,AIF-C01 D1
+Fórmula del recall,"TP / (TP + FN). Priorízalo cuando el falso negativo es caro (cáncer, fraude).",AIF-C01 D1
+¿Cuándo usar F1-score?,Clases desbalanceadas y necesidad de equilibrar precisión y recall.,AIF-C01 D1
+¿Por qué no usar accuracy con clases desbalanceadas?,Un modelo que siempre predice la clase mayoritaria obtiene accuracy alta pero no detecta nada.,AIF-C01 D1
+RMSE vs. MAE,Ambas son de regresión. RMSE penaliza más los errores grandes; MAE es robusta a outliers.,AIF-C01 D1
+¿Cuándo ML tradicional en vez de un FM?,"Datos tabulares, decisiones reguladas que deben explicarse, determinismo, bajo costo y baja latencia.",AIF-C01 D1 v1.1
+Data leakage,Información del objetivo o del test filtrada al entrenamiento: métricas infladas que fallan en producción.,AIF-C01 D1
+SageMaker Ground Truth,Etiquetado de datos con humanos + etiquetado automático (aprendizaje activo).,AIF-C01 D1
+SageMaker Canvas,ML sin código para analistas de negocio.,AIF-C01 D1
+SageMaker Autopilot,AutoML: entrena y ajusta modelos automáticamente con visibilidad del proceso.,AIF-C01 D1
+SageMaker Data Wrangler,Preparación visual de datos y feature engineering.,AIF-C01 D1
+SageMaker Feature Store,Repositorio centralizado de features (online/offline) para reutilizarlas.,AIF-C01 D1
+SageMaker Pipelines,Orquestación CI/CD de flujos de ML (MLOps).,AIF-C01 D1
+SageMaker Model Registry,"Versionado, catálogo y aprobación de modelos.",AIF-C01 D1
+Serverless Inference,"Tráfico intermitente, escala a cero, tolera arranques en frío.",AIF-C01 D1
+Asynchronous Inference,"Payloads grandes (hasta 1 GB), procesos largos (hasta 1 h), cola de peticiones.",AIF-C01 D1
+Batch Transform,"Inferencia offline sobre un dataset completo en S3, sin endpoint persistente.",AIF-C01 D1
+Real-time endpoint,Baja latencia y tráfico sostenido; pagas por hora de instancia.,AIF-C01 D1
+¿Qué es un Foundation Model?,"Modelo grande pre-entrenado con datos masivos sin etiquetar, adaptable a muchas tareas.",AIF-C01 D2
+¿Qué es un token?,Unidad mínima de texto que procesa el modelo (≈ 4 caracteres en inglés). Se factura por token.,AIF-C01 D2
+Ventana de contexto,Máximo de tokens (entrada + salida) que el modelo puede manejar en una petición.,AIF-C01 D2
+Temperatura,Controla la aleatoriedad: baja = determinista y factual; alta = creativa y variada.,AIF-C01 D2
+Top-P,Muestrea del conjunto mínimo de tokens cuya probabilidad acumulada ≥ P.,AIF-C01 D2
+Top-K,Muestrea solo entre los K tokens más probables. K = 1 equivale a greedy.,AIF-C01 D2
+Embedding,Vector que representa el significado semántico; base de la búsqueda semántica y RAG.,AIF-C01 D2
+Modelo de difusión,"Genera imágenes eliminando ruido iterativamente (Stable Diffusion, Nova Canvas).",AIF-C01 D2
+RAG en una frase,Recupera información relevante de una fuente externa y la añade al prompt; actualizable sin re-entrenar y con citas.,AIF-C01 D2
+¿Cuándo fine-tuning?,"Cambiar estilo, formato o tarea específica con pares prompt–respuesta etiquetados.",AIF-C01 D2
+¿Cuándo continued pre-training?,Adaptar el modelo a un dominio con mucho texto sin etiquetar.,AIF-C01 D2
+Opción más barata para mejorar un FM,"Prompt engineering (zero/few-shot, instrucciones claras).",AIF-C01 D2
+Few-shot prompting,Incluir ejemplos entrada→salida en el prompt para guiar formato y estilo sin entrenar.,AIF-C01 D2
+Chain-of-thought,Pedir razonamiento paso a paso para problemas de lógica o varios pasos.,AIF-C01 D2
+ROUGE,Evaluación de RESÚMENES (solapamiento con referencias).,AIF-C01 D2
+BLEU,Evaluación de TRADUCCIÓN automática.,AIF-C01 D2
+BERTScore,Similitud SEMÁNTICA entre textos usando embeddings.,AIF-C01 D2
+Alucinación,"Salida plausible pero falsa o no respaldada. Mitigar con RAG, grounding check, temperatura baja.",AIF-C01 D2
+Precio por tokens,Se pagan tokens de entrada y de salida; los de salida son más caros. Menos tokens = menos costo y latencia.,AIF-C01 D2 v1.1
+Context engineering,"Decidir y estructurar qué entra en el contexto: instrucciones, ejemplos, herramientas, memoria, datos recuperados.",AIF-C01 D2 v1.1
+Model Context Protocol (MCP),Protocolo abierto que estandariza cómo los agentes se conectan con herramientas y datos externos (el 'USB-C de la IA').,AIF-C01 D2 v1.1
+Patrón supervisor multi-agente,Un agente coordinador delega subtareas en agentes especialistas y combina los resultados.,AIF-C01 D2 v1.1
+Memoria a corto vs. largo plazo de un agente,Corto: contexto de la sesión. Largo: preferencias y hechos entre sesiones (AgentCore Memory).,AIF-C01 D2 v1.1
+RLHF,Alinear un modelo con preferencias humanas mediante un modelo de recompensa.,AIF-C01 D2
+Amazon Bedrock,"Servicio serverless con API única para FMs de varios proveedores + KB, Agents, Guardrails, evaluación.",AIF-C01 D3
+Bedrock vs. SageMaker JumpStart,"Bedrock: serverless, mínimo esfuerzo. JumpStart: control de instancias, red y personalización profunda.",AIF-C01 D3
+Bedrock Knowledge Bases,"RAG gestionado: ingesta desde S3, chunking, embeddings, vector store, Retrieve / RetrieveAndGenerate con citas.",AIF-C01 D3
+Vector store por defecto de Bedrock KB,Amazon OpenSearch Serverless (Quick create).,AIF-C01 D3
+Otros vector stores de Bedrock KB,"Aurora PostgreSQL (pgvector), S3 Vectors, Neptune Analytics (GraphRAG), Pinecone, Redis Enterprise, MongoDB Atlas.",AIF-C01 D3
+Retrieve vs. RetrieveAndGenerate,Retrieve: devuelve solo los chunks. RetrieveAndGenerate: recupera y genera la respuesta con citas.,AIF-C01 D3
+Bedrock Agents: action group,APIs que el agente puede invocar (esquema OpenAPI o function details) ejecutadas por Lambda.,AIF-C01 D3
+Amazon Bedrock AgentCore,"Servicios para operar agentes en producción con cualquier framework: Runtime, Memory, Gateway, Identity, Policy, Observability, Evaluations, Browser, Code Interpreter.",AIF-C01 D3 v1.1
+AgentCore Gateway,"Convierte APIs, Lambda y servidores MCP en herramientas para los agentes.",AIF-C01 D3 v1.1
+Strands Agents,SDK open source de AWS (Python/TypeScript) para agentes 'model-driven': modelo + prompt + herramientas.,AIF-C01 D3 v1.1
+Kiro,"IDE agéntico de AWS con desarrollo spec-driven (requisitos → diseño → tareas), steering files y hooks.",AIF-C01 D3 v1.1
+AWS Transform,"Servicio agéntico para migrar y modernizar: mainframe COBOL, .NET Windows → Linux, VMware.",AIF-C01 D3 v1.1
+Amazon Quick,"Evolución de QuickSight: Quick Sight (BI), Quick Research, Quick Flows, Quick Automate, Quick Index.",AIF-C01 D3 v1.1
+Bedrock Guardrails: 6 políticas,"Content filters (incl. prompt attack), denied topics, word filters, sensitive info (PII), contextual grounding, automated reasoning.",AIF-C01 D3
+ApplyGuardrail API,"Aplica un guardrail a cualquier modelo, incluso fuera de Bedrock.",AIF-C01 D3
+Bedrock Prompt Management,"Plantillas de prompts con variables, variantes y VERSIONES para reproducibilidad y rollback.",AIF-C01 D3 v1.1
+Bedrock Model Distillation,Un modelo 'estudiante' pequeño aprende de un 'maestro' grande: más barato y rápido.,AIF-C01 D3
+Bedrock Model Evaluation,"Evaluación automática, humana y LLM-as-a-judge de FMs y RAG.",AIF-C01 D3
+LLM-as-a-judge,"Un LLM evalúa las respuestas de otro según criterios (corrección, completitud) a escala.",AIF-C01 D3 v1.1
+Métricas de negocio de una app GenAI,"Tasa de tareas completadas, satisfacción del usuario, costo por interacción, deflexión.",AIF-C01 D3 v1.1
+Amazon Comprehend,"NLP: sentimiento, entidades, frases clave, idioma, PII, clasificación personalizada.",AIF-C01 D3
+Amazon Textract,"Extrae texto, formularios y tablas de documentos escaneados (más allá del OCR).",AIF-C01 D3
+Amazon Rekognition,"Visión: objetos, rostros, moderación de contenido en imágenes y video.",AIF-C01 D3
+Amazon Transcribe,"Voz → texto; diarización, vocabulario personalizado, redacción de PII.",AIF-C01 D3
+Amazon Polly,"Texto → voz; SSML, voces neuronales y generativas.",AIF-C01 D3
+Amazon Lex,Chatbots de voz y texto basados en intents y slots (integración con Amazon Connect).,AIF-C01 D3
+Amazon Q Business,Asistente sobre datos corporativos que respeta los permisos (ACL) de las fuentes.,AIF-C01 D3
+Amazon Q Developer,"Asistente de código y de AWS: generación, escaneo de seguridad, transformación de código.",AIF-C01 D3
+Amazon Kendra,Búsqueda empresarial inteligente (retriever para RAG).,AIF-C01 D3
+Amazon Personalize,Recomendaciones personalizadas en tiempo real.,AIF-C01 D3
+PartyRock,Playground sin código para crear apps GenAI con Bedrock.,AIF-C01 D3
+Pilares de IA responsable,"Equidad, explicabilidad, transparencia, privacidad y seguridad, robustez/veracidad, safety, controlabilidad, gobernanza.",AIF-C01 D4
+SageMaker Clarify,Sesgo pre y post-entrenamiento + explicabilidad (SHAP) + evaluación de FMs.,AIF-C01 D4
+SageMaker Model Monitor,"Drift en producción: calidad de datos, calidad del modelo, sesgo, atribución de features.",AIF-C01 D4
+SageMaker Model Cards,"Documentación estandarizada: uso previsto, riesgo, métricas, consideraciones éticas.",AIF-C01 D4
+Amazon Augmented AI (A2I),Revisión humana (human-in-the-loop) por baja confianza o muestreo.,AIF-C01 D4
+AWS AI Service Cards,Documentación de AWS sobre uso previsto y limitaciones de sus servicios de IA.,AIF-C01 D4
+Sesgo de muestreo,El dataset no representa a la población real. Solución: datos diversos y representativos.,AIF-C01 D4
+Interpretabilidad vs. desempeño,Los modelos complejos suelen ser más precisos y menos interpretables.,AIF-C01 D4
+¿Bedrock entrena con mis prompts?,No. No se usan para entrenar modelos base ni se comparten con los proveedores.,AIF-C01 D4
+AI services opt-out policy,Política de AWS Organizations para que los servicios de IA no usen tu contenido para mejorar el servicio.,AIF-C01 D4
+Cross-region inference y residencia,Los inference profiles pueden procesar en otras regiones de la misma geografía.,AIF-C01 D4
+Responsabilidad del cliente en Bedrock,"IAM, datos, configuración (guardrails, cifrado, red, logging) y uso responsable.",AIF-C01 D5
+Generative AI Security Scoping Matrix,"Scopes: 1 app de consumo, 2 app empresarial, 3 modelo pre-entrenado, 4 modelo fine-tuned, 5 modelo propio.",AIF-C01 D5
+Bedrock sin pasar por Internet,Interface VPC endpoint (PrivateLink) para bedrock-runtime.,AIF-C01 D5
+CloudTrail vs. Model Invocation Logging,"CloudTrail: quién, cuándo y desde dónde (metadatos). Invocation logging: contenido de prompts y respuestas.",AIF-C01 D5
+Métricas de Bedrock en CloudWatch,"Invocations, InvocationLatency, InvocationThrottles, InputTokenCount, OutputTokenCount.",AIF-C01 D5
+Forzar un guardrail con IAM,Condición bedrock:GuardrailIdentifier en la política IAM.,AIF-C01 D5
+Restringir modelos en toda la organización,SCP de AWS Organizations con Deny y NotResource.,AIF-C01 D5
+On-Demand,"Pago por token, sin compromiso: cargas variables y prototipos.",AIF-C01 D5
+Batch inference,"≈ 50 % más barato, asíncrono vía S3: volúmenes grandes sin tiempo real.",AIF-C01 D5
+Provisioned Throughput,"Capacidad reservada (Model Units), rendimiento garantizado; para modelos personalizados y tráfico estable.",AIF-C01 D5
+Amazon Macie,Descubre PII y datos sensibles en S3.,AIF-C01 D5
+AWS Artifact,"Descarga de informes de cumplimiento de AWS (SOC, ISO).",AIF-C01 D5
+AWS KMS customer managed keys,"Control de la política de clave, rotación y revocación; uso auditado en CloudTrail.",AIF-C01 D5
+AgentCore Identity,Autenticación de quién invoca al agente y credenciales OAuth/API keys para que el agente acceda a herramientas en nombre del usuario.,AIF-C01 D5 v1.1
+Policy in AgentCore,"Autorización determinista (Cedar) de cada llamada a herramienta en Gateway, fuera del LLM: resiste prompt injection.",AIF-C01 D5 v1.1
+Detección de alucinaciones (5.1.5),"Grounding con RAG + contextual grounding check, validación de la salida, puntuación de confianza, revisión humana.",AIF-C01 D5 v1.1
+OWASP Top 10 for LLM,"Referencia de riesgos: prompt injection, fuga de datos, agencia excesiva, envenenamiento, manejo inseguro de la salida…",AIF-C01 D5

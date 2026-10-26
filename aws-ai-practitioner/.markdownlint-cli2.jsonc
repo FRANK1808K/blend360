@@ -1,0 +1,16 @@
+{
+  // Reglas de estilo Markdown del repositorio (https://github.com/DavidAnson/markdownlint)
+  "config": {
+    "default": true,
+    // Líneas largas permitidas: las tablas comparativas y los párrafos técnicos las necesitan.
+    "MD013": false,
+    // HTML permitido para <details>/<summary> en las preguntas de práctica.
+    "MD033": false,
+    // Se permiten encabezados repetidos en secciones distintas (p. ej., "Autoevaluación rápida").
+    "MD024": { "siblings_only": true },
+    // Las filas separadoras compactas de tabla (|---|---|) son válidas en GFM.
+    "MD060": false
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**"]
+}

@@ -1,0 +1,39 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InvokeEmbeddingModelOnly",
+      "Effect": "Allow",
+      "Action": "bedrock:InvokeModel",
+      "Resource": "arn:aws:bedrock:__REGION__::foundation-model/amazon.titan-embed-text-v2:0"
+    },
+    {
+      "Sid": "ListSourceBucket",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::__BUCKET__",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceAccount": "__ACCOUNT_ID__"
+        }
+      }
+    },
+    {
+      "Sid": "ReadSourceDocuments",
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::__BUCKET__/docs/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceAccount": "__ACCOUNT_ID__"
+        }
+      }
+    },
+    {
+      "Sid": "AccessVectorCollection",
+      "Effect": "Allow",
+      "Action": "aoss:APIAccessAll",
+      "Resource": "arn:aws:aoss:__REGION__:__ACCOUNT_ID__:collection/__COLLECTION_ID__"
+    }
+  ]
+}

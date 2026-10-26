@@ -4,7 +4,7 @@
 
 > **Por qué importa tanto para Blend360:** Blend360 es **AWS Premier Tier Services Partner** (el nivel más alto de partners de servicios). Tiene competencias de AWS en **Data & Analytics**, **Generative AI**, Financial Services, DevOps y Migration, y es *delivery partner* de **Amazon EMR** y **Amazon QuickSight**. Es decir, gran parte de su trabajo con clientes se construye sobre AWS. Ver [qué evalúa Blend360](../guides/que-evalua-blend360.md).
 >
-> 💡 **Ventaja para ti:** como presentas el **AWS Certified AI Practitioner el 16 de noviembre**, mucho de esto ya lo estarás estudiando. Tu repositorio [AWS AI Practitioner en español](https://github.com/FRANK1808K/AWS-IA-PRACTITIONER-EN-ESPA-OL) complementa este módulo.
+> 💡 **Ventaja para ti:** como presentas el **AWS Certified AI Practitioner el 16 de noviembre**, mucho de esto ya lo estarás estudiando. Todo el material completo está integrado en el módulo [AWS AI Practitioner (AIF-C01)](../aws-ai-practitioner/README.md).
 
 | Archivo | Contenido |
 |---|---|
