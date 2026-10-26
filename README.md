@@ -18,6 +18,8 @@ Cada documento existe **en español y en inglés**. Los ejercicios y simulacros 
 
 > **Aviso:** material de estudio comunitario, **no oficial** y sin relación con Blend360. Las preguntas son originales. Lo que se sabe del proceso viene de reseñas públicas de candidatos ([ver investigación](guides/que-evalua-blend360.md)).
 
+**En línea, sin instalar nada (también en el celular):** 🎯 [Simulador + laboratorio de código](https://frank1808k.github.io/blend360/) · 📖 [Guía de estudio web](https://frank1808k.github.io/blend360/guia/) (búsqueda, modo blanco/negro, español e inglés)
+
 ---
 
 ## ¿Por dónde empiezo?
@@ -87,7 +89,9 @@ blend360/
 ├── 08-estadistica-y-ml/        Estadística, pruebas A/B y ML + 25 preguntas
 ├── english/                    Inglés técnico para A2
 ├── simulacros/                 Simulacro técnico (90 min) + razonamiento (30 min)
-├── simulator/                  Simulador interactivo con cronómetro (ES/EN)
+├── simulator/                  Simulador + laboratorio de código (ES/EN, modo blanco/negro)
+├── guide/                      Sitio web de la guía de estudio (MkDocs, se publica en /guia/)
+├── scripts/                    Verificación de documentos y generación del laboratorio y la guía
 ├── cheatsheets/                Repasos de una página + plan de 48 h
 └── flashcards/                 209 tarjetas para Anki
 ```
@@ -99,6 +103,7 @@ La CI ([`checks.yml`](.github/workflows/checks.yml)) verifica en cada cambio que
 - Las **36 soluciones SQL**, en los dos idiomas, se ejecutan y producen exactamente el "resultado esperado" publicado (`02-sql/check_solutions.py`).
 - Las **25 soluciones de Python**, los **20 problemas de algoritmos** y las fórmulas de estadística y ML (`08-estadistica-y-ml/estadistica_ml_practica.py`) pasan sus pruebas.
 - El Markdown cumple las reglas de estilo (`markdownlint`), cada documento tiene su versión en el otro idioma y todos los enlaces internos funcionan (`scripts/check_docs.py`).
+- La guía web se construye sin enlaces ni anclas rotas (`scripts/build_guide.py --strict`).
 - El laboratorio del simulador usa exactamente los mismos ejercicios, soluciones y pruebas del repositorio (`scripts/build_lab.py --check`).
 
 ## Fechas clave

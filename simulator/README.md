@@ -13,7 +13,9 @@ Simulador en el navegador para las dos partes de la prueba, con un **laboratorio
 | **Reto SQL** | 5 | 60:00 | 5 consultas de nivel 🟡–🔴, sin ver soluciones (como la prueba reportada en Glassdoor) |
 | **Laboratorio Python** | 45 | Meta por ejercicio | 25 ejercicios de Python + 20 de algoritmos, con pruebas automáticas |
 
-**Pensado para aprender inglés:** cada pregunta técnica tiene un botón **"Ver traducción"** que muestra la versión en español. Intenta responder primero en inglés, como en el examen real.
+**Pensado para aprender inglés:** arriba eliges el **idioma de las preguntas**. En **inglés** (como el examen real) cada pregunta tiene el botón **"Ver traducción"**; en **español** (para aprender un tema) tiene **"Ver en inglés"** con el original. El idioma de la interfaz (ES/EN) se elige aparte.
+
+**Diseño:** modo **blanco** o **negro** con el botón ☀️/🌙 (se recuerda en tu navegador), letra **Century Gothic** (si tu equipo no la tiene, se usa *Didact Gothic*, muy parecida) y transiciones suaves al cambiar de pantalla y al responder. Si tu sistema pide reducir el movimiento, las animaciones se desactivan.
 
 Al terminar un simulacro ves tu puntaje, el resultado **por tema** y la revisión pregunta por pregunta con la explicación. Tus últimos 8 intentos se guardan en tu navegador.
 
@@ -30,7 +32,7 @@ Aquí no eliges entre opciones: **escribes el código**, lo ejecutas y el labora
 
 - **En línea (recomendado, funciona en el celular):** la versión publicada en el enlace que te compartió Claude.
 - **Local:** abre `simulator/index.html` con doble clic en cualquier navegador (no requiere instalar nada).
-- **GitHub Pages:** [frank1808k.github.io/blend360](https://frank1808k.github.io/blend360/). El flujo [`pages.yml`](../.github/workflows/pages.yml) lo vuelve a publicar cada vez que el simulador cambia en la rama por defecto del repositorio. Si alguna vez no se publica, revisa *Settings → Pages → Source: **GitHub Actions***.
+- **GitHub Pages:** [frank1808k.github.io/blend360](https://frank1808k.github.io/blend360/). El flujo [`pages.yml`](../.github/workflows/pages.yml) lo vuelve a publicar cada vez que el simulador o la documentación cambian en la rama por defecto del repositorio, junto con la [guía de estudio web](https://frank1808k.github.io/blend360/guia/). Si alguna vez no se publica, revisa *Settings → Pages → Source: **GitHub Actions***.
 
 **Atajos de teclado:** `A`–`D` o `1`–`4` para responder, `←` `→` para moverte entre preguntas, `T` para ver la traducción.
 

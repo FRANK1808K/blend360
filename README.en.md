@@ -18,6 +18,8 @@ Every document exists in **English and Spanish**. The exercises and mock exams a
 
 > **Disclaimer:** community study material, **unofficial** and not affiliated with Blend360. All questions are original. What is known about the hiring process comes from public candidate reviews ([see the research](guides/que-evalua-blend360.en.md)).
 
+**Online, nothing to install (also on your phone):** 🎯 [Simulator + code lab](https://frank1808k.github.io/blend360/) · 📖 [Study guide website](https://frank1808k.github.io/blend360/guia/en/) (search, white/black mode, English and Spanish)
+
 ---
 
 ## Where do I start?
@@ -85,7 +87,9 @@ blend360/
 ├── 08-estadistica-y-ml/        Statistics, A/B tests and ML + 25 questions
 ├── english/                    Technical English for A2 speakers
 ├── simulacros/                 Mock exams: technical (90 min) + reasoning (30 min)
-├── simulator/                  Interactive simulator with a timer (ES/EN)
+├── simulator/                  Simulator + code lab (ES/EN, white/black mode)
+├── guide/                      Study guide website (MkDocs, published at /guia/)
+├── scripts/                    Document checks and the lab and guide builders
 ├── cheatsheets/                One-page reviews + 48-hour plan
 └── flashcards/                 209 Anki cards
 ```
@@ -99,6 +103,7 @@ The CI pipeline ([`checks.yml`](.github/workflows/checks.yml)) verifies on every
 - The **36 SQL solutions** in both languages run and produce exactly the published "expected result" (`02-sql/check_solutions.py`).
 - The **25 Python solutions**, the **20 algorithm solutions** and the statistics and ML formulas (`08-estadistica-y-ml/estadistica_ml_practica.py`) pass their tests.
 - The Markdown follows the style rules (`markdownlint`), every document has its twin in the other language and every internal link works (`scripts/check_docs.py`).
+- The study guide website builds with no broken links or anchors (`scripts/build_guide.py --strict`).
 - The simulator's code lab uses exactly the same exercises, solutions and tests as the repository (`scripts/build_lab.py --check`).
 
 ## Key dates

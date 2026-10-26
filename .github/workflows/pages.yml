@@ -1,12 +1,15 @@
-# Publishes the interactive simulator to GitHub Pages from the repository's default branch.
-# Publica el simulador interactivo en GitHub Pages desde la rama por defecto del repositorio.
-# If the first run cannot enable Pages by itself / Si la primera ejecución no puede activar Pages sola:
-# Settings → Pages → Build and deployment → Source: "GitHub Actions".
 name: Pages
 
+# Publishes the simulator at the site root and the study guide at /guia/.
+# Publica el simulador en la raíz del sitio y la guía de estudio en /guia/.
 on:
   push:
-    paths: ["simulator/**", ".github/workflows/pages.yml"]
+    paths:
+      - "simulator/**"
+      - "guide/**"
+      - "**.md"
+      - "scripts/build_guide.py"
+      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -20,8 +23,7 @@ concurrency:
 
 jobs:
   deploy:
-    # Only the default branch deploys; private repos need PAGES_ENABLED=true (paid plan).
-    # Solo despliega la rama por defecto; los repos privados necesitan PAGES_ENABLED=true (plan de pago).
+    # Only the default branch is published / Solo se publica la rama por defecto.
     if: >-
       github.ref_name == github.event.repository.default_branch &&
       (!github.event.repository.private || vars.PAGES_ENABLED == 'true')
@@ -31,11 +33,20 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build the study guide
+        run: |
+          pip install --quiet -r guide/requirements.txt
+          python scripts/build_guide.py --strict --out _site/guia
+      - name: Add the simulator
+        run: cp -r simulator/. _site/
       - uses: actions/configure-pages@v5
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: simulator
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

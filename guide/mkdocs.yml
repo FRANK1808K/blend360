@@ -1,0 +1,178 @@
+# Study guide website / Sitio web de la guía de estudio.
+# Built by scripts/build_guide.py, which copies the repository's Markdown into guide/_docs first.
+# Lo construye scripts/build_guide.py, que primero copia el Markdown del repositorio a guide/_docs.
+site_name: Blend360 All Star · Guía de estudio
+site_description: Preparación para la prueba de ingreso de Blend360 (All Stars, Colombia), en español e inglés.
+site_url: https://frank1808k.github.io/blend360/guia/
+repo_url: https://github.com/FRANK1808K/blend360
+repo_name: FRANK1808K/blend360
+edit_uri: ""
+docs_dir: _docs
+
+theme:
+  name: material
+  language: es
+  font: false
+  icon:
+    logo: material/school-outline
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo negro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo blanco
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+
+extra_css:
+  - assets/extra.css
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: es
+          name: Español
+          default: true
+          build: true
+        - locale: en
+          name: English
+          build: true
+          site_name: Blend360 All Star · Study guide
+          nav_translations:
+            Inicio: Home
+            Empieza aquí: Start here
+            Plan de estudio: Study plan
+            Qué evalúa Blend360: What Blend360 evaluates
+            Razonamiento: Reasoning
+            Razonamiento abstracto: Abstract reasoning
+            50 ejercicios: 50 exercises
+            Técnica: Technical
+            Guía: Guide
+            35 ejercicios: 35 exercises
+            Algoritmos y estructuras: Algorithms and data structures
+            Bases de datos: Databases
+            Fundamentos: Fundamentals
+            Análisis de datos: Data analytics
+            30 preguntas: 30 questions
+            Resolución de problemas: Problem solving
+            Estadística y ML: Statistics and ML
+            25 preguntas: 25 questions
+            Inglés: English
+            Plan de inglés: English plan
+            Cómo leer preguntas: How to read questions
+            Vocabulario técnico: Technical vocabulary
+            Gramática mínima: Minimum grammar
+            Entrevista y frases: Interview and phrases
+            Ejercicios: Exercises
+            Práctica: Practice
+            Simulacros: Mock exams
+            Simulacro técnico: Technical mock exam
+            Simulacro de razonamiento: Reasoning mock exam
+            Simulador interactivo: Interactive simulator
+            Repaso: Review
+            Cheatsheets: Cheat sheets
+            Repaso final 48 h: Final 48-hour review
+            Algoritmos: Algorithms
+            AWS y bases de datos: AWS and databases
+            Abrir el simulador ↗: Open the simulator ↗
+
+nav:
+  - Inicio:
+      - index.md
+      - Empieza aquí:
+          - Plan de estudio: guides/plan-de-estudio.md
+          - Qué evalúa Blend360: guides/que-evalua-blend360.md
+  - Razonamiento:
+      - Razonamiento abstracto:
+          - 01-razonamiento-abstracto/index.md
+          - 50 ejercicios: 01-razonamiento-abstracto/ejercicios.md
+  - Técnica:
+      - SQL:
+          - 02-sql/index.md
+          - 35 ejercicios: 02-sql/ejercicios.md
+      - Python:
+          - 03-python/index.md
+          - pandas: 03-python/pandas.md
+      - Algoritmos y estructuras: 04-algoritmos-y-estructuras/index.md
+      - Bases de datos: 05-bases-de-datos/index.md
+      - AWS:
+          - Fundamentos: 06-aws/index.md
+          - Análisis de datos: 06-aws/analisis-de-datos.md
+          - 30 preguntas: 06-aws/preguntas.md
+      - Resolución de problemas: 07-resolucion-de-problemas/index.md
+      - Estadística y ML:
+          - 08-estadistica-y-ml/index.md
+          - 25 preguntas: 08-estadistica-y-ml/preguntas.md
+  - Inglés:
+      - Plan de inglés: english/index.md
+      - Cómo leer preguntas: english/como-leer-preguntas.md
+      - Vocabulario técnico: english/vocabulario-tecnico.md
+      - Gramática mínima: english/gramatica-minima.md
+      - Entrevista y frases: english/entrevista-y-frases.md
+      - Ejercicios: english/ejercicios-ingles.md
+  - Práctica:
+      - Simulacros:
+          - simulacros/index.md
+          - Simulacro técnico: simulacros/simulacro-tecnico-01.md
+          - Simulacro de razonamiento: simulacros/simulacro-razonamiento-01.md
+      - Simulador interactivo: simulator/index.md
+      - Abrir el simulador ↗: https://frank1808k.github.io/blend360/
+  - Repaso:
+      - Cheatsheets:
+          - cheatsheets/index.md
+          - SQL: cheatsheets/sql.md
+          - Python: cheatsheets/python.md
+          - Algoritmos: cheatsheets/algoritmos.md
+          - AWS y bases de datos: cheatsheets/aws-y-bases-de-datos.md
+          - Estadística y ML: cheatsheets/estadistica-ml.md
+          - Repaso final 48 h: cheatsheets/repaso-final-48h.md
+      - Flashcards: flashcards/index.md
+
+markdown_extensions:
+  - tables
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: false
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - toc:
+      permalink: "#"
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
+validation:
+  links:
+    not_found: warn
+    anchors: warn
+    unrecognized_links: warn
+
+extra:
+  generator: false

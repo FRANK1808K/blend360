@@ -23,11 +23,11 @@
 
 ## 🟢 Nivel básico
 
-### 1. Filter and sort
+### 1. Filtrar y ordenar
 
 **Write a query that returns the name and price of all products in the `Electronics` category, sorted from the most expensive to the cheapest.**
 
-*Nombre y precio de los productos de la categoría Electronics, del más caro al más barato.*
+*Escribe una consulta que devuelva el nombre y el precio de todos los productos de la categoría `Electronics`, ordenados del más caro al más barato.*
 
 <details>
 <summary>Solución</summary>
@@ -53,11 +53,11 @@ Wireless Mouse | 25.00
 
 </details>
 
-### 2. Multiple conditions
+### 2. Varias condiciones
 
 **List the name, city and signup date of customers from Colombia who signed up on or after March 1st, 2024.**
 
-*Clientes de Colombia que se registraron a partir del 1 de marzo de 2024 (inclusive).*
+*Lista el nombre, la ciudad y la fecha de registro de los clientes de Colombia que se registraron el 1 de marzo de 2024 o después.*
 
 <details>
 <summary>Solución</summary>
@@ -86,11 +86,11 @@ Diego Vargas | Medellín     | 2024-06-12
 
 </details>
 
-### 3. Missing values
+### 3. Valores faltantes
 
 **Return the customers whose city is unknown (missing).**
 
-*Clientes cuya ciudad es desconocida.*
+*Devuelve los clientes cuya ciudad es desconocida (falta el dato).*
 
 <details>
 <summary>Solución</summary>
@@ -114,11 +114,11 @@ customer_id | name
 
 </details>
 
-### 4. Count per group
+### 4. Contar por grupo
 
 **How many customers are there in each country? Show the country with the most customers first.**
 
-*¿Cuántos clientes hay por país? Ordena de mayor a menor.*
+*¿Cuántos clientes hay en cada país? Muestra primero el país con más clientes.*
 
 <details>
 <summary>Solución</summary>
@@ -143,11 +143,11 @@ Peru     | 1
 
 </details>
 
-### 5. Pattern matching
+### 5. Búsqueda por patrón
 
 **Find all the products whose name contains the word "Desk".**
 
-*Productos cuyo nombre contiene "Desk".*
+*Encuentra todos los productos cuyo nombre contiene la palabra "Desk".*
 
 <details>
 <summary>Solución</summary>
@@ -170,11 +170,11 @@ product_id | name
 
 </details>
 
-### 6. Unique values
+### 6. Valores únicos
 
 **Return the list of distinct order statuses, in alphabetical order.**
 
-*Lista de estados de pedido sin repetir, en orden alfabético.*
+*Devuelve la lista de estados de pedido distintos (sin repetir), en orden alfabético.*
 
 <details>
 <summary>Solución</summary>
@@ -198,11 +198,11 @@ shipped
 
 </details>
 
-### 7. Total revenue
+### 7. Ingreso total
 
 **Calculate the total revenue (quantity × unit price) of all orders that were NOT cancelled.**
 
-*Ingreso total de los pedidos no cancelados.*
+*Calcula el ingreso total (cantidad × precio unitario) de todos los pedidos que NO fueron cancelados.*
 
 <details>
 <summary>Solución</summary>
@@ -227,11 +227,11 @@ total_revenue
 
 </details>
 
-### 8. Count by status
+### 8. Conteo por estado
 
 **Count how many orders there are for each status.**
 
-*Cuántos pedidos hay en cada estado.*
+*Cuenta cuántos pedidos hay en cada estado.*
 
 <details>
 <summary>Solución</summary>
@@ -260,7 +260,7 @@ cancelled | 2
 
 **Show the average salary of each department, rounded to 2 decimals, but only for departments whose average salary is greater than 8,000.**
 
-*Salario promedio por departamento (2 decimales), solo si el promedio es mayor que 8.000.*
+*Muestra el salario promedio de cada departamento, redondeado a 2 decimales, pero solo de los departamentos cuyo salario promedio es mayor que 8.000.*
 
 <details>
 <summary>Solución</summary>
@@ -286,11 +286,11 @@ Data        | 9750.00
 
 </details>
 
-### 10. Revenue by category
+### 10. Ingreso por categoría
 
 **Calculate the revenue of each product category (excluding cancelled orders), from highest to lowest.**
 
-*Ingreso por categoría (sin pedidos cancelados), de mayor a menor.*
+*Calcula el ingreso de cada categoría de producto (sin contar los pedidos cancelados), de mayor a menor.*
 
 <details>
 <summary>Solución</summary>
@@ -326,7 +326,7 @@ Stationery  | 204.50
 
 **List every order with its id, date, status and the name of the customer who placed it. Sort by date.**
 
-*Cada pedido con id, fecha, estado y nombre del cliente, ordenado por fecha.*
+*Lista cada pedido con su id, fecha, estado y el nombre del cliente que lo hizo. Ordena por fecha.*
 
 <details>
 <summary>Solución</summary>
@@ -363,11 +363,11 @@ order_id | order_date | status    | name
 
 </details>
 
-### 12. Customers without orders
+### 12. Clientes sin pedidos
 
 **Find the customers who have never placed an order.**
 
-*Clientes que nunca han hecho un pedido.*
+*Encuentra los clientes que nunca han hecho un pedido.*
 
 <details>
 <summary>Solución</summary>
@@ -392,11 +392,11 @@ customer_id | name
 
 </details>
 
-### 13. Products never sold
+### 13. Productos nunca vendidos
 
 **Which products have never been sold? Use `NOT EXISTS`.**
 
-*Productos que nunca se han vendido, usando NOT EXISTS.*
+*¿Qué productos nunca se han vendido? Usa `NOT EXISTS`.*
 
 <details>
 <summary>Solución</summary>
@@ -424,7 +424,7 @@ product_id | name
 
 **Show each employee's name together with their manager's name. Employees without a manager must also appear.**
 
-*Cada empleado con el nombre de su jefe. Los que no tienen jefe también deben aparecer.*
+*Muestra el nombre de cada empleado junto con el nombre de su jefe. Los empleados sin jefe también deben aparecer.*
 
 <details>
 <summary>Solución</summary>
@@ -459,11 +459,11 @@ Daniel Pardo   | Natalia Cruz
 
 </details>
 
-### 15. Earning more than the manager
+### 15. Ganar más que el jefe
 
 **Find the employees who earn more than their direct manager.**
 
-*Empleados que ganan más que su jefe directo.*
+*Encuentra los empleados que ganan más que su jefe directo.*
 
 <details>
 <summary>Solución</summary>
@@ -486,11 +486,11 @@ Daniel Pardo | 11000  | Natalia Cruz | 10000
 
 </details>
 
-### 16. Spend per customer (including zero)
+### 16. Gasto por cliente (incluido el cero)
 
 **For every customer, show the total amount spent on non-cancelled orders. Customers with no purchases must appear with 0.**
 
-*Total gastado por cada cliente en pedidos no cancelados; los que no compraron aparecen con 0.*
+*Para cada cliente, muestra el monto total gastado en pedidos no cancelados. Los clientes sin compras deben aparecer con 0.*
 
 <details>
 <summary>Solución</summary>
@@ -529,11 +529,11 @@ María Ruiz   | 0
 
 </details>
 
-### 17. Above the average
+### 17. Mayor que el promedio
 
 **List the products whose price is greater than the average price of all products.**
 
-*Productos con precio mayor que el promedio.*
+*Lista los productos cuyo precio es mayor que el precio promedio de todos los productos.*
 
 <details>
 <summary>Solución</summary>
@@ -558,11 +558,11 @@ Monitor 27"   | 300.00
 
 </details>
 
-### 18. Correlated subquery
+### 18. Subconsulta correlacionada
 
 **Find the employees who earn more than the average salary of their own department.**
 
-*Empleados que ganan más que el promedio de su propio departamento.*
+*Encuentra los empleados que ganan más que el salario promedio de su propio departamento.*
 
 <details>
 <summary>Solución</summary>
@@ -590,11 +590,11 @@ Isabel Suárez | Marketing   | 9500
 
 </details>
 
-### 19. Second highest salary
+### 19. Segundo salario más alto
 
 **Return the second highest distinct salary in the company.**
 
-*El segundo salario más alto (sin contar repetidos).*
+*Devuelve el segundo salario distinto más alto de la empresa.*
 
 <details>
 <summary>Solución</summary>
@@ -618,11 +618,11 @@ second_highest
 
 </details>
 
-### 20. Best customer (CTE)
+### 20. Mejor cliente (CTE)
 
 **Using a CTE, find the customer who spent the most on non-cancelled orders.**
 
-*Con una CTE, el cliente que más gastó en pedidos no cancelados.*
+*Usando una CTE, encuentra el cliente que más gastó en pedidos no cancelados.*
 
 <details>
 <summary>Solución</summary>
@@ -654,11 +654,11 @@ Sofía Torres | 2750.00
 
 </details>
 
-### 21. Average order value
+### 21. Ticket promedio
 
 **What is the average order value (AOV) of non-cancelled orders? Round to 2 decimals.**
 
-*Ticket promedio (valor medio por pedido) de los pedidos no cancelados.*
+*¿Cuál es el valor promedio por pedido (AOV, «average order value») de los pedidos no cancelados? Redondea a 2 decimales.*
 
 <details>
 <summary>Solución</summary>
@@ -692,11 +692,11 @@ orders | avg_order_value
 
 ## 🟠 CASE y funciones de ventana
 
-### 22. Price buckets
+### 22. Rangos de precio
 
 **Classify each product as `High` (price ≥ 300), `Medium` (40 ≤ price < 300) or `Low` (price < 40).**
 
-*Clasifica productos en High / Medium / Low según el precio.*
+*Clasifica cada producto como `High` (precio ≥ 300), `Medium` (40 ≤ precio < 300) o `Low` (precio < 40).*
 
 <details>
 <summary>Solución</summary>
@@ -733,11 +733,11 @@ Notebook A5    | 4.50    | Low
 
 </details>
 
-### 23. Conditional aggregation
+### 23. Agregación condicional
 
 **In a single row, show the number of delivered, shipped and cancelled orders, and the cancellation rate as a percentage (1 decimal).**
 
-*En una sola fila: entregados, enviados, cancelados y % de cancelación.*
+*En una sola fila, muestra el número de pedidos entregados (delivered), enviados (shipped) y cancelados (cancelled), y la tasa de cancelación en porcentaje (1 decimal).*
 
 <details>
 <summary>Solución</summary>
@@ -762,11 +762,11 @@ delivered | shipped | cancelled | cancel_rate_pct
 
 </details>
 
-### 24. Customer segmentation
+### 24. Segmentación de clientes
 
 **Label each customer according to their number of orders (any status): 0 → `No orders`, 1 → `New`, 2 or more → `Returning`.**
 
-*Etiqueta a cada cliente según su número de pedidos.*
+*Etiqueta a cada cliente según su número de pedidos (en cualquier estado): 0 → `No orders`, 1 → `New`, 2 o más → `Returning`.*
 
 <details>
 <summary>Solución</summary>
@@ -807,11 +807,11 @@ Carlos Díaz  | 0      | No orders
 
 </details>
 
-### 25. Ranking functions
+### 25. Funciones de ranking
 
 **Rank employees by salary (highest first) within each department using `ROW_NUMBER`, `RANK` and `DENSE_RANK`.**
 
-*Ranking de salarios dentro de cada departamento con las tres funciones.*
+*Ordena a los empleados por salario (el más alto primero) dentro de cada departamento usando `ROW_NUMBER`, `RANK` y `DENSE_RANK`.*
 
 <details>
 <summary>Solución</summary>
@@ -848,11 +848,11 @@ Marketing   | Mateo Ramírez  | 6000   | 2       | 2   | 2
 
 </details>
 
-### 26. Top earner per department
+### 26. Mejor pagado por departamento
 
 **Return the highest-paid employee(s) of each department.**
 
-*El (o los) empleado(s) mejor pagado(s) de cada departamento.*
+*Devuelve el empleado (o los empleados) mejor pagado(s) de cada departamento.*
 
 <details>
 <summary>Solución</summary>
@@ -883,11 +883,11 @@ Marketing   | Isabel Suárez  | 9500
 
 </details>
 
-### 27. Running total
+### 27. Total acumulado
 
 **For each non-cancelled order, show its date, its total and the running (cumulative) revenue ordered by date.**
 
-*Total de cada pedido no cancelado y el ingreso acumulado por fecha.*
+*Para cada pedido no cancelado, muestra su fecha, su total y el ingreso acumulado ordenado por fecha.*
 
 <details>
 <summary>Solución</summary>
@@ -929,11 +929,11 @@ order_id | order_date | total   | running_revenue
 
 </details>
 
-### 28. Month-over-month growth
+### 28. Crecimiento mes a mes
 
 **Calculate the revenue of each month (non-cancelled orders), the previous month's revenue and the month-over-month growth percentage (1 decimal).**
 
-*Ingreso mensual, ingreso del mes anterior y crecimiento % mes a mes.*
+*Calcula el ingreso de cada mes (pedidos no cancelados), el ingreso del mes anterior y el porcentaje de crecimiento mes a mes (1 decimal).*
 
 <details>
 <summary>Solución</summary>
@@ -973,11 +973,11 @@ month   | revenue | prev_revenue | mom_growth_pct
 
 </details>
 
-### 29. Share of total
+### 29. Participación sobre el total
 
 **For each category, show its revenue (non-cancelled orders) and its percentage of the total revenue (1 decimal).**
 
-*Ingreso por categoría y su % sobre el total.*
+*Para cada categoría, muestra su ingreso (pedidos no cancelados) y su porcentaje del ingreso total (1 decimal).*
 
 <details>
 <summary>Solución</summary>
@@ -1012,11 +1012,11 @@ Stationery  | 204.50  | 2.40
 
 </details>
 
-### 30. Days between orders
+### 30. Días entre pedidos
 
 **For each order, show the customer, the order date, the date of that customer's previous order and the number of days between them.**
 
-*Para cada pedido, la fecha del pedido anterior del mismo cliente y los días transcurridos.*
+*Para cada pedido, muestra el cliente, la fecha del pedido, la fecha del pedido anterior de ese mismo cliente y el número de días entre los dos.*
 
 <details>
 <summary>Solución</summary>
@@ -1057,11 +1057,11 @@ customer_id | order_id | order_date | prev_order_date | days_since_prev
 
 </details>
 
-### 31. First order per customer
+### 31. Primer pedido de cada cliente
 
 **Return the first order (id and date) of every customer who has ordered.**
 
-*El primer pedido de cada cliente.*
+*Devuelve el primer pedido (id y fecha) de cada cliente que ha hecho pedidos.*
 
 <details>
 <summary>Solución</summary>
@@ -1097,11 +1097,11 @@ customer_id | order_id | order_date
 
 </details>
 
-### 32. Top 2 products per category
+### 32. Top 2 productos por categoría
 
 **For each category, return the 2 products with the most units sold (non-cancelled orders).**
 
-*Los 2 productos más vendidos (en unidades) de cada categoría.*
+*Para cada categoría, devuelve los 2 productos con más unidades vendidas (pedidos no cancelados).*
 
 <details>
 <summary>Solución</summary>
@@ -1145,11 +1145,11 @@ Stationery  | Gel Pens (x10) | 7
 
 ## 🔴 Retos tipo entrevista
 
-### 33. Duplicates
+### 33. Duplicados
 
 **Find the salary values that are shared by more than one employee, and how many employees have each one.**
 
-*Salarios repetidos y cuántos empleados tienen cada uno.*
+*Encuentra los valores de salario que comparten varios empleados, y cuántos empleados tienen cada uno.*
 
 <details>
 <summary>Solución</summary>
@@ -1174,11 +1174,11 @@ salary | employees
 
 </details>
 
-### 34. Cross-category buyers
+### 34. Compradores de dos categorías
 
 **Find the customers who bought products from BOTH the `Electronics` and the `Furniture` categories (non-cancelled orders).**
 
-*Clientes que compraron Electronics Y Furniture (pedidos no cancelados).*
+*Encuentra los clientes que compraron productos de AMBAS categorías, `Electronics` y `Furniture` (pedidos no cancelados).*
 
 <details>
 <summary>Solución</summary>
@@ -1212,11 +1212,11 @@ Sofía Torres
 
 </details>
 
-### 35. Signup-to-purchase conversion
+### 35. Conversión de registro a compra
 
 **For each customer, compute the number of days between signup and their first order (any status). Then, in a second query, calculate what percentage of ALL customers placed their first order within 30 days of signing up.**
 
-*Días entre el registro y la primera compra; y qué % del total de clientes compró en sus primeros 30 días.*
+*Para cada cliente, calcula el número de días entre su registro y su primer pedido (en cualquier estado). Luego, en una segunda consulta, calcula qué porcentaje de TODOS los clientes hizo su primer pedido dentro de los 30 días siguientes a su registro.*
 
 <details>
 <summary>Solución</summary>

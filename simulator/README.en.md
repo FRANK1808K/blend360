@@ -13,7 +13,9 @@ A browser simulator for both parts of the test, with a **code lab for writing co
 | **SQL challenge** | 5 | 60:00 | 5 🟡–🔴 queries with no solutions (like the test reported on Glassdoor) |
 | **Python lab** | 45 | Target per exercise | 25 Python exercises + 20 algorithm problems, with automated tests |
 
-**Made for learning English:** every technical question has a **"Show translation"** button that reveals the Spanish version. Try to answer in English first, like in the real exam.
+**Made for learning English:** at the top you choose the **question language**. In **English** (like the real exam) every question has a **"Show Spanish translation"** button; in **Spanish** (to learn a topic) it has **"Show English"** with the original. The interface language (ES/EN) is chosen separately.
+
+**Design:** **white** or **black** mode with the ☀️/🌙 button (remembered in your browser), the **Century Gothic** font (if your device does not have it, *Didact Gothic*, a very similar font, is used) and smooth transitions between screens and when you answer. If your system asks for reduced motion, the animations are turned off.
 
 When you finish a mock exam you see your score, the result **per topic** and a question-by-question review with explanations. Your last 8 attempts are saved in your browser.
 
@@ -30,7 +32,7 @@ No options to choose from here: **you write the code**, run it, and the lab grad
 
 - **Online (recommended, works on your phone):** the published version at the link Claude shared with you.
 - **Locally:** double-click `simulator/index.html` to open it in any browser (nothing to install).
-- **GitHub Pages:** [frank1808k.github.io/blend360](https://frank1808k.github.io/blend360/). The [`pages.yml`](../.github/workflows/pages.yml) workflow republishes it every time the simulator changes on the repository's default branch. If it ever stops publishing, check *Settings → Pages → Source: **GitHub Actions***.
+- **GitHub Pages:** [frank1808k.github.io/blend360](https://frank1808k.github.io/blend360/). The [`pages.yml`](../.github/workflows/pages.yml) workflow republishes it every time the simulator or the documentation changes on the repository's default branch, together with the [study guide website](https://frank1808k.github.io/blend360/guia/en/). If it ever stops publishing, check *Settings → Pages → Source: **GitHub Actions***.
 
 **Keyboard shortcuts:** `A`–`D` or `1`–`4` to answer, `←` `→` to move between questions, `T` to show the translation.
 
