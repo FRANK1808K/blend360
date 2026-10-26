@@ -1,25 +1,24 @@
-"""Ejecuta cada solución SQL de ejercicios.md y verifica el "Resultado esperado".
+"""Runs every SQL solution in ejercicios.md / ejercicios.en.md and checks its expected result.
+Ejecuta cada solución SQL de ejercicios.md / ejercicios.en.md y verifica su resultado esperado.
 
-Uso:
-    python3 check_solutions.py           # verifica (lo usa la CI)
-    python3 check_solutions.py --write   # regenera los bloques de resultado esperado
+Usage / Uso:
+    python3 check_solutions.py           # verify (used by CI) / verifica (lo usa la CI)
+    python3 check_solutions.py --write   # regenerate expected results / regenera los resultados esperados
 
-Formato en ejercicios.md: un bloque ```sql dentro de <details>, seguido (opcionalmente)
-de una línea "Resultado esperado:" y un bloque ```text.
+Format: a ```sql block inside <details>, followed by an "Expected result:" (EN) or
+"Resultado esperado:" (ES) line and a ```text block.
 """
 import re
 import sqlite3
 import sys
-from pathlib import Path
 
 from setup_db import HERE, build
 
-MD_PATH = HERE / "ejercicios.md"
-SOLUTION_RE = re.compile(
-    r"(?P<sql>```sql\n(?P<query>.*?)```\n)"
-    r"(?:\nResultado esperado:\n\n```text\n(?P<expected>.*?)```\n)?",
-    re.S,
-)
+# file → (label before the expected block, word for "rows")
+FILES = {
+    "ejercicios.md": ("Resultado esperado:", "fila"),
+    "ejercicios.en.md": ("Expected result:", "row"),
+}
 
 
 def fmt(value) -> str:
@@ -30,7 +29,7 @@ def fmt(value) -> str:
     return str(value)
 
 
-def render(conn: sqlite3.Connection, query: str) -> str:
+def render(conn: sqlite3.Connection, query: str, row_word: str) -> str:
     cur = conn.execute(query)
     headers = [d[0] for d in cur.description]
     rows = [[fmt(v) for v in row] for row in cur.fetchall()]
@@ -39,14 +38,17 @@ def render(conn: sqlite3.Connection, query: str) -> str:
     lines = [" | ".join(h.ljust(w) for h, w in zip(headers, widths)).rstrip()]
     lines.append("-+-".join("-" * w for w in widths))
     lines += [" | ".join(c.ljust(w) for c, w in zip(r, widths)).rstrip() for r in rows]
-    lines.append(f"({len(rows)} fila{'s' if len(rows) != 1 else ''})")
+    lines.append(f"({len(rows)} {row_word}{'s' if len(rows) != 1 else ''})")
     return "\n".join(lines) + "\n"
 
 
-def main() -> int:
-    conn = build(HERE / "check.db")
-    text = MD_PATH.read_text(encoding="utf-8")
-    write = "--write" in sys.argv
+def check_file(conn, name, label, row_word, write):
+    path = HERE / name
+    pattern = re.compile(
+        r"(?P<sql>```sql\n(?P<query>.*?)```\n)"
+        rf"(?:\n{re.escape(label)}\n\n```text\n(?P<expected>.*?)```\n)?",
+        re.S,
+    )
     failures, count = [], 0
 
     def replace(match: re.Match) -> str:
@@ -54,27 +56,39 @@ def main() -> int:
         count += 1
         query = match["query"]
         try:
-            actual = render(conn, query)
+            actual = render(conn, query, row_word)
         except sqlite3.Error as exc:
-            failures.append(f"Solución #{count}: error SQL: {exc}\n{query}")
+            failures.append(f"{name} #{count}: SQL error: {exc}\n{query}")
             return match.group(0)
-        if not write and match["expected"] is not None and match["expected"] != actual:
-            failures.append(f"Solución #{count}: resultado distinto.\nEsperado:\n"
-                            f"{match['expected']}\nObtenido:\n{actual}")
-        return f"{match['sql']}\nResultado esperado:\n\n```text\n{actual}```\n"
+        if not write:
+            if match["expected"] is None:
+                failures.append(f"{name} #{count}: missing expected result (run --write)")
+            elif match["expected"] != actual:
+                failures.append(f"{name} #{count}: different result.\nExpected:\n"
+                                f"{match['expected']}\nGot:\n{actual}")
+        return f"{match['sql']}\n{label}\n\n```text\n{actual}```\n"
 
-    new_text = SOLUTION_RE.sub(replace, text)
-    conn.close()
-    (HERE / "check.db").unlink()
-
+    new_text = pattern.sub(replace, path.read_text(encoding="utf-8"))
     if write:
-        MD_PATH.write_text(new_text, encoding="utf-8")
-        print(f"{count} soluciones ejecutadas; resultados escritos en {MD_PATH.name}")
-    for failure in failures:
+        path.write_text(new_text, encoding="utf-8")
+    return count, failures
+
+
+def main() -> int:
+    write = "--write" in sys.argv
+    conn = build(HERE / "check.db")
+    all_failures = []
+    try:
+        for name, (label, row_word) in FILES.items():
+            count, failures = check_file(conn, name, label, row_word, write)
+            all_failures += failures
+            print(f"{name}: {count - len(failures)}/{count} OK" + (" (written)" if write else ""))
+    finally:
+        conn.close()
+        (HERE / "check.db").unlink()
+    for failure in all_failures:
         print(failure, end="\n\n")
-    if not write:
-        print(f"{count - len(failures)}/{count} soluciones correctas")
-    return 1 if failures else 0
+    return 1 if all_failures else 0
 
 
 if __name__ == "__main__":
