@@ -1,13 +1,18 @@
-"""20 problemas clásicos de algoritmos y estructuras de datos.
+"""20 classic algorithm and data structure problems.
+20 problemas clásicos de algoritmos y estructuras de datos.
+
+Replace each `raise NotImplementedError` and run:  python3 test_problemas.py
+Goal: 🟢 problems in ≤ 10 min, 🟡 problems in ≤ 20 min. When you finish, say the
+complexity of your solution out loud in English: "Time complexity is O(n), space is O(1)".
 
 Reemplaza cada `raise NotImplementedError` y corre:  python3 test_problemas.py
-Meta: los 🟢 en ≤ 10 min, los 🟡 en ≤ 20 min. Di en voz alta (¡en inglés!) la
-complejidad de tu solución al terminar: "Time complexity is O(n), space is O(1)".
+Meta: los 🟢 en ≤ 10 min, los 🟡 en ≤ 20 min. Al terminar, di en voz alta (¡en inglés!)
+la complejidad de tu solución: "Time complexity is O(n), space is O(1)".
 """
 
 
 class ListNode:
-    """Nodo de lista enlazada simple."""
+    """Singly linked list node / Nodo de lista enlazada simple."""
 
     def __init__(self, val, next=None):
         self.val = val
@@ -73,7 +78,7 @@ def max_profit(prices):
     raise NotImplementedError
 
 
-# ------------------------------------------------------------ 🟢 Pila / búsqueda / ordenamiento
+# ------------------------------------------------------------ 🟢 Stack / search / sorting — Pila / búsqueda / ordenamiento
 
 def valid_parentheses(s):
     """🟢 Return True if every bracket ()[]{} is closed in the correct order.
@@ -140,7 +145,7 @@ def reverse_linked_list(head):
     raise NotImplementedError
 
 
-# ------------------------------------------------------------ 🟡 Patrones
+# ------------------------------------------------------------ 🟡 Patterns / Patrones
 
 def merge_sort(nums):
     """🟡 Return a NEW sorted list using merge sort (divide and conquer).

@@ -1,14 +1,16 @@
-# Mock abstract reasoning test #1: 30 minutes (simulacro de razonamiento)
+# Simulacro de razonamiento abstracto #1: 30 minutos
 
 > **Instrucciones:** 30 preguntas en **30 minutos** (60 s por pregunta). La dificultad **aumenta**. No te quedes más de 1 minuto en una pregunta: marca, adivina y sigue. Respuestas al final.
 >
-> *Instructions: Choose the option that best completes each sequence. You have 30 minutes.*
+> *Instructions: Choose the option that best completes each sequence. You have 30 minutes.* = Elige la opción que mejor completa cada secuencia. Tienes 30 minutos.
+>
+> Versión en inglés: [simulacro-razonamiento-01.en.md](simulacro-razonamiento-01.en.md).
 
 **Alfabeto de apoyo:** A1 B2 C3 D4 E5 F6 G7 H8 I9 J10 K11 L12 M13 N14 O15 P16 Q17 R18 S19 T20 U21 V22 W23 X24 Y25 Z26
 
 ---
 
-## Numbers
+## Numbers (números)
 
 | # | Sequence | A | B | C | D |
 |---|---|---|---|---|---|
@@ -21,7 +23,7 @@
 | 7 | 64, 32, 48, 24, 36, **?** | 18 | 12 | 54 | 72 |
 | 8 | 2, 3, 5, 9, 17, **?** | 25 | 31 | 33 | 34 |
 
-## Letters
+## Letters (letras)
 
 | # | Sequence | A | B | C | D |
 |---|---|---|---|---|---|
@@ -30,7 +32,7 @@
 | 11 | AB, DE, GH, **?** | IJ | JK | HI | KL |
 | 12 | Z1, Y2, X3, **?** | W4 | V4 | W3 | X4 |
 
-## Dominoes (0–6, circular: after 6 comes 0)
+## Dominoes (dominós; 0–6, circular: after 6 comes 0 = después del 6 viene el 0)
 
 | # | Sequence | A | B | C | D |
 |---|---|---|---|---|---|
@@ -39,7 +41,7 @@
 | 15 | [2\|5] [5\|2] [3\|4] [4\|3] [1\|6] **[?\|?]** | [1\|6] | [6\|1] | [2\|5] | [0\|0] |
 | 16 | [1\|6] [2\|5] [3\|4] [4\|3] **[?\|?]** | [5\|3] | [5\|2] | [4\|2] | [2\|5] |
 
-## Figures
+## Figures (figuras)
 
 | # | Sequence | A | B | C | D |
 |---|---|---|---|---|---|
@@ -66,7 +68,7 @@
 | 23 | `AAB ABA BAA AAB` **?** | `BAA` | `ABA` | `AAB` | `BBA` |
 | 24 | `□■□■ ■□■□ □■□■` **?** | `□■□■` | `■■□□` | `■□■□` | `□□■■` |
 
-## Matrices
+## Matrices (matrices)
 
 **25.**
 
@@ -108,7 +110,7 @@ A) ●■★  B) ●▲■★  C) ▲  D) ●■
 
 A) ↑  B) ↓  C) →  D) ←
 
-## Analogies and odd one out
+## Analogies and odd one out (analogías y el que no pertenece)
 
 **29.** 3 is to 10 as 5 is to **?** A) 15  B) 25  C) 26  D) 30
 

@@ -1,6 +1,6 @@
 # Flashcards (185 tarjetas para Anki)
 
-[`blend360-flashcards.csv`](blend360-flashcards.csv) tiene 185 tarjetas con 3 columnas: `front`, `back` y `tags`.
+[`blend360-flashcards.csv`](blend360-flashcards.csv) tiene 185 tarjetas con 3 columnas: `front`, `back` y `tags`. El frente es el término o concepto en inglés y el reverso la explicación en español: cada tarjeta entrena a la vez tu inglés y el contenido técnico.
 
 | Tag | Tarjetas | Contenido |
 |---|---|---|
@@ -20,6 +20,8 @@
 3. Configura: *Field separator*: **Comma** · ✅ *Allow HTML* · *First row is header*.
 4. Relaciona los campos: columna 1 → **Front**, columna 2 → **Back**, columna 3 → **Tags**.
 5. Importa. Estudia **20 tarjetas nuevas al día** + los repasos que te pida Anki.
+
+💡 **Entrena en las dos direcciones:** al importar, elige el tipo de nota **"Basic (and reversed card)"**. Así Anki también te preguntará español → inglés, que es lo que necesitas para *hablar* en la entrevista.
 
 > 💡 Anki usa **repetición espaciada**: te muestra cada tarjeta justo antes de que la olvides. Con 15–20 minutos al día **todos los días**, para el 18 de diciembre te sabrás las 185.
 

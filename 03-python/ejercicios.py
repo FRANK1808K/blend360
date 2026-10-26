@@ -1,4 +1,10 @@
-"""25 ejercicios de Python tipo prueba técnica.
+"""25 technical-test-style Python exercises / 25 ejercicios de Python tipo prueba técnica.
+
+Instructions:
+  1. Replace each `raise NotImplementedError` with your implementation.
+  2. Run `python3 test_ejercicios.py` to grade yourself.
+  3. Try to solve each one in 5 minutes or less (the real test gives you no more time).
+  4. Only then look at soluciones.py.
 
 Instrucciones:
   1. Reemplaza cada `raise NotImplementedError` por tu implementación.
@@ -6,11 +12,12 @@ Instrucciones:
   3. Intenta resolver cada uno en 5 minutos o menos (en la prueba real no hay más tiempo).
   4. Solo después mira soluciones.py.
 
-Los enunciados están en inglés (como en la prueba) con una traducción corta.
+Each statement is in English (like the test), followed by a short Spanish translation.
+Cada enunciado está en inglés (como en la prueba), seguido de una traducción corta.
 """
 
 
-# ---------------------------------------------------------------- Básicos
+# ---------------------------------------------------------------- Basics / Básicos
 
 def is_even(n):
     """Return True if n is even, False otherwise.
@@ -76,7 +83,7 @@ def max_without_builtin(nums):
     raise NotImplementedError
 
 
-# ---------------------------------------------------------------- Listas y strings
+# ---------------------------------------------------------------- Lists and strings / Listas y strings
 
 def remove_duplicates(items):
     """Remove duplicates keeping the ORIGINAL order of first appearance.
@@ -150,7 +157,7 @@ def compress(s):
     raise NotImplementedError
 
 
-# ---------------------------------------------------------------- Datos (estilo análisis)
+# ---------------------------------------------------------------- Data (analysis style) / Datos (estilo análisis)
 
 def count_by(records, key):
     """Given a list of dicts, count how many records there are for each value
@@ -209,7 +216,7 @@ def clean_numbers(values):
     raise NotImplementedError
 
 
-# ---------------------------------------------------------------- Matemática y recursión
+# ---------------------------------------------------------------- Math and recursion / Matemática y recursión
 
 def is_prime(n):
     """Return True if n is a prime number.  ¿Es primo?

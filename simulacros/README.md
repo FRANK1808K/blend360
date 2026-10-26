@@ -2,10 +2,12 @@
 
 | Simulacro | Duración | Contenido | Cuándo hacerlo |
 |---|---|---|---|
-| [Técnico #1](simulacro-tecnico-01.md) | 90 min | 40 preguntas de opción múltiple (SQL, Python, algoritmos, BD, AWS) + 3 problemas de código | Semana 5 (después de estudiar todos los módulos) |
-| [Razonamiento abstracto #1](simulacro-razonamiento-01.md) | 30 min | 30 preguntas: números, letras, dominós, figuras, matrices | Semana 2 y repetir en la semana 6 |
-| [Simulador interactivo](../simulator/index.html) | 30 / 90 min | Banco aleatorio + **figuras generadas** + cronómetro | Desde la semana 2, 2–3 veces por semana |
+| [Técnico #1](simulacro-tecnico-01.md) | 90 min | 40 preguntas de opción múltiple (SQL, Python, algoritmos, BD, AWS) + 3 problemas de código | Semana 6 (después de estudiar todos los módulos) |
+| [Razonamiento abstracto #1](simulacro-razonamiento-01.md) | 30 min | 30 preguntas: números, letras, dominós, figuras, matrices | Semana 3 y repetir en la semana 7 |
+| [Simulador interactivo](../simulator/README.md) | 30 / 50 min | Banco aleatorio + **figuras generadas** + cronómetro | Desde la semana 2, 2–3 veces por semana |
 | [AWS: 30 preguntas](../06-aws/preguntas.md) | 30 min | Nube + análisis de datos en AWS | Semana 2 (y te sirve para el AIF-C01) |
+
+Las preguntas de cada simulacro están **en inglés**, como en el examen, con la **traducción al español escondida** debajo de cada una. Cada simulacro tiene además una versión 100 % en inglés (`.en.md`) para practicar en condiciones reales.
 
 ## Reglas para que el simulacro sirva
 

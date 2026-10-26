@@ -1,5 +1,6 @@
+-- Practice database: online store (retail/marketing analytics style).
 -- Base de datos de práctica: tienda en línea (estilo retail/marketing analytics).
--- Compatible con SQLite 3.25+ (funciones de ventana). Crear con: python3 setup_db.py
+-- SQLite 3.25+ (window functions / funciones de ventana). Create / Crear: python3 setup_db.py
 
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS orders;
@@ -11,7 +12,7 @@ CREATE TABLE customers (
     customer_id  INTEGER PRIMARY KEY,
     name         TEXT    NOT NULL,
     email        TEXT    UNIQUE,
-    city         TEXT,                 -- puede ser NULL a propósito
+    city         TEXT,                 -- may be NULL on purpose / puede ser NULL a propósito
     country      TEXT    NOT NULL,
     segment      TEXT    NOT NULL,     -- 'Consumer', 'Corporate', 'Small Business'
     signup_date  DATE    NOT NULL
@@ -44,7 +45,7 @@ CREATE TABLE employees (
     name         TEXT    NOT NULL,
     department   TEXT    NOT NULL,
     salary       INTEGER NOT NULL,
-    manager_id   INTEGER REFERENCES employees(emp_id),  -- NULL = no tiene jefe (CEO)
+    manager_id   INTEGER REFERENCES employees(emp_id),  -- NULL = no manager (CEO) / no tiene jefe
     hire_date    DATE    NOT NULL
 );
 
@@ -69,7 +70,7 @@ INSERT INTO products VALUES
  (6, 'Notebook A5',       'Stationery',     4.50),
  (7, 'Gel Pens (x10)',    'Stationery',     8.00),
  (8, 'Monitor 27"',       'Electronics',  300.00),
- (9, 'Desk Lamp',         'Furniture',     40.00);   -- producto 9: nunca vendido
+ (9, 'Desk Lamp',         'Furniture',     40.00);   -- product 9: never sold / nunca vendido
 
 INSERT INTO orders VALUES
  (101, 1, '2024-02-01', 'delivered'),
@@ -87,7 +88,7 @@ INSERT INTO orders VALUES
  (113, 4, '2024-06-28', 'delivered'),
  (114, 2, '2024-07-04', 'delivered'),
  (115, 10,'2024-07-19', 'shipped');
--- Cliente 6 (Carlos) nunca ha comprado.
+-- Customer 6 (Carlos) never bought anything / nunca ha comprado.
 
 INSERT INTO order_items VALUES
  (101, 1, 1, 1200.00),
@@ -98,7 +99,7 @@ INSERT INTO order_items VALUES
  (104, 5, 1,  350.00),
  (105, 8, 2,  300.00),
  (105, 2, 2,   25.00),
- (106, 1, 2, 1150.00),   -- precio con descuento
+ (106, 1, 2, 1150.00),   -- discounted price / precio con descuento
  (106, 5, 1,  350.00),
  (107, 7, 5,    8.00),
  (108, 6, 3,    4.50),
@@ -124,4 +125,4 @@ INSERT INTO employees VALUES
  (8,  'Santiago Gil',    'Engineering',  8000, 6,    '2023-02-14'),
  (9,  'Isabel Suárez',   'Marketing',    9500, 1,    '2021-11-08'),
  (10, 'Mateo Ramírez',   'Marketing',    6000, 9,    '2024-04-01'),
- (11, 'Daniel Pardo',    'Engineering', 11000, 7,    '2022-07-01');  -- gana más que su jefa (Natalia)
+ (11, 'Daniel Pardo',    'Engineering', 11000, 7,    '2022-07-01');  -- earns more than his manager (Natalia) / gana más que su jefa

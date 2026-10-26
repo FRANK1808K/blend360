@@ -1,12 +1,15 @@
-"""Soluciones de referencia de ejercicios.py (con la complejidad de cada una).
+"""Reference solutions for ejercicios.py, with the complexity of each one.
+Soluciones de referencia de ejercicios.py, con la complejidad de cada una.
 
+There are many correct solutions; these favor clarity + reasonable efficiency,
+which is what a technical test rewards.
 Hay muchas soluciones correctas; estas priorizan claridad + eficiencia razonable,
 que es lo que se valora en una prueba técnica.
 """
 from collections import Counter, defaultdict
 
 
-# ---------------------------------------------------------------- Básicos
+# ---------------------------------------------------------------- Basics / Básicos
 
 def is_even(n):
     return n % 2 == 0                                    # O(1)
@@ -28,7 +31,7 @@ def count_vowels(s):
 def fizzbuzz(n):
     result = []
     for i in range(1, n + 1):
-        if i % 15 == 0:                                  # primero el caso más específico
+        if i % 15 == 0:                                  # most specific case first / primero el caso más específico
             result.append("FizzBuzz")
         elif i % 3 == 0:
             result.append("Fizz")
@@ -41,11 +44,11 @@ def fizzbuzz(n):
 
 def sum_digits(n):
     total = 0
-    while n > 0:                                         # O(número de dígitos)
-        total += n % 10                                  # último dígito
-        n //= 10                                         # quitar el último dígito
+    while n > 0:                                         # O(number of digits / número de dígitos)
+        total += n % 10                                  # last digit / último dígito
+        n //= 10                                         # drop the last digit / quitar el último dígito
     return total
-    # alternativa en una línea: sum(int(d) for d in str(n))
+    # one-liner / en una línea: sum(int(d) for d in str(n))
 
 
 def max_without_builtin(nums):
@@ -58,17 +61,17 @@ def max_without_builtin(nums):
     return best
 
 
-# ---------------------------------------------------------------- Listas y strings
+# ---------------------------------------------------------------- Lists and strings / Listas y strings
 
 def remove_duplicates(items):
-    seen = set()                                         # set → búsqueda O(1)
+    seen = set()                                         # set → O(1) lookups / búsqueda O(1)
     result = []
     for x in items:
         if x not in seen:
             seen.add(x)
             result.append(x)
     return result                                        # O(n)
-    # alternativa: list(dict.fromkeys(items))
+    # alternative / alternativa: list(dict.fromkeys(items))
 
 
 def word_frequency(text):
@@ -80,20 +83,20 @@ def word_frequency(text):
 def longest_word(text):
     best = ""
     for word in text.split():
-        if len(word) > len(best):                        # ">" estricto → en empate se queda la primera
+        if len(word) > len(best):                        # strict ">" keeps the first on ties / en empate se queda la primera
             best = word
     return best
-    # alternativa: max(text.split(), key=len)  (max también devuelve la primera en empate)
+    # alternative / alternativa: max(text.split(), key=len)  (max also returns the first on ties)
 
 
 def are_anagrams(a, b):
     clean = lambda s: s.replace(" ", "").lower()
-    return Counter(clean(a)) == Counter(clean(b))        # O(n); con sorted() sería O(n log n)
+    return Counter(clean(a)) == Counter(clean(b))        # O(n); with sorted() it would be O(n log n)
 
 
 def second_largest(nums):
     first = second = None
-    for x in set(nums):                                  # O(n), una sola pasada
+    for x in set(nums):                                  # O(n), a single pass / una sola pasada
         if first is None or x > first:
             first, second = x, first
         elif second is None or x > second:
@@ -106,7 +109,7 @@ def flatten(list_of_lists):
 
 
 def transpose(matrix):
-    return [list(col) for col in zip(*matrix)]           # zip(*m) agrupa por columnas
+    return [list(col) for col in zip(*matrix)]           # zip(*m) groups by column / agrupa por columnas
 
 
 def compress(s):
@@ -120,11 +123,11 @@ def compress(s):
         else:
             parts.append(f"{current}{count}")
             current, count = ch, 1
-    parts.append(f"{current}{count}")                    # no olvidar el último grupo
-    return "".join(parts)                                # join es O(n); concatenar con + en bucle es peor
+    parts.append(f"{current}{count}")                    # do not forget the last group / no olvidar el último grupo
+    return "".join(parts)                                # join is O(n); "+=" in a loop is worse / concatenar con + es peor
 
 
-# ---------------------------------------------------------------- Datos (estilo análisis)
+# ---------------------------------------------------------------- Data (analysis style) / Datos (estilo análisis)
 
 def count_by(records, key):
     counts = {}
@@ -143,7 +146,7 @@ def average_by(records, group_key, value_key):
 
 
 def top_n(scores, n):
-    ordered = sorted(scores.items(), key=lambda kv: (-kv[1], kv[0]))  # valor desc, nombre asc
+    ordered = sorted(scores.items(), key=lambda kv: (-kv[1], kv[0]))  # value desc, name asc / valor desc, nombre asc
     return [name for name, _ in ordered[:n]]
 
 
@@ -152,7 +155,7 @@ def filter_records(records, field, threshold):
 
 
 def merge_sum(d1, d2):
-    result = dict(d1)                                    # copia: no modificar la entrada
+    result = dict(d1)                                    # copy: do not modify the input / copia: no modificar la entrada
     for k, v in d2.items():
         result[k] = result.get(k, 0) + v
     return result
@@ -165,18 +168,18 @@ def clean_numbers(values):
             continue
         try:
             result.append(float(str(v).strip()))
-        except ValueError:                               # "abc" y "" lanzan ValueError
+        except ValueError:                               # "abc" and "" raise ValueError / lanzan ValueError
             continue
     return result
 
 
-# ---------------------------------------------------------------- Matemática y recursión
+# ---------------------------------------------------------------- Math and recursion / Matemática y recursión
 
 def is_prime(n):
     if n < 2:
         return False
     i = 2
-    while i * i <= n:                                    # basta probar hasta √n → O(√n)
+    while i * i <= n:                                    # testing up to √n is enough → O(√n) / basta probar hasta √n
         if n % i == 0:
             return False
         i += 1
@@ -190,7 +193,7 @@ def primes_up_to(n):
     is_p[0] = is_p[1] = False
     for i in range(2, int(n ** 0.5) + 1):
         if is_p[i]:
-            for multiple in range(i * i, n + 1, i):      # tachar múltiplos
+            for multiple in range(i * i, n + 1, i):      # cross out multiples / tachar múltiplos
                 is_p[multiple] = False
     return [i for i, p in enumerate(is_p) if p]          # O(n log log n)
 
@@ -198,15 +201,15 @@ def primes_up_to(n):
 def factorial(n):
     if n < 0:
         raise ValueError("n must be non-negative")
-    if n <= 1:                                           # caso base
+    if n <= 1:                                           # base case / caso base
         return 1
-    return n * factorial(n - 1)                          # caso recursivo
+    return n * factorial(n - 1)                          # recursive case / caso recursivo
 
 
 def fibonacci(n):
     seq = []
     a, b = 0, 1
-    for _ in range(n):                                   # iterativo O(n); el recursivo ingenuo es O(2^n)
+    for _ in range(n):                                   # iterative O(n); naive recursion is O(2^n) / el recursivo ingenuo es O(2^n)
         seq.append(a)
         a, b = b, a + b
     return seq

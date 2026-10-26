@@ -1,7 +1,7 @@
-"""Corrector de problemas.py (sin dependencias).
+"""Grader for problemas.py (no dependencies) / Corrector de problemas.py (sin dependencias).
 
-    python3 test_problemas.py              # corrige tus respuestas
-    python3 test_problemas.py soluciones   # verifica las soluciones de referencia
+    python3 test_problemas.py              # grades your answers / corrige tus respuestas
+    python3 test_problemas.py soluciones   # checks the reference solutions / verifica las soluciones de referencia
 """
 import importlib
 import random
@@ -57,10 +57,10 @@ def _check_special(module, name):
         s = module.MinStack()
         for x in (5, 3, 7, 3, 1):
             s.push(x)
-        assert s.get_min() == 1, "get_min debería ser 1"
-        assert s.pop() == 1 and s.get_min() == 3, "tras pop, get_min debería ser 3"
+        assert s.get_min() == 1, "get_min should be 1 / debería ser 1"
+        assert s.pop() == 1 and s.get_min() == 3, "after pop, get_min should be 3 / tras pop, debería ser 3"
         s.pop()
-        assert s.get_min() == 3 and s.top() == 7, "el mínimo 3 sigue (hay otro 3)"
+        assert s.get_min() == 3 and s.top() == 7, "min is still 3 (there is another 3) / el mínimo 3 sigue (hay otro 3)"
         s.pop()
         s.pop()
         assert s.get_min() == 5 and s.top() == 5
@@ -71,12 +71,12 @@ def _check_special(module, name):
     elif name == "bubble_sort":
         data = [3, 1, 2]
         module.bubble_sort(data)
-        assert data == [3, 1, 2], "bubble_sort no debe modificar la lista original"
+        assert data == [3, 1, 2], "bubble_sort must not modify the input / no debe modificar la lista original"
     elif name == "merge_sort":
         rng = random.Random(360)
         for _ in range(50):
             data = [rng.randint(-50, 50) for _ in range(rng.randint(0, 30))]
-            assert module.merge_sort(data) == sorted(data), f"merge_sort falla con {data}"
+            assert module.merge_sort(data) == sorted(data), f"merge_sort fails with / falla con {data}"
 
 
 def run(module_name):
@@ -88,11 +88,11 @@ def run(module_name):
             for args, expected in CASES.get(name, []):
                 got = getattr(module, name)(*args)
                 if got != expected:
-                    raise AssertionError(f"{name}{args} → {got!r}, se esperaba {expected!r}")
+                    raise AssertionError(f"{name}{args} → {got!r}, expected / se esperaba {expected!r}")
             _check_special(module, name)
         except NotImplementedError:
             pending += 1
-            print(f"  ⏳ {name}: pendiente")
+            print(f"  ⏳ {name}: pending / pendiente")
             continue
         except Exception as exc:  # noqa: BLE001
             failed += 1
@@ -100,7 +100,7 @@ def run(module_name):
             continue
         passed += 1
         print(f"  ✅ {name}")
-    print(f"\n{module_name}.py → {passed}/{len(names)} correctos, {failed} con errores, {pending} pendientes")
+    print(f"\n{module_name}.py → {passed}/{len(names)} correct / correctos, {failed} failed / con errores, {pending} pending / pendientes")
     return failed == 0 and pending == 0
 
 

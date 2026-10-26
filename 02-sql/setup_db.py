@@ -1,10 +1,10 @@
-"""Crea practice.db (SQLite) a partir de schema.sql.
+"""Creates practice.db (SQLite) from schema.sql / Crea practice.db (SQLite) a partir de schema.sql.
 
-Uso:
-    python3 setup_db.py            # crea/recrea practice.db
-    python3 setup_db.py --shell    # además abre una consola SQL interactiva
+Usage / Uso:
+    python3 setup_db.py            # creates/recreates practice.db / crea o recrea practice.db
+    python3 setup_db.py --shell    # also opens an interactive SQL console / además abre una consola SQL
 
-Abre la base también con: sqlite3 practice.db   (o con DB Browser for SQLite / DBeaver)
+You can also open it with / También puedes abrirla con: sqlite3 practice.db (or DB Browser for SQLite / DBeaver)
 """
 import sqlite3
 import sys
@@ -24,14 +24,14 @@ def build(db_path: Path = DB_PATH) -> sqlite3.Connection:
 
 
 def shell(conn: sqlite3.Connection) -> None:
-    print("Consola SQL. Termina cada consulta con ';'. Escribe .salir para terminar.")
+    print("SQL console / Consola SQL. End each query with / Termina cada consulta con ';'. Type / Escribe .exit to quit / para salir.")
     buffer = ""
     while True:
         try:
             line = input("sql> " if not buffer else "...> ")
         except EOFError:
             break
-        if line.strip() == ".salir":
+        if line.strip() in (".exit", ".salir"):
             break
         buffer += line + "\n"
         if not sqlite3.complete_statement(buffer):
@@ -53,6 +53,6 @@ if __name__ == "__main__":
     connection = build()
     tables = [r[0] for r in connection.execute(
         "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name")]
-    print(f"Base creada en {DB_PATH} con tablas: {', '.join(tables)}")
+    print(f"Database created / Base creada: {DB_PATH} — tables / tablas: {', '.join(tables)}")
     if "--shell" in sys.argv:
         shell(connection)

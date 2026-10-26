@@ -1,7 +1,7 @@
-"""Corrector de ejercicios.py (sin dependencias: no necesitas pytest).
+"""Grader for ejercicios.py (no dependencies) / Corrector de ejercicios.py (sin dependencias: no necesitas pytest).
 
-    python3 test_ejercicios.py              # corrige tus respuestas
-    python3 test_ejercicios.py soluciones   # corrige las soluciones de referencia
+    python3 test_ejercicios.py              # grades your answers / corrige tus respuestas
+    python3 test_ejercicios.py soluciones   # checks the reference solutions / verifica las soluciones de referencia
 """
 import importlib
 import sys
@@ -55,18 +55,18 @@ def run(module_name):
             for args, expected in cases:
                 got = func(*args)
                 if got != expected:
-                    raise AssertionError(f"{name}{args} → {got!r}, se esperaba {expected!r}")
+                    raise AssertionError(f"{name}{args} → {got!r}, expected / se esperaba {expected!r}")
             if name == "factorial":
                 try:
                     func(-1)
-                    raise AssertionError("factorial(-1) debería lanzar ValueError")
+                    raise AssertionError("factorial(-1) should raise ValueError / debería lanzar ValueError")
                 except ValueError:
                     pass
             if name == "max_without_builtin":
                 _check_no_builtin(func)
         except NotImplementedError:
             pending += 1
-            print(f"  ⏳ {name}: pendiente")
+            print(f"  ⏳ {name}: pending / pendiente")
             continue
         except Exception as exc:  # noqa: BLE001 - mostrar cualquier fallo al estudiante
             failed += 1
@@ -75,7 +75,7 @@ def run(module_name):
         passed += 1
         print(f"  ✅ {name}")
     total = len(TESTS)
-    print(f"\n{module_name}.py → {passed}/{total} correctos, {failed} con errores, {pending} pendientes")
+    print(f"\n{module_name}.py → {passed}/{total} correct / correctos, {failed} failed / con errores, {pending} pending / pendientes")
     return failed == 0 and pending == 0
 
 
@@ -84,7 +84,7 @@ def _check_no_builtin(func):
     original_max, original_sorted = builtins.max, builtins.sorted
 
     def forbidden(*_a, **_k):
-        raise AssertionError("max_without_builtin no debe usar max() ni sorted()")
+        raise AssertionError("max_without_builtin must not use max() or sorted() / no debe usar max() ni sorted()")
 
     builtins.max, builtins.sorted = forbidden, forbidden
     try:
