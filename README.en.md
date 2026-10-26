@@ -47,7 +47,8 @@ Every document exists in **English and Spanish**. The exercises and mock exams a
 | 05 | [Databases](05-bases-de-datos/README.en.md) | Keys, normalization, ACID, indexes, OLTP/OLAP, star schema, lake/warehouse, NoSQL | Self-assessment |
 | 06 | [AWS](06-aws/README.en.md) + [data analytics on AWS](06-aws/analisis-de-datos.en.md) | Cloud, IAM, services, pricing; S3, Glue, Athena, Redshift, EMR, Kinesis, QuickSight | [30 questions](06-aws/preguntas.en.md) |
 | 07 | [Problem solving](07-resolucion-de-problemas/README.en.md) | The UMPIRE method, time management, logic, percentages, probability, statistics, business cases | Solved exercises |
-| EN | [Technical English (A2 → functional)](english/README.en.md) | Exam keywords, false friends, vocabulary, minimum grammar, interview | [Exercises](english/ejercicios-ingles.en.md) + [185 flashcards](flashcards/README.en.md) |
+| 08 | [Statistics and machine learning](08-estadistica-y-ml/README.en.md) | Descriptive stats, probability, inference, **A/B tests**, regression, ML, metrics; a study route through your Drive notes | [25 questions](08-estadistica-y-ml/preguntas.en.md) + [from-scratch script](08-estadistica-y-ml/estadistica_ml_practica.py) |
+| EN | [Technical English (A2 → functional)](english/README.en.md) | Exam keywords, false friends, vocabulary, minimum grammar, interview | [Exercises](english/ejercicios-ingles.en.md) + [209 flashcards](flashcards/README.en.md) |
 
 ## Practice
 
@@ -80,11 +81,12 @@ blend360/
 ├── 05-bases-de-datos/          Databases: theory
 ├── 06-aws/                     Cloud + data analytics + 30 questions
 ├── 07-resolucion-de-problemas/ Problem solving: method, logic, statistics, cases
+├── 08-estadistica-y-ml/        Statistics, A/B tests and ML + 25 questions
 ├── english/                    Technical English for A2 speakers
 ├── simulacros/                 Mock exams: technical (90 min) + reasoning (30 min)
 ├── simulator/                  Interactive simulator with a timer (ES/EN)
 ├── cheatsheets/                One-page reviews + 48-hour plan
-└── flashcards/                 185 Anki cards
+└── flashcards/                 209 Anki cards
 ```
 
 Every `X.md` file (Spanish) has an `X.en.md` twin (English).
@@ -94,7 +96,7 @@ Every `X.md` file (Spanish) has an `X.en.md` twin (English).
 The CI pipeline ([`checks.yml`](.github/workflows/checks.yml)) verifies on every change that:
 
 - The **36 SQL solutions** in both languages run and produce exactly the published "expected result" (`02-sql/check_solutions.py`).
-- The **25 Python solutions** and the **20 algorithm solutions** pass their tests.
+- The **25 Python solutions**, the **20 algorithm solutions** and the statistics and ML formulas (`08-estadistica-y-ml/estadistica_ml_practica.py`) pass their tests.
 - The Markdown follows the style rules (`markdownlint`), every document has its twin in the other language and every internal link works (`scripts/check_docs.py`).
 
 ## Key dates

@@ -8,7 +8,7 @@ Simulador en el navegador para las dos partes de la prueba, disponible en **espa
 |---|---|---|---|
 | **Razonamiento abstracto** | 30 | 30:00 | Figuras **generadas al azar**: rotaciones, cantidades, posiciones, lados, cuadrantes, figuras con dos reglas, matrices 3×3, dominós D-48, series numéricas y de letras. La dificultad aumenta |
 | **Técnico (opción múltiple)** | 40 | 50:00 | Banco de 60 preguntas **en inglés**: SQL (15), Python (15), algoritmos (12), bases de datos (8), AWS (10) |
-| **Práctica por tema** | Ilimitadas | Sin tiempo | Retroalimentación inmediata con explicación en español |
+| **Práctica por tema** | Ilimitadas | Sin tiempo | Retroalimentación inmediata con explicación. Incluye además **12 preguntas de estadística y ML** (solo en práctica) |
 
 **Pensado para aprender inglés:** cada pregunta técnica tiene un botón **"Ver traducción"** que muestra la versión en español. Intenta responder primero en inglés, como en el examen real.
 

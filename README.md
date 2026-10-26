@@ -49,7 +49,8 @@ Cada documento existe **en español y en inglés**. Los ejercicios y simulacros 
 | 05 | [Bases de datos](05-bases-de-datos/README.md) | Llaves, normalización, ACID, índices, OLTP/OLAP, estrella, lake/warehouse, NoSQL | Autoevaluación |
 | 06 | [AWS](06-aws/README.md) + [análisis de datos en AWS](06-aws/analisis-de-datos.md) | Nube, IAM, servicios, precios; S3, Glue, Athena, Redshift, EMR, Kinesis, QuickSight | [30 preguntas en inglés](06-aws/preguntas.md) |
 | 07 | [Resolución de problemas](07-resolucion-de-problemas/README.md) | Método UMPIRE, gestión del tiempo, lógica, porcentajes, probabilidad, estadística, casos de negocio | Ejercicios resueltos |
-| EN | [Inglés técnico (A2 → funcional)](english/README.md) | Palabras clave de los enunciados, falsos amigos, vocabulario, gramática mínima, entrevista | [Ejercicios](english/ejercicios-ingles.md) + [185 flashcards](flashcards/README.md) |
+| 08 | [Estadística y machine learning](08-estadistica-y-ml/README.md) | Descriptiva, probabilidad, inferencia, **pruebas A/B**, regresión, ML, métricas; ruta de estudio con tus apuntes de Drive | [25 preguntas](08-estadistica-y-ml/preguntas.md) + [script desde cero](08-estadistica-y-ml/estadistica_ml_practica.py) |
+| EN | [Inglés técnico (A2 → funcional)](english/README.md) | Palabras clave de los enunciados, falsos amigos, vocabulario, gramática mínima, entrevista | [Ejercicios](english/ejercicios-ingles.md) + [209 flashcards](flashcards/README.md) |
 
 ## Practicar
 
@@ -82,11 +83,12 @@ blend360/
 ├── 05-bases-de-datos/          Teoría
 ├── 06-aws/                     Nube + análisis de datos + 30 preguntas
 ├── 07-resolucion-de-problemas/ Método, lógica, estadística, casos
+├── 08-estadistica-y-ml/        Estadística, pruebas A/B y ML + 25 preguntas
 ├── english/                    Inglés técnico para A2
 ├── simulacros/                 Simulacro técnico (90 min) + razonamiento (30 min)
 ├── simulator/                  Simulador interactivo con cronómetro (ES/EN)
 ├── cheatsheets/                Repasos de una página + plan de 48 h
-└── flashcards/                 185 tarjetas para Anki
+└── flashcards/                 209 tarjetas para Anki
 ```
 
 ## Calidad del material
@@ -94,7 +96,7 @@ blend360/
 La CI ([`checks.yml`](.github/workflows/checks.yml)) verifica en cada cambio que:
 
 - Las **36 soluciones SQL**, en los dos idiomas, se ejecutan y producen exactamente el "resultado esperado" publicado (`02-sql/check_solutions.py`).
-- Las **25 soluciones de Python** y los **20 problemas de algoritmos** pasan sus pruebas.
+- Las **25 soluciones de Python**, los **20 problemas de algoritmos** y las fórmulas de estadística y ML (`08-estadistica-y-ml/estadistica_ml_practica.py`) pasan sus pruebas.
 - El Markdown cumple las reglas de estilo (`markdownlint`), cada documento tiene su versión en el otro idioma y todos los enlaces internos funcionan (`scripts/check_docs.py`).
 
 ## Fechas clave

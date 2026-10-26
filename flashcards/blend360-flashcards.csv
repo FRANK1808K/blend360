@@ -184,3 +184,27 @@ Regla XOR en matrices,Quedan los elementos que aparecen en solo una de las dos f
 Regla 'sudoku' en matrices,Cada fila/columna contiene cada elemento una vez,razonamiento
 Tiempo por pregunta (30 min),"≈ 45–60 s; si no ves la regla en 60 s: marca, adivina, sigue",razonamiento
 Rotación horaria 45°,↑ ↗ → ↘ ↓ ↙ ← ↖,razonamiento
+Mean vs median (skewed data),Con sesgo/outliers usa la mediana; la media se va hacia los extremos,estadistica_ml
+Sample variance: why n − 1?,Corrección de Bessel: evita subestimar la varianza poblacional,estadistica_ml
+IQR outlier rule (Tukey),Outlier si < Q1 − 1.5·IQR o > Q3 + 1.5·IQR,estadistica_ml
+z-score,(x − media) / desviación estándar; |z| > 3 suele ser atípico,estadistica_ml
+Empirical rule,"68 % a ±1σ, 95 % a ±2σ, 99.7 % a ±3σ (distribución normal)",estadistica_ml
+Central Limit Theorem (CLT),"La media muestral es aprox. normal con n grande (≥ 30), sin importar la población",estadistica_ml
+Poisson distribution,Conteo de eventos en un intervalo (pedidos por hora),estadistica_ml
+Bayes' theorem,P(A|B) = P(B|A)·P(A) / P(B) — cuidado con la tasa base,estadistica_ml
+p-value,P(resultado tan extremo | H0 cierta). Si p < α (0.05) se rechaza H0,estadistica_ml
+Type I vs Type II error,Tipo I = falso positivo (α); Tipo II = falso negativo (β),estadistica_ml
+Statistical power,1 − β: probabilidad de detectar un efecto real (meta ≥ 0.8),estadistica_ml
+95% confidence interval for the mean,media ± 1.96·s/√n; más n → intervalo más estrecho,estadistica_ml
+Which test for 2 conversion rates (A/B)?,Prueba z de dos proporciones,estadistica_ml
+Which test for 3+ group means?,ANOVA (y luego comparaciones múltiples),estadistica_ml
+Peeking (A/B tests),Mirar y detener antes de tiempo: infla los falsos positivos,estadistica_ml
+Correlation vs causation,Correlación ≠ causalidad; para causalidad se necesita un experimento,estadistica_ml
+Overfitting vs underfitting,"Overfitting: alta varianza (bien en train, mal en test). Underfitting: alto sesgo",estadistica_ml
+L1 (Lasso) vs L2 (Ridge),L1 puede llevar coeficientes a 0 (selección); L2 los encoge,estadistica_ml
+Data leakage,Info del test/futuro en el entrenamiento; ajustar escalado/imputación solo con train,estadistica_ml
+Precision vs recall,"Precision = TP/(TP+FP) (FP caro). Recall = TP/(TP+FN) (FN caro: fraude, churn)",estadistica_ml
+Accuracy paradox,"Con 5 % de fraude, predecir siempre 'no' da 95 % accuracy y 0 recall",estadistica_ml
+Random forest vs gradient boosting,RF: árboles en paralelo (bagging) que votan. Boosting: árboles en secuencia que corrigen errores,estadistica_ml
+k-means: how to choose k?,Método del codo o coeficiente de silueta,estadistica_ml
+RFM segmentation,"Recencia, frecuencia y valor monetario; base de segmentación de clientes",estadistica_ml

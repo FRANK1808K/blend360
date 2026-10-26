@@ -21,6 +21,11 @@ jobs:
       - name: Algorithms reference solutions
         working-directory: 04-algoritmos-y-estructuras
         run: python test_problemas.py soluciones
+      - name: Statistics and ML formulas
+        working-directory: 08-estadistica-y-ml
+        run: |
+          pip install --quiet numpy
+          python estadistica_ml_practica.py
       - name: pandas practice script runs
         working-directory: 03-python
         run: |

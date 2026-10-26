@@ -44,8 +44,9 @@
 2. **Data-oriented Python** (handling lists, dictionaries, strings, pandas) + basic algorithms → [03-python](../03-python/README.en.md) and [04-algorithms](../04-algoritmos-y-estructuras/README.en.md).
 3. **Abstract reasoning is demanding** → daily practice, with a timer. See [01-abstract reasoning](../01-razonamiento-abstracto/README.en.md).
 4. **English:** the test is in English and Blend works with US clients → reading exam questions + your self-introduction. See [english](../english/README.en.md).
-5. **Behavioral:** prepare 2–3 **STAR** stories about projects, teamwork and a challenge.
-6. **Platform:** if they tell you it is Coderbyte, HackerRank or similar, do 3–4 practice challenges **on that platform** to learn its editor and test cases.
+5. **Statistics and ML** (Data Science tracks): A/B tests, p-values, model metrics, overfitting → [08-statistics and ML](../08-estadistica-y-ml/README.en.md).
+6. **Behavioral:** prepare 2–3 **STAR** stories about projects, teamwork and a challenge.
+7. **Platform:** if they tell you it is Coderbyte, HackerRank or similar, do 3–4 practice challenges **on that platform** to learn its editor and test cases.
 
 ## 5. Questions worth asking the recruiter
 

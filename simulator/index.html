@@ -617,10 +617,43 @@ const BANK = [
    "Athena cobra por datos escaneados: columnar + particiones = menos datos escaneados.", "¿Qué acciones reducen el costo de las consultas en Amazon Athena?",
    "Athena charges per data scanned: columnar + partitions = less data scanned.",
    ["Convertir a Parquet y particionar los datos por fecha", "Guardar los datos en muchos CSV pequeños", "Usar siempre SELECT *", "Mover los datos a S3 Glacier Deep Archive"]],
+  // Estadística y ML / Statistics and ML (solo práctica / practice only)
+  ["Stats", "Salaries are right-skewed by a few very high values. Which measure best represents the typical salary?", null, ["Median", "Mean", "Range", "Variance"], 0,
+   "La mediana es robusta a outliers.", "Los salarios están sesgados a la derecha por unos pocos valores muy altos. ¿Qué medida representa mejor el salario típico?",
+   "The median is robust to outliers.", ["Mediana", "Media", "Rango", "Varianza"]],
+  ["Stats", "In a normal distribution, about what share of the data is within ±2 standard deviations?", null, ["95%", "68%", "99.7%", "50%"], 0,
+   "Regla 68-95-99,7.", "En una distribución normal, ¿qué porcentaje de los datos está aproximadamente a ±2 desviaciones estándar?", "Rule 68-95-99.7."],
+  ["Stats", "What is a p-value?", null, ["The probability of a result at least this extreme if H0 were true", "The probability that H0 is true", "The size of the effect", "The probability that H1 is true"], 0,
+   "Se calcula suponiendo H0 verdadera.", "¿Qué es un p-valor?", "It is computed assuming H0 is true.",
+   ["La probabilidad de un resultado al menos tan extremo si H0 fuera cierta", "La probabilidad de que H0 sea cierta", "El tamaño del efecto", "La probabilidad de que H1 sea cierta"]],
+  ["Stats", "Rejecting H0 when it is actually true is a:", null, ["Type I error (false positive)", "Type II error (false negative)", "Correct decision", "Sampling bias"], 0,
+   "Su probabilidad es α.", "Rechazar H0 cuando en realidad es verdadera es un:", "Its probability is α.",
+   ["Error tipo I (falso positivo)", "Error tipo II (falso negativo)", "Decisión correcta", "Sesgo de muestreo"]],
+  ["Stats", "Which test compares the conversion rates of version A and version B?", null, ["Two-proportion z-test", "ANOVA", "Paired t-test", "Chi-square goodness of fit"], 0,
+   "Dos proporciones → prueba z de dos proporciones.", "¿Qué prueba compara las tasas de conversión de la versión A y la versión B?", "Two proportions → two-proportion z-test.",
+   ["Prueba z de dos proporciones", "ANOVA", "Prueba t pareada", "Chi-cuadrado de bondad de ajuste"]],
+  ["Stats", "A team stops its A/B test as soon as p < 0.05. What is the problem?", null, ["Peeking inflates false positives", "Nothing", "The test becomes one-sided", "It lowers the power to 100%"], 0,
+   "El tamaño de muestra se decide antes y se respeta.", "Un equipo detiene su prueba A/B apenas p < 0,05. ¿Cuál es el problema?", "The sample size is decided beforehand and respected.",
+   ["Mirar antes de tiempo infla los falsos positivos", "Ninguno", "La prueba se vuelve unilateral", "Sube la potencia al 100 %"]],
+  ["Stats", "What does the Central Limit Theorem say?", null, ["The sample mean is approximately normal for large n", "Every population is normal", "Mean equals median", "Large samples have no outliers"], 0,
+   "Por eso funcionan los intervalos de confianza.", "¿Qué dice el teorema del límite central?", "That is why confidence intervals work.",
+   ["La media muestral es aproximadamente normal con n grande", "Toda población es normal", "La media es igual a la mediana", "Las muestras grandes no tienen outliers"]],
+  ["Stats", "99% accuracy on train and 70% on test most likely means:", null, ["Overfitting", "Underfitting", "A perfect model", "Data leakage was avoided"], 0,
+   "Alta varianza: memorizó el train.", "99 % de exactitud en train y 70 % en test probablemente significa:", "High variance: it memorized the training set.",
+   ["Sobreajuste", "Subajuste", "Un modelo perfecto", "Se evitó la fuga de datos"]],
+  ["Stats", "TP = 30, FN = 20, FP = 10. What is the recall?", null, ["0.60", "0.75", "0.30", "0.97"], 0,
+   "Recall = 30 / (30 + 20).", "TP = 30, FN = 20, FP = 10. ¿Cuál es el recall?", "Recall = 30 / (30 + 20)."],
+  ["Stats", "Which algorithm segments customers WITHOUT labels?", null, ["k-means", "Logistic regression", "Linear regression", "Random forest"], 0,
+   "Clustering = no supervisado.", "¿Qué algoritmo segmenta clientes SIN etiquetas?", "Clustering = unsupervised."],
+  ["Stats", "Which regularization can set some coefficients exactly to zero?", null, ["L1 (Lasso)", "L2 (Ridge)", "Dropout", "Early stopping"], 0,
+   "L1 selecciona variables; L2 solo encoge.", "¿Qué regularización puede dejar algunos coeficientes exactamente en cero?", "L1 selects features; L2 only shrinks."],
+  ["Stats", "With 5% fraud, a model that always predicts \"no fraud\" has 95% accuracy. Which metric exposes it?", null, ["Recall", "Accuracy", "R²", "MAE"], 0,
+   "Su recall es 0 (paradoja de la exactitud).", "Con 5 % de fraude, un modelo que siempre predice \"no fraude\" tiene 95 % de exactitud. ¿Qué métrica lo delata?",
+   "Its recall is 0 (accuracy paradox)."],
 ];
-const TECH_TOPICS = ["SQL", "Python", "Algorithms", "Databases", "AWS"];
+const TECH_TOPICS = ["SQL", "Python", "Algorithms", "Databases", "AWS", "Stats"];
 const TOPIC_NAME = { SQL: { es: "SQL", en: "SQL" }, Python: { es: "Python", en: "Python" }, Algorithms: { es: "Algoritmos", en: "Algorithms" },
-  Databases: { es: "Bases de datos", en: "Databases" }, AWS: { es: "AWS", en: "AWS" } };
+  Databases: { es: "Bases de datos", en: "Databases" }, AWS: { es: "AWS", en: "AWS" }, Stats: { es: "Estadística y ML", en: "Statistics and ML" } };
 
 function techQuestion(row) {
   const [topic, prompt, code, opts, ans, exEs, promptEs, exEn, optsEs] = row;
@@ -631,7 +664,7 @@ function techQuestion(row) {
 function buildTechExam(n = 40) {
   const per = { SQL: 11, Python: 10, Algorithms: 8, Databases: 4, AWS: 7 };
   let qs = [];
-  for (const tp of TECH_TOPICS) qs = qs.concat(shuffle(BANK.filter(r => r[0] === tp)).slice(0, per[tp]));
+  for (const tp of TECH_TOPICS) qs = qs.concat(shuffle(BANK.filter(r => r[0] === tp)).slice(0, per[tp] || 0));   // Stats: solo práctica / practice only
   return shuffle(qs).slice(0, n).map(techQuestion);
 }
 

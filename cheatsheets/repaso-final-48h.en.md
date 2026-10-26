@@ -8,7 +8,7 @@
 
 | Block | What to do | Time |
 |---|---|---|
-| Morning | Read the 4 cheat sheets: [SQL](sql.en.md) · [Python](python.en.md) · [Algorithms](algoritmos.en.md) · [AWS + DB](aws-y-bases-de-datos.en.md) | 1 h |
+| Morning | Read the 5 cheat sheets: [SQL](sql.en.md) · [Python](python.en.md) · [Algorithms](algoritmos.en.md) · [AWS + DB](aws-y-bases-de-datos.en.md) · [Statistics + ML](estadistica-ml.en.md) | 1 h |
 | Morning | Redo SQL 16, 26, 28, 32 and 34 from the [exercises](../02-sql/ejercicios.en.md) **without looking** | 45 min |
 | Afternoon | 1 abstract reasoning mock exam of 30 min in the [simulator](../simulator/README.en.md) | 30 min |
 | Afternoon | Review **only** the mistakes you wrote down in your mock exams | 45 min |

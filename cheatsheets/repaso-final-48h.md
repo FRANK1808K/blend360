@@ -8,7 +8,7 @@
 
 | Bloque | Qué hacer | Tiempo |
 |---|---|---|
-| Mañana | Lee los 4 cheatsheets: [SQL](sql.md) · [Python](python.md) · [Algoritmos](algoritmos.md) · [AWS + BD](aws-y-bases-de-datos.md) | 1 h |
+| Mañana | Lee los 5 cheatsheets: [SQL](sql.md) · [Python](python.md) · [Algoritmos](algoritmos.md) · [AWS + BD](aws-y-bases-de-datos.md) · [Estadística + ML](estadistica-ml.md) | 1 h |
 | Mañana | Rehaz **sin mirar** los SQL 16, 26, 28, 32 y 34 de [ejercicios.md](../02-sql/ejercicios.md) | 45 min |
 | Tarde | 1 simulacro de razonamiento abstracto de 30 min en el [simulador](../simulator/index.html) | 30 min |
 | Tarde | Repasa **solo** los errores que anotaste en tus simulacros | 45 min |

@@ -87,11 +87,12 @@ Do not study anything for Blend360 that day. Rest after the exam.
 - [ ] English: write and memorize your **self-introduction** ([interview and phrases](../english/entrevista-y-frases.en.md)).
 - [ ] Reasoning: simulator, 1 full 30-minute mock exam.
 
-### Week 6 · Nov 30 – Dec 6: algorithms + databases + problem solving
+### Week 6 · Nov 30 – Dec 6: algorithms + databases + problem solving + statistics/ML
 
 - [ ] Algorithms: the 🟡 problems (the remaining 9).
 - [ ] The whole [05-databases](../05-bases-de-datos/README.en.md) module.
 - [ ] The whole [07-problem solving](../07-resolucion-de-problemas/README.en.md) module (includes logic, statistics and business cases).
+- [ ] [08-statistics and ML](../08-estadistica-y-ml/README.en.md): sections 2–6 and 9 + the 🔴 rows of the route through your Drive notes + [25 questions](../08-estadistica-y-ml/preguntas.en.md). If you are placed on the Data Science track, give it priority.
 - [ ] **Saturday, Dec 5:** [technical mock exam #1](../simulacros/simulacro-tecnico-01.en.md) (90 min, real conditions).
 - [ ] Sunday, Dec 6: analyze your mistakes in the mock exam and review those topics.
 - [ ] English: [English exercises](../english/ejercicios-ingles.en.md) + record yourself answering 3 interview questions.

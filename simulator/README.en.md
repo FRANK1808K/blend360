@@ -8,7 +8,7 @@ A browser simulator for both parts of the test, available in **English and Spani
 |---|---|---|---|
 | **Abstract reasoning** | 30 | 30:00 | **Randomly generated** figures: rotations, amounts, positions, sides, quadrants, two-rule figures, 3×3 matrices, D-48 dominoes, number and letter series. Difficulty increases |
 | **Technical (multiple choice)** | 40 | 50:00 | A bank of 60 questions **in English**: SQL (15), Python (15), algorithms (12), databases (8), AWS (10) |
-| **Practice by topic** | Unlimited | No timer | Immediate feedback with an explanation |
+| **Practice by topic** | Unlimited | No timer | Immediate feedback with an explanation. Also includes **12 statistics and ML questions** (practice only) |
 
 **Made for learning English:** every technical question has a **"Show translation"** button that reveals the Spanish version. Try to answer in English first, like in the real exam.
 

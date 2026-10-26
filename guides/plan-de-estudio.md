@@ -87,11 +87,12 @@ Ese día no estudies nada para Blend360. Descansa después del examen.
 - [ ] Inglés: escribe y memoriza tu **presentación personal** ([entrevista-y-frases.md](../english/entrevista-y-frases.md)).
 - [ ] Razonamiento: simulador, 1 simulacro completo de 30 min.
 
-### Semana 6 · 30 nov – 6 dic: algoritmos + BD + resolución de problemas
+### Semana 6 · 30 nov – 6 dic: algoritmos + BD + resolución de problemas + estadística/ML
 
 - [ ] Algoritmos: problemas 🟡 (los 9 restantes).
 - [ ] [05-bases-de-datos](../05-bases-de-datos/README.md) completo.
 - [ ] [07-resolucion-de-problemas](../07-resolucion-de-problemas/README.md) completo (incluye lógica, estadística y casos).
+- [ ] [08-estadistica-y-ml](../08-estadistica-y-ml/README.md): secciones 2–6 y 9 + las filas 🔴 de la ruta con tus apuntes de Drive + [25 preguntas](../08-estadistica-y-ml/preguntas.md). Si te asignan a la ruta de Data Science, dale prioridad.
 - [ ] **Sábado 5 dic:** [simulacro técnico #1](../simulacros/simulacro-tecnico-01.md) (90 min, condiciones reales).
 - [ ] Domingo 6 dic: analiza los errores del simulacro y repasa esos temas.
 - [ ] Inglés: [ejercicios-ingles.md](../english/ejercicios-ingles.md) + grábate respondiendo 3 preguntas de entrevista.

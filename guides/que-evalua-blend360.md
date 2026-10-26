@@ -44,8 +44,9 @@
 2. **Python orientado a datos** (manipular listas, diccionarios, strings, pandas) + algoritmos básicos → [03-python](../03-python/README.md) y [04-algoritmos](../04-algoritmos-y-estructuras/README.md).
 3. **El razonamiento abstracto es exigente** → práctica diaria, con tiempo. Ver [01-razonamiento-abstracto](../01-razonamiento-abstracto/README.md).
 4. **Inglés:** la prueba es en inglés y Blend trabaja con clientes de EE. UU. → lectura de enunciados + presentación personal. Ver [english](../english/README.md).
-5. **Comportamiento:** prepara 2–3 historias **STAR** sobre proyectos, trabajo en equipo y un reto.
-6. **Plataforma:** si te dicen que es Coderbyte, HackerRank o similar, haz 3–4 retos de práctica **en esa plataforma** para conocer el editor y los casos de prueba.
+5. **Estadística y ML** (rutas de Data Science): pruebas A/B, p-valor, métricas de modelos, sobreajuste → [08-estadistica-y-ml](../08-estadistica-y-ml/README.md).
+6. **Comportamiento:** prepara 2–3 historias **STAR** sobre proyectos, trabajo en equipo y un reto.
+7. **Plataforma:** si te dicen que es Coderbyte, HackerRank o similar, haz 3–4 retos de práctica **en esa plataforma** para conocer el editor y los casos de prueba.
 
 ## 5. Preguntas que conviene hacerle al reclutador
 

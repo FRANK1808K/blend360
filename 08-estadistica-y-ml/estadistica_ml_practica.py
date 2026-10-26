@@ -113,6 +113,28 @@ def confidence_interval_mean(xs, z=1.96):
     return mean(xs) - z * se, mean(xs) + z * se
 
 
+def one_sample_t(xs, mu0):
+    # t = (x̄ - μ0) / (s / √n): use it when σ is unknown / úsala cuando no conoces σ
+    return (mean(xs) - mu0) / (std(xs) / math.sqrt(len(xs)))
+
+
+def normal_ppf(p):
+    # Inverse of the normal CDF by bisection / Inversa de la CDF normal por bisección
+    lo, hi = -10.0, 10.0
+    for _ in range(100):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if normal_cdf(mid) < p else (lo, mid)
+    return (lo + hi) / 2
+
+
+def sample_size_two_proportions(p0, p1, alpha=0.05, power=0.80):
+    # Users needed PER GROUP to detect p0 → p1 / Usuarios necesarios POR GRUPO para detectar p0 → p1
+    z_a, z_b = normal_ppf(1 - alpha / 2), normal_ppf(power)
+    p_bar = (p0 + p1) / 2
+    num = z_a * math.sqrt(2 * p_bar * (1 - p_bar)) + z_b * math.sqrt(p0 * (1 - p0) + p1 * (1 - p1))
+    return math.ceil((num / (p1 - p0)) ** 2)
+
+
 def two_proportion_ztest(conv_a, n_a, conv_b, n_b):
     p_a, p_b = conv_a / n_a, conv_b / n_b
     p_pool = (conv_a + conv_b) / (n_a + n_b)
@@ -198,9 +220,15 @@ def main():
     assert round(z, 2) == 2.02 and round(p, 3) == 0.043
     z_small, p_small = two_proportion_ztest(20, 200, 24, 200)           # same rates, 10× fewer users / 10× menos usuarios
     assert p_small > 0.05
+    assert round(normal_ppf(0.975), 2) == 1.96 and round(normal_ppf(0.80), 2) == 0.84
+    n_needed = sample_size_two_proportions(0.10, 0.105)               # +5 % relative lift / mejora relativa del 5 %
+    assert 57_700 <= n_needed <= 57_800
+    assert sample_size_two_proportions(0.10, 0.12) < 5_000             # bigger effect → far fewer users / efecto mayor → muchos menos usuarios
+    assert round(one_sample_t([52, 48, 55, 50, 53, 49, 51, 54], 50), 2) == 1.73
     lo, hi = confidence_interval_mean([10, 12, 9, 11, 13, 10, 12, 11, 9, 13])
     assert round(lo, 2) == 10.08 and round(hi, 2) == 11.92
     print(f"4. A/B test: z = {z:.2f}, p = {p:.3f} (significant / significativo) · n=200: p = {p_small:.2f} · 95% CI = ({lo:.2f}, {hi:.2f})")
+    print(f"   Sample size / Tamaño de muestra 10% → 10.5%: {n_needed:,} per group / por grupo · 10% → 12%: {sample_size_two_proportions(0.10, 0.12):,}")
 
     rows = list(range(100))
     train, test = train_test_split(rows)
