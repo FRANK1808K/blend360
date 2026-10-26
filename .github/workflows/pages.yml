@@ -1,0 +1,38 @@
+# Publishes the interactive simulator to GitHub Pages / Publica el simulador interactivo en GitHub Pages.
+# One-time setup / Configuración única: Settings → Pages → Build and deployment → Source: "GitHub Actions".
+# Private repos need a paid plan for Pages: the job is skipped unless the repo is public or the
+# repository variable PAGES_ENABLED is "true" (Settings → Secrets and variables → Actions → Variables).
+# Los repos privados necesitan un plan de pago para Pages: el trabajo se omite salvo que el repo sea
+# público o la variable PAGES_ENABLED valga "true".
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["simulator/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: ${{ !github.event.repository.private || vars.PAGES_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: simulator
+      - id: deployment
+        uses: actions/deploy-pages@v4

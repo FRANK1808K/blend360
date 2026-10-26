@@ -18,7 +18,7 @@ Al terminar un simulacro ves tu puntaje, el resultado **por tema** y la revisió
 
 - **En línea (recomendado, funciona en el celular):** la versión publicada en el enlace que te compartió Claude.
 - **Local:** abre `simulator/index.html` con doble clic en cualquier navegador (no requiere instalar nada).
-- **GitHub Pages:** en *Settings → Pages* del repositorio, publica la rama y abre `/simulator/`.
+- **GitHub Pages:** el flujo [`pages.yml`](../.github/workflows/pages.yml) publica el simulador en `https://frank1808k.github.io/blend360/` cada vez que cambia en `main`. Configuración única: *Settings → Pages → Source: **GitHub Actions***. Tu repositorio es **privado**: con el plan gratuito de GitHub, Pages solo funciona si lo haces público. Con GitHub Pro, crea la variable `PAGES_ENABLED = true` (*Settings → Secrets and variables → Actions → Variables*). Mientras tanto, el flujo se omite sin fallar.
 
 **Atajos de teclado:** `A`–`D` o `1`–`4` para responder, `←` `→` para moverte entre preguntas, `T` para ver la traducción.
 
