@@ -7,12 +7,13 @@
 <meta name="description" content="Simulador cronometrado oficial del examen AWS Certified AI Practitioner (AIF-C01) con interfaz interactiva, modo oscuro, versión en inglés, cronómetro oficial y reporte detallado por dominio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap">
 <style>
 :root {
   --paper: #f8fafc;
   --card: #ffffff;
   --surface: #f1f5f9;
+  --surface-hover: #e2e8f0;
   --ink: #0f172a;
   --muted: #64748b;
   --rule: #e2e8f0;
@@ -30,69 +31,73 @@
   --flag-soft: #fef3c7;
   --en: #475569;
   --en-soft: #f8fafc;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 0 24px rgba(255, 153, 0, 0.25);
-  --font-body: "Plus Jakarta Sans", "Century Gothic", "Didact Gothic", system-ui, sans-serif;
-  --font-display: var(--font-body);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 28px -6px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 25px rgba(255, 153, 0, 0.35);
+  --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --ease: cubic-bezier(.16, 1, .3, 1);
-  --r: 14px;
+  --r: 16px;
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
   --paper: #09090b;
-  --card: #121217;
-  --surface: #1a1a24;
+  --card: #111116;
+  --surface: #181820;
+  --surface-hover: #22222e;
   --ink: #f8fafc;
   --muted: #94a3b8;
   --rule: #272733;
-  --grid: #181820;
+  --grid: #1a1a24;
   --accent: #FF9900;
   --accent-hover: #ffad26;
   --accent-ink: #000000;
   --accent-soft: rgba(255, 153, 0, 0.18);
   --brand: #13131a;
   --good: #34d399;
-  --good-soft: rgba(16, 185, 129, 0.16);
+  --good-soft: rgba(16, 185, 129, 0.15);
   --bad: #f87171;
-  --bad-soft: rgba(239, 68, 68, 0.16);
+  --bad-soft: rgba(239, 68, 68, 0.15);
   --flag: #fbbf24;
-  --flag-soft: rgba(245, 158, 11, 0.16);
+  --flag-soft: rgba(245, 158, 11, 0.15);
   --en: #cbd5e1;
   --en-soft: #14141d;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 32px rgba(255, 153, 0, 0.35);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 28px -6px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 35px rgba(255, 153, 0, 0.45);
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #09090b;
-    --card: #121217;
-    --surface: #1a1a24;
+    --card: #111116;
+    --surface: #181820;
+    --surface-hover: #22222e;
     --ink: #f8fafc;
     --muted: #94a3b8;
     --rule: #272733;
-    --grid: #181820;
+    --grid: #1a1a24;
     --accent: #FF9900;
     --accent-hover: #ffad26;
     --accent-ink: #000000;
     --accent-soft: rgba(255, 153, 0, 0.18);
     --brand: #13131a;
     --good: #34d399;
-    --good-soft: rgba(16, 185, 129, 0.16);
+    --good-soft: rgba(16, 185, 129, 0.15);
     --bad: #f87171;
-    --bad-soft: rgba(239, 68, 68, 0.16);
+    --bad-soft: rgba(239, 68, 68, 0.15);
     --flag: #fbbf24;
-    --flag-soft: rgba(245, 158, 11, 0.16);
+    --flag-soft: rgba(245, 158, 11, 0.15);
     --en: #cbd5e1;
     --en-soft: #14141d;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
-    --shadow-glow: 0 0 32px rgba(255, 153, 0, 0.35);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 12px 28px -6px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 0 35px rgba(255, 153, 0, 0.45);
     color-scheme: dark;
   }
 }
@@ -113,11 +118,11 @@ body {
 }
 
 .wrap {
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
-  padding-inline: 18px;
-  padding-block: 24px 60px;
-  animation: enterFade .4s var(--ease);
+  padding-inline: 20px;
+  padding-block: 24px 64px;
+  animation: enterFade .35s var(--ease);
 }
 
 @keyframes enterFade {
@@ -126,15 +131,14 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: var(--font-display);
   line-height: 1.2;
   margin: 0;
   text-wrap: balance;
   font-weight: 700;
 }
-h1 { font-size: clamp(2rem, 5vw, 2.75rem); letter-spacing: -0.03em; }
+h1 { font-size: clamp(2rem, 5vw, 2.85rem); letter-spacing: -0.035em; }
 h2 { font-size: 1.35rem; letter-spacing: -0.02em; }
-h3 { font-size: 1.1rem; }
+h3 { font-size: 1.12rem; }
 p { margin: 0; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -143,14 +147,14 @@ code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surfac
 .muted { color: var(--muted); }
 .eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
   font-weight: 700;
 }
 
-/* Botones con micro-interacciones */
+/* Botones y controles táctiles */
 button, select { font: inherit; }
 .btn {
   appearance: none;
@@ -158,17 +162,18 @@ button, select { font: inherit; }
   background: var(--card);
   color: var(--ink);
   border-radius: 999px;
-  padding: 9px 18px;
+  padding: 10px 20px;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   justify-content: center;
   text-decoration: none;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
   transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .2s, background-color .2s, color .2s;
+  user-select: none;
 }
 .btn:hover:not(:disabled) {
   transform: translateY(-2px);
@@ -190,7 +195,7 @@ button, select { font: inherit; }
 }
 .btn.ghost { border-color: var(--rule); background: transparent; box-shadow: none; }
 .btn.ghost:hover:not(:disabled) { border-color: var(--ink); background: var(--surface); }
-.btn.mini { padding: 4px 12px; font-size: 0.8rem; }
+.btn.mini { padding: 5px 14px; font-size: 0.82rem; }
 .btn:disabled { opacity: .4; cursor: not-allowed; }
 .btn:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
@@ -203,19 +208,19 @@ button, select { font: inherit; }
   top: 0;
   z-index: 50;
   background: color-mix(in srgb, var(--card) 85%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--rule);
-  padding: 10px 18px;
+  padding: 12px 20px;
   transition: border-color .25s var(--ease);
 }
 .top-in {
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 .brand {
@@ -223,25 +228,25 @@ button, select { font: inherit; }
   align-items: center;
   gap: 10px;
   font-weight: 800;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   letter-spacing: -0.01em;
 }
 .brand-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
   background: var(--accent);
   color: #000;
   font-weight: 900;
-  font-size: 0.85rem;
-  box-shadow: inset 0 -2px 0 rgba(0,0,0,.2);
+  font-size: 0.88rem;
+  box-shadow: 0 2px 8px rgba(255, 153, 0, 0.4);
 }
 .iconbtn {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1.5px solid var(--rule);
   background: var(--card);
@@ -250,10 +255,10 @@ button, select { font: inherit; }
   place-items: center;
   padding: 0;
   cursor: pointer;
-  transition: transform .25s var(--ease), border-color .2s;
+  transition: transform .25s var(--ease), border-color .2s, box-shadow .2s;
 }
-.iconbtn:hover { border-color: var(--ink); transform: rotate(-15deg); }
-.iconbtn svg { width: 18px; height: 18px; }
+.iconbtn:hover { border-color: var(--ink); transform: rotate(-15deg); box-shadow: var(--shadow); }
+.iconbtn svg { width: 19px; height: 19px; }
 
 /* Hero de Inicio */
 .hero {
@@ -261,23 +266,49 @@ button, select { font: inherit; }
   gap: 16px;
   position: relative;
   isolation: isolate;
-  padding-block: 16px 8px;
+  padding-block: 20px 10px;
 }
 .hero::after {
   content: "";
   position: absolute;
   z-index: -1;
   right: -20px;
-  top: -20px;
-  width: min(340px, 60vw);
+  top: -30px;
+  width: min(380px, 65vw);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--accent) 45%, transparent), transparent 65%);
-  filter: blur(12px);
+  background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--accent) 40%, transparent), transparent 65%);
+  filter: blur(20px);
   opacity: .5;
 }
-.hero h1 .acc { color: var(--accent); }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.hero-tag .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent) 0%, #ffbe4d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
 .chip {
   display: inline-flex;
   align-items: baseline;
@@ -285,13 +316,15 @@ button, select { font: inherit; }
   border: 1.5px solid var(--rule);
   background: var(--card);
   border-radius: 999px;
-  padding: 5px 13px;
-  font-size: 0.85rem;
-  box-shadow: var(--shadow);
+  padding: 6px 15px;
+  font-size: 0.88rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s, border-color .2s;
 }
+.chip:hover { transform: translateY(-1px); border-color: var(--ink); }
 .chip strong {
   font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: var(--accent);
 }
 
@@ -299,104 +332,161 @@ button, select { font: inherit; }
 .modes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 14px;
-  margin-block: 22px 18px;
+  gap: 16px;
+  margin-block: 20px 24px;
 }
 .mode-card {
   position: relative;
   background: var(--card);
   border: 1.5px solid var(--rule);
   border-radius: var(--r);
-  padding: 20px;
+  padding: 22px;
   display: grid;
-  gap: 8px;
+  gap: 10px;
   align-content: start;
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: transform .25s var(--ease), border-color .25s, box-shadow .25s;
 }
 .mode-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: var(--ink);
   box-shadow: var(--shadow-lg);
 }
 .mode-card input { position: absolute; opacity: 0; }
 .mode-card.is-selected {
   border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 4%, var(--card));
+  background: color-mix(in srgb, var(--accent) 5%, var(--card));
   box-shadow: 0 0 0 2px var(--accent), var(--shadow-lg);
 }
-.mode-card .tag {
+.mode-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.mode-ico {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+}
+.mode-ico svg { width: 22px; height: 22px; }
+.mode-tag {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 700;
-  padding: 3px 9px;
+  padding: 3px 10px;
   border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  justify-self: start;
-}
-.mode-card h3 { font-size: 1.15rem; }
-.mode-card .meta {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
+  background: var(--surface);
   color: var(--muted);
 }
+.mode-card.is-selected .mode-tag {
+  background: var(--accent);
+  color: #000;
+}
+.mode-card h3 { font-size: 1.2rem; }
+.mode-card .meta {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
 
-/* Barra de configuración de examen */
+/* Barra de configuración */
 .settings-bar {
   background: var(--card);
   border: 1.5px solid var(--rule);
   border-radius: var(--r);
-  padding: 16px 20px;
+  padding: 18px 24px;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px 24px;
+  gap: 18px 28px;
   align-items: center;
   justify-content: space-between;
   box-shadow: var(--shadow);
 }
 .settings-bar label {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
+  user-select: none;
 }
 select {
-  padding: 8px 14px;
-  border-radius: 10px;
+  padding: 9px 16px;
+  border-radius: 12px;
   border: 1.5px solid var(--rule);
   background: var(--surface);
   color: var(--ink);
   font-weight: 600;
+  font-size: 0.92rem;
   transition: border-color .2s;
   cursor: pointer;
 }
 select:hover { border-color: var(--ink); }
+
+/* Switch interactivo */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex: none;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--rule);
+  transition: .25s var(--ease);
+  border-radius: 999px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--card);
+  transition: .25s var(--ease);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+}
+input:checked + .slider { background-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(20px); background-color: #000; }
 
 /* Confirmación */
 .confirm-box {
   background: var(--flag-soft);
   border: 1.5px solid var(--flag);
   border-radius: var(--r);
-  padding: 16px 20px;
+  padding: 16px 22px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
   font-size: 0.95rem;
 }
 
 /* Tabla de historial */
 .history-section {
-  margin-top: 36px;
+  margin-top: 40px;
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 .table-wrap {
   overflow-x: auto;
@@ -405,28 +495,28 @@ select:hover { border-color: var(--ink); }
   background: var(--card);
   box-shadow: var(--shadow);
 }
-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--rule); white-space: nowrap; }
 th {
   background: var(--surface);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
   font-weight: 700;
 }
 tbody tr:last-child td { border-bottom: none; }
-tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transparent); }
+tbody tr:hover td { background: color-mix(in srgb, var(--surface) 60%, transparent); }
 
 .pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
 }
 .pill.ok { background: var(--good-soft); color: var(--good); }
@@ -436,11 +526,11 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
 /* Interfaz de Examen */
 .exam-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
-  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 24px;
   align-items: start;
 }
-@media (max-width: 820px) {
+@media (max-width: 860px) {
   .exam-layout { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -448,9 +538,9 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
   background: var(--card);
   border: 1.5px solid var(--rule);
   border-radius: var(--r);
-  padding: 24px;
+  padding: 28px;
   display: grid;
-  gap: 18px;
+  gap: 20px;
   box-shadow: var(--shadow);
 }
 .qhead {
@@ -459,22 +549,22 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  padding-bottom: 12px;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--rule);
 }
 .qtext {
-  font-size: 1.12rem;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  line-height: 1.65;
   font-weight: 500;
 }
-.opts { display: grid; gap: 10px; }
+.opts { display: grid; gap: 12px; }
 .opt-label {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: flex-start;
-  padding: 12px 16px;
+  padding: 14px 18px;
   border: 1.5px solid var(--rule);
-  border-radius: 12px;
+  border-radius: 14px;
   background: var(--card);
   cursor: pointer;
   transition: transform .18s var(--ease), border-color .2s, background-color .2s;
@@ -485,19 +575,20 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
   background: var(--surface);
   transform: translateX(4px);
 }
-.opt-label input { margin-top: 3px; accent-color: var(--accent); }
+.opt-label input { margin-top: 4px; accent-color: var(--accent); }
 .opt-letter {
   display: inline-grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: var(--surface);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.84rem;
   font-weight: 700;
   color: var(--muted);
   flex: none;
+  transition: background-color .2s, color .2s;
 }
 .opt-label.picked {
   border-color: var(--accent);
@@ -520,22 +611,22 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
 .en-panel {
   border: 1.5px dashed var(--rule);
   background: var(--en-soft);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 18px;
   display: grid;
-  gap: 10px;
+  gap: 12px;
   color: var(--en);
   animation: enterFade .25s var(--ease);
 }
-.en-panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.en-panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 
 /* Feedback inmediato */
 .feedback-box {
-  padding: 14px 18px;
-  border-radius: 12px;
-  font-size: 0.95rem;
+  padding: 16px 20px;
+  border-radius: 14px;
+  font-size: 0.96rem;
   display: grid;
-  gap: 6px;
+  gap: 8px;
   animation: enterFade .25s var(--ease);
 }
 .feedback-box.ok { background: var(--good-soft); color: var(--ink); border: 1.5px solid var(--good); }
@@ -546,27 +637,27 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
   background: var(--card);
   border: 1.5px solid var(--rule);
   border-radius: var(--r);
-  padding: 18px;
+  padding: 20px;
   display: grid;
-  gap: 14px;
+  gap: 16px;
   box-shadow: var(--shadow);
   position: sticky;
-  top: 76px;
+  top: 86px;
 }
 .navgrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(2.1rem, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(auto-fill, minmax(2.2rem, 1fr));
+  gap: 7px;
 }
 .nav-cell {
   appearance: none;
   border: 1.5px solid var(--rule);
   background: var(--surface);
   color: var(--ink);
-  border-radius: 8px;
-  height: 2.2rem;
+  border-radius: 9px;
+  height: 2.3rem;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
   position: relative;
@@ -574,7 +665,7 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
   place-items: center;
   transition: transform .15s, border-color .15s, background-color .15s;
 }
-.nav-cell:hover { transform: scale(1.1); border-color: var(--ink); }
+.nav-cell:hover { transform: scale(1.12); border-color: var(--ink); }
 .nav-cell.answered { background: var(--accent-soft); border-color: var(--accent); color: var(--ink); }
 .nav-cell.current { border-color: var(--ink); box-shadow: 0 0 0 2px var(--ink); font-weight: 800; }
 .nav-cell.flagged::after {
@@ -592,7 +683,7 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
 /* Barra de progreso */
 .progress-bar {
   flex: 1 1 12rem;
-  height: 8px;
+  height: 9px;
   background: var(--surface);
   border-radius: 999px;
   overflow: hidden;
@@ -601,19 +692,19 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
 .progress-bar span {
   display: block;
   height: 100%;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent) 0%, #ffbe4d 100%);
   transition: width .3s var(--ease);
 }
 
 .timer {
   font-family: var(--font-mono);
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  padding: 4px 12px;
-  border-radius: 8px;
+  padding: 5px 14px;
+  border-radius: 10px;
   background: var(--surface);
-  border: 1px solid var(--rule);
+  border: 1.5px solid var(--rule);
 }
 .timer.low {
   color: var(--bad);
@@ -622,23 +713,23 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
   animation: pulse 1s infinite alternate;
 }
 @keyframes pulse {
-  from { opacity: 1; }
-  to { opacity: 0.6; }
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0.7; transform: scale(1.02); }
 }
 
 /* Pantalla de Informe */
 .report-grid {
   display: grid;
-  gap: 20px;
+  gap: 24px;
 }
 .score-card {
   background: var(--card);
   border: 1.5px solid var(--rule);
   border-radius: var(--r);
-  padding: 28px;
+  padding: 32px;
   display: flex;
   flex-wrap: wrap;
-  gap: 24px 40px;
+  gap: 24px 44px;
   align-items: center;
   justify-content: space-between;
   box-shadow: var(--shadow-lg);
@@ -653,9 +744,8 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
   background: var(--accent);
 }
 .score-big {
-  font-size: clamp(3rem, 8vw, 4.2rem);
+  font-size: clamp(3.2rem, 9vw, 4.6rem);
   font-weight: 800;
-  font-family: var(--font-display);
   line-height: 1;
 }
 
@@ -663,28 +753,26 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
   background: var(--card);
   border: 1.5px solid var(--rule);
   border-radius: var(--r);
-  padding: 24px;
+  padding: 28px;
   display: grid;
-  gap: 16px;
+  gap: 18px;
   box-shadow: var(--shadow);
 }
 .drow {
   display: grid;
-  grid-template-columns: minmax(0, 18rem) minmax(0, 1fr) 5rem 9.5rem;
-  gap: 12px;
+  grid-template-columns: minmax(0, 19rem) minmax(0, 1fr) 5rem 10rem;
+  gap: 14px;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
-@media (max-width: 680px) {
-  .drow {
-    grid-template-columns: minmax(0, 1fr) 4rem;
-  }
+@media (max-width: 720px) {
+  .drow { grid-template-columns: minmax(0, 1fr) 4rem; }
   .drow .track { grid-column: 1 / -1; }
   .drow .pill { justify-self: start; }
 }
 .track {
   position: relative;
-  height: 12px;
+  height: 13px;
   background: var(--surface);
   border-radius: 999px;
   border: 1px solid var(--rule);
@@ -698,12 +786,12 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
 }
 .track .mark {
   position: absolute;
-  top: -4px;
-  bottom: -4px;
-  width: 2px;
+  top: -5px;
+  bottom: -5px;
+  width: 2.5px;
   background: var(--ink);
   left: 70%;
-  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  box-shadow: 0 0 5px rgba(0,0,0,0.35);
 }
 
 .rcard {
@@ -711,9 +799,9 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
   border: 1.5px solid var(--rule);
   border-left: 5px solid var(--bad);
   border-radius: var(--r);
-  padding: 18px 20px;
+  padding: 20px 24px;
   display: grid;
-  gap: 10px;
+  gap: 12px;
   box-shadow: var(--shadow);
 }
 .rcard.is-right { border-left-color: var(--good); }
@@ -721,7 +809,7 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
 /* Teclas de acceso rápido */
 .shortcuts-hint {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: var(--muted);
   display: flex;
   flex-wrap: wrap;
@@ -731,9 +819,9 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
 .kbd {
   background: var(--surface);
   border: 1px solid var(--rule);
-  border-radius: 4px;
-  padding: 1px 5px;
-  font-size: 0.72rem;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--ink);
 }
@@ -750,13 +838,13 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 50%, transpare
     <div class="row">
       <div class="brand">
         <span class="brand-badge">AWS</span>
-        <span>AIF-C01 · Simulador</span>
+        <span>AIF-C01 · Simulador Oficial</span>
       </div>
       <a href="../../" class="btn ghost mini" style="margin-left:8px">← Volver a Blend360</a>
       <a href="../" class="btn ghost mini">Guía de estudio ↗</a>
     </div>
     <div class="row">
-      <button class="iconbtn" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
+      <button class="iconbtn" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema claro/oscuro">
         <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -829,13 +917,17 @@ function shuffle(list) {
 }
 
 const MODES = [
-  { id: "sim01", name: "Simulacro 01", tag: "Examen completo", desc: "65 preguntas con ponderación oficial. Cubre todos los dominios y temas de la guía v1.1.", n: 65, min: 90,
+  { id: "sim01", name: "Simulacro 01", tag: "Examen oficial", desc: "65 preguntas con ponderación oficial. Cubre todos los dominios y temas de la guía v1.1.", n: 65, min: 90,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
     pick: () => DATA.exams[0].questions.map(q => ({ ...q, exam: DATA.exams[0].name })) },
-  { id: "sim02", name: "Simulacro 02", tag: "Escenarios avanzados", desc: "65 preguntas de escenario técnico. Mayor grado de dificultad con opciones plausibles.", n: 65, min: 90,
+  { id: "sim02", name: "Simulacro 02", tag: "Escenarios reales", desc: "65 preguntas de escenario técnico. Mayor grado de dificultad con dos opciones plausibles.", n: 65, min: 90,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
     pick: () => DATA.exams[1].questions.map(q => ({ ...q, exam: DATA.exams[1].name })) },
-  { id: "weak", name: "Refuerzo D1 · D3 · D4 · D5", tag: "Enfoque específico", desc: "40 preguntas al azar de los dominios con menor margen reportado en candidatos.", n: 40, min: 55,
+  { id: "weak", name: "Refuerzo D1·D3·D4·D5", tag: "Dominios débiles", desc: "40 preguntas al azar de los dominios con menor margen reportado en candidatos.", n: 40, min: 55,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
     pick: () => shuffle(allQuestions().filter(q => q.domain !== "D2")).slice(0, 40) },
   { id: "v11", name: "Novedades Guía v1.1", tag: "Temas nuevos", desc: "IA agéntica, MCP, Amazon Bedrock AgentCore, context engineering, tokens y grounding.", n: null, min: null,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>`,
     pick: () => shuffle(allQuestions().filter(q => q.new)) },
 ];
 
@@ -845,8 +937,8 @@ function englishBlock(q) {
       <span class="eyebrow" style="color:var(--ink)">English version (original exam format)</span>
       <span class="pill" style="background:var(--surface)">EN</span>
     </div>
-    <p class="qtext" style="font-size:1.05rem">${q.en.text}</p>
-    <ul>${q.en.options.map(o => `<li><span class="opt-letter" style="display:inline-flex;width:20px;height:20px;margin-right:6px">${o.id}</span> ${o.text}</li>`).join("")}</ul>
+    <p class="qtext" style="font-size:1.06rem">${q.en.text}</p>
+    <ul>${q.en.options.map(o => `<li><span class="opt-letter" style="display:inline-flex;width:22px;height:22px;margin-right:8px">${o.id}</span> ${o.text}</li>`).join("")}</ul>
   </div>`;
 }
 
@@ -871,14 +963,17 @@ function renderStart() {
   app.innerHTML = `
   <div class="wrap">
     <div class="hero">
-      <span class="eyebrow">AWS Certified AI Practitioner · AIF-C01</span>
-      <h1>Simulador Oficial <span class="acc">Interactivo</span></h1>
-      <p class="muted" style="max-width:62ch">Entrena bajo condiciones idénticas al examen de certificación: cronómetro oficial, interfaz de alto rendimiento, preguntas marcadas para revisión, versión en inglés en un clic y diagnóstico por dominio «Cumple / Necesita mejora».</p>
+      <div class="hero-tag">
+        <span class="dot"></span>
+        <span>AWS Certified AI Practitioner · AIF-C01</span>
+      </div>
+      <h1>Simulador Oficial de <span class="gradient-text">Examen AWS</span></h1>
+      <p class="muted" style="max-width:64ch;font-size:1.05rem">Practica bajo condiciones idénticas al examen de certificación: cronómetro oficial, interfaz con diseño dinámico, preguntas marcadas para revisión, alternador a inglés en un clic y diagnóstico por dominio «Cumple / Necesita mejora».</p>
       <div class="chips">
         <span class="chip"><strong>65</strong> preguntas</span>
-        <span class="chip"><strong>90</strong> min (120 ESL)</span>
-        <span class="chip">Aprobado <strong>700</strong> / 1000</span>
-        <span class="chip">Meta simulacros <strong>≥ 80 %</strong></span>
+        <span class="chip">⏱️ <strong>90</strong> min (120 con ESL)</span>
+        <span class="chip">🎯 Aprobado: <strong>700</strong> / 1000</span>
+        <span class="chip">📈 Meta recomendada: <strong>≥ 80 %</strong></span>
       </div>
     </div>
 
@@ -891,36 +986,44 @@ function renderStart() {
       </div>
     </div>` : ""}
 
-    <div class="section-title" style="margin-top:20px">
-      <span class="eyebrow">Selecciona una modalidad</span>
+    <div class="row spread" style="margin-top:22px">
+      <span class="eyebrow">Elige una modalidad de examen</span>
+      <span class="mono muted" style="font-size:0.8rem">130 preguntas originales en total</span>
     </div>
+
     <div class="modes-grid">
       ${MODES.map(m => `
         <label class="mode-card ${pref.mode === m.id ? "is-selected" : ""}" for="mode-${m.id}">
           <input type="radio" name="mode" id="mode-${m.id}" value="${m.id}" ${pref.mode === m.id ? "checked" : ""}>
-          <span class="tag">${m.tag}</span>
+          <div class="mode-header">
+            <span class="mode-ico">${m.icon}</span>
+            <span class="mode-tag">${m.tag}</span>
+          </div>
           <h3>${m.name}</h3>
-          <p class="muted" style="font-size:0.9rem">${m.desc}</p>
+          <p class="muted" style="font-size:0.92rem">${m.desc}</p>
           <span class="meta">⏱️ ${m.n || v11count} preguntas · ${m.min ? m.min : Math.round(v11count * 1.4)} min</span>
         </label>`).join("")}
     </div>
 
     <div class="settings-bar">
-      <div class="row" style="gap:20px">
+      <div class="row" style="gap:24px">
         <label for="time">
-          <span>Tiempo:</span>
+          <span>Tiempo de examen:</span>
           <select id="time">
             <option value="std" ${pref.time === "std" ? "selected" : ""}>Estándar (90 min)</option>
             <option value="esl" ${pref.time === "esl" ? "selected" : ""}>ESL +30 min (120 min)</option>
             <option value="none" ${pref.time === "none" ? "selected" : ""}>Sin límite de tiempo</option>
           </select>
         </label>
-        <label for="instant">
-          <input type="checkbox" id="instant" ${pref.instant ? "checked" : ""}>
+        <label for="instant" style="cursor:pointer">
+          <span class="switch">
+            <input type="checkbox" id="instant" ${pref.instant ? "checked" : ""}>
+            <span class="slider"></span>
+          </span>
           <span>Corrección inmediata (modo estudio)</span>
         </label>
       </div>
-      <button class="btn btn-primary" id="start" style="padding-inline:26px">Iniciar Examen →</button>
+      <button class="btn btn-primary" id="start" style="padding-inline:28px">Empezar examen →</button>
     </div>
 
     <section class="history-section">
@@ -934,7 +1037,7 @@ function renderStart() {
           <thead><tr><th>Fecha</th><th>Modalidad</th><th>Puntaje</th><th>D1</th><th>D2</th><th>D3</th><th>D4</th><th>D5</th><th>Tiempo</th></tr></thead>
           <tbody>${history.slice().reverse().map(h => `<tr>
             <td>${new Date(h.date).toLocaleDateString("es", { month:"short", day:"numeric" })}</td>
-            <td style="font-weight:600">${h.modeName}</td>
+            <td style="font-weight:700">${h.modeName}</td>
             <td class="num"><span class="pill ${h.pct >= 80 ? "ok" : h.pct >= 70 ? "warn" : "ko"}">${h.pct} %</span></td>
             ${["D1","D2","D3","D4","D5"].map(d => `<td class="num">${h.domains[d] == null ? "–" : h.domains[d] + "%"}</td>`).join("")}
             <td class="num">${fmtTime(h.used)}</td></tr>`).join("")}
@@ -1011,12 +1114,12 @@ function renderExam() {
   const flagged = Object.keys(state.flags).filter(k => state.flags[k]).length;
 
   app.innerHTML = `
-  <div class="top-bar" style="top:57px;background:color-mix(in srgb, var(--paper) 92%, transparent)">
+  <div class="top-bar" style="top:59px;background:color-mix(in srgb, var(--paper) 90%, transparent)">
     <div class="top-in">
-      <div class="row" style="gap:14px;flex:1 1 auto">
+      <div class="row" style="gap:16px;flex:1 1 auto">
         <span class="eyebrow">${state.modeName}${state.instant ? " · Modo Estudio" : ""}</span>
         <div class="progress-bar"><span style="width:${pct(answered, total)}%"></span></div>
-        <span class="mono muted" style="font-size:0.85rem">${answered}/${total} respondidas</span>
+        <span class="mono muted" style="font-size:0.88rem">${answered}/${total} respondidas</span>
       </div>
       <div class="row">
         <span class="timer ${state.limit && state.limit - state.used < 300 ? "low" : ""}" id="timer">
@@ -1069,7 +1172,7 @@ function renderExam() {
           <div>${q.why}</div>
         </div>` : ""}
 
-        <div class="row spread" style="padding-top:10px;border-top:1px solid var(--rule)">
+        <div class="row spread" style="padding-top:14px;border-top:1px solid var(--rule)">
           <div class="row">
             <button class="btn ghost" id="prev" ${state.idx === 0 ? "disabled" : ""}>← Anterior</button>
             <button class="btn ${state.flags[q.id] ? "btn-primary" : "ghost"}" id="flag">
@@ -1083,14 +1186,14 @@ function renderExam() {
         </div>
 
         <div class="shortcuts-hint">
-          <span>Atajos: <span class="kbd">1-5</span> o <span class="kbd">A-E</span> responder · <span class="kbd">←</span> <span class="kbd">→</span> mover · <span class="kbd">F</span> marcar · <span class="kbd">T</span> inglés</span>
+          <span>Atajos: <span class="kbd">1-5</span> o <span class="kbd">A-E</span> responder · <span class="kbd">←</span> <span class="kbd">→</span> navegar · <span class="kbd">F</span> marcar · <span class="kbd">T</span> inglés</span>
         </div>
       </article>
 
       <aside class="navpanel">
         <div class="row spread">
           <h3>Navegador</h3>
-          <span class="mono muted" style="font-size:0.8rem">${pct(answered, total)}%</span>
+          <span class="mono muted" style="font-size:0.82rem">${pct(answered, total)}%</span>
         </div>
         <div class="navgrid">
           ${state.questions.map((x, i) => `
@@ -1099,8 +1202,8 @@ function renderExam() {
             </button>
           `).join("")}
         </div>
-        <div class="row spread" style="font-size:0.78rem;color:var(--muted);padding-block:4px;border-top:1px solid var(--rule)">
-          <span>🟦 Respondida</span>
+        <div class="row spread" style="font-size:0.8rem;color:var(--muted);padding-block:6px;border-top:1px solid var(--rule)">
+          <span>🟧 Respondida</span>
           <span>🚩 Marcada (${flagged})</span>
         </div>
         <div id="finish-zone">
@@ -1136,7 +1239,7 @@ function renderExam() {
     document.getElementById("finish-zone").innerHTML = `
     <div class="confirm-box" style="padding:14px;flex-direction:column;align-items:stretch">
       <span style="font-size:0.88rem">${blank ? `Quedan <strong>${blank}</strong> preguntas sin responder.` : "¡Has respondido todas las preguntas!"}${flagged ? ` Tienes <strong>${flagged}</strong> marcadas.` : ""}</span>
-      <button class="btn btn-primary" id="finish-yes" style="margin-top:6px">Confirmar y ver informe</button>
+      <button class="btn btn-primary" id="finish-yes" style="margin-top:8px">Confirmar y ver informe</button>
       <button class="btn ghost mini" id="finish-no" style="margin-top:4px">Volver al examen</button>
     </div>`;
     document.getElementById("finish-yes").onclick = finish;
@@ -1214,13 +1317,13 @@ function renderReport(res, p) {
   app.innerHTML = `
   <div class="wrap report-grid">
     <div class="hero" style="padding-bottom:0">
-      <span class="eyebrow">Informe de Resultados · ${state.modeName}</span>
-      <h1>Tu Desglose <span class="acc">Técnico</span></h1>
+      <div class="hero-tag"><span class="dot"></span><span>Resultado Oficial · ${state.modeName}</span></div>
+      <h1>Tu Desglose <span class="gradient-text">Técnico</span></h1>
     </div>
 
     <section class="score-card">
       <div style="display:grid;gap:6px">
-        <div class="score-big ${level[0] === 'ok' ? 'text-good' : ''}">${p} %</div>
+        <div class="score-big">${p} %</div>
         <p class="mono muted">${res.right} de ${res.total} respuestas correctas · Tiempo: ${fmtTime(state.used)}</p>
       </div>
       <div style="display:grid;gap:8px;max-width:28rem">
@@ -1248,7 +1351,7 @@ function renderReport(res, p) {
       <p class="muted" style="font-size:0.85rem;margin-top:6px">La línea vertical negra marca el 70 % orientativo. Si un dominio queda en «Necesita mejora», repasa sus cheatsheets antes de volver a intentar.</p>
     </section>
 
-    <div class="row spread" style="margin-top:8px">
+    <div class="row spread" style="margin-top:10px">
       <div class="row">
         <button class="btn btn-primary" id="again">← Repetir o Volver al Inicio</button>
         <a href="../../" class="btn ghost">Ir al inicio de Blend360</a>
@@ -1259,7 +1362,7 @@ function renderReport(res, p) {
       </label>
     </div>
 
-    <section class="review" id="review" style="display:grid;gap:14px"></section>
+    <section class="review" id="review" style="display:grid;gap:16px"></section>
   </div>`;
 
   const drawReview = onlyWrong => {
@@ -1273,18 +1376,18 @@ function renderReport(res, p) {
           <span class="eyebrow">${DOMAINS[q.domain]}${q.new ? ' · Guía v1.1' : ''}</span>
           <span class="pill ${ok ? 'ok' : 'ko'}">${ok ? '✓ Correcta' : '✗ Fallada'}</span>
         </div>
-        <p style="font-size:1.05rem;font-weight:600">${q.text}</p>
-        <div class="row" style="gap:14px;font-size:0.92rem">
+        <p style="font-size:1.08rem;font-weight:600">${q.text}</p>
+        <div class="row" style="gap:16px;font-size:0.94rem">
           <div><strong>Tu respuesta:</strong> <span class="mono">${mine}</span></div>
           <div><strong>Correcta:</strong> <span class="mono" style="color:var(--good);font-weight:700">${q.answer.join(', ')}</span></div>
         </div>
-        <div style="display:grid;gap:4px;font-size:0.9rem;background:var(--surface);padding:10px 14px;border-radius:8px">
+        <div style="display:grid;gap:5px;font-size:0.92rem;background:var(--surface);padding:12px 16px;border-radius:10px">
           ${q.options.filter(o => q.answer.includes(o.id)).map(o => `<div><span class="mono" style="font-weight:700">${o.id}.</span> ${o.text}</div>`).join('')}
         </div>
-        <p class="muted" style="font-size:0.92rem">💡 ${q.why}</p>
-        <details class="en-details" style="font-size:0.88rem;color:var(--accent);cursor:pointer"><summary>Ver versión en inglés</summary>${englishBlock(q)}</details>
+        <p class="muted" style="font-size:0.94rem">💡 ${q.why}</p>
+        <details class="en-details" style="font-size:0.9rem;color:var(--accent);cursor:pointer"><summary>Ver versión en inglés</summary>${englishBlock(q)}</details>
       </article>`;
-    }).join("") : `<p class="muted" style="padding:20px;text-align:center">¡Excelente! No tienes preguntas falladas en este intento.</p>`;
+    }).join("") : `<p class="muted" style="padding:24px;text-align:center">¡Excelente! No tienes preguntas falladas en este intento.</p>`;
   };
 
   drawReview(true);
