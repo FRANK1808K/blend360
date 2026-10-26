@@ -24,6 +24,11 @@ ROOT = Path(__file__).resolve().parent.parent
 HTML = ROOT / "simulator" / "index.html"
 START = '<script type="application/json" id="lab-data">'
 END = "</script><!-- LAB-DATA-END -->"
+ORDER_WORDS = re.compile(r"sorted|sort by|alphabetical order|\bmost\b.*\bfirst\b|highest to lowest|ordered by", re.I)
+# Statements that do not say which columns to show ("Find the customers who…"): any subset of the
+# solution's columns that identifies the same rows is accepted.
+# Enunciados que no dicen qué columnas mostrar: se acepta cualquier subconjunto que identifique las mismas filas.
+FLEXIBLE_COLUMNS = {3, 5, 12, 13, 15, 17, 18, 20, 26, 34}
 LEVELS = {"🟢": "basic", "🟡": "joins", "🟠": "windows", "🔴": "challenge"}
 
 
@@ -70,6 +75,10 @@ def sql_data() -> dict:
                 "n": e["n"], "part": i + 1, "parts": len(e["parts"]), "level": e["level"],
                 "title": {"en": e["title"], "es": s["title"]},
                 "q": e["q"], "es": s["tr"] or e["tr"],
+                # Row order is only graded when the statement asks for it / El orden de las filas
+                # solo se califica cuando el enunciado lo pide.
+                "ordered": bool(ORDER_WORDS.search(e["q"])),
+                "flexCols": e["n"] in FLEXIBLE_COLUMNS,
                 "sql": {"en": part["sql"], "es": s["parts"][i]["sql"]}, "note": {"en": part["note"], "es": s["parts"][i]["note"]},
             })
     schema = (ROOT / "02-sql" / "schema.sql").read_text(encoding="utf-8")
