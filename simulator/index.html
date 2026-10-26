@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- ARTIFACT-START -->
+<title>Simulacro 30·90</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: hoja de respuestas de examen — barra de estado fija arriba, columna central de lectura, opciones en rejilla. */
+:root {
+  --paper: #f5f6f1;
+  --card: #ffffff;
+  --ink: #18212c;
+  --muted: #5c6674;
+  --rule: #d8ddd3;
+  --grid: #e8ebe3;
+  --accent: #0d6e66;
+  --accent-ink: #ffffff;
+  --mark: #f3d35c;
+  --ok: #1d7a3a;
+  --ok-bg: #e3f3e7;
+  --bad: #b3261e;
+  --bad-bg: #fbe5e3;
+  --flag: #a15c00;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11161b; --card: #1a2128; --ink: #e6eae2; --muted: #9aa4ae; --rule: #2d3640; --grid: #1d252c;
+    --accent: #3fc9b8; --accent-ink: #0b1a18; --mark: #8a7420; --ok: #6fd08d; --ok-bg: #173323;
+    --bad: #ff8a80; --bad-bg: #3a1b19; --flag: #f2b45a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11161b; --card: #1a2128; --ink: #e6eae2; --muted: #9aa4ae; --rule: #2d3640; --grid: #1d252c;
+  --accent: #3fc9b8; --accent-ink: #0b1a18; --mark: #8a7420; --ok: #6fd08d; --ok-bg: #173323;
+  --bad: #ff8a80; --bad-bg: #3a1b19; --flag: #f2b45a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.5;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--card); }
+.wrap { max-width: 860px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 48px; display: grid; gap: 20px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.35rem; font-weight: 600; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.eyebrow { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.btn { border: 1.5px solid var(--ink); background: var(--card); border-radius: 6px; padding: 10px 16px; font-weight: 700; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.ghost { border-color: var(--rule); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.hero { display: grid; gap: 10px; }
+.hero p { max-width: 62ch; }
+.modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.mode { background: var(--card); border: 1.5px solid var(--rule); border-radius: 10px; padding: 18px; display: grid; gap: 10px; align-content: start; }
+.mode .meta { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.mode .btn { justify-self: start; }
+.mode.featured { border-color: var(--accent); }
+.sample { background: var(--card); border: 1.5px dashed var(--rule); border-radius: 10px; padding: 16px; display: grid; gap: 12px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+select { font: inherit; padding: 9px 10px; border-radius: 6px; border: 1.5px solid var(--rule); background: var(--card); color: var(--ink); }
+.history { display: grid; gap: 6px; font-family: var(--font-mono); font-size: 0.85rem; }
+.history div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--rule); padding-block: 4px; font-variant-numeric: tabular-nums; }
+/* Exam bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--card); border-bottom: 1.5px solid var(--rule); }
+.bar .in { max-width: 860px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 10px; display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+.timer { font-family: var(--font-mono); font-weight: 600; font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.timer.low { color: var(--bad); }
+.progress { font-family: var(--font-mono); font-size: 0.9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.qcard { background: var(--card); border: 1.5px solid var(--rule); border-radius: 10px; padding: 18px; display: grid; gap: 16px; min-width: 0; }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--rule); color: var(--muted); }
+.prompt { font-size: 1.08rem; }
+.prompt .es { display: block; font-size: 0.9rem; color: var(--muted); margin-top: 4px; }
+pre.code { margin: 0; background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 12px; overflow-x: auto; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.45; }
+.seq { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.seq .cell, .opt .cell { width: 78px; height: 78px; border: 1.5px solid var(--rule); border-radius: 6px; background: var(--card); display: grid; place-items: center; }
+.seq .cell.q { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--accent); border-style: dashed; }
+.fig { width: 100%; height: 100%; display: block; color: var(--ink); }
+.fig .pp { fill: var(--card); }
+.fig .qmark { fill: var(--accent); font-family: var(--font-display); font-weight: 800; }
+.matrix { width: min(100%, 300px); }
+.options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.options.visual { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.opt { border: 1.5px solid var(--rule); background: var(--card); border-radius: 8px; padding: 10px 12px; text-align: left; display: flex; gap: 10px; align-items: center; min-width: 0; }
+.options.visual .opt { flex-direction: column; padding: 8px 4px; }
+.opt .k { font-family: var(--font-mono); font-weight: 600; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--ink); display: grid; place-items: center; flex: none; font-size: 0.85rem; }
+.opt .t { min-width: 0; overflow-wrap: anywhere; font-family: var(--font-body); }
+.opt .t code, .prompt code { font-family: var(--font-mono); font-size: 0.92em; }
+.opt.sel { border-color: var(--ink); background: color-mix(in srgb, var(--mark) 45%, var(--card)); }
+.opt.sel .k { background: var(--ink); color: var(--card); }
+.opt.right { border-color: var(--ok); background: var(--ok-bg); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
+.palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); gap: 6px; }
+.palette button { border: 1.5px solid var(--rule); background: var(--card); border-radius: 5px; padding: 5px 0; font-family: var(--font-mono); font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+.palette button.done { background: var(--ink); color: var(--card); border-color: var(--ink); }
+.palette button.cur { outline: 2px solid var(--accent); outline-offset: 1px; }
+.palette button.flagged { border-color: var(--flag); box-shadow: inset 0 -3px 0 var(--flag); }
+.feedback { border-left: 4px solid var(--ok); background: var(--ok-bg); padding: 10px 12px; border-radius: 0 6px 6px 0; }
+.feedback.bad { border-color: var(--bad); background: var(--bad-bg); }
+.score { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: baseline; }
+.score .big { font-family: var(--font-display); font-weight: 800; font-size: 3rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.topics { display: grid; gap: 8px; }
+.topics .t { display: grid; grid-template-columns: minmax(110px, 160px) 1fr auto; gap: 10px; align-items: center; font-variant-numeric: tabular-nums; }
+.meter { height: 10px; background: var(--grid); border-radius: 999px; overflow: hidden; border: 1px solid var(--rule); }
+.meter span { display: block; height: 100%; background: var(--accent); }
+.review { display: grid; gap: 12px; }
+.review details { background: var(--card); border: 1.5px solid var(--rule); border-radius: 8px; padding: 10px 14px; min-width: 0; }
+.review summary { cursor: pointer; display: flex; gap: 10px; align-items: baseline; }
+.review .ans { font-family: var(--font-mono); font-size: 0.85rem; }
+.pill { font-family: var(--font-mono); font-size: 0.75rem; padding: 1px 8px; border-radius: 999px; flex: none; }
+.pill.ok { background: var(--ok-bg); color: var(--ok); }
+.pill.no { background: var(--bad-bg); color: var(--bad); }
+.note { font-size: 0.85rem; color: var(--muted); max-width: 70ch; }
+@media (max-width: 520px) {
+  .options { grid-template-columns: 1fr; }
+  .options.visual { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .seq .cell { width: 60px; height: 60px; }
+  .opt .cell { width: 100%; max-width: 64px; height: auto; aspect-ratio: 1; }
+  .options.visual .opt .k { width: 22px; height: 22px; font-size: 0.75rem; }
+  .topics .t { grid-template-columns: 1fr auto; }
+  .topics .t .meter { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .opt { transition: background-color .12s, border-color .12s; }
+}
+</style>
+<!-- ARTIFACT-HEAD-END -->
+</head>
+<body>
+<div id="app"></div>
+<script>
+"use strict";
+// ---------------------------------------------------------------- utilidades
+const $ = (s, el = document) => el.querySelector(s);
+const rand = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+const shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const mod = (a, m) => ((a % m) + m) % m;
+const KEYS = ["A", "B", "C", "D"];
+let uid = 0;
+
+// ---------------------------------------------------------------- figuras SVG
+// Todo se dibuja con currentColor (tinta) y var(--card) (papel) para funcionar en ambos temas.
+const INK = "currentColor", PP = 'class="pp"'; // "papel": el fondo de tarjeta, vía CSS (var() no funciona en atributos SVG)
+const svg = (body, vb = 100) => `<svg class="fig" viewBox="0 0 ${vb} ${vb}" aria-hidden="true">${body}</svg>`;
+
+function fillAttrs(fill, id) {
+  if (fill === "black") return `fill="${INK}"`;
+  if (fill === "striped") return `fill="url(#p${id})"`;
+  return PP;
+}
+function stripeDef(id) {
+  return `<defs><pattern id="p${id}" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" ${PP}/><rect width="2.4" height="6" fill="${INK}"/></pattern></defs>`;
+}
+function shapePath(shape, cx, cy, r) {
+  switch (shape) {
+    case "circle": return `<circle cx="${cx}" cy="${cy}" r="${r}"`;
+    case "square": return `<rect x="${cx - r * 0.88}" y="${cy - r * 0.88}" width="${r * 1.76}" height="${r * 1.76}"`;
+    case "triangle": return `<polygon points="${cx},${cy - r} ${cx + r * 0.95},${cy + r * 0.75} ${cx - r * 0.95},${cy + r * 0.75}"`;
+    case "diamond": return `<polygon points="${cx},${cy - r} ${cx + r},${cy} ${cx},${cy + r} ${cx - r},${cy}"`;
+    case "star": {
+      const pts = [];
+      for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * 0.45 : r; pts.push(`${(cx + rr * Math.cos(a)).toFixed(1)},${(cy + rr * Math.sin(a)).toFixed(1)}`); }
+      return `<polygon points="${pts.join(" ")}"`;
+    }
+  }
+}
+function shapeSVG(shape, cx, cy, r, fill) {
+  const id = ++uid;
+  return (fill === "striped" ? stripeDef(id) : "") + `${shapePath(shape, cx, cy, r)} ${fillAttrs(fill, id)} stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>`;
+}
+function arrowSVG(angle, dotFill) {
+  let s = `<g transform="rotate(${angle} 50 50)"><path d="M50 12 L72 40 L58 40 L58 86 L42 86 L42 40 L28 40 Z" fill="${INK}"/></g>`;
+  if (dotFill) s += `<circle cx="80" cy="80" r="9" ${dotFill === "black" ? `fill="${INK}"` : PP} stroke="${INK}" stroke-width="3"/>`;
+  return svg(s);
+}
+function flagSVG(angle) {
+  return svg(`<g transform="rotate(${angle} 50 50)"><rect x="46" y="14" width="7" height="72" fill="${INK}"/><polygon points="53,14 84,26 53,38" fill="${INK}"/><circle cx="49.5" cy="86" r="6" fill="${INK}"/></g>`);
+}
+function countSVG(n, shape, fill = "black") {
+  const cols = n <= 4 ? 2 : n <= 9 ? 3 : 4, rows = Math.ceil(n / cols), step = 84 / Math.max(cols, rows), r = step * 0.34;
+  let body = "";
+  for (let i = 0; i < n; i++) {
+    const c = i % cols, rw = Math.floor(i / cols);
+    const cx = 50 + (c - (cols - 1) / 2) * step, cy = 50 + (rw - (rows - 1) / 2) * step;
+    body += shapeSVG(shape, +cx.toFixed(1), +cy.toFixed(1), +r.toFixed(1), fill);
+  }
+  return svg(body);
+}
+function polygonSVG(n) {
+  if (n === 0) return svg(`<circle cx="50" cy="50" r="36" ${PP} stroke="${INK}" stroke-width="3.5"/>`);
+  const pts = [];
+  for (let i = 0; i < n; i++) { const a = -Math.PI / 2 + i * 2 * Math.PI / n; pts.push(`${(50 + 38 * Math.cos(a)).toFixed(1)},${(52 + 38 * Math.sin(a)).toFixed(1)}`); }
+  return svg(`<polygon points="${pts.join(" ")}" ${PP} stroke="${INK}" stroke-width="3.5" stroke-linejoin="round"/>`);
+}
+const BORDER = [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2], [1, 2], [0, 2], [0, 1]];
+function gridDotSVG(cell, cell2) {
+  let body = "";
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) body += `<rect x="${8 + c * 28}" y="${8 + r * 28}" width="28" height="28" ${PP} stroke="${INK}" stroke-width="2"/>`;
+  const dot = (p, f) => `<circle cx="${22 + p[0] * 28}" cy="${22 + p[1] * 28}" r="9" ${f} stroke="${INK}" stroke-width="2.5"/>`;
+  body += dot(cell, `fill="${INK}"`);
+  if (cell2) body += dot(cell2, PP);
+  return svg(body);
+}
+function quadrantSVG(q) { // q: 0 arriba-der, 1 abajo-der, 2 abajo-izq, 3 arriba-izq (sentido horario)
+  const paths = ["M50 50 L50 14 A36 36 0 0 1 86 50 Z", "M50 50 L86 50 A36 36 0 0 1 50 86 Z", "M50 50 L50 86 A36 36 0 0 1 14 50 Z", "M50 50 L14 50 A36 36 0 0 1 50 14 Z"];
+  return svg(`<circle cx="50" cy="50" r="36" ${PP} stroke="${INK}" stroke-width="3"/><path d="${paths[q]}" fill="${INK}"/><line x1="14" y1="50" x2="86" y2="50" stroke="${INK}" stroke-width="2"/><line x1="50" y1="14" x2="50" y2="86" stroke="${INK}" stroke-width="2"/>`);
+}
+const PIPS = { 0: [], 1: [[1, 1]], 2: [[0, 0], [2, 2]], 3: [[0, 0], [1, 1], [2, 2]], 4: [[0, 0], [2, 0], [0, 2], [2, 2]], 5: [[0, 0], [2, 0], [1, 1], [0, 2], [2, 2]], 6: [[0, 0], [2, 0], [0, 1], [2, 1], [0, 2], [2, 2]] };
+function dominoSVG(top, bottom) {
+  const half = (v, y0) => PIPS[v].map(([c, r]) => `<circle cx="${34 + c * 16}" cy="${y0 + 10 + r * 12}" r="4.6" fill="${INK}"/>`).join("");
+  return svg(`<rect x="22" y="6" width="56" height="88" rx="8" ${PP} stroke="${INK}" stroke-width="3"/><line x1="26" y1="50" x2="74" y2="50" stroke="${INK}" stroke-width="2.5"/>${half(top, 7)}${half(bottom, 51)}`);
+}
+function matrixSVG(cells) { // cells: 9 items {shape, fill} or null para "?"
+  let body = "";
+  cells.forEach((c, i) => {
+    const x = (i % 3) * 100, y = Math.floor(i / 3) * 100;
+    body += `<rect x="${x + 2}" y="${y + 2}" width="96" height="96" ${PP} stroke="${INK}" stroke-width="2" ${c ? "" : 'stroke-dasharray="6 5"'}/>`;
+    body += c ? shapeSVG(c.shape, x + 50, y + 50, 30, c.fill) : `<text x="${x + 50}" y="${y + 66}" text-anchor="middle" font-size="48" class="qmark">?</text>`;
+  });
+  return `<svg class="fig matrix" viewBox="0 0 300 300" aria-hidden="true">${body}</svg>`;
+}
+const single = (shape, fill) => svg(shapeSVG(shape, 50, 50, 32, fill));
+
+// ---------------------------------------------------------------- generadores de razonamiento abstracto
+// Cada generador devuelve {topic, prompt, es, seq|matrix|text, options:[{svg|text}], answer, explain}
+function finish(q, correct, distractors) {
+  const key = o => o.key;
+  const seen = new Set([key(correct)]);
+  const opts = [correct];
+  for (const d of distractors) { if (opts.length === 4) break; if (!seen.has(key(d))) { seen.add(key(d)); opts.push(d); } }
+  const order = shuffle(opts);
+  q.options = order.map(o => ({ svg: o.svg, text: o.text }));
+  q.answer = order.indexOf(correct);
+  return q;
+}
+const NEXT = { prompt: "Which figure comes next in the sequence?", es: "¿Qué figura sigue en la secuencia?" };
+
+function genRotation() {
+  const step = pick([45, 90, 135]) * pick([1, -1]), start = rand(0, 7) * 45, draw = pick([arrowSVG, flagSVG]);
+  const ang = i => mod(start + i * step, 360);
+  const mk = a => ({ key: mod(a, 360), svg: draw(mod(a, 360)) });
+  const ans = ang(4);
+  const q = { topic: "Rotación", ...NEXT, seq: [0, 1, 2, 3].map(i => draw(ang(i))),
+    explain: `La figura gira ${Math.abs(step)}° en sentido ${step > 0 ? "horario" : "antihorario"} en cada paso.` };
+  return finish(q, mk(ans), shuffle([mk(ans + step), mk(ans - step), mk(ans + 180), mk(ans + 90), mk(ans - 90), mk(ans + 45)]));
+}
+function genCount() {
+  const shape = pick(["circle", "square", "triangle", "star"]), start = rand(1, 3), step = pick([1, 2]);
+  const other = pick(["circle", "square", "triangle", "star"].filter(s => s !== shape));
+  const ans = start + 4 * step;
+  const mk = (n, s = shape) => ({ key: n + s, svg: countSVG(n, s) });
+  const q = { topic: "Cantidad", ...NEXT, seq: [0, 1, 2, 3].map(i => countSVG(start + i * step, shape)),
+    explain: `La cantidad aumenta +${step} en cada paso: ${[0, 1, 2, 3].map(i => start + i * step).join(", ")}, ${ans}.` };
+  return finish(q, mk(ans), shuffle([mk(ans - 1), mk(ans + 1), mk(ans, other), mk(ans - step)]));
+}
+function genTwoRules() {
+  const step = 90 * pick([1, -1]), start = rand(0, 3) * 90, fills = shuffle(["black", "white"]);
+  const ang = i => mod(start + i * step, 360);
+  const mk = (a, f) => ({ key: mod(a, 360) + f, svg: arrowSVG(mod(a, 360), f) });
+  const ans = mk(ang(4), fills[0]);
+  const q = { topic: "Dos reglas", ...NEXT, seq: [0, 1, 2, 3].map(i => arrowSVG(ang(i), fills[i % 2])),
+    explain: `Dos reglas a la vez: la flecha gira 90° en sentido ${step > 0 ? "horario" : "antihorario"} y el círculo alterna ${fills[0] === "black" ? "negro/blanco" : "blanco/negro"}.` };
+  return finish(q, ans, [mk(ang(4), fills[1]), mk(ang(3), fills[0]), mk(ang(3), fills[1]), mk(ang(4) + 180, fills[0])]);
+}
+function genPosition() {
+  const step = pick([1, 2, 3]) * pick([1, -1]), start = rand(0, 7);
+  const pos = i => BORDER[mod(start + i * step, 8)];
+  const mk = p => ({ key: p.join(), svg: gridDotSVG(p) });
+  const ans = pos(4);
+  const q = { topic: "Posición", ...NEXT, seq: [0, 1, 2, 3].map(i => gridDotSVG(pos(i))),
+    explain: `El punto avanza ${Math.abs(step)} casilla(s) por el borde en sentido ${step > 0 ? "horario" : "antihorario"}.` };
+  return finish(q, mk(ans), shuffle([mk(pos(5)), mk(pos(3)), mk([1, 1]), mk(BORDER[mod(start + 4 * step + 4, 8)]), mk(pos(6))]));
+}
+function genSides() {
+  const start = rand(3, 4), ans = start + 4;
+  const mk = n => ({ key: n, svg: polygonSVG(n) });
+  const q = { topic: "Lados", ...NEXT, seq: [0, 1, 2, 3].map(i => polygonSVG(start + i)),
+    explain: `Cada figura tiene un lado más: ${[0, 1, 2, 3].map(i => start + i).join(", ")} → ${ans} lados.` };
+  return finish(q, mk(ans), shuffle([mk(ans - 1), mk(ans + 1), mk(0), mk(start)]));
+}
+function genQuadrant() {
+  const dir = pick([1, -1]), start = rand(0, 3);
+  const quad = i => mod(start + i * dir, 4);
+  const mk = qd => ({ key: qd, svg: quadrantSVG(qd) });
+  const q = { topic: "Rotación", ...NEXT, seq: [0, 1, 2, 3, 4].map(i => quadrantSVG(quad(i))),
+    explain: `El cuarto negro gira 90° en sentido ${dir > 0 ? "horario" : "antihorario"} en cada paso.` };
+  return finish(q, mk(quad(5)), shuffle([0, 1, 2, 3].filter(x => x !== quad(5)).map(mk)));
+}
+function genMatrix() {
+  const shapes = shuffle(["circle", "square", "triangle", "diamond", "star"]).slice(0, 4), fills = shuffle(["white", "black", "striped"]);
+  const cells = [];
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) cells.push({ shape: shapes[r], fill: fills[c] });
+  const ans = cells[8]; cells[8] = null;
+  const mk = (s, f) => ({ key: s + f, svg: single(s, f) });
+  const otherFill = fills.filter(f => f !== ans.fill);
+  const q = { topic: "Matriz", prompt: "Which figure completes the matrix?", es: "¿Qué figura completa la matriz?", matrix: matrixSVG(cells),
+    explain: "La forma es constante en cada fila y el relleno es constante en cada columna (blanco, negro o rayado)." };
+  return finish(q, mk(ans.shape, ans.fill), shuffle([mk(ans.shape, otherFill[0]), mk(ans.shape, otherFill[1]), mk(shapes[1], ans.fill), mk(shapes[3], ans.fill), mk(shapes[0], otherFill[0])]));
+}
+function genLatin() {
+  const shapes = shuffle(["circle", "square", "triangle", "diamond", "star"]), base = shapes.slice(0, 3), fill = pick(["white", "black"]);
+  const rows = [base, [base[1], base[2], base[0]], [base[2], base[0], base[1]]];
+  const cells = rows.flat().map(s => ({ shape: s, fill }));
+  const ans = cells[8]; cells[8] = null;
+  const mk = (s, f = fill) => ({ key: s + f, svg: single(s, f) });
+  const q = { topic: "Matriz", prompt: "Which figure completes the matrix?", es: "¿Qué figura completa la matriz?", matrix: matrixSVG(cells),
+    explain: "Cada fila y cada columna contiene las tres formas una sola vez (como un sudoku)." };
+  return finish(q, mk(ans.shape), shuffle([mk(base[0]), mk(base[2]), mk(shapes[3]), mk(ans.shape, fill === "white" ? "black" : "white")]));
+}
+function genDomino() {
+  const ts = pick([1, -1, 2, -2]), bs = pick([1, -1, 2, 0, -2].filter(x => x !== 0 || ts !== 0)), t0 = rand(0, 6), b0 = rand(0, 6);
+  const tile = i => [mod(t0 + i * ts, 7), mod(b0 + i * bs, 7)];
+  const [at, ab] = tile(4);
+  const mk = (t, b) => ({ key: `${t}-${b}`, svg: dominoSVG(t, b) });
+  const fmt = s => (s > 0 ? "+" : "") + s;
+  const q = { topic: "Dominó", prompt: "Which domino comes next? (values 0–6, after 6 comes 0)", es: "¿Qué ficha sigue? (valores 0–6; después del 6 viene el 0)",
+    seq: [0, 1, 2, 3].map(i => dominoSVG(...tile(i))),
+    explain: `Mitad superior ${fmt(ts)} y mitad inferior ${bs === 0 ? "constante" : fmt(bs)}, de forma circular (6 → 0).` };
+  return finish(q, mk(at, ab), shuffle([mk(ab, at), mk(at, mod(ab + 1, 7)), mk(mod(at + 1, 7), ab), mk(mod(at - 1, 7), ab), mk(at, mod(ab - 1, 7))]));
+}
+function genNumber() {
+  const type = pick(["arit", "geo", "alt", "dif", "fib", "sq"]);
+  let seq, ans, why;
+  if (type === "arit") { const a = rand(1, 20), d = pick([3, 4, 6, 7, 9, 11, -3, -5]); seq = [0, 1, 2, 3, 4].map(i => a + (d < 0 ? 60 : 0) + i * d); ans = seq[4] + d; why = `Suma ${d} en cada paso.`; }
+  else if (type === "geo") { const a = rand(1, 5), r = pick([2, 3]); seq = [0, 1, 2, 3, 4].map(i => a * r ** i); ans = seq[4] * r; why = `Multiplica por ${r}.`; }
+  else if (type === "alt") { const a = rand(2, 12), p = rand(4, 9), m = rand(1, 3); seq = [a]; for (let i = 1; i < 6; i++) seq.push(i % 2 ? seq[i - 1] + p : seq[i - 1] - m); ans = seq[5] + p; why = `Alterna +${p} y −${m}.`; }
+  else if (type === "dif") { const a = rand(1, 10), d0 = rand(1, 3); seq = [a]; for (let i = 0; i < 4; i++) seq.push(seq[i] + d0 + i); ans = seq[4] + d0 + 4; why = `Las diferencias crecen de 1 en 1: +${d0}, +${d0 + 1}, +${d0 + 2}…`; }
+  else if (type === "fib") { const a = rand(1, 3), b = rand(2, 5); seq = [a, b]; for (let i = 2; i < 6; i++) seq.push(seq[i - 1] + seq[i - 2]); ans = seq[4] + seq[5]; why = "Cada número es la suma de los dos anteriores."; }
+  else { const off = pick([0, 1, -1, 2]); seq = [1, 2, 3, 4, 5].map(n => n * n + off); ans = 36 + off; why = `Cuadrados perfectos (1, 4, 9, 16, 25…)${off ? (off > 0 ? " más " : " menos ") + Math.abs(off) : ""}.`; }
+  const mk = n => ({ key: n, text: String(n) });
+  const q = { topic: "Serie numérica", prompt: "Which number comes next?", es: "¿Qué número sigue?", text: seq.join(", ") + ", ?", explain: why };
+  return finish(q, mk(ans), shuffle([mk(ans + 1), mk(ans - 1), mk(ans + 2), mk(ans - 2), mk(ans + 10)]));
+}
+function genLetters() {
+  const step = pick([2, 3, 4, -2, -3]), start = step > 0 ? rand(0, 5) : rand(20, 25);
+  const L = i => String.fromCharCode(65 + start + i * step);
+  const ansI = start + 5 * step;
+  const mk = i => ({ key: i, text: String.fromCharCode(65 + i) });
+  const q = { topic: "Serie de letras", prompt: "Which letter comes next? (English alphabet, A–Z)", es: "¿Qué letra sigue? (alfabeto inglés, sin Ñ)",
+    text: [0, 1, 2, 3, 4].map(L).join(", ") + ", ?", explain: `Avanza ${step > 0 ? "+" : ""}${step} posiciones en el alfabeto (A=1 … Z=26).` };
+  return finish(q, mk(ansI), shuffle([1, -1, 2, -2, 3, -3, step].map(d => ansI + d).filter(i => i >= 0 && i < 26).map(mk)));
+}
+const ABSTRACT_PLAN = [genNumber, genLetters, genCount, genRotation, genSides, genDomino, genQuadrant, genPosition, genMatrix, genRotation,
+  genDomino, genNumber, genTwoRules, genLatin, genCount, genPosition, genDomino, genMatrix, genTwoRules, genRotation,
+  genNumber, genLatin, genDomino, genTwoRules, genPosition, genMatrix, genQuadrant, genTwoRules, genLetters, genMatrix];
+
+// ---------------------------------------------------------------- banco técnico (inglés)
+const BANK = [
+  // SQL
+  ["SQL", "Which clause filters rows BEFORE they are grouped?", null, ["WHERE", "HAVING", "ORDER BY", "LIMIT"], 0, "WHERE filtra filas antes del GROUP BY; HAVING filtra grupos."],
+  ["SQL", "Table t has 8 rows and the column city has 2 NULL values. What does this return?", "SELECT COUNT(city) FROM t;", ["8", "6", "2", "NULL"], 1, "COUNT(columna) ignora los NULL: 8 − 2 = 6."],
+  ["SQL", "Which JOIN returns ALL the rows of the left table, with NULLs when there is no match?", null, ["INNER JOIN", "LEFT JOIN", "CROSS JOIN", "FULL JOIN on the right table only"], 1, "LEFT JOIN conserva toda la tabla izquierda."],
+  ["SQL", "Salaries: 700, 700, 500. What does RANK() OVER (ORDER BY salary DESC) assign to 500?", null, ["2", "3", "1", "4"], 1, "RANK salta posiciones con los empates: 1, 1, 3. DENSE_RANK daría 2."],
+  ["SQL", "Which query finds the duplicated emails?", null, ["SELECT email FROM users GROUP BY email HAVING COUNT(*) > 1;", "SELECT email FROM users WHERE COUNT(*) > 1;", "SELECT DISTINCT email FROM users;", "SELECT email FROM users ORDER BY email;"], 0, "Duplicados = GROUP BY + HAVING COUNT(*) > 1. No se pueden usar agregados en el WHERE."],
+  ["SQL", "How does AVG(x) treat NULL values in x?", null, ["It ignores them", "It counts them as 0", "It returns an error", "It always returns NULL"], 0, "Las funciones de agregación (excepto COUNT(*)) ignoran los NULL."],
+  ["SQL", "Which window function returns the value of the PREVIOUS row?", null, ["LAG()", "LEAD()", "NTILE()", "FIRST_VALUE()"], 0, "LAG = fila anterior; LEAD = fila siguiente."],
+  ["SQL", "Table a has 5 rows and table b has 4 rows. How many rows does this return?", "SELECT * FROM a CROSS JOIN b;", ["9", "20", "5", "4"], 1, "CROSS JOIN = producto cartesiano: 5 × 4."],
+  ["SQL", "What is the result of the expression NULL = NULL?", null, ["TRUE", "FALSE", "NULL (unknown)", "An error"], 2, "Comparar con NULL da NULL (desconocido). Se usa IS NULL."],
+  ["SQL", "Which statement about UNION and UNION ALL is TRUE?", null, ["UNION removes duplicates; UNION ALL keeps them", "UNION ALL removes duplicates; UNION keeps them", "Both remove duplicates", "UNION ALL sorts the result"], 0, "UNION ALL es más rápido porque no deduplica."],
+  ["SQL", "Which query returns the 3 HIGHEST salaries?", null, ["SELECT salary FROM e ORDER BY salary DESC LIMIT 3;", "SELECT salary FROM e ORDER BY salary LIMIT 3;", "SELECT salary FROM e WHERE salary > 3;", "SELECT TOP salary FROM e;"], 0, "Ordenar de mayor a menor (DESC) y limitar."],
+  ["SQL", "A query uses customers c LEFT JOIN orders o, and then WHERE o.status = 'paid'. What happens?", null, ["Customers without orders are removed (it behaves like an INNER JOIN)", "Nothing changes", "It is a syntax error", "All customers appear with status NULL"], 0, "Filtrar la tabla derecha en el WHERE elimina las filas NULL. El filtro va en el ON."],
+  ["SQL", "Which expression avoids INTEGER division when calculating a percentage of integer columns?", null, ["100.0 * a / b", "100 * a / b", "a / b * 100", "(a / b) * 100"], 0, "El 100.0 convierte la operación a decimal antes de dividir."],
+  ["SQL", "What does this calculate?", "SUM(amount) OVER (ORDER BY order_date)", ["A running (cumulative) total", "The total for each date only", "The average amount", "The rank of each order"], 0, "SUM con OVER(ORDER BY) = total acumulado."],
+  ["SQL", "What is the correct LOGICAL order of execution?", null, ["FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY", "SELECT → FROM → WHERE → GROUP BY", "FROM → SELECT → WHERE → ORDER BY", "WHERE → FROM → HAVING → SELECT"], 0, "Por eso ORDER BY acepta alias y WHERE no."],
+  // Python
+  ["Python", "What is the output?", "print(type(3 / 3))", ["<class 'float'>", "<class 'int'>", "1", "1.0"], 0, "El operador / siempre devuelve float."],
+  ["Python", "What is the output?", 'print("python"[1:4])', ["yth", "pyt", "ytho", "ython"], 0, "Índices 1, 2 y 3; el final (4) no se incluye."],
+  ["Python", "What is the output?", "x = [1, 2, 3]\ny = x\ny.append(4)\nprint(len(x))", ["3", "4", "An error", "None"], 1, "y = x no copia: es la misma lista."],
+  ["Python", "What is the output?", "print(2 ** 3 ** 2)", ["64", "512", "36", "18"], 1, "** asocia a la derecha: 3 ** 2 = 9 y 2 ** 9 = 512."],
+  ["Python", "What is the output?", 'print(bool("False"))', ["True", "False", "An error", "None"], 0, "Cualquier string no vacío es truthy."],
+  ["Python", "What is the output?", "print([n * n for n in range(4)])", ["[0, 1, 4, 9]", "[1, 4, 9, 16]", "[0, 1, 4, 9, 16]", "[0, 2, 4, 6]"], 0, "range(4) = 0, 1, 2, 3."],
+  ["Python", "What is the output?", "print(len({1, 1, 2, 3, 3}))", ["5", "3", "2", "An error"], 1, "Un set elimina los duplicados: {1, 2, 3}."],
+  ["Python", "Given d = {\"a\": 1}, which expression raises a KeyError?", null, ['d["z"]', 'd.get("z")', '"z" in d', 'd.pop("z", None)'], 0, "El acceso directo a una clave inexistente lanza KeyError; get devuelve None."],
+  ["Python", "What is the output?", "nums = [3, 1, 2]\nprint(nums.sort())", ["[1, 2, 3]", "None", "[3, 1, 2]", "An error"], 1, ".sort() ordena in-place y devuelve None."],
+  ["Python", "What is the output?", 'print("a-b-c".split("-", 1))', ["['a', 'b-c']", "['a', 'b', 'c']", "['a-b', 'c']", "['a']"], 0, "maxsplit = 1: divide solo una vez."],
+  ["Python", "Which of these types is IMMUTABLE?", null, ["tuple", "list", "dict", "set"], 0, "Las tuplas no se pueden modificar."],
+  ["Python", "What is the output?", "def f(x, acc=[]):\n    acc.append(x)\n    return acc\nf(1)\nprint(f(2))", ["[2]", "[1, 2]", "[1]", "An error"], 1, "El argumento por defecto mutable se comparte entre llamadas."],
+  ["Python", "What is the output?", 'print(sorted(["b", "A", "a"]))', ["['A', 'a', 'b']", "['a', 'A', 'b']", "['a', 'b', 'A']", "['b', 'a', 'A']"], 0, "Las mayúsculas van antes en el orden Unicode."],
+  ["Python", "In pandas, which call is equivalent to a SQL LEFT JOIN?", null, ['a.merge(b, on="k", how="left")', "a.join_left(b)", "pd.concat([a, b])", "a.groupby(b)"], 0, "merge con how='left'."],
+  ["Python", "What is the output?", "print(10 // 3, 10 % 3)", ["3 1", "3.33 1", "3 0", "1 3"], 0, "// es la división entera y % es el residuo."],
+  // Algoritmos
+  ["Algorithms", "What is the time complexity of binary search?", null, ["O(log n)", "O(n)", "O(1)", "O(n log n)"], 0, "Descarta la mitad en cada paso."],
+  ["Algorithms", "Which data structure is LIFO (Last In, First Out)?", null, ["Stack", "Queue", "Heap", "Hash table"], 0, "Pila: el último en entrar es el primero en salir."],
+  ["Algorithms", "Which data structure does Breadth-First Search (BFS) use?", null, ["Queue", "Stack", "Heap", "Tree"], 0, "BFS explora por niveles con una cola (FIFO)."],
+  ["Algorithms", "What is the WORST-CASE complexity of merge sort?", null, ["O(n log n)", "O(n²)", "O(n)", "O(log n)"], 0, "Merge sort siempre es O(n log n)."],
+  ["Algorithms", "What is the WORST-CASE complexity of quick sort?", null, ["O(n²)", "O(n log n)", "O(n)", "O(log n)"], 0, "Con un mal pivote, quick sort se degrada a O(n²)."],
+  ["Algorithms", "Two nested loops, each iterating over n elements, have a complexity of:", null, ["O(n²)", "O(2n)", "O(n)", "O(log n)"], 0, "Los bucles anidados se multiplican."],
+  ["Algorithms", "An in-order traversal of a binary search tree returns the values:", null, ["In sorted order", "In reverse insertion order", "Level by level", "In random order"], 0, "Izquierda → nodo → derecha = orden ascendente."],
+  ["Algorithms", "Which structure lets you check whether a value was already seen in O(1) on average?", null, ["A hash set", "A sorted list", "A linked list", "A stack"], 0, "Un set usa una tabla hash."],
+  ["Algorithms", "What is the value of x at the end?", "x ← 1\nfor i from 1 to 5:\n    x ← x * 2", ["32", "10", "16", "64"], 0, "2⁵ = 32."],
+  ["Algorithms", "Binary search REQUIRES that the data is:", null, ["Sorted", "Unique", "Numeric only", "Stored in a linked list"], 0, "Solo funciona sobre datos ordenados."],
+  ["Algorithms", "What is the optimal time complexity of Two Sum using a hash map?", null, ["O(n)", "O(n²)", "O(log n)", "O(1)"], 0, "Una pasada guardando los complementos en un dict."],
+  ["Algorithms", "What happens if a recursive function has no base case?", null, ["It causes a stack overflow (RecursionError)", "It returns None", "It runs in O(1)", "It sorts the input"], 0, "La recursión nunca termina."],
+  // Bases de datos
+  ["Databases", "Which ACID property guarantees that a transaction is completed entirely or not at all?", null, ["Atomicity", "Consistency", "Isolation", "Durability"], 0, "Atomicidad = todo o nada."],
+  ["Databases", "What is the main purpose of a foreign key?", null, ["To guarantee referential integrity between tables", "To make every query faster", "To encrypt a column", "To allow duplicate primary keys"], 0, "La FK referencia la PK de otra tabla."],
+  ["Databases", "Which normal form removes TRANSITIVE dependencies?", null, ["3NF", "1NF", "2NF", "None of them"], 0, "3NF: ninguna columna no clave depende de otra columna no clave."],
+  ["Databases", "What is a disadvantage of adding many indexes to a table?", null, ["INSERT, UPDATE and DELETE become slower", "SELECT queries become slower", "The table loses its primary key", "Data is deleted"], 0, "Cada escritura también actualiza los índices."],
+  ["Databases", "In a star schema, which table stores the numeric measures (revenue, quantity)?", null, ["The fact table", "A dimension table", "A lookup table", "A staging table"], 0, "Tabla de hechos = métricas + FKs a las dimensiones."],
+  ["Databases", "Which of the following describes an OLAP system?", null, ["Complex aggregations over millions of rows, often columnar", "Many short transactions that update a few rows", "Processing card payments in real time", "A cache for web sessions"], 0, "OLAP = análisis; OLTP = transacciones."],
+  ["Databases", "How is a many-to-many (N:M) relationship implemented in a relational database?", null, ["With a junction (bridge) table", "With a single foreign key", "With a view", "It is not possible"], 0, "Por ejemplo, order_items entre orders y products."],
+  ["Databases", "Which AWS service is a key-value NoSQL database?", null, ["Amazon DynamoDB", "Amazon Redshift", "Amazon RDS for MySQL", "Amazon Aurora"], 0, "DynamoDB es NoSQL key-value/documentos."],
+  // AWS
+  ["AWS", "Which service runs SQL queries directly on data in Amazon S3 without managing servers?", null, ["Amazon Athena", "Amazon RDS", "Amazon EC2", "Amazon DynamoDB"], 0, "Athena = SQL serverless sobre S3; se paga por datos escaneados."],
+  ["AWS", "Which service is a petabyte-scale, columnar data warehouse?", null, ["Amazon Redshift", "Amazon S3", "AWS Lambda", "Amazon ElastiCache"], 0, "Redshift = data warehouse MPP columnar."],
+  ["AWS", "What does an AWS Glue crawler do?", null, ["Scans data, infers the schema and creates tables in the Data Catalog", "Deletes old files in S3", "Creates BI dashboards", "Monitors EC2 instances"], 0, "El crawler llena el Glue Data Catalog."],
+  ["AWS", "Real-time clickstream ingestion with CUSTOM consumer applications. Which service is the best fit?", null, ["Amazon Kinesis Data Streams", "AWS Glue DataBrew", "Amazon S3 Glacier", "AWS Snowball"], 0, "Streams = tiempo real con consumidores propios."],
+  ["AWS", "Load streaming data into S3 in near real time, convert it to Parquet, and write NO code. Which service?", null, ["Amazon Data Firehose", "Amazon EMR", "Amazon MSK", "AWS Lambda"], 0, "Firehose es una entrega totalmente gestionada."],
+  ["AWS", "Which service creates interactive BI dashboards with the in-memory SPICE engine?", null, ["Amazon QuickSight", "AWS CloudTrail", "Amazon SQS", "AWS IAM"], 0, "QuickSight es el BI de AWS."],
+  ["AWS", "Under the shared responsibility model, what is the CUSTOMER responsible for?", null, ["Managing IAM users and permissions", "Physical security of data centers", "Server hardware", "The global network"], 0, "El cliente: seguridad EN la nube (datos, IAM, configuración)."],
+  ["AWS", "Which service shows WHO made an API call (for example, who deleted a bucket)?", null, ["AWS CloudTrail", "Amazon CloudWatch", "AWS Config", "Amazon Inspector"], 0, "CloudTrail audita las llamadas a la API."],
+  ["AWS", "A nightly batch job can be interrupted and restarted. What is the CHEAPEST EC2 option?", null, ["Spot Instances", "On-Demand Instances", "Dedicated Hosts", "Reserved Instances (3 years)"], 0, "Spot: hasta ~90 % de descuento para cargas interrumpibles."],
+  ["AWS", "Which actions reduce the cost of Amazon Athena queries?", null, ["Convert to Parquet and partition the data by date", "Store the data as many small CSV files", "Always use SELECT *", "Move the data to S3 Glacier Deep Archive"], 0, "Athena cobra por datos escaneados: columnar + particiones = menos datos escaneados."],
+];
+const TECH_TOPICS = ["SQL", "Python", "Algorithms", "Databases", "AWS"];
+const TOPIC_ES = { SQL: "SQL", Python: "Python", Algorithms: "Algoritmos", Databases: "Bases de datos", AWS: "AWS" };
+
+function techQuestion(row) {
+  const [topic, prompt, code, opts, ans, explain] = row;
+  const order = shuffle(opts.map((t, i) => ({ t, i })));
+  return { topic: TOPIC_ES[topic], prompt, code, options: order.map(o => ({ text: o.t })), answer: order.findIndex(o => o.i === ans), explain };
+}
+function buildTechExam(n = 40) {
+  const per = { SQL: 11, Python: 10, Algorithms: 8, Databases: 4, AWS: 7 };
+  let qs = [];
+  for (const t of TECH_TOPICS) qs = qs.concat(shuffle(BANK.filter(r => r[0] === t)).slice(0, per[t]));
+  return shuffle(qs).slice(0, n).map(techQuestion);
+}
+
+// ---------------------------------------------------------------- estado y almacenamiento
+const MODES = {
+  abstract: { name: "Razonamiento abstracto", minutes: 30, count: 30 },
+  tech: { name: "Técnico: opción múltiple", minutes: 50, count: 40 },
+};
+let S = { view: "home", practiceTopic: "visual" };
+const store = {
+  get() { try { return JSON.parse(localStorage.getItem("sim3090-history") || "[]"); } catch { return []; } },
+  add(r) { try { const h = store.get(); h.unshift(r); localStorage.setItem("sim3090-history", JSON.stringify(h.slice(0, 8))); } catch { /* sin almacenamiento */ } },
+};
+let tick = null;
+
+function startExam(mode) {
+  const m = MODES[mode];
+  const questions = mode === "abstract" ? ABSTRACT_PLAN.map(g => g()) : buildTechExam(m.count);
+  S = { view: "exam", mode, questions, answers: Array(questions.length).fill(null), flags: Array(questions.length).fill(false), cur: 0, endsAt: Date.now() + m.minutes * 60000, startedAt: Date.now() };
+  runTimer(); render();
+}
+function startPractice(topic) {
+  S = { view: "practice", practiceTopic: topic, q: practiceQuestion(topic), chosen: null, done: 0, right: 0 };
+  render();
+}
+const VISUAL_GENS = [genRotation, genCount, genTwoRules, genPosition, genSides, genQuadrant, genMatrix, genLatin, genDomino];
+function practiceQuestion(topic) {
+  if (topic === "visual") return pick(VISUAL_GENS)();
+  if (topic === "series") return pick([genNumber, genLetters, genDomino])();
+  return techQuestion(pick(BANK.filter(r => r[0] === topic)));
+}
+function runTimer() {
+  clearInterval(tick);
+  tick = setInterval(() => {
+    if (S.view !== "exam") return clearInterval(tick);
+    const left = S.endsAt - Date.now();
+    if (left <= 0) { finishExam(true); return; }
+    const t = $("#timer");
+    if (t) { t.textContent = fmtTime(left); t.classList.toggle("low", left < 5 * 60000); }
+  }, 500);
+}
+const fmtTime = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; };
+function finishExam(timeUp = false) {
+  clearInterval(tick);
+  const correct = S.questions.filter((q, i) => S.answers[i] === q.answer).length;
+  const used = Math.min(Date.now(), S.endsAt) - S.startedAt;
+  S = { ...S, view: "results", correct, used, timeUp };
+  store.add({ mode: MODES[S.mode].name, score: `${correct}/${S.questions.length}`, date: new Date().toLocaleDateString("es-CO"), time: fmtTime(used) });
+  render(); window.scrollTo({ top: 0 });
+}
+
+// ---------------------------------------------------------------- render
+function figureBlock(q) {
+  if (q.matrix) return `<div>${q.matrix}</div>`;
+  if (q.seq) return `<div class="seq">${q.seq.map(s => `<div class="cell">${s}</div>`).join("")}<div class="cell q">?</div></div>`;
+  if (q.text) return `<pre class="code" style="font-size:1.25rem">${esc(q.text)}</pre>`;
+  return "";
+}
+function optionsBlock(q, chosen, reveal) {
+  const visual = q.options.some(o => o.svg);
+  return `<div class="options ${visual ? "visual" : ""}" role="radiogroup">${q.options.map((o, i) => {
+    let cls = "opt";
+    if (reveal) { if (i === q.answer) cls += " right"; else if (i === chosen) cls += " wrong"; }
+    else if (i === chosen) cls += " sel";
+    const body = o.svg ? `<span class="cell">${o.svg}</span>` : `<span class="t">${esc(o.text)}</span>`;
+    return `<button class="${cls}" data-opt="${i}" role="radio" aria-checked="${i === chosen}"><span class="k">${KEYS[i]}</span>${body}</button>`;
+  }).join("")}</div>`;
+}
+function questionCard(q, idx, total, chosen, reveal) {
+  return `<section class="qcard" aria-live="polite">
+    <div class="row"><span class="tag">${esc(q.topic)}</span>${total ? `<span class="progress">Pregunta ${idx + 1} de ${total}</span>` : ""}</div>
+    <p class="prompt">${esc(q.prompt)}${q.es ? `<span class="es">${esc(q.es)}</span>` : ""}</p>
+    ${q.code ? `<pre class="code">${esc(q.code)}</pre>` : ""}
+    ${figureBlock(q)}
+    ${optionsBlock(q, chosen, reveal)}
+  </section>`;
+}
+function homeView() {
+  const sample = genTwoRules();
+  const hist = store.get();
+  return `<main class="wrap">
+    <header class="hero">
+      <span class="eyebrow">Prueba de ingreso · 30 + 90 minutos</span>
+      <h1>Simulacro 30·90</h1>
+      <p class="muted">Entrena las dos partes del examen: <strong>razonamiento abstracto (30 min)</strong> y la <strong>parte técnica</strong> (SQL, Python, algoritmos, bases de datos y AWS). Las preguntas técnicas están en inglés, como en la prueba real. Las figuras se generan al azar, así que cada intento es distinto.</p>
+    </header>
+    <section class="modes">
+      <article class="mode featured">
+        <h2>Razonamiento abstracto</h2>
+        <p class="meta">30 preguntas · 30:00</p>
+        <p>Series, dominós D-48, matrices 3×3, rotaciones y figuras con dos reglas. La dificultad aumenta.</p>
+        <button class="btn primary" data-start="abstract">Empezar simulacro</button>
+      </article>
+      <article class="mode">
+        <h2>Técnico: opción múltiple</h2>
+        <p class="meta">40 preguntas · 50:00</p>
+        <p>Parte 1 del examen técnico, en inglés. Después, practica la parte de código con los problemas del repositorio.</p>
+        <button class="btn" data-start="tech">Empezar simulacro</button>
+      </article>
+      <article class="mode">
+        <h2>Práctica por tema</h2>
+        <p class="meta">Sin tiempo · retroalimentación inmediata</p>
+        <select id="ptopic" aria-label="Tema de práctica">
+          <option value="visual">Figuras (visual)</option><option value="series">Series y dominós</option>
+          <option value="SQL">SQL</option><option value="Python">Python</option><option value="Algorithms">Algoritmos</option>
+          <option value="Databases">Bases de datos</option><option value="AWS">AWS</option>
+        </select>
+        <button class="btn" data-practice>Practicar</button>
+      </article>
+    </section>
+    <section class="sample">
+      <div class="row"><span class="eyebrow">Ejemplo de pregunta</span><button class="btn ghost" data-resample>Otra figura</button></div>
+      ${questionCard(sample, 0, 0, null, false).replace('class="qcard"', 'class="qcard" style="border:none;padding:0"')}
+      <details><summary>Ver respuesta</summary><p style="margin-top:8px"><strong>${KEYS[sample.answer]}</strong>. ${esc(sample.explain)}</p></details>
+    </section>
+    <section class="mode">
+      <h3>Tus últimos intentos</h3>
+      ${hist.length ? `<div class="history">${hist.map(h => `<div><span>${esc(h.date)} · ${esc(h.mode)}</span><span>${esc(h.score)} · ${esc(h.time)}</span></div>`).join("")}</div>`
+        : `<p class="muted">Aún no hay intentos guardados en este navegador. Al terminar un simulacro, tu puntaje aparece aquí.</p>`}
+    </section>
+    <p class="note">Material de estudio no oficial, creado para practicar. No contiene preguntas reales de ningún examen.</p>
+  </main>`;
+}
+function examView() {
+  const q = S.questions[S.cur], n = S.questions.length;
+  const answered = S.answers.filter(a => a !== null).length;
+  return `<div class="bar"><div class="in">
+      <strong>${esc(MODES[S.mode].name)}</strong>
+      <span class="progress">${answered}/${n} respondidas</span>
+      <span class="timer" id="timer">${fmtTime(S.endsAt - Date.now())}</span>
+      <button class="btn ghost" data-finish>Terminar</button>
+    </div></div>
+    <main class="wrap">
+      ${questionCard(q, S.cur, n, S.answers[S.cur], false)}
+      <div class="nav">
+        <button class="btn ghost" data-prev ${S.cur === 0 ? "disabled" : ""}>← Anterior</button>
+        <button class="btn ghost" data-flag>${S.flags[S.cur] ? "Quitar marca" : "Marcar para revisar"}</button>
+        ${S.cur < n - 1 ? `<button class="btn primary" data-next>Siguiente →</button>` : `<button class="btn primary" data-finish>Terminar y ver resultado</button>`}
+      </div>
+      <nav class="palette" aria-label="Ir a la pregunta">${S.questions.map((_, i) =>
+        `<button data-go="${i}" class="${S.answers[i] !== null ? "done" : ""} ${i === S.cur ? "cur" : ""} ${S.flags[i] ? "flagged" : ""}" aria-label="Pregunta ${i + 1}">${i + 1}</button>`).join("")}</nav>
+      <p class="note">Atajos: teclas A–D o 1–4 para responder, ← y → para moverte. Si no ves la regla en 60 segundos: marca, responde algo y sigue.</p>
+    </main>`;
+}
+function practiceView() {
+  const q = S.q, reveal = S.chosen !== null, ok = S.chosen === q.answer;
+  return `<main class="wrap">
+    <div class="row" style="justify-content:space-between"><button class="btn ghost" data-home>← Inicio</button><span class="progress">${S.right}/${S.done} correctas</span></div>
+    ${questionCard(q, 0, 0, S.chosen, reveal)}
+    ${reveal ? `<div class="feedback ${ok ? "" : "bad"}"><strong>${ok ? "Correcto." : `Incorrecto. La respuesta es ${KEYS[q.answer]}.`}</strong> ${esc(q.explain)}</div>
+      <div class="row"><button class="btn primary" data-pnext>Siguiente pregunta →</button></div>` : ""}
+  </main>`;
+}
+function resultsView() {
+  const n = S.questions.length, pct = Math.round(100 * S.correct / n);
+  const byTopic = {};
+  S.questions.forEach((q, i) => { const t = byTopic[q.topic] || (byTopic[q.topic] = { ok: 0, n: 0 }); t.n++; if (S.answers[i] === q.answer) t.ok++; });
+  const verdict = pct >= 85 ? "Excelente: estás listo para este bloque." : pct >= 70 ? "Bien. Repasa los temas más bajos y repite en 2–3 días." : "Todavía en construcción. Vuelve a los módulos de los temas con menor puntaje.";
+  return `<main class="wrap">
+    <header class="hero">
+      <span class="eyebrow">${esc(MODES[S.mode].name)}${S.timeUp ? " · se acabó el tiempo" : ""}</span>
+      <div class="score"><span class="big">${S.correct}/${n}</span><span class="timer">${pct}%</span><span class="progress">Tiempo usado ${fmtTime(S.used)}</span></div>
+      <p>${verdict}</p>
+    </header>
+    <section class="qcard"><h3>Resultado por tema</h3><div class="topics">${Object.entries(byTopic).map(([t, v]) =>
+      `<div class="t"><span>${esc(t)}</span><span class="meter"><span style="width:${Math.round(100 * v.ok / v.n)}%"></span></span><span class="progress">${v.ok}/${v.n}</span></div>`).join("")}</div></section>
+    <div class="row"><button class="btn primary" data-start="${S.mode}">Repetir con preguntas nuevas</button><button class="btn ghost" data-home>Volver al inicio</button></div>
+    <section class="review"><h3>Revisión pregunta por pregunta</h3>${S.questions.map((q, i) => {
+      const ok = S.answers[i] === q.answer;
+      return `<details ${ok ? "" : "open"}><summary><span class="pill ${ok ? "ok" : "no"}">${ok ? "Bien" : "Mal"}</span><span>${i + 1}. ${esc(q.prompt)}</span></summary>
+        <div style="display:grid;gap:10px;margin-top:10px">${q.code ? `<pre class="code">${esc(q.code)}</pre>` : ""}${figureBlock(q)}${optionsBlock(q, S.answers[i], true)}
+        <p class="ans">Tu respuesta: ${S.answers[i] === null ? "sin responder" : KEYS[S.answers[i]]} · Correcta: ${KEYS[q.answer]}</p><p>${esc(q.explain)}</p></div></details>`;
+    }).join("")}</section>
+  </main>`;
+}
+function render() {
+  const app = $("#app");
+  app.innerHTML = S.view === "exam" ? examView() : S.view === "practice" ? practiceView() : S.view === "results" ? resultsView() : homeView();
+  if (S.view === "home") { const sel = $("#ptopic"); if (sel) sel.value = S.practiceTopic || "visual"; }
+}
+
+// ---------------------------------------------------------------- eventos
+document.addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  if (b.dataset.start) return startExam(b.dataset.start);
+  if (b.hasAttribute("data-practice")) return startPractice($("#ptopic").value);
+  if (b.hasAttribute("data-resample") || b.hasAttribute("data-home")) { clearInterval(tick); S = { view: "home", practiceTopic: S.practiceTopic }; return render(); }
+  if (b.dataset.opt !== undefined) {
+    const i = Number(b.dataset.opt);
+    if (S.view === "exam") { S.answers[S.cur] = i; return render(); }
+    if (S.view === "practice" && S.chosen === null) { S.chosen = i; S.done++; if (i === S.q.answer) S.right++; return render(); }
+    return;
+  }
+  if (b.hasAttribute("data-pnext")) { S.q = practiceQuestion(S.practiceTopic); S.chosen = null; return render(); }
+  if (b.hasAttribute("data-next")) { S.cur++; return render(); }
+  if (b.hasAttribute("data-prev")) { S.cur--; return render(); }
+  if (b.hasAttribute("data-flag")) { S.flags[S.cur] = !S.flags[S.cur]; return render(); }
+  if (b.dataset.go !== undefined) { S.cur = Number(b.dataset.go); return render(); }
+  if (b.hasAttribute("data-finish")) {
+    const blank = S.answers.filter(a => a === null).length;
+    if (blank && !b.dataset.confirm) { b.dataset.confirm = "1"; b.textContent = `Hay ${blank} sin responder. ¿Terminar igual?`; return; }
+    return finishExam(false);
+  }
+});
+document.addEventListener("keydown", e => {
+  if (e.target.closest("select, input, textarea") || e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toUpperCase();
+  const idx = "ABCD".indexOf(k) >= 0 ? "ABCD".indexOf(k) : "1234".indexOf(k);
+  if (S.view === "exam") {
+    if (idx >= 0 && idx < S.questions[S.cur].options.length) { S.answers[S.cur] = idx; render(); }
+    else if (e.key === "ArrowRight" && S.cur < S.questions.length - 1) { S.cur++; render(); }
+    else if (e.key === "ArrowLeft" && S.cur > 0) { S.cur--; render(); }
+  } else if (S.view === "practice" && S.chosen === null && idx >= 0 && idx < S.q.options.length) {
+    S.chosen = idx; S.done++; if (idx === S.q.answer) S.right++; render();
+  }
+});
+
+// Conservar el intento en curso si la página se actualiza mientras está abierta.
+window.claude?.hot?.snapshot?.(() => S);
+function boot(data) {
+  if (data && data.view) { S = data; if (S.view === "exam") runTimer(); }
+  render();
+}
+window.claude?.hot?.ready ? window.claude.hot.ready(boot) : boot(window.claude?.hot?.data ?? {});
+</script>
+<!-- ARTIFACT-END -->
+</body>
+</html>

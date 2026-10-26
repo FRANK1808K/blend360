@@ -1,0 +1,34 @@
+name: Checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  solutions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: SQL solutions match expected results
+        working-directory: 02-sql
+        run: python check_solutions.py
+      - name: Python reference solutions
+        working-directory: 03-python
+        run: python test_ejercicios.py soluciones
+      - name: Algorithms reference solutions
+        working-directory: 04-algoritmos-y-estructuras
+        run: python test_problemas.py soluciones
+      - name: pandas practice script runs
+        working-directory: 03-python
+        run: |
+          pip install --quiet pandas
+          python pandas_practica.py > /dev/null
+
+  markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v20

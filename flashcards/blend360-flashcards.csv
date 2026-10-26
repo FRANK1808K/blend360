@@ -1,0 +1,186 @@
+front,back,tags
+NOT / EXCEPT (in a question),Te piden la opción FALSA / la que NO cumple,ingles::examen
+LEAST,MENOS (the least expensive = el más barato),ingles::examen
+at least 3,al menos 3 (≥ 3),ingles::examen
+at most 3,como máximo 3 (≤ 3),ingles::examen
+more than 3,"más de 3 (> 3, NO incluye el 3)",ingles::examen
+Choose TWO,Elige DOS respuestas,ingles::examen
+which of the following,cuál de las siguientes,ingles::examen
+meet the requirements,cumplir los requisitos,ingles::examen
+assume,suponga / asuma,ingles::examen
+given,dado (la entrada),ingles::examen
+return,devolver / retornar (la salida),ingles::examen
+output,salida / lo que imprime,ingles::examen
+in-place,sin crear otra estructura (espacio O(1)),ingles::examen
+consecutive,"consecutivos, seguidos",ingles::examen
+ascending / descending,ascendente (menor→mayor) / descendente (mayor→menor),ingles::examen
+ties,empates,ingles::examen
+otherwise,de lo contrario / si no,ingles::examen
+unless,a menos que (= if not),ingles::examen
+each / per,cada / por (→ GROUP BY),ingles::examen
+filter out,"EXCLUIR, quitar",ingles::examen
+least operational overhead,lo que requiere menos trabajo de administración,ingles::examen
+cost-effective,"económico, rentable",ingles::examen
+ad hoc queries,consultas puntuales no planificadas,ingles::examen
+rounded to two decimal places,redondeado a 2 decimales,ingles::examen
+edge case,caso borde / límite,ingles::examen
+actual / actually (falso amigo),real / en realidad,ingles::examen
+eventually (falso amigo),"finalmente, con el tiempo",ingles::examen
+library (falso amigo),biblioteca (de código),ingles::examen
+realize (falso amigo),darse cuenta,ingles::examen
+record (falso amigo),registro (fila),ingles::examen
+current (falso amigo),actual,ingles::examen
+sensitive data,datos sensibles,ingles::examen
+deprecated,obsoleto,ingles::examen
+compliance,cumplimiento normativo,ingles::examen
+constraint,restricción,ingles::examen
+"3,500 vs 3.5 (in English)","3,500 = tres mil quinientos; 3.5 = tres coma cinco",ingles::examen
+query,consulta (se pronuncia 'kuíri'),ingles::vocabulario
+queue,cola (se pronuncia 'kiú'),ingles::vocabulario
+stack,pila,ingles::vocabulario
+heap,montículo,ingles::vocabulario
+leaf / leaves,hoja / hojas (árbol),ingles::vocabulario
+edge (graph),arista,ingles::vocabulario
+nested,anidado,ingles::vocabulario
+remainder,residuo (módulo),ingles::vocabulario
+even / odd,par / impar,ingles::vocabulario
+lowercase / uppercase,minúsculas / mayúsculas,ingles::vocabulario
+whitespace,espacio en blanco,ingles::vocabulario
+trailing spaces,espacios al final,ingles::vocabulario
+swap,intercambiar,ingles::vocabulario
+traverse,recorrer,ingles::vocabulario
+revenue,ingresos,ingles::vocabulario
+profit,ganancia,ingles::vocabulario
+churn,abandono de clientes,ingles::vocabulario
+outlier,valor atípico,ingles::vocabulario
+mean / median / mode,media / mediana / moda,ingles::vocabulario
+insight,hallazgo útil,ingles::vocabulario
+stakeholder,parte interesada,ingles::vocabulario
+funnel,embudo,ingles::vocabulario
+forecast,pronóstico,ingles::vocabulario
+throughput,volumen procesado por unidad de tiempo,ingles::vocabulario
+latency,latencia (demora),ingles::vocabulario
+outage,caída del servicio,ingles::vocabulario
+upfront,por adelantado,ingles::vocabulario
+workload,carga de trabajo,ingles::vocabulario
+clockwise / counterclockwise,sentido horario / antihorario,ingles::vocabulario
+odd one out,el que no pertenece,ingles::vocabulario
+shaded,sombreado,ingles::vocabulario
+mirror image,imagen en espejo,ingles::vocabulario
+deadline,fecha límite,ingles::vocabulario
+strength / weakness,fortaleza / debilidad,ingles::vocabulario
+hiring manager,gerente que contrata,ingles::vocabulario
+Orden lógico de ejecución SQL,FROM/JOIN → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → ORDER BY → LIMIT,sql
+WHERE vs HAVING,WHERE filtra filas antes de agrupar; HAVING filtra grupos (con agregados),sql
+COUNT(*) vs COUNT(col),COUNT(*) cuenta todas las filas; COUNT(col) ignora NULL,sql
+¿Por qué x = NULL no funciona?,NULL = NULL da NULL (desconocido). Usar IS NULL,sql
+Clientes sin pedidos (anti-join),LEFT JOIN orders o ... WHERE o.id IS NULL  (o NOT EXISTS),sql
+"RANK vs DENSE_RANK vs ROW_NUMBER (9000, 9000, 7000)","RANK 1,1,3 · DENSE_RANK 1,1,2 · ROW_NUMBER 1,2,3",sql
+Top N por grupo,ROW_NUMBER() OVER (PARTITION BY g ORDER BY x DESC) en una CTE + WHERE rn <= N,sql
+Running total,SUM(x) OVER (ORDER BY fecha),sql
+% del total,x * 100.0 / SUM(x) OVER (),sql
+Valor de la fila anterior,LAG(x) OVER (PARTITION BY ... ORDER BY ...),sql
+Encontrar duplicados,GROUP BY cols HAVING COUNT(*) > 1,sql
+UNION vs UNION ALL,UNION elimina duplicados; UNION ALL los conserva (más rápido),sql
+DELETE vs TRUNCATE vs DROP,"DELETE: filas (DML, con WHERE); TRUNCATE: todas las filas (DDL); DROP: borra la tabla",sql
+Evitar división entera,Multiplicar por 100.0 o hacer CAST a decimal,sql
+LEFT JOIN que se vuelve INNER,Cuando filtras la tabla derecha en el WHERE; pon el filtro en el ON,sql
+LIKE '_a%',_ = un carácter exacto; % = cualquier cantidad. Segunda letra 'a',sql
+BETWEEN 10 AND 20,Inclusivo: incluye 10 y 20,sql
+CTE,"WITH nombre AS (SELECT ...) : subconsulta con nombre, más legible",sql
+Subconsulta correlacionada,Subconsulta que usa columnas de la consulta externa; se evalúa por fila,sql
+Agregación condicional,SUM(CASE WHEN cond THEN 1 ELSE 0 END),sql
+DDL / DML / DCL / TCL,DDL: CREATE/ALTER/DROP · DML: SELECT/INSERT/UPDATE/DELETE · DCL: GRANT/REVOKE · TCL: COMMIT/ROLLBACK,sql
+Gaps and islands (días consecutivos),fecha - ROW_NUMBER() OVER (ORDER BY fecha) es constante dentro de cada racha,sql
+7 / 2 · 7 // 2 · 7 % 2 · -7 // 2,3.5 · 3 · 1 · -4,python
+Valores falsy,"0, 0.0, '', [], {}, set(), None, False",python
+list vs tuple,list es mutable; tuple es inmutable,python
+lst.sort() vs sorted(lst),sort() ordena in-place y devuelve None; sorted() devuelve una lista nueva,python
+b = a (listas),No copia: ambos nombres apuntan a la misma lista. Copiar: a.copy() / a[:],python
+"def f(x, lst=[])",Trampa: el default mutable se comparte entre llamadas. Usa lst=None,python
+Invertir un string,s[::-1],python
+Contar frecuencias,collections.Counter(xs) · .most_common(k),python
+"dict.get(k, 0)",Devuelve 0 si k no existe (sin KeyError),python
+Buscar en set/dict vs list,set/dict: O(1) promedio · list: O(n),python
+is vs ==,== compara valor; is compara identidad (úsalo con None),python
+Tupla de 1 elemento,"(1,)",python
+Set vacío,set()   ({} es un dict vacío),python
+enumerate / zip,"enumerate: (índice, valor) · zip: recorre listas en paralelo",python
+Ordenar por valor desc y nombre asc,"sorted(items, key=lambda kv: (-kv[1], kv[0]))",python
+TypeError vs ValueError,TypeError: tipo incorrecto ('a'+1) · ValueError: valor inválido (int('x')),python
+pandas: equivalente de GROUP BY + SUM,df.groupby('g')['x'].sum(),python
+pandas: LEFT JOIN,"a.merge(b, on='k', how='left')",python
+pandas: LAG,df['x'].shift(1),python
+pandas: valor de grupo por fila (OVER),df.groupby('g')['x'].transform('mean'),python
+pandas: filtro AND,df[(df.a > 1) & (df.b == 'X')]  (con paréntesis),python
+Big O de búsqueda binaria,"O(log n), requiere datos ordenados",algoritmos
+Pasos de búsqueda binaria con 1.000.000 de elementos,≈ 20,algoritmos
+Dos bucles anidados sobre n,O(n²),algoritmos
+Pila (stack),LIFO: el último en entrar es el primero en salir,algoritmos
+Cola (queue),FIFO: el primero en entrar es el primero en salir,algoritmos
+BFS usa…,Una cola; camino más corto sin pesos,algoritmos
+DFS usa…,Una pila o recursión; explorar componentes,algoritmos
+Merge sort,"O(n log n) siempre, estable, espacio O(n)",algoritmos
+Quick sort,"O(n log n) promedio, O(n²) peor caso, no estable",algoritmos
+Bubble / insertion sort,O(n²); O(n) si ya está ordenado,algoritmos
+Recorrido in-order de un BST,Devuelve los valores ordenados,algoritmos
+Recursión: partes,Caso base + caso recursivo,algoritmos
+Memoización,Guardar resultados ya calculados (Fibonacci O(2^n) → O(n)),algoritmos
+Patrón: '¿existe un par que sume X?',Hash map / set (Two Sum O(n)),algoritmos
+Patrón: 'substring contiguo más largo',Ventana deslizante,algoritmos
+Patrón: 'paréntesis balanceados',Pila,algoritmos
+Colisión en una tabla hash,Dos claves con el mismo índice; se resuelve con encadenamiento o direccionamiento abierto,algoritmos
+Estable (ordenamiento),Mantiene el orden relativo de los elementos iguales,algoritmos
+Primary key,Identifica cada fila de forma única; no NULL ni duplicados,bases_de_datos
+Foreign key,Referencia la PK de otra tabla; integridad referencial,bases_de_datos
+Relación N:M,Se implementa con una tabla intermedia (puente),bases_de_datos
+1NF,"Valores atómicos, sin grupos repetidos",bases_de_datos
+2NF,1NF + sin dependencias parciales de una PK compuesta,bases_de_datos
+3NF,2NF + sin dependencias transitivas,bases_de_datos
+ACID,"Atomicidad, Consistencia, Aislamiento (Isolation), Durabilidad",bases_de_datos
+Atomicidad,Todo o nada en una transacción,bases_de_datos
+Índice: ventaja / desventaja,Lecturas más rápidas / escrituras más lentas + espacio,bases_de_datos
+OLTP vs OLAP,"OLTP: transacciones, filas, normalizado · OLAP: análisis, columnar, estrella",bases_de_datos
+Star schema,Tabla de hechos (métricas + FKs) rodeada de dimensiones (atributos),bases_de_datos
+Data warehouse vs data lake,"Warehouse: estructurado, schema-on-write · Lake: cualquier dato, schema-on-read",bases_de_datos
+ETL vs ELT,ETL transforma antes de cargar; ELT carga y transforma dentro del warehouse,bases_de_datos
+Tipos de NoSQL,"Key-value (DynamoDB), documentos (MongoDB), columnas anchas (Cassandra), grafos (Neptune)",bases_de_datos
+Teorema CAP,Ante una partición de red: elegir Consistencia o Disponibilidad,bases_de_datos
+Parquet,"Formato columnar comprimido, ideal para analítica",bases_de_datos
+Particionamiento,"Organizar archivos por columna (p. ej., fecha) para leer solo lo necesario",bases_de_datos
+SCD tipo 2,Agrega una fila nueva con fechas de vigencia (conserva historia),bases_de_datos
+Cloud computing (definición AWS),On-demand delivery of IT resources over the Internet with pay-as-you-go pricing,aws
+6 ventajas de la nube,Gasto variable · economías de escala · no adivinar capacidad · velocidad · no mantener data centers · global en minutos,aws
+Región vs AZ,Región: área geográfica con varias AZ · AZ: 1+ centros de datos aislados,aws
+Responsabilidad compartida,"AWS: seguridad DE la nube · Cliente: seguridad EN la nube (datos, IAM, SO de EC2)",aws
+IAM role,Identidad con credenciales temporales; la forma correcta de dar permisos a servicios,aws
+Least privilege,Dar solo los permisos mínimos necesarios,aws
+Spot Instances,Hasta ~90% más baratas; para trabajos que toleran interrupciones,aws
+CloudTrail vs CloudWatch,"CloudTrail: quién hizo qué (API) · CloudWatch: métricas, logs, alarmas",aws
+Amazon S3,"Almacenamiento de objetos, 11 nueves de durabilidad, base del data lake",aws
+S3 Glacier Deep Archive,"Lo más barato para archivo a largo plazo, con acceso muy raro",aws
+Amazon Athena,SQL serverless sobre S3; se paga por datos escaneados,aws
+Reducir costo de Athena,Parquet + compresión + particiones + seleccionar solo las columnas necesarias,aws
+Amazon Redshift,Data warehouse columnar MPP; carga masiva con COPY,aws
+AWS Glue,ETL serverless (Spark) + Data Catalog + crawlers,aws
+Glue crawler,"Escanea los datos, infiere el esquema y crea tablas en el Data Catalog",aws
+Glue DataBrew,Preparación de datos visual sin código,aws
+Amazon EMR,Clústeres gestionados de Spark/Hadoop/Hive; control total; Spot,aws
+Kinesis Data Streams vs Data Firehose,Streams: tiempo real con consumidores propios · Firehose: entrega gestionada a S3/Redshift sin código,aws
+AWS DMS,Migrar/replicar bases de datos; CDC,aws
+Amazon AppFlow,"Integrar SaaS (Salesforce, etc.) con S3/Redshift sin código",aws
+Lake Formation,Gobierno del data lake; permisos por tabla/columna/fila,aws
+Amazon Macie,Descubre PII/datos sensibles en S3,aws
+Amazon QuickSight,BI serverless; dashboards; motor en memoria SPICE,aws
+Step Functions vs MWAA,Step Functions: orquestación serverless visual · MWAA: Airflow gestionado,aws
+Amazon Bedrock,IA generativa por API con modelos fundacionales,aws
+SageMaker AI,"Construir, entrenar y desplegar modelos de ML",aws
+Well-Architected: 6 pilares,"Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability",aws
+Blend360 y AWS,AWS Premier Tier Services Partner; competencias Data & Analytics y Generative AI; delivery partner de EMR y QuickSight,aws
+Checklist FORMA-CPR,"Forma, Orientación, Relleno, Movimiento, Aumento, Combinación, Proporción, Repetición",razonamiento
+Dominós D-48: valores,"0 a 6, circular: después de 6 viene 0",razonamiento
+Matriz 3×3: primero revisar…,Filas → columnas → diagonales,razonamiento
+Regla XOR en matrices,Quedan los elementos que aparecen en solo una de las dos figuras,razonamiento
+Regla 'sudoku' en matrices,Cada fila/columna contiene cada elemento una vez,razonamiento
+Tiempo por pregunta (30 min),"≈ 45–60 s; si no ves la regla en 60 s: marca, adivina, sigue",razonamiento
+Rotación horaria 45°,↑ ↗ → ↘ ↓ ↙ ← ↖,razonamiento

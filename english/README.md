@@ -1,6 +1,6 @@
-# 🇬🇧 English for the Blend360 exam: de A2 a "funcional" en 7 semanas
+# 🇬🇧 English for the Blend360 exam: de A2 a "funcional" en 8 semanas
 
-> **Tu situación:** nivel A2, examen técnico en inglés el **18 de diciembre**. En 7 semanas no vas a llegar a C1, ni hace falta. Lo que necesitas es:
+> **Tu situación:** nivel A2, examen técnico en inglés el **18 de diciembre**. En 8 semanas no vas a llegar a C1, ni hace falta. Lo que necesitas es:
 >
 > 1. **Leer y entender enunciados técnicos** sin bloquearte. Es lo **más importante** para la prueba escrita.
 > 2. **Reconocer las palabras "trampa"** de las preguntas (NOT, EXCEPT, LEAST, at least…).
@@ -32,15 +32,18 @@
 
 ## Plan por semanas
 
+Las semanas coinciden con el [plan de estudio general](../guides/plan-de-estudio.md).
+
 | Semana | Fechas | Enfoque de inglés |
 |---|---|---|
-| 1 | 27 oct – 2 nov | Vocabulario: SQL + palabras de enunciados. Gramática: presente simple, *there is/are* |
-| 2 | 3 – 9 nov | Vocabulario: AWS (te sirve **también para el AIF-C01 del 16 de nov**). Gramática: pasiva (*is stored*, *are returned*) |
-| 3 | 10 – 16 nov | Vocabulario: AWS/IA (repaso para el AIF-C01). Lectura: preguntas largas tipo AWS |
-| 4 | 17 – 23 nov | Vocabulario: Python + algoritmos. Gramática: condicionales (*if… then*), comparativos |
-| 5 | 24 – 30 nov | Presentación personal (escribir + memorizar + grabar). Explicar código en voz alta |
-| 6 | 1 – 7 dic | Preguntas de entrevista típicas: practica las respuestas modelo. Simulacros completos en inglés |
-| 7 | 8 – 17 dic | Repaso de flashcards + simulacros. **Nada nuevo** la última semana |
+| 1 | 26 oct – 1 nov | Vocabulario: SQL + palabras de enunciados. Gramática: presente simple, *there is/are* |
+| 2 | 2 – 8 nov | Vocabulario: AWS (te sirve **también para el AIF-C01 del 16 de nov**). Gramática: pasiva (*is stored*, *are returned*) |
+| 3 | 9 – 15 nov | Vocabulario: AWS/IA (repaso para el AIF-C01). Lectura: preguntas largas tipo AWS |
+| 4 | 17 – 22 nov | Vocabulario: Python + algoritmos. Gramática: condicionales (*if… then*), comparativos |
+| 5 | 23 – 29 nov | Presentación personal (escribir + memorizar + grabar). Explicar código en voz alta |
+| 6 | 30 nov – 6 dic | Preguntas de entrevista típicas: practica las respuestas modelo. Simulacro técnico completo en inglés |
+| 7 | 7 – 13 dic | Simulacros en inglés + respuestas de entrevista en voz alta |
+| 8 | 14 – 17 dic | Repaso de flashcards. **Nada nuevo** |
 
 ## Recursos gratuitos recomendados
 

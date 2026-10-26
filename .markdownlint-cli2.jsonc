@@ -1,0 +1,18 @@
+{
+  // Reglas de estilo Markdown (https://github.com/DavidAnson/markdownlint)
+  "config": {
+    "default": true,
+    // Las tablas y los párrafos técnicos necesitan líneas largas.
+    "MD013": false,
+    // HTML permitido para <details>/<summary> en las soluciones.
+    "MD033": false,
+    // Encabezados repetidos permitidos en secciones distintas (p. ej., "Autoevaluación").
+    "MD024": { "siblings_only": true },
+    // Las preguntas de opción múltiple usan negrita como "título" de la pregunta.
+    "MD036": false,
+    // Filas separadoras compactas de tabla (|---|---|) válidas en GFM.
+    "MD060": false
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**"]
+}

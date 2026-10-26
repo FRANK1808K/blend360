@@ -75,7 +75,7 @@ Completa la plantilla con tus datos, apréndela de memoria y grábate diciéndol
 
 > *"My English is not perfect yet, but I'm working on it every day. I practice with technical videos and flashcards, and I'm improving quickly. I can read technical documentation without problems."*
 
-> 💡 Esta respuesta convierte tu A2 en una **fortaleza** (mejora activa). Es honesta y muestra disciplina.
+💡 Esta respuesta convierte tu A2 en una **fortaleza** (mejora activa). Es honesta y muestra disciplina.
 
 ### "Tell me about a challenge you faced." (método **STAR**)
 
