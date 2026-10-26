@@ -13,6 +13,7 @@
 | [soluciones.py](soluciones.py) | Commented solutions (open them only after trying) |
 | [test_ejercicios.py](test_ejercicios.py) | Automatic grader |
 | [pandas.en.md](pandas.en.md) | Data analysis with pandas (SQL equivalents) |
+| [Python lab](../simulator/README.en.md#code-lab) | The same 25 exercises in the browser, with the same tests, nothing to install |
 
 ```bash
 cd 03-python

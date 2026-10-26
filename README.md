@@ -27,6 +27,7 @@ Cada documento existe **en español y en inglés**. Los ejercicios y simulacros 
 | 📅 **Quiero saber qué estudiar cada día** | [Plan de estudio 26 oct → 18 dic](guides/plan-de-estudio.md) (incluye el AWS AIF-C01 del 16 de nov) |
 | 🔎 **Quiero saber cómo evalúa Blend360** | [Qué evalúa Blend360](guides/que-evalua-blend360.md): proceso reportado por candidatos, relación con AWS, preguntas para el reclutador |
 | 🧪 **Quiero medir mi nivel ya** | [Simulador interactivo](simulator/README.md) · [Simulacro técnico](simulacros/simulacro-tecnico-01.md) · [Simulacro de razonamiento](simulacros/simulacro-razonamiento-01.md) |
+| ⌨️ **Quiero practicar escribiendo código** | [Laboratorio del simulador](simulator/README.md#laboratorio-de-código): escribes SQL o Python en el navegador (también en el celular) y se corrige al instante |
 | 🇬🇧 **Mi inglés es A2 y me preocupa** | [Plan de inglés](english/README.md) → [cómo leer preguntas en inglés](english/como-leer-preguntas.md) |
 | ⏰ **El examen es en 2 días** | [Repaso final de 48 h](cheatsheets/repaso-final-48h.md) + [cheatsheets](cheatsheets/README.md) |
 
@@ -43,9 +44,9 @@ Cada documento existe **en español y en inglés**. Los ejercicios y simulacros 
 | # | Módulo | Contenido | Práctica |
 |---|---|---|---|
 | 01 | [Razonamiento abstracto](01-razonamiento-abstracto/README.md) | Tipos de pregunta, checklist **FORMA-CPR**, estrategia para los 30 min | [50 ejercicios](01-razonamiento-abstracto/ejercicios.md) + figuras ilimitadas en el [simulador](simulator/README.md) |
-| 02 | [SQL](02-sql/README.md) | De `SELECT` a funciones de ventana, NULLs, JOINs, CTEs, patrones de entrevista | [35 ejercicios](02-sql/ejercicios.md) sobre una base de datos real (SQLite) |
-| 03 | [Python](03-python/README.md) + [pandas](03-python/pandas.md) | Fundamentos, trampas, quiz "¿qué imprime?", pandas ↔ SQL | [25 ejercicios](03-python/ejercicios.py) con corrector automático |
-| 04 | [Algoritmos y estructuras de datos](04-algoritmos-y-estructuras/README.md) | Big O, estructuras, búsqueda y ordenamiento, recursión, patrones, pseudocódigo | [20 problemas clásicos](04-algoritmos-y-estructuras/problemas.py) con corrector |
+| 02 | [SQL](02-sql/README.md) | De `SELECT` a funciones de ventana, NULLs, JOINs, CTEs, patrones de entrevista | [35 ejercicios](02-sql/ejercicios.md) sobre una base de datos real (SQLite), también en el [laboratorio SQL](simulator/README.md#laboratorio-de-código) |
+| 03 | [Python](03-python/README.md) + [pandas](03-python/pandas.md) | Fundamentos, trampas, quiz "¿qué imprime?", pandas ↔ SQL | [25 ejercicios](03-python/ejercicios.py) con corrector automático, también en el [laboratorio Python](simulator/README.md#laboratorio-de-código) |
+| 04 | [Algoritmos y estructuras de datos](04-algoritmos-y-estructuras/README.md) | Big O, estructuras, búsqueda y ordenamiento, recursión, patrones, pseudocódigo | [20 problemas clásicos](04-algoritmos-y-estructuras/problemas.py) con corrector, también en el [laboratorio](simulator/README.md#laboratorio-de-código) |
 | 05 | [Bases de datos](05-bases-de-datos/README.md) | Llaves, normalización, ACID, índices, OLTP/OLAP, estrella, lake/warehouse, NoSQL | Autoevaluación |
 | 06 | [AWS](06-aws/README.md) + [análisis de datos en AWS](06-aws/analisis-de-datos.md) | Nube, IAM, servicios, precios; S3, Glue, Athena, Redshift, EMR, Kinesis, QuickSight | [30 preguntas en inglés](06-aws/preguntas.md) |
 | 07 | [Resolución de problemas](07-resolucion-de-problemas/README.md) | Método UMPIRE, gestión del tiempo, lógica, porcentajes, probabilidad, estadística, casos de negocio | Ejercicios resueltos |
@@ -98,6 +99,7 @@ La CI ([`checks.yml`](.github/workflows/checks.yml)) verifica en cada cambio que
 - Las **36 soluciones SQL**, en los dos idiomas, se ejecutan y producen exactamente el "resultado esperado" publicado (`02-sql/check_solutions.py`).
 - Las **25 soluciones de Python**, los **20 problemas de algoritmos** y las fórmulas de estadística y ML (`08-estadistica-y-ml/estadistica_ml_practica.py`) pasan sus pruebas.
 - El Markdown cumple las reglas de estilo (`markdownlint`), cada documento tiene su versión en el otro idioma y todos los enlaces internos funcionan (`scripts/check_docs.py`).
+- El laboratorio del simulador usa exactamente los mismos ejercicios, soluciones y pruebas del repositorio (`scripts/build_lab.py --check`).
 
 ## Fechas clave
 

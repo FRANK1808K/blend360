@@ -27,6 +27,7 @@ Every document exists in **English and Spanish**. The exercises and mock exams a
 | 📅 **I want to know what to study each day** | [Study plan: Oct 26 → Dec 18](guides/plan-de-estudio.en.md) (includes the AWS AIF-C01 exam on Nov 16) |
 | 🔎 **I want to know how Blend360 evaluates candidates** | [What Blend360 evaluates](guides/que-evalua-blend360.en.md): process reported by candidates, the AWS partnership, questions for the recruiter |
 | 🧪 **I want to measure my level now** | [Interactive simulator](simulator/README.en.md) · [Technical mock exam](simulacros/simulacro-tecnico-01.en.md) · [Reasoning mock exam](simulacros/simulacro-razonamiento-01.en.md) |
+| ⌨️ **I want to practice writing code** | [The simulator's code lab](simulator/README.en.md#code-lab): write SQL or Python in the browser (also on your phone) and get it graded instantly |
 | 🇬🇧 **My English is basic and I'm worried** | [English plan](english/README.en.md) → [how to read exam questions in English](english/como-leer-preguntas.en.md) |
 | ⏰ **The exam is in 2 days** | [48-hour final review](cheatsheets/repaso-final-48h.en.md) + [cheat sheets](cheatsheets/README.en.md) |
 
@@ -41,9 +42,9 @@ Every document exists in **English and Spanish**. The exercises and mock exams a
 | # | Module | Content | Practice |
 |---|---|---|---|
 | 01 | [Abstract reasoning](01-razonamiento-abstracto/README.en.md) | Question types, the **FORMA-CPR** checklist, a strategy for the 30 minutes | [50 exercises](01-razonamiento-abstracto/ejercicios.en.md) + unlimited figures in the [simulator](simulator/README.en.md) |
-| 02 | [SQL](02-sql/README.en.md) | From `SELECT` to window functions, NULLs, JOINs, CTEs, interview patterns | [35 exercises](02-sql/ejercicios.en.md) on a real database (SQLite) |
-| 03 | [Python](03-python/README.en.md) + [pandas](03-python/pandas.en.md) | Fundamentals, traps, "what is the output?" quiz, pandas ↔ SQL | [25 exercises](03-python/ejercicios.py) with an automatic grader |
-| 04 | [Algorithms and data structures](04-algoritmos-y-estructuras/README.en.md) | Big O, data structures, searching and sorting, recursion, patterns, pseudocode | [20 classic problems](04-algoritmos-y-estructuras/problemas.py) with a grader |
+| 02 | [SQL](02-sql/README.en.md) | From `SELECT` to window functions, NULLs, JOINs, CTEs, interview patterns | [35 exercises](02-sql/ejercicios.en.md) on a real database (SQLite), also in the [SQL lab](simulator/README.en.md#code-lab) |
+| 03 | [Python](03-python/README.en.md) + [pandas](03-python/pandas.en.md) | Fundamentals, traps, "what is the output?" quiz, pandas ↔ SQL | [25 exercises](03-python/ejercicios.py) with an automatic grader, also in the [Python lab](simulator/README.en.md#code-lab) |
+| 04 | [Algorithms and data structures](04-algoritmos-y-estructuras/README.en.md) | Big O, data structures, searching and sorting, recursion, patterns, pseudocode | [20 classic problems](04-algoritmos-y-estructuras/problemas.py) with a grader, also in the [code lab](simulator/README.en.md#code-lab) |
 | 05 | [Databases](05-bases-de-datos/README.en.md) | Keys, normalization, ACID, indexes, OLTP/OLAP, star schema, lake/warehouse, NoSQL | Self-assessment |
 | 06 | [AWS](06-aws/README.en.md) + [data analytics on AWS](06-aws/analisis-de-datos.en.md) | Cloud, IAM, services, pricing; S3, Glue, Athena, Redshift, EMR, Kinesis, QuickSight | [30 questions](06-aws/preguntas.en.md) |
 | 07 | [Problem solving](07-resolucion-de-problemas/README.en.md) | The UMPIRE method, time management, logic, percentages, probability, statistics, business cases | Solved exercises |
@@ -98,6 +99,7 @@ The CI pipeline ([`checks.yml`](.github/workflows/checks.yml)) verifies on every
 - The **36 SQL solutions** in both languages run and produce exactly the published "expected result" (`02-sql/check_solutions.py`).
 - The **25 Python solutions**, the **20 algorithm solutions** and the statistics and ML formulas (`08-estadistica-y-ml/estadistica_ml_practica.py`) pass their tests.
 - The Markdown follows the style rules (`markdownlint`), every document has its twin in the other language and every internal link works (`scripts/check_docs.py`).
+- The simulator's code lab uses exactly the same exercises, solutions and tests as the repository (`scripts/build_lab.py --check`).
 
 ## Key dates
 

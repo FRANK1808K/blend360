@@ -6,6 +6,9 @@
 
 **Cómo practicar:**
 
+- **Sin instalar nada (recomendado):** el [laboratorio SQL del simulador](../simulator/README.md#laboratorio-de-código) tiene estos mismos 35 ejercicios. Escribes la consulta, la ejecutas y te dice si el resultado es correcto; funciona en el celular. Incluye un **reto de 5 consultas en 60 minutos**.
+- **En tu computador:**
+
 ```bash
 cd 02-sql
 python3 setup_db.py --shell      # crea practice.db y abre una consola SQL

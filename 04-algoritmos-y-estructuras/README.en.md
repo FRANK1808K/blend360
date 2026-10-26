@@ -15,6 +15,7 @@
 | [problemas.py](problemas.py) | 20 classic problems to solve (statements in English and Spanish) |
 | [soluciones.py](soluciones.py) | Explained solutions, with their complexity |
 | [test_problemas.py](test_problemas.py) | Grader: `python3 test_problemas.py` or `python3 test_problemas.py soluciones` |
+| [Python lab](../simulator/README.en.md#code-lab) | The same 20 problems in the browser, with the same tests |
 
 ---
 

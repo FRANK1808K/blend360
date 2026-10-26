@@ -56,14 +56,7 @@ def run(module_name):
                 got = func(*args)
                 if got != expected:
                     raise AssertionError(f"{name}{args} → {got!r}, expected / se esperaba {expected!r}")
-            if name == "factorial":
-                try:
-                    func(-1)
-                    raise AssertionError("factorial(-1) should raise ValueError / debería lanzar ValueError")
-                except ValueError:
-                    pass
-            if name == "max_without_builtin":
-                _check_no_builtin(func)
+            _check_special(module, name)
         except NotImplementedError:
             pending += 1
             print(f"  ⏳ {name}: pending / pendiente")
@@ -77,6 +70,18 @@ def run(module_name):
     total = len(TESTS)
     print(f"\n{module_name}.py → {passed}/{total} correct / correctos, {failed} failed / con errores, {pending} pending / pendientes")
     return failed == 0 and pending == 0
+
+
+def _check_special(module, name):
+    """Extra checks beyond input → output (also used by the simulator's Python lab)."""
+    if name == "factorial":
+        try:
+            module.factorial(-1)
+        except ValueError:
+            return
+        raise AssertionError("factorial(-1) should raise ValueError / debería lanzar ValueError")
+    if name == "max_without_builtin":
+        _check_no_builtin(module.max_without_builtin)
 
 
 def _check_no_builtin(func):

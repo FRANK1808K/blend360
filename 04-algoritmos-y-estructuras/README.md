@@ -15,6 +15,7 @@
 | [problemas.py](problemas.py) | 20 problemas clásicos para resolver |
 | [soluciones.py](soluciones.py) | Soluciones explicadas, con complejidad |
 | [test_problemas.py](test_problemas.py) | Corrector: `python3 test_problemas.py` o `python3 test_problemas.py soluciones` |
+| [Laboratorio Python](../simulator/README.md#laboratorio-de-código) | Los mismos 20 problemas en el navegador, con las mismas pruebas |
 
 ---
 

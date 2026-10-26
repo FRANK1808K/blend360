@@ -13,6 +13,7 @@
 | [soluciones.py](soluciones.py) | Soluciones comentadas (ábrelas solo después de intentarlo) |
 | [test_ejercicios.py](test_ejercicios.py) | Corrector automático |
 | [pandas.md](pandas.md) | Análisis de datos con pandas (equivalencias con SQL) |
+| [Laboratorio Python](../simulator/README.md#laboratorio-de-código) | Los mismos 25 ejercicios en el navegador, con las mismas pruebas, sin instalar nada |
 
 ```bash
 cd 03-python

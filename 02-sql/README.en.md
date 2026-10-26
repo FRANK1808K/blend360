@@ -6,6 +6,9 @@
 
 **How to practice:**
 
+- **Nothing to install (recommended):** the [simulator's SQL lab](../simulator/README.en.md#code-lab) has these same 35 exercises. You write the query, run it, and it tells you whether the result is right; it works on your phone. It includes a **challenge of 5 queries in 60 minutes**.
+- **On your computer:**
+
 ```bash
 cd 02-sql
 python3 setup_db.py --shell      # creates practice.db and opens a SQL console
