@@ -1,5 +1,7 @@
 # Cheat sheets (quick review)
 
+🌐 [Español](README.md) · **English**
+
 | Cheat sheet | To review |
 |---|---|
 | [sql.en.md](sql.en.md) | Order of execution, JOINs, window functions and classic patterns |

@@ -1,5 +1,7 @@
 # Blend360 All Star: entrance exam preparation
 
+🌐 [Español](README.md) · **English**
+
 [![Checks](https://github.com/FRANK1808K/blend360/actions/workflows/checks.yml/badge.svg)](https://github.com/FRANK1808K/blend360/actions/workflows/checks.yml)
 ![Exam](https://img.shields.io/badge/exam-Dec%2018%2C%202026-0d6e66)
 ![AWS AIF-C01](https://img.shields.io/badge/AWS%20AIF--C01-Nov%2016%2C%202026-FF9900?logo=amazonwebservices&logoColor=white)
@@ -93,7 +95,7 @@ The CI pipeline ([`checks.yml`](.github/workflows/checks.yml)) verifies on every
 
 - The **36 SQL solutions** in both languages run and produce exactly the published "expected result" (`02-sql/check_solutions.py`).
 - The **25 Python solutions** and the **20 algorithm solutions** pass their tests.
-- The Markdown follows the style rules (`markdownlint`) and every internal link works.
+- The Markdown follows the style rules (`markdownlint`), every document has its twin in the other language and every internal link works (`scripts/check_docs.py`).
 
 ## Key dates
 

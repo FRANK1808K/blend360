@@ -1,5 +1,7 @@
 # 02 · SQL — De cero a nivel prueba técnica
 
+🌐 **Español** · [English](README.en.md)
+
 > SQL es probablemente **el tema con más peso** en una prueba de una empresa de analítica como Blend360. Aquí cubres todo lo que suele preguntarse: desde `SELECT` hasta funciones de ventana.
 
 **Cómo practicar:**

@@ -1,5 +1,7 @@
 # Mock technical exam #1: 90 minutes
 
+🌐 [Español](simulacro-tecnico-01.md) · **English**
+
 > **Instructions (like the real exam):**
 >
 > - **Time: 90 minutes.** Part 1: 40 multiple-choice questions (~50 min). Part 2: 3 coding problems (~40 min).

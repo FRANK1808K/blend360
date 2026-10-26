@@ -1,5 +1,7 @@
 # 02 · SQL — 35 ejercicios con solución
 
+🌐 **Español** · [English](ejercicios.en.md)
+
 > **Cómo usar este archivo:**
 >
 > 1. Ejecuta `python3 setup_db.py --shell` (o abre `practice.db` en DB Browser).

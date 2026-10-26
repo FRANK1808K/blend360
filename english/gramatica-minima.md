@@ -1,5 +1,7 @@
 # Gramática mínima para la prueba técnica
 
+🌐 **Español** · [English](gramatica-minima.en.md)
+
 > Solo lo que **realmente** aparece en enunciados técnicos y lo que necesitas para **explicar tu solución**. Ni más ni menos.
 
 ---

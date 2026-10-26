@@ -1,5 +1,7 @@
 # 🇬🇧 English for the Blend360 exam: de A2 a "funcional" en 8 semanas
 
+🌐 **Español** · [English](README.en.md)
+
 > **Tu situación:** nivel A2, examen técnico en inglés el **18 de diciembre**. En 8 semanas no vas a llegar a C1, ni hace falta. Lo que necesitas es:
 >
 > 1. **Leer y entender enunciados técnicos** sin bloquearte. Es lo **más importante** para la prueba escrita.

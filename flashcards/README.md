@@ -1,5 +1,7 @@
 # Flashcards (185 tarjetas para Anki)
 
+🌐 **Español** · [English](README.en.md)
+
 [`blend360-flashcards.csv`](blend360-flashcards.csv) tiene 185 tarjetas con 3 columnas: `front`, `back` y `tags`. El frente es el término o concepto en inglés y el reverso la explicación en español: cada tarjeta entrena a la vez tu inglés y el contenido técnico.
 
 | Tag | Tarjetas | Contenido |

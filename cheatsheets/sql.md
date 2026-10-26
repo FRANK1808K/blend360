@@ -1,5 +1,7 @@
 # Cheatsheet: SQL (1 página)
 
+🌐 **Español** · [English](sql.en.md)
+
 ```sql
 -- Orden de ESCRITURA                       -- Orden LÓGICO de ejecución
 SELECT DISTINCT col, AGG(x) AS a            -- 5 SELECT  6 DISTINCT

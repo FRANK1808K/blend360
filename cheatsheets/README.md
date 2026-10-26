@@ -1,5 +1,7 @@
 # Cheatsheets (repaso rápido)
 
+🌐 **Español** · [English](README.en.md)
+
 | Cheatsheet | Para repasar |
 |---|---|
 | [sql.md](sql.md) | Orden de ejecución, JOINs, ventanas y patrones clásicos |

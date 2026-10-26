@@ -1,5 +1,7 @@
 # Cheatsheet: AWS + bases de datos (1 página)
 
+🌐 **Español** · [English](aws-y-bases-de-datos.en.md)
+
 **Nube:** pago por uso, bajo demanda. **6 ventajas:** gasto variable en vez de fijo · economías de escala · dejar de adivinar la capacidad · velocidad y agilidad · no mantener centros de datos · global en minutos.
 **IaaS** (EC2) · **PaaS** (Elastic Beanstalk) · **SaaS** (QuickSight, Gmail). **Región** > **AZ** (1+ centros de datos) · **edge location** (CloudFront).
 **Responsabilidad compartida:** AWS = seguridad **DE** la nube (hardware, instalaciones). Cliente = seguridad **EN** la nube (datos, IAM, SO de EC2, security groups).

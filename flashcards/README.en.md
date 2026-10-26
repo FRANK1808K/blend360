@@ -1,5 +1,7 @@
 # Flashcards (185 Anki cards)
 
+🌐 [Español](README.md) · **English**
+
 [`blend360-flashcards.csv`](blend360-flashcards.csv) contains 185 cards with 3 columns: `front`, `back` and `tags`. The front is the English term or concept and the back is the Spanish explanation, so every card trains your English and the technical content at the same time.
 
 | Tag | Cards | Content |

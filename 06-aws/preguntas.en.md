@@ -1,5 +1,7 @@
 # 06c · AWS & data analytics: 30 practice questions
 
+🌐 [Español](preguntas.md) · **English**
+
 > Try to answer each question in **≤ 60 seconds**. If a word blocks you, look it up in the [technical vocabulary](../english/vocabulario-tecnico.en.md#aws-and-cloud). The answers and explanations are at the end.
 
 ---

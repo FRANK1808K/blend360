@@ -1,5 +1,7 @@
 # Cheatsheet: algoritmos y estructuras (1 página)
 
+🌐 **Español** · [English](algoritmos.en.md)
+
 **Big O (de mejor a peor):** O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ) < O(n!)
 Bucles seguidos → se **suman**. Bucles anidados → se **multiplican**. Dividir a la mitad en cada paso → **log n**.
 

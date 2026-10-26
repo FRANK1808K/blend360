@@ -1,5 +1,7 @@
 # Cheatsheet: Python + pandas (1 página)
 
+🌐 **Español** · [English](python.en.md)
+
 ```python
 # Strings
 s[::-1]; s.lower(); s.split(); ",".join(lst); s.strip(); s.replace(a, b); f"{x:.2f}"

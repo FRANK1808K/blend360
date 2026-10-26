@@ -1,5 +1,7 @@
 # Mock exams
 
+🌐 [Español](README.md) · **English**
+
 | Mock exam | Duration | Content | When to take it |
 |---|---|---|---|
 | [Technical #1](simulacro-tecnico-01.en.md) | 90 min | 40 multiple-choice questions (SQL, Python, algorithms, databases, AWS) + 3 coding problems | Week 6 (after studying every module) |

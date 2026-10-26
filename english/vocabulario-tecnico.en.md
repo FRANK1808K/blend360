@@ -1,5 +1,7 @@
 # Technical vocabulary EN → ES (by topic)
 
+🌐 [Español](vocabulario-tecnico.md) · **English**
+
 > Study **one topic per day** and add the words you did not know to Anki ([flashcards](../flashcards/README.en.md)). Words marked with 🔊 have a tricky pronunciation: the hint in quotes is written the way a Spanish speaker would read it. Listen to them on [YouGlish](https://youglish.com/) or in the [Cambridge Dictionary](https://dictionary.cambridge.org/).
 
 ## Contents

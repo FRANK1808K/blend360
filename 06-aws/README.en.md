@@ -1,5 +1,7 @@
 # 06 · What is AWS? Cloud fundamentals
 
+🌐 [Español](README.md) · **English**
+
 > **Why it matters so much for Blend360:** Blend360 is an **AWS Premier Tier Services Partner** (the highest tier for services partners). It holds AWS competencies in **Data & Analytics**, **Generative AI**, Financial Services, DevOps and Migration, and it is a *delivery partner* for **Amazon EMR** and **Amazon QuickSight**. In other words, much of its client work is built on AWS. See [what Blend360 evaluates](../guides/que-evalua-blend360.en.md).
 >
 > 💡 **Your advantage:** since you take the **AWS Certified AI Practitioner on November 16**, you will be studying much of this anyway. Your repository [AWS AI Practitioner in Spanish](https://github.com/FRANK1808K/AWS-IA-PRACTITIONER-EN-ESPA-OL) complements this module.

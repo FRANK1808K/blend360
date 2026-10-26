@@ -1,5 +1,7 @@
 # 05 · Databases: the theory that gets asked
 
+🌐 [Español](README.md) · **English**
+
 > SQL is the *language*; this module is the *theory*: modeling, keys, normalization, ACID, indexes, OLTP vs OLAP, NoSQL, data warehouse and data lake. These are typical multiple-choice and technical-interview questions.
 
 ---

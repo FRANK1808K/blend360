@@ -1,5 +1,7 @@
 # Cheat sheet: algorithms and data structures (1 page)
 
+🌐 [Español](algoritmos.md) · **English**
+
 **Big O (best to worst):** O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ) < O(n!)
 Sequential loops → **add**. Nested loops → **multiply**. Halving at each step → **log n**.
 

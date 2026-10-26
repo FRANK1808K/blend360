@@ -1,5 +1,7 @@
 # 06c · AWS y análisis de datos: 30 preguntas de práctica
 
+🌐 **Español** · [English](preguntas.en.md)
+
 > Las preguntas están **en inglés**, como en la prueba. Intenta responder en **≤ 60 segundos** cada una. **Primero intenta en inglés**; abre la traducción solo si te bloqueas y anota las palabras nuevas en tus [flashcards](../flashcards/README.md). Las respuestas y explicaciones están al final.
 
 ---

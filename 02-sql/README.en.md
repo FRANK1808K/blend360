@@ -1,5 +1,7 @@
 # 02 · SQL — from zero to technical-test level
 
+🌐 [Español](README.md) · **English**
+
 > SQL is probably **the heaviest topic** in a test from an analytics company like Blend360. This module covers everything that is usually asked, from `SELECT` to window functions.
 
 **How to practice:**

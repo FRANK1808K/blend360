@@ -1,5 +1,7 @@
 # 03 · Python — what you need for the technical test
 
+🌐 [Español](README.md) · **English**
+
 > According to candidate reports, Blend360's online test usually includes **Python (or R) programming problems together with SQL**, with limited time. There may also be multiple-choice questions such as "what does this code print?". This module covers both.
 
 **Material in this module:**

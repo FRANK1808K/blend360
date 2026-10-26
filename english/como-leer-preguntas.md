@@ -1,5 +1,7 @@
 # Cómo leer preguntas de examen en inglés (sin bloquearte)
 
+🌐 **Español** · [English](como-leer-preguntas.en.md)
+
 > En una prueba técnica, **una sola palabra** puede cambiar la respuesta: *NOT*, *EXCEPT*, *LEAST*, *at least*. Esta guía te enseña a encontrarlas y a no caer en los "falsos amigos".
 
 ---

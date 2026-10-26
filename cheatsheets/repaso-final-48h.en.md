@@ -1,5 +1,7 @@
 # Final review: the last 48 hours (December 16–17)
 
+🌐 [Español](repaso-final-48h.md) · **English**
+
 > **Golden rule:** the last 48 hours are **not** for learning new things. They are for **reviewing, resting and arriving with a fresh mind**.
 
 ## 48 hours before (December 16)

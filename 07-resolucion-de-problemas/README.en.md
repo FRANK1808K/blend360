@@ -1,5 +1,7 @@
 # 07 · Problem solving (+ logic, math and basic statistics)
 
+🌐 [Español](README.md) · **English**
+
 > In a test from a data company, "problem solving" usually mixes three things:
 >
 > 1. **Programming problems** that you must break down and solve.

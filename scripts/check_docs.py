@@ -1,0 +1,66 @@
+"""Checks the documentation / Verifica la documentación.
+
+1. Every Spanish file X.md has an English twin X.en.md (and vice versa).
+   Cada archivo en español X.md tiene su gemelo en inglés X.en.md (y viceversa).
+2. Every relative link points to an existing file and, if it has an #anchor, to an existing heading.
+   Cada enlace relativo apunta a un archivo existente y, si tiene #ancla, a un encabezado existente.
+
+Usage / Uso:  python3 scripts/check_docs.py
+"""
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SKIP = {"node_modules", ".git"}
+
+
+def markdown_files():
+    return sorted(p for p in ROOT.rglob("*.md") if not SKIP & set(p.parts))
+
+
+def slug(heading: str) -> str:
+    """GitHub-style anchor / ancla al estilo de GitHub."""
+    text = re.sub(r"`|\*\*|\*", "", heading.strip().lower())
+    text = re.sub(r"[^\w\- ]", "", text, flags=re.UNICODE)
+    return text.replace(" ", "-")
+
+
+def anchors(path: Path) -> set:
+    text = re.sub(r"```.*?```", "", path.read_text(encoding="utf-8"), flags=re.S)
+    return {slug(m.group(1)) for m in re.finditer(r"^#{1,6} (.+)$", text, flags=re.M)}
+
+
+def main() -> int:
+    errors = []
+    files = markdown_files()
+    names = {p.relative_to(ROOT).as_posix() for p in files}
+    for name in names:
+        twin = name[:-6] + ".md" if name.endswith(".en.md") else name[:-3] + ".en.md"
+        if twin not in names:
+            errors.append(f"{name}: missing twin / falta su gemelo {twin}")
+    cache = {}
+    for md in files:
+        text = re.sub(r"```.*?```", "", md.read_text(encoding="utf-8"), flags=re.S)
+        for link in re.findall(r"\]\(([^)\s]+)\)", text):
+            if link.startswith(("http://", "https://", "mailto:")):
+                continue
+            target_part, _, frag = link.partition("#")
+            target = (md.parent / target_part).resolve() if target_part else md.resolve()
+            rel = md.relative_to(ROOT)
+            if not target.exists():
+                errors.append(f"{rel}: broken link / enlace roto → {link}")
+                continue
+            if frag and target.suffix == ".md":
+                if target not in cache:
+                    cache[target] = anchors(target)
+                if frag not in cache[target]:
+                    errors.append(f"{rel}: missing anchor / ancla inexistente → {link}")
+    for e in sorted(errors):
+        print(e)
+    print(f"{len(files)} files checked / archivos revisados, {len(errors)} problems / problemas")
+    return 1 if errors else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

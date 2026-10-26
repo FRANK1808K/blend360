@@ -1,5 +1,7 @@
 # Simulacros
 
+🌐 **Español** · [English](README.en.md)
+
 | Simulacro | Duración | Contenido | Cuándo hacerlo |
 |---|---|---|---|
 | [Técnico #1](simulacro-tecnico-01.md) | 90 min | 40 preguntas de opción múltiple (SQL, Python, algoritmos, BD, AWS) + 3 problemas de código | Semana 6 (después de estudiar todos los módulos) |

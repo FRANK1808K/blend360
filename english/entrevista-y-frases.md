@@ -1,5 +1,7 @@
 # Entrevista y frases útiles (nivel A2 → B1)
 
+🌐 **Español** · [English](entrevista-y-frases.en.md)
+
 > Las respuestas modelo usan **frases cortas y simples a propósito**. En una entrevista técnica es mucho mejor decir algo simple y claro que una frase larga con errores. **Adapta, memoriza y practica en voz alta.**
 
 ---

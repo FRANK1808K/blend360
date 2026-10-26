@@ -1,5 +1,7 @@
 # How to read exam questions in English (without freezing)
 
+🌐 [Español](como-leer-preguntas.md) · **English**
+
 > In a technical test, **one single word** can change the answer: *NOT*, *EXCEPT*, *LEAST*, *at least*. This guide teaches you to spot them and to avoid "false friends".
 
 ---

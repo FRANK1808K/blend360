@@ -1,5 +1,7 @@
 # What does Blend360 evaluate? (research)
 
+🌐 [Español](que-evalua-blend360.md) · **English**
+
 > A summary of what is publicly known about the process, researched on **October 26, 2026**. The sources are candidate reviews and third-party guides, **not** official Blend360 information, and the format may change. Always confirm with your recruiter (see [questions for the recruiter](#5-questions-worth-asking-the-recruiter)).
 
 ---

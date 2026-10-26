@@ -1,5 +1,7 @@
 # Cheat sheet: AWS + databases (1 page)
 
+🌐 [Español](aws-y-bases-de-datos.md) · **English**
+
 **Cloud:** pay-as-you-go, on demand. **6 advantages:** variable instead of fixed expense · economies of scale · stop guessing capacity · speed and agility · stop maintaining data centers · go global in minutes.
 **IaaS** (EC2) · **PaaS** (Elastic Beanstalk) · **SaaS** (QuickSight, Gmail). **Region** > **AZ** (1+ data centers) · **edge location** (CloudFront).
 **Shared responsibility:** AWS = security **OF** the cloud (hardware, facilities). Customer = security **IN** the cloud (data, IAM, EC2 OS, security groups).

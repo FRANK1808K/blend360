@@ -1,5 +1,7 @@
 # Minimum grammar for the technical test
 
+🌐 [Español](gramatica-minima.md) · **English**
+
 > Only what **really** appears in technical statements, and what you need to **explain your solution**. No more, no less. Each example has its Spanish meaning so you can check that you understood.
 
 ---

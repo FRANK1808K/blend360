@@ -1,5 +1,7 @@
 # 04 · Algoritmos básicos y estructuras de datos
 
+🌐 **Español** · [English](README.en.md)
+
 > El temario dice **"habilidades en algoritmo básico, estructura de datos y resolución de problemas"**. En pruebas de 90 minutos esto suele aparecer de dos formas:
 >
 > 1. **Opción múltiple:** "¿cuál es la complejidad?", "¿qué estructura usarías?", "¿qué devuelve este pseudocódigo?".

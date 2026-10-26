@@ -1,10 +1,11 @@
 # Blend360 All Star: preparación para la prueba de ingreso
 
+🌐 **Español** · [English](README.en.md)
+
 [![Checks](https://github.com/FRANK1808K/blend360/actions/workflows/checks.yml/badge.svg)](https://github.com/FRANK1808K/blend360/actions/workflows/checks.yml)
 ![Examen](https://img.shields.io/badge/examen-18%20dic%202026-0d6e66)
 ![AWS AIF-C01](https://img.shields.io/badge/AWS%20AIF--C01-16%20nov%202026-FF9900?logo=amazonwebservices&logoColor=white)
-![Idioma](https://img.shields.io/badge/explicaciones-espa%C3%B1ol-c60b1e)
-![Preguntas](https://img.shields.io/badge/preguntas%20de%20pr%C3%A1ctica-en%20ingl%C3%A9s-1f4e79)
+![Idiomas](https://img.shields.io/badge/idiomas-Espa%C3%B1ol%20%7C%20English-1f4e79)
 
 Repositorio de estudio para la prueba del **programa All Star (semillero) de Blend360 en Colombia**:
 
@@ -13,7 +14,7 @@ Repositorio de estudio para la prueba del **programa All Star (semillero) de Ble
 | **Razonamiento abstracto** | 30 min | Series de figuras, matrices, dominós, series numéricas y de letras |
 | **Prueba técnica** (en inglés) | 90 min | SQL · Python · qué es AWS y análisis de datos en AWS · algoritmos básicos · bases de datos · estructuras de datos · resolución de problemas |
 
-Todo el material se explica **en español**, pero los ejercicios y simulacros vienen **en inglés**, como en la prueba real, con un módulo de inglés técnico para nivel A2. Las soluciones de código están **verificadas automáticamente**.
+Cada documento existe **en español y en inglés**. Los ejercicios y simulacros vienen **en inglés**, como en la prueba real, con la **traducción al español escondida debajo de cada pregunta** para cuando te bloquees. Además hay un módulo de inglés técnico para nivel A2. Las soluciones de código están **verificadas automáticamente**.
 
 > **Aviso:** material de estudio comunitario, **no oficial** y sin relación con Blend360. Las preguntas son originales. Lo que se sabe del proceso viene de reseñas públicas de candidatos ([ver investigación](guides/que-evalua-blend360.md)).
 
@@ -28,6 +29,14 @@ Todo el material se explica **en español**, pero los ejercicios y simulacros vi
 | 🧪 **Quiero medir mi nivel ya** | [Simulador interactivo](simulator/README.md) · [Simulacro técnico](simulacros/simulacro-tecnico-01.md) · [Simulacro de razonamiento](simulacros/simulacro-razonamiento-01.md) |
 | 🇬🇧 **Mi inglés es A2 y me preocupa** | [Plan de inglés](english/README.md) → [cómo leer preguntas en inglés](english/como-leer-preguntas.md) |
 | ⏰ **El examen es en 2 días** | [Repaso final de 48 h](cheatsheets/repaso-final-48h.md) + [cheatsheets](cheatsheets/README.md) |
+
+## Cómo usar los dos idiomas
+
+1. **Aprende** cada tema primero en español (esta versión).
+2. **Relee** la misma sección en inglés ([English](README.en.md)). Como ya conoces el contenido, aprendes las palabras en inglés en contexto.
+3. **Practica** siempre en inglés. Abre la traducción al español solo cuando te bloquees, y anota las palabras que no sabías en tus [flashcards](flashcards/README.md).
+
+> Cada archivo `X.md` (español) tiene su gemelo `X.en.md` (inglés). Arriba de cada documento está el selector 🌐 para cambiar de idioma.
 
 ## Módulos
 
@@ -75,7 +84,7 @@ blend360/
 ├── 07-resolucion-de-problemas/ Método, lógica, estadística, casos
 ├── english/                    Inglés técnico para A2
 ├── simulacros/                 Simulacro técnico (90 min) + razonamiento (30 min)
-├── simulator/                  Simulador interactivo con cronómetro
+├── simulator/                  Simulador interactivo con cronómetro (ES/EN)
 ├── cheatsheets/                Repasos de una página + plan de 48 h
 └── flashcards/                 185 tarjetas para Anki
 ```
@@ -84,9 +93,9 @@ blend360/
 
 La CI ([`checks.yml`](.github/workflows/checks.yml)) verifica en cada cambio que:
 
-- Las **36 soluciones SQL** se ejecutan y producen exactamente el "resultado esperado" publicado (`02-sql/check_solutions.py`).
+- Las **36 soluciones SQL**, en los dos idiomas, se ejecutan y producen exactamente el "resultado esperado" publicado (`02-sql/check_solutions.py`).
 - Las **25 soluciones de Python** y los **20 problemas de algoritmos** pasan sus pruebas.
-- El Markdown cumple las reglas de estilo (`markdownlint`).
+- El Markdown cumple las reglas de estilo (`markdownlint`), cada documento tiene su versión en el otro idioma y todos los enlaces internos funcionan (`scripts/check_docs.py`).
 
 ## Fechas clave
 

@@ -1,5 +1,7 @@
 # 03b · pandas for data analysis
 
+🌐 [Español](pandas.md) · **English**
+
 > Blend360 is a **data analytics** company: in the test (or in the technical interview) you may be asked to clean, aggregate or join data in Python. pandas is the standard tool for that. If you already know SQL, pandas is the same thing with a different syntax.
 
 **Runnable practice:** [`pandas_practica.py`](pandas_practica.py) solves several questions from the SQL module in pandas, using the same database:

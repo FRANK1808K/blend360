@@ -1,5 +1,7 @@
 # 06b · Análisis de datos en AWS ⭐
 
+🌐 **Español** · [English](analisis-de-datos.en.md)
+
 > Este es el corazón del trabajo de Blend360 con AWS: **construir plataformas de datos y analítica para clientes**. Blend tiene la competencia **AWS Data & Analytics** y es *delivery partner* de **Amazon EMR** y **Amazon QuickSight**, así que esos servicios merecen atención especial.
 
 ---

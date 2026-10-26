@@ -1,5 +1,7 @@
 # Repaso final: últimas 48 horas (16–17 de diciembre)
 
+🌐 **Español** · [English](repaso-final-48h.en.md)
+
 > **Regla de oro:** las últimas 48 horas **no** son para aprender cosas nuevas. Son para **repasar, descansar y llegar con la mente fresca**.
 
 ## 48 horas antes (16 de diciembre)

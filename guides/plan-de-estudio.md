@@ -1,5 +1,7 @@
 # Plan de estudio: 26 de octubre → 18 de diciembre de 2026
 
+🌐 **Español** · [English](plan-de-estudio.en.md)
+
 > **Dos exámenes, un solo plan.**
 >
 > - 🟧 **16 de noviembre (lunes):** AWS Certified AI Practitioner (AIF-C01).

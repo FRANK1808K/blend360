@@ -1,5 +1,7 @@
 # 01 · Abstract reasoning: 50 exercises with solutions
 
+🌐 [Español](ejercicios.md) · **English**
+
 > **How to practice:** use a timer. Goal: **≤ 60 s per exercise**. Write down your answer and check the solutions at the **end of each section**. For "real" (drawn) figures, also use the [simulator](../simulator/README.en.md).
 
 ---

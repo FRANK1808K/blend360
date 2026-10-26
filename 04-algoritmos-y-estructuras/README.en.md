@@ -1,5 +1,7 @@
 # 04 · Basic algorithms and data structures
 
+🌐 [Español](README.md) · **English**
+
 > The syllabus says **"skills in basic algorithms, data structures and problem solving"**. In 90-minute tests this usually shows up in two ways:
 >
 > 1. **Multiple choice:** "what is the complexity?", "which data structure would you use?", "what does this pseudocode return?".

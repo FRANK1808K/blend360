@@ -1,5 +1,7 @@
 # Interview and useful phrases (A2 → B1 level)
 
+🌐 [Español](entrevista-y-frases.md) · **English**
+
 > The model answers use **short, simple sentences on purpose**. In a technical interview, saying something simple and clear is much better than a long sentence with mistakes. **Adapt them, memorize them and practice out loud.**
 
 ---

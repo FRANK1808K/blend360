@@ -1,5 +1,7 @@
 # Ejercicios de inglés técnico (con respuestas)
 
+🌐 **Español** · [English](ejercicios-ingles.en.md)
+
 > Hazlos **sin traductor**. Las respuestas están al final de cada sección.
 
 ---

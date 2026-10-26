@@ -1,5 +1,7 @@
 # 01 · Razonamiento abstracto: 50 ejercicios con solución
 
+🌐 **Español** · [English](ejercicios.en.md)
+
 > **Cómo practicar:** cronómetro en mano. Meta: **≤ 60 s por ejercicio**. Anota tu respuesta y revisa las soluciones al **final de cada sección**. Para figuras "reales" (dibujadas), usa también el [simulador](../simulator/index.html).
 >
 > Las instrucciones vienen en inglés y español para que te acostumbres: *"Which option comes next in the sequence?"* = ¿Qué opción sigue en la secuencia?

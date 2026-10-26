@@ -1,5 +1,7 @@
 # 01 · Razonamiento abstracto (30 minutos)
 
+🌐 **Español** · [English](README.en.md)
+
 > Un candidato que presentó el proceso de Blend360 en **Bogotá (mayo de 2026)** reportó pruebas de **lógica y razonamiento abstracto "bastante exigentes"**. La buena noticia es que el razonamiento abstracto **se entrena**: hay pocos tipos de reglas y se repiten. Si aprendes a reconocerlas, vas a ir mucho más rápido.
 
 | Archivo | Contenido |

@@ -1,5 +1,7 @@
 # 05 · Bases de datos: teoría que preguntan
 
+🌐 **Español** · [English](README.en.md)
+
 > SQL es el *lenguaje*; este módulo es la *teoría*: modelado, llaves, normalización, ACID, índices, OLTP vs OLAP, NoSQL, data warehouse y data lake. Son preguntas típicas de opción múltiple y de entrevista técnica.
 
 ---

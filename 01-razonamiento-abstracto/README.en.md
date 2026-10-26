@@ -1,5 +1,7 @@
 # 01 · Abstract reasoning (30 minutes)
 
+🌐 [Español](README.md) · **English**
+
 > A candidate who went through the Blend360 process in **Bogotá (May 2026)** reported **logic and abstract reasoning tests that were "quite demanding"**. The good news: abstract reasoning **can be trained**. There are only a few types of rules and they repeat. Once you learn to recognize them, you get much faster.
 
 | File | Content |

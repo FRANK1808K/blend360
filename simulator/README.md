@@ -1,5 +1,7 @@
 # Simulador interactivo: Simulacro 30·90
 
+🌐 **Español** · [English](README.en.md)
+
 Simulador en el navegador para las dos partes de la prueba, disponible en **español e inglés** (botón ES/EN arriba):
 
 | Modo | Preguntas | Tiempo | Contenido |

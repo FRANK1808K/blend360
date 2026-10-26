@@ -1,5 +1,7 @@
 # Simulacro técnico #1: 90 minutos
 
+🌐 **Español** · [English](simulacro-tecnico-01.en.md)
+
 > **Instrucciones (como en el examen real):**
 >
 > - **Tiempo: 90 minutos.** Parte 1: 40 preguntas de opción múltiple (~50 min). Parte 2: 3 problemas de código (~40 min).

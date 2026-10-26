@@ -1,5 +1,7 @@
 # Vocabulario técnico EN → ES (por tema)
 
+🌐 **Español** · [English](vocabulario-tecnico.en.md)
+
 > Estudia **un tema por día** y pasa a Anki las palabras que no sabías ([flashcards](../flashcards/README.md)). Las palabras marcadas con 🔊 tienen una pronunciación engañosa; escúchalas en [YouGlish](https://youglish.com/) o en el [Cambridge Dictionary](https://dictionary.cambridge.org/).
 
 ## Índice

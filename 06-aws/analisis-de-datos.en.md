@@ -1,5 +1,7 @@
 # 06b · Data analytics on AWS ⭐
 
+🌐 [Español](analisis-de-datos.md) · **English**
+
 > This is the core of Blend360's work with AWS: **building data and analytics platforms for clients**. Blend holds the **AWS Data & Analytics** competency and is a *delivery partner* for **Amazon EMR** and **Amazon QuickSight**, so those services deserve special attention.
 
 ---

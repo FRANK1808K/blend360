@@ -126,6 +126,12 @@ pre.code { margin: 0; background: var(--paper); border: 1px solid var(--rule); b
 .pill.ok { background: var(--ok-bg); color: var(--ok); }
 .pill.no { background: var(--bad-bg); color: var(--bad); }
 .note { font-size: 0.85rem; color: var(--muted); max-width: 70ch; }
+.langsw { display: inline-flex; border: 1.5px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.langsw button { border: 0; background: var(--card); padding: 6px 10px; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+.langsw button.on { background: var(--ink); color: var(--card); }
+.trbtn { justify-self: start; font-size: 0.9rem; padding: 7px 12px; }
+.tr { border-left: 4px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--card)); padding: 10px 14px; border-radius: 0 6px 6px 0; display: grid; gap: 6px; }
+.tropts { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 2px; }
 @media (max-width: 520px) {
   .options { grid-template-columns: 1fr; }
   .options.visual { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
@@ -238,6 +244,68 @@ function matrixSVG(cells) { // cells: 9 items {shape, fill} or null para "?"
 }
 const single = (shape, fill) => svg(shapeSVG(shape, 50, 50, 32, fill));
 
+// ---------------------------------------------------------------- idioma / language
+// Los textos bilingües son objetos {es, en}; tx() elige el del idioma activo.
+let LANG = (() => { try { return localStorage.getItem("sim3090-lang") === "en" ? "en" : "es"; } catch { return "es"; } })();
+const tx = v => (v && typeof v === "object" && "es" in v ? v[LANG] : v);
+const T = {
+  es: {
+    eyebrow: "Prueba de ingreso · 30 + 90 minutos",
+    hero: "Entrena las dos partes del examen: <strong>razonamiento abstracto (30 min)</strong> y la <strong>parte técnica</strong> (SQL, Python, algoritmos, bases de datos y AWS). Las preguntas técnicas están en inglés, como en la prueba real, con un botón para ver la traducción. Las figuras se generan al azar, así que cada intento es distinto.",
+    absMeta: "30 preguntas · 30:00", absDesc: "Series, dominós D-48, matrices 3×3, rotaciones y figuras con dos reglas. La dificultad aumenta.",
+    techMeta: "40 preguntas · 50:00", techDesc: "Parte 1 del examen técnico, en inglés. Después, practica la parte de código con los problemas del repositorio.",
+    start: "Empezar simulacro", pracTitle: "Práctica por tema", pracMeta: "Sin tiempo · retroalimentación inmediata", practice: "Practicar",
+    pracTopic: "Tema de práctica", tVisual: "Figuras (visual)", tSeries: "Series y dominós",
+    sample: "Ejemplo de pregunta", another: "Otra figura", seeAnswer: "Ver respuesta",
+    lastTitle: "Tus últimos intentos", noHist: "Aún no hay intentos guardados en este navegador. Al terminar un simulacro, tu puntaje aparece aquí.",
+    note: "Material de estudio no oficial, creado para practicar. No contiene preguntas reales de ningún examen.",
+    answered: "respondidas", finish: "Terminar", question: (i, n) => `Pregunta ${i} de ${n}`, prev: "← Anterior", next: "Siguiente →",
+    flag: "Marcar para revisar", unflag: "Quitar marca", finishSee: "Terminar y ver resultado", goTo: "Ir a la pregunta",
+    shortcuts: "Atajos: teclas A–D o 1–4 para responder, ← y → para moverte, T para ver la traducción. Si no ves la regla en 60 segundos: marca, responde algo y sigue.",
+    blank: n => `Hay ${n} sin responder. ¿Terminar igual?`, home: "← Inicio", correctCount: "correctas",
+    right: "Correcto.", wrong: k => `Incorrecto. La respuesta es ${k}.`, nextQ: "Siguiente pregunta →",
+    timeUp: " · se acabó el tiempo", timeUsed: "Tiempo usado", byTopic: "Resultado por tema", repeat: "Repetir con preguntas nuevas",
+    backHome: "Volver al inicio", review: "Revisión pregunta por pregunta", ok: "Bien", ko: "Mal", yourAns: "Tu respuesta",
+    unanswered: "sin responder", correctAns: "Correcta",
+    v1: "Excelente: estás listo para este bloque.", v2: "Bien. Repasa los temas más bajos y repite en 2–3 días.",
+    v3: "Todavía en construcción. Vuelve a los módulos de los temas con menor puntaje.",
+    showTr: "Ver traducción", hideTr: "Ocultar traducción", trLabel: "Traducción al español", langLabel: "Idioma",
+    modes: { abstract: "Razonamiento abstracto", tech: "Técnico: opción múltiple" },
+  },
+  en: {
+    eyebrow: "Entrance test · 30 + 90 minutes",
+    hero: "Train for both parts of the exam: <strong>abstract reasoning (30 min)</strong> and the <strong>technical part</strong> (SQL, Python, algorithms, databases and AWS). The technical questions are in English, like the real test, with a button to see the Spanish translation. The figures are randomly generated, so every attempt is different.",
+    absMeta: "30 questions · 30:00", absDesc: "Series, D-48 dominoes, 3×3 matrices, rotations and two-rule figures. Difficulty increases.",
+    techMeta: "40 questions · 50:00", techDesc: "Part 1 of the technical exam. Afterwards, practice the coding part with the problems in the repository.",
+    start: "Start mock exam", pracTitle: "Practice by topic", pracMeta: "No timer · immediate feedback", practice: "Practice",
+    pracTopic: "Practice topic", tVisual: "Figures (visual)", tSeries: "Series and dominoes",
+    sample: "Sample question", another: "Another figure", seeAnswer: "See the answer",
+    lastTitle: "Your latest attempts", noHist: "No attempts saved in this browser yet. When you finish a mock exam, your score appears here.",
+    note: "Unofficial study material created for practice. It contains no real exam questions.",
+    answered: "answered", finish: "Finish", question: (i, n) => `Question ${i} of ${n}`, prev: "← Previous", next: "Next →",
+    flag: "Flag for review", unflag: "Remove flag", finishSee: "Finish and see results", goTo: "Go to question",
+    shortcuts: "Shortcuts: keys A–D or 1–4 to answer, ← and → to move, T to show the translation. If you do not see the rule in 60 seconds: flag it, answer something and move on.",
+    blank: n => `${n} unanswered. Finish anyway?`, home: "← Home", correctCount: "correct",
+    right: "Correct.", wrong: k => `Incorrect. The answer is ${k}.`, nextQ: "Next question →",
+    timeUp: " · time is up", timeUsed: "Time used", byTopic: "Result by topic", repeat: "Retry with new questions",
+    backHome: "Back to home", review: "Question-by-question review", ok: "Right", ko: "Wrong", yourAns: "Your answer",
+    unanswered: "unanswered", correctAns: "Correct",
+    v1: "Excellent: you are ready for this part.", v2: "Good. Review your weakest topics and try again in 2–3 days.",
+    v3: "Still building up. Go back to the modules of your lowest-scoring topics.",
+    showTr: "Show Spanish translation", hideTr: "Hide translation", trLabel: "Spanish translation", langLabel: "Language",
+    modes: { abstract: "Abstract reasoning", tech: "Technical: multiple choice" },
+  },
+};
+const t = k => T[LANG][k];
+function setLang(l) {
+  LANG = l;
+  try { localStorage.setItem("sim3090-lang", l); } catch { /* sin almacenamiento */ }
+  document.documentElement.lang = l;
+  render();
+}
+const CW = { es: ["horario", "antihorario"], en: ["clockwise", "counterclockwise"] };
+const dirTxt = (s, l) => CW[l][s > 0 ? 0 : 1];
+
 // ---------------------------------------------------------------- generadores de razonamiento abstracto
 // Cada generador devuelve {topic, prompt, es, seq|matrix|text, options:[{svg|text}], answer, explain}
 function finish(q, correct, distractors) {
@@ -251,23 +319,29 @@ function finish(q, correct, distractors) {
   return q;
 }
 const NEXT = { prompt: "Which figure comes next in the sequence?", es: "¿Qué figura sigue en la secuencia?" };
+const TOP = {
+  rot: { es: "Rotación", en: "Rotation" }, cnt: { es: "Cantidad", en: "Amount" }, two: { es: "Dos reglas", en: "Two rules" },
+  pos: { es: "Posición", en: "Position" }, sides: { es: "Lados", en: "Sides" }, mat: { es: "Matriz", en: "Matrix" },
+  dom: { es: "Dominó", en: "Domino" }, num: { es: "Serie numérica", en: "Number series" }, let: { es: "Serie de letras", en: "Letter series" },
+};
 
 function genRotation() {
   const step = pick([45, 90, 135]) * pick([1, -1]), start = rand(0, 7) * 45, draw = pick([arrowSVG, flagSVG]);
   const ang = i => mod(start + i * step, 360);
   const mk = a => ({ key: mod(a, 360), svg: draw(mod(a, 360)) });
   const ans = ang(4);
-  const q = { topic: "Rotación", ...NEXT, seq: [0, 1, 2, 3].map(i => draw(ang(i))),
-    explain: `La figura gira ${Math.abs(step)}° en sentido ${step > 0 ? "horario" : "antihorario"} en cada paso.` };
+  const q = { topic: TOP.rot, ...NEXT, seq: [0, 1, 2, 3].map(i => draw(ang(i))),
+    explain: { es: `La figura gira ${Math.abs(step)}° en sentido ${dirTxt(step, "es")} en cada paso.`,
+               en: `The figure rotates ${Math.abs(step)}° ${dirTxt(step, "en")} at each step.` } };
   return finish(q, mk(ans), shuffle([mk(ans + step), mk(ans - step), mk(ans + 180), mk(ans + 90), mk(ans - 90), mk(ans + 45)]));
 }
 function genCount() {
   const shape = pick(["circle", "square", "triangle", "star"]), start = rand(1, 3), step = pick([1, 2]);
   const other = pick(["circle", "square", "triangle", "star"].filter(s => s !== shape));
-  const ans = start + 4 * step;
+  const ans = start + 4 * step, list = [0, 1, 2, 3].map(i => start + i * step).join(", ");
   const mk = (n, s = shape) => ({ key: n + s, svg: countSVG(n, s) });
-  const q = { topic: "Cantidad", ...NEXT, seq: [0, 1, 2, 3].map(i => countSVG(start + i * step, shape)),
-    explain: `La cantidad aumenta +${step} en cada paso: ${[0, 1, 2, 3].map(i => start + i * step).join(", ")}, ${ans}.` };
+  const q = { topic: TOP.cnt, ...NEXT, seq: [0, 1, 2, 3].map(i => countSVG(start + i * step, shape)),
+    explain: { es: `La cantidad aumenta +${step} en cada paso: ${list}, ${ans}.`, en: `The amount increases by ${step} at each step: ${list}, ${ans}.` } };
   return finish(q, mk(ans), shuffle([mk(ans - 1), mk(ans + 1), mk(ans, other), mk(ans - step)]));
 }
 function genTwoRules() {
@@ -275,8 +349,10 @@ function genTwoRules() {
   const ang = i => mod(start + i * step, 360);
   const mk = (a, f) => ({ key: mod(a, 360) + f, svg: arrowSVG(mod(a, 360), f) });
   const ans = mk(ang(4), fills[0]);
-  const q = { topic: "Dos reglas", ...NEXT, seq: [0, 1, 2, 3].map(i => arrowSVG(ang(i), fills[i % 2])),
-    explain: `Dos reglas a la vez: la flecha gira 90° en sentido ${step > 0 ? "horario" : "antihorario"} y el círculo alterna ${fills[0] === "black" ? "negro/blanco" : "blanco/negro"}.` };
+  const bw = fills[0] === "black";
+  const q = { topic: TOP.two, ...NEXT, seq: [0, 1, 2, 3].map(i => arrowSVG(ang(i), fills[i % 2])),
+    explain: { es: `Dos reglas a la vez: la flecha gira 90° en sentido ${dirTxt(step, "es")} y el círculo alterna ${bw ? "negro/blanco" : "blanco/negro"}.`,
+               en: `Two rules at once: the arrow rotates 90° ${dirTxt(step, "en")} and the circle alternates ${bw ? "black/white" : "white/black"}.` } };
   return finish(q, ans, [mk(ang(4), fills[1]), mk(ang(3), fills[0]), mk(ang(3), fills[1]), mk(ang(4) + 180, fills[0])]);
 }
 function genPosition() {
@@ -284,25 +360,27 @@ function genPosition() {
   const pos = i => BORDER[mod(start + i * step, 8)];
   const mk = p => ({ key: p.join(), svg: gridDotSVG(p) });
   const ans = pos(4);
-  const q = { topic: "Posición", ...NEXT, seq: [0, 1, 2, 3].map(i => gridDotSVG(pos(i))),
-    explain: `El punto avanza ${Math.abs(step)} casilla(s) por el borde en sentido ${step > 0 ? "horario" : "antihorario"}.` };
+  const q = { topic: TOP.pos, ...NEXT, seq: [0, 1, 2, 3].map(i => gridDotSVG(pos(i))),
+    explain: { es: `El punto avanza ${Math.abs(step)} casilla(s) por el borde en sentido ${dirTxt(step, "es")}.`,
+               en: `The dot moves ${Math.abs(step)} cell(s) along the border, ${dirTxt(step, "en")}.` } };
   return finish(q, mk(ans), shuffle([mk(pos(5)), mk(pos(3)), mk([1, 1]), mk(BORDER[mod(start + 4 * step + 4, 8)]), mk(pos(6))]));
 }
 function genSides() {
-  const start = rand(3, 4), ans = start + 4;
+  const start = rand(3, 4), ans = start + 4, list = [0, 1, 2, 3].map(i => start + i).join(", ");
   const mk = n => ({ key: n, svg: polygonSVG(n) });
-  const q = { topic: "Lados", ...NEXT, seq: [0, 1, 2, 3].map(i => polygonSVG(start + i)),
-    explain: `Cada figura tiene un lado más: ${[0, 1, 2, 3].map(i => start + i).join(", ")} → ${ans} lados.` };
+  const q = { topic: TOP.sides, ...NEXT, seq: [0, 1, 2, 3].map(i => polygonSVG(start + i)),
+    explain: { es: `Cada figura tiene un lado más: ${list} → ${ans} lados.`, en: `Each figure has one more side: ${list} → ${ans} sides.` } };
   return finish(q, mk(ans), shuffle([mk(ans - 1), mk(ans + 1), mk(0), mk(start)]));
 }
 function genQuadrant() {
   const dir = pick([1, -1]), start = rand(0, 3);
   const quad = i => mod(start + i * dir, 4);
   const mk = qd => ({ key: qd, svg: quadrantSVG(qd) });
-  const q = { topic: "Rotación", ...NEXT, seq: [0, 1, 2, 3, 4].map(i => quadrantSVG(quad(i))),
-    explain: `El cuarto negro gira 90° en sentido ${dir > 0 ? "horario" : "antihorario"} en cada paso.` };
+  const q = { topic: TOP.rot, ...NEXT, seq: [0, 1, 2, 3, 4].map(i => quadrantSVG(quad(i))),
+    explain: { es: `El cuarto negro gira 90° en sentido ${dirTxt(dir, "es")} en cada paso.`, en: `The black quarter rotates 90° ${dirTxt(dir, "en")} at each step.` } };
   return finish(q, mk(quad(5)), shuffle([0, 1, 2, 3].filter(x => x !== quad(5)).map(mk)));
 }
+const MATRIX_Q = { prompt: "Which figure completes the matrix?", es: "¿Qué figura completa la matriz?" };
 function genMatrix() {
   const shapes = shuffle(["circle", "square", "triangle", "diamond", "star"]).slice(0, 4), fills = shuffle(["white", "black", "striped"]);
   const cells = [];
@@ -310,8 +388,9 @@ function genMatrix() {
   const ans = cells[8]; cells[8] = null;
   const mk = (s, f) => ({ key: s + f, svg: single(s, f) });
   const otherFill = fills.filter(f => f !== ans.fill);
-  const q = { topic: "Matriz", prompt: "Which figure completes the matrix?", es: "¿Qué figura completa la matriz?", matrix: matrixSVG(cells),
-    explain: "La forma es constante en cada fila y el relleno es constante en cada columna (blanco, negro o rayado)." };
+  const q = { topic: TOP.mat, ...MATRIX_Q, matrix: matrixSVG(cells),
+    explain: { es: "La forma es constante en cada fila y el relleno es constante en cada columna (blanco, negro o rayado).",
+               en: "The shape is constant in each row and the fill is constant in each column (white, black or striped)." } };
   return finish(q, mk(ans.shape, ans.fill), shuffle([mk(ans.shape, otherFill[0]), mk(ans.shape, otherFill[1]), mk(shapes[1], ans.fill), mk(shapes[3], ans.fill), mk(shapes[0], otherFill[0])]));
 }
 function genLatin() {
@@ -320,135 +399,244 @@ function genLatin() {
   const cells = rows.flat().map(s => ({ shape: s, fill }));
   const ans = cells[8]; cells[8] = null;
   const mk = (s, f = fill) => ({ key: s + f, svg: single(s, f) });
-  const q = { topic: "Matriz", prompt: "Which figure completes the matrix?", es: "¿Qué figura completa la matriz?", matrix: matrixSVG(cells),
-    explain: "Cada fila y cada columna contiene las tres formas una sola vez (como un sudoku)." };
+  const q = { topic: TOP.mat, ...MATRIX_Q, matrix: matrixSVG(cells),
+    explain: { es: "Cada fila y cada columna contiene las tres formas una sola vez (como un sudoku).",
+               en: "Each row and each column contains the three shapes exactly once (like a sudoku)." } };
   return finish(q, mk(ans.shape), shuffle([mk(base[0]), mk(base[2]), mk(shapes[3]), mk(ans.shape, fill === "white" ? "black" : "white")]));
 }
 function genDomino() {
-  const ts = pick([1, -1, 2, -2]), bs = pick([1, -1, 2, 0, -2].filter(x => x !== 0 || ts !== 0)), t0 = rand(0, 6), b0 = rand(0, 6);
+  const ts = pick([1, -1, 2, -2]), bs = pick([1, -1, 2, 0, -2]), t0 = rand(0, 6), b0 = rand(0, 6);
   const tile = i => [mod(t0 + i * ts, 7), mod(b0 + i * bs, 7)];
   const [at, ab] = tile(4);
-  const mk = (t, b) => ({ key: `${t}-${b}`, svg: dominoSVG(t, b) });
+  const mk = (top, b) => ({ key: `${top}-${b}`, svg: dominoSVG(top, b) });
   const fmt = s => (s > 0 ? "+" : "") + s;
-  const q = { topic: "Dominó", prompt: "Which domino comes next? (values 0–6, after 6 comes 0)", es: "¿Qué ficha sigue? (valores 0–6; después del 6 viene el 0)",
+  const q = { topic: TOP.dom, prompt: "Which domino comes next? (values 0–6, after 6 comes 0)", es: "¿Qué ficha sigue? (valores 0–6; después del 6 viene el 0)",
     seq: [0, 1, 2, 3].map(i => dominoSVG(...tile(i))),
-    explain: `Mitad superior ${fmt(ts)} y mitad inferior ${bs === 0 ? "constante" : fmt(bs)}, de forma circular (6 → 0).` };
+    explain: { es: `Mitad superior ${fmt(ts)} y mitad inferior ${bs === 0 ? "constante" : fmt(bs)}, de forma circular (6 → 0).`,
+               en: `Top half ${fmt(ts)} and bottom half ${bs === 0 ? "constant" : fmt(bs)}, circularly (6 → 0).` } };
   return finish(q, mk(at, ab), shuffle([mk(ab, at), mk(at, mod(ab + 1, 7)), mk(mod(at + 1, 7), ab), mk(mod(at - 1, 7), ab), mk(at, mod(ab - 1, 7))]));
 }
 function genNumber() {
   const type = pick(["arit", "geo", "alt", "dif", "fib", "sq"]);
   let seq, ans, why;
-  if (type === "arit") { const a = rand(1, 20), d = pick([3, 4, 6, 7, 9, 11, -3, -5]); seq = [0, 1, 2, 3, 4].map(i => a + (d < 0 ? 60 : 0) + i * d); ans = seq[4] + d; why = `Suma ${d} en cada paso.`; }
-  else if (type === "geo") { const a = rand(1, 5), r = pick([2, 3]); seq = [0, 1, 2, 3, 4].map(i => a * r ** i); ans = seq[4] * r; why = `Multiplica por ${r}.`; }
-  else if (type === "alt") { const a = rand(2, 12), p = rand(4, 9), m = rand(1, 3); seq = [a]; for (let i = 1; i < 6; i++) seq.push(i % 2 ? seq[i - 1] + p : seq[i - 1] - m); ans = seq[5] + p; why = `Alterna +${p} y −${m}.`; }
-  else if (type === "dif") { const a = rand(1, 10), d0 = rand(1, 3); seq = [a]; for (let i = 0; i < 4; i++) seq.push(seq[i] + d0 + i); ans = seq[4] + d0 + 4; why = `Las diferencias crecen de 1 en 1: +${d0}, +${d0 + 1}, +${d0 + 2}…`; }
-  else if (type === "fib") { const a = rand(1, 3), b = rand(2, 5); seq = [a, b]; for (let i = 2; i < 6; i++) seq.push(seq[i - 1] + seq[i - 2]); ans = seq[4] + seq[5]; why = "Cada número es la suma de los dos anteriores."; }
-  else { const off = pick([0, 1, -1, 2]); seq = [1, 2, 3, 4, 5].map(n => n * n + off); ans = 36 + off; why = `Cuadrados perfectos (1, 4, 9, 16, 25…)${off ? (off > 0 ? " más " : " menos ") + Math.abs(off) : ""}.`; }
+  if (type === "arit") { const a = rand(1, 20), d = pick([3, 4, 6, 7, 9, 11, -3, -5]); seq = [0, 1, 2, 3, 4].map(i => a + (d < 0 ? 60 : 0) + i * d); ans = seq[4] + d; why = { es: `Suma ${d} en cada paso.`, en: `Add ${d} at each step.` }; }
+  else if (type === "geo") { const a = rand(1, 5), r = pick([2, 3]); seq = [0, 1, 2, 3, 4].map(i => a * r ** i); ans = seq[4] * r; why = { es: `Multiplica por ${r}.`, en: `Multiply by ${r}.` }; }
+  else if (type === "alt") { const a = rand(2, 12), p = rand(4, 9), m = rand(1, 3); seq = [a]; for (let i = 1; i < 6; i++) seq.push(i % 2 ? seq[i - 1] + p : seq[i - 1] - m); ans = seq[5] + p; why = { es: `Alterna +${p} y −${m}.`, en: `Alternates +${p} and −${m}.` }; }
+  else if (type === "dif") { const a = rand(1, 10), d0 = rand(1, 3); seq = [a]; for (let i = 0; i < 4; i++) seq.push(seq[i] + d0 + i); ans = seq[4] + d0 + 4; why = { es: `Las diferencias crecen de 1 en 1: +${d0}, +${d0 + 1}, +${d0 + 2}…`, en: `The differences grow by 1: +${d0}, +${d0 + 1}, +${d0 + 2}…` }; }
+  else if (type === "fib") { const a = rand(1, 3), b = rand(2, 5); seq = [a, b]; for (let i = 2; i < 6; i++) seq.push(seq[i - 1] + seq[i - 2]); ans = seq[4] + seq[5]; why = { es: "Cada número es la suma de los dos anteriores.", en: "Each number is the sum of the previous two." }; }
+  else {
+    const off = pick([0, 1, -1, 2]); seq = [1, 2, 3, 4, 5].map(n => n * n + off); ans = 36 + off;
+    why = { es: `Cuadrados perfectos (1, 4, 9, 16, 25…)${off ? (off > 0 ? " más " : " menos ") + Math.abs(off) : ""}.`,
+            en: `Perfect squares (1, 4, 9, 16, 25…)${off ? (off > 0 ? " plus " : " minus ") + Math.abs(off) : ""}.` };
+  }
   const mk = n => ({ key: n, text: String(n) });
-  const q = { topic: "Serie numérica", prompt: "Which number comes next?", es: "¿Qué número sigue?", text: seq.join(", ") + ", ?", explain: why };
+  const q = { topic: TOP.num, prompt: "Which number comes next?", es: "¿Qué número sigue?", text: seq.join(", ") + ", ?", explain: why };
   return finish(q, mk(ans), shuffle([mk(ans + 1), mk(ans - 1), mk(ans + 2), mk(ans - 2), mk(ans + 10)]));
 }
 function genLetters() {
   const step = pick([2, 3, 4, -2, -3]), start = step > 0 ? rand(0, 5) : rand(20, 25);
   const L = i => String.fromCharCode(65 + start + i * step);
-  const ansI = start + 5 * step;
+  const ansI = start + 5 * step, s = (step > 0 ? "+" : "") + step;
   const mk = i => ({ key: i, text: String.fromCharCode(65 + i) });
-  const q = { topic: "Serie de letras", prompt: "Which letter comes next? (English alphabet, A–Z)", es: "¿Qué letra sigue? (alfabeto inglés, sin Ñ)",
-    text: [0, 1, 2, 3, 4].map(L).join(", ") + ", ?", explain: `Avanza ${step > 0 ? "+" : ""}${step} posiciones en el alfabeto (A=1 … Z=26).` };
+  const q = { topic: TOP.let, prompt: "Which letter comes next? (English alphabet, A–Z)", es: "¿Qué letra sigue? (alfabeto inglés, sin Ñ)",
+    text: [0, 1, 2, 3, 4].map(L).join(", ") + ", ?",
+    explain: { es: `Avanza ${s} posiciones en el alfabeto (A=1 … Z=26).`, en: `It moves ${s} positions in the alphabet (A=1 … Z=26).` } };
   return finish(q, mk(ansI), shuffle([1, -1, 2, -2, 3, -3, step].map(d => ansI + d).filter(i => i >= 0 && i < 26).map(mk)));
 }
 const ABSTRACT_PLAN = [genNumber, genLetters, genCount, genRotation, genSides, genDomino, genQuadrant, genPosition, genMatrix, genRotation,
   genDomino, genNumber, genTwoRules, genLatin, genCount, genPosition, genDomino, genMatrix, genTwoRules, genRotation,
   genNumber, genLatin, genDomino, genTwoRules, genPosition, genMatrix, genQuadrant, genTwoRules, genLetters, genMatrix];
 
-// ---------------------------------------------------------------- banco técnico (inglés)
+// ---------------------------------------------------------------- banco técnico / technical bank
+// [tema, pregunta EN, código, opciones, índice correcto, explicación ES, pregunta ES, explicación EN, opciones ES (opcional)]
 const BANK = [
   // SQL
-  ["SQL", "Which clause filters rows BEFORE they are grouped?", null, ["WHERE", "HAVING", "ORDER BY", "LIMIT"], 0, "WHERE filtra filas antes del GROUP BY; HAVING filtra grupos."],
-  ["SQL", "Table t has 8 rows and the column city has 2 NULL values. What does this return?", "SELECT COUNT(city) FROM t;", ["8", "6", "2", "NULL"], 1, "COUNT(columna) ignora los NULL: 8 − 2 = 6."],
-  ["SQL", "Which JOIN returns ALL the rows of the left table, with NULLs when there is no match?", null, ["INNER JOIN", "LEFT JOIN", "CROSS JOIN", "FULL JOIN on the right table only"], 1, "LEFT JOIN conserva toda la tabla izquierda."],
-  ["SQL", "Salaries: 700, 700, 500. What does RANK() OVER (ORDER BY salary DESC) assign to 500?", null, ["2", "3", "1", "4"], 1, "RANK salta posiciones con los empates: 1, 1, 3. DENSE_RANK daría 2."],
-  ["SQL", "Which query finds the duplicated emails?", null, ["SELECT email FROM users GROUP BY email HAVING COUNT(*) > 1;", "SELECT email FROM users WHERE COUNT(*) > 1;", "SELECT DISTINCT email FROM users;", "SELECT email FROM users ORDER BY email;"], 0, "Duplicados = GROUP BY + HAVING COUNT(*) > 1. No se pueden usar agregados en el WHERE."],
-  ["SQL", "How does AVG(x) treat NULL values in x?", null, ["It ignores them", "It counts them as 0", "It returns an error", "It always returns NULL"], 0, "Las funciones de agregación (excepto COUNT(*)) ignoran los NULL."],
-  ["SQL", "Which window function returns the value of the PREVIOUS row?", null, ["LAG()", "LEAD()", "NTILE()", "FIRST_VALUE()"], 0, "LAG = fila anterior; LEAD = fila siguiente."],
-  ["SQL", "Table a has 5 rows and table b has 4 rows. How many rows does this return?", "SELECT * FROM a CROSS JOIN b;", ["9", "20", "5", "4"], 1, "CROSS JOIN = producto cartesiano: 5 × 4."],
-  ["SQL", "What is the result of the expression NULL = NULL?", null, ["TRUE", "FALSE", "NULL (unknown)", "An error"], 2, "Comparar con NULL da NULL (desconocido). Se usa IS NULL."],
-  ["SQL", "Which statement about UNION and UNION ALL is TRUE?", null, ["UNION removes duplicates; UNION ALL keeps them", "UNION ALL removes duplicates; UNION keeps them", "Both remove duplicates", "UNION ALL sorts the result"], 0, "UNION ALL es más rápido porque no deduplica."],
-  ["SQL", "Which query returns the 3 HIGHEST salaries?", null, ["SELECT salary FROM e ORDER BY salary DESC LIMIT 3;", "SELECT salary FROM e ORDER BY salary LIMIT 3;", "SELECT salary FROM e WHERE salary > 3;", "SELECT TOP salary FROM e;"], 0, "Ordenar de mayor a menor (DESC) y limitar."],
-  ["SQL", "A query uses customers c LEFT JOIN orders o, and then WHERE o.status = 'paid'. What happens?", null, ["Customers without orders are removed (it behaves like an INNER JOIN)", "Nothing changes", "It is a syntax error", "All customers appear with status NULL"], 0, "Filtrar la tabla derecha en el WHERE elimina las filas NULL. El filtro va en el ON."],
-  ["SQL", "Which expression avoids INTEGER division when calculating a percentage of integer columns?", null, ["100.0 * a / b", "100 * a / b", "a / b * 100", "(a / b) * 100"], 0, "El 100.0 convierte la operación a decimal antes de dividir."],
-  ["SQL", "What does this calculate?", "SUM(amount) OVER (ORDER BY order_date)", ["A running (cumulative) total", "The total for each date only", "The average amount", "The rank of each order"], 0, "SUM con OVER(ORDER BY) = total acumulado."],
-  ["SQL", "What is the correct LOGICAL order of execution?", null, ["FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY", "SELECT → FROM → WHERE → GROUP BY", "FROM → SELECT → WHERE → ORDER BY", "WHERE → FROM → HAVING → SELECT"], 0, "Por eso ORDER BY acepta alias y WHERE no."],
+  ["SQL", "Which clause filters rows BEFORE they are grouped?", null, ["WHERE", "HAVING", "ORDER BY", "LIMIT"], 0,
+   "WHERE filtra filas antes del GROUP BY; HAVING filtra grupos.", "¿Qué cláusula filtra filas ANTES de agruparlas?",
+   "WHERE filters rows before the GROUP BY; HAVING filters groups."],
+  ["SQL", "Table t has 8 rows and the column city has 2 NULL values. What does this return?", "SELECT COUNT(city) FROM t;", ["8", "6", "2", "NULL"], 1,
+   "COUNT(columna) ignora los NULL: 8 − 2 = 6.", "La tabla t tiene 8 filas y la columna city tiene 2 valores NULL. ¿Qué devuelve esto?",
+   "COUNT(column) ignores NULLs: 8 − 2 = 6."],
+  ["SQL", "Which JOIN returns ALL the rows of the left table, with NULLs when there is no match?", null, ["INNER JOIN", "LEFT JOIN", "CROSS JOIN", "FULL JOIN on the right table only"], 1,
+   "LEFT JOIN conserva toda la tabla izquierda.", "¿Qué JOIN devuelve TODAS las filas de la tabla izquierda, con NULL cuando no hay coincidencia?",
+   "LEFT JOIN keeps the whole left table.", ["INNER JOIN", "LEFT JOIN", "CROSS JOIN", "FULL JOIN solo sobre la tabla derecha"]],
+  ["SQL", "Salaries: 700, 700, 500. What does RANK() OVER (ORDER BY salary DESC) assign to 500?", null, ["2", "3", "1", "4"], 1,
+   "RANK salta posiciones con los empates: 1, 1, 3. DENSE_RANK daría 2.", "Salarios: 700, 700, 500. ¿Qué valor asigna RANK() OVER (ORDER BY salary DESC) al 500?",
+   "RANK skips positions after ties: 1, 1, 3. DENSE_RANK would give 2."],
+  ["SQL", "Which query finds the duplicated emails?", null, ["SELECT email FROM users GROUP BY email HAVING COUNT(*) > 1;", "SELECT email FROM users WHERE COUNT(*) > 1;", "SELECT DISTINCT email FROM users;", "SELECT email FROM users ORDER BY email;"], 0,
+   "Duplicados = GROUP BY + HAVING COUNT(*) > 1. No se pueden usar agregados en el WHERE.", "¿Qué consulta encuentra los emails duplicados?",
+   "Duplicates = GROUP BY + HAVING COUNT(*) > 1. Aggregates cannot be used in the WHERE."],
+  ["SQL", "How does AVG(x) treat NULL values in x?", null, ["It ignores them", "It counts them as 0", "It returns an error", "It always returns NULL"], 0,
+   "Las funciones de agregación (excepto COUNT(*)) ignoran los NULL.", "¿Cómo trata AVG(x) los valores NULL de x?",
+   "Aggregate functions (except COUNT(*)) ignore NULLs.", ["Los ignora", "Los cuenta como 0", "Devuelve un error", "Siempre devuelve NULL"]],
+  ["SQL", "Which window function returns the value of the PREVIOUS row?", null, ["LAG()", "LEAD()", "NTILE()", "FIRST_VALUE()"], 0,
+   "LAG = fila anterior; LEAD = fila siguiente.", "¿Qué función de ventana devuelve el valor de la fila ANTERIOR?",
+   "LAG = previous row; LEAD = next row."],
+  ["SQL", "Table a has 5 rows and table b has 4 rows. How many rows does this return?", "SELECT * FROM a CROSS JOIN b;", ["9", "20", "5", "4"], 1,
+   "CROSS JOIN = producto cartesiano: 5 × 4.", "La tabla a tiene 5 filas y la tabla b tiene 4. ¿Cuántas filas devuelve esto?",
+   "CROSS JOIN = Cartesian product: 5 × 4."],
+  ["SQL", "What is the result of the expression NULL = NULL?", null, ["TRUE", "FALSE", "NULL (unknown)", "An error"], 2,
+   "Comparar con NULL da NULL (desconocido). Se usa IS NULL.", "¿Cuál es el resultado de la expresión NULL = NULL?",
+   "Comparing with NULL gives NULL (unknown). Use IS NULL.", ["TRUE", "FALSE", "NULL (desconocido)", "Un error"]],
+  ["SQL", "Which statement about UNION and UNION ALL is TRUE?", null, ["UNION removes duplicates; UNION ALL keeps them", "UNION ALL removes duplicates; UNION keeps them", "Both remove duplicates", "UNION ALL sorts the result"], 0,
+   "UNION ALL es más rápido porque no deduplica.", "¿Qué afirmación sobre UNION y UNION ALL es VERDADERA?",
+   "UNION ALL is faster because it does not deduplicate.",
+   ["UNION elimina duplicados; UNION ALL los conserva", "UNION ALL elimina duplicados; UNION los conserva", "Ambos eliminan duplicados", "UNION ALL ordena el resultado"]],
+  ["SQL", "Which query returns the 3 HIGHEST salaries?", null, ["SELECT salary FROM e ORDER BY salary DESC LIMIT 3;", "SELECT salary FROM e ORDER BY salary LIMIT 3;", "SELECT salary FROM e WHERE salary > 3;", "SELECT TOP salary FROM e;"], 0,
+   "Ordenar de mayor a menor (DESC) y limitar.", "¿Qué consulta devuelve los 3 salarios MÁS ALTOS?",
+   "Sort from highest to lowest (DESC) and limit."],
+  ["SQL", "A query uses customers c LEFT JOIN orders o, and then WHERE o.status = 'paid'. What happens?", null, ["Customers without orders are removed (it behaves like an INNER JOIN)", "Nothing changes", "It is a syntax error", "All customers appear with status NULL"], 0,
+   "Filtrar la tabla derecha en el WHERE elimina las filas NULL. El filtro va en el ON.", "Una consulta usa customers c LEFT JOIN orders o y luego WHERE o.status = 'paid'. ¿Qué pasa?",
+   "Filtering the right table in the WHERE removes the NULL rows. The filter belongs in the ON.",
+   ["Se eliminan los clientes sin pedidos (se comporta como un INNER JOIN)", "No cambia nada", "Es un error de sintaxis", "Todos los clientes aparecen con status NULL"]],
+  ["SQL", "Which expression avoids INTEGER division when calculating a percentage of integer columns?", null, ["100.0 * a / b", "100 * a / b", "a / b * 100", "(a / b) * 100"], 0,
+   "El 100.0 convierte la operación a decimal antes de dividir.", "¿Qué expresión evita la división ENTERA al calcular un porcentaje con columnas enteras?",
+   "The 100.0 turns the operation into a decimal one before dividing."],
+  ["SQL", "What does this calculate?", "SUM(amount) OVER (ORDER BY order_date)", ["A running (cumulative) total", "The total for each date only", "The average amount", "The rank of each order"], 0,
+   "SUM con OVER(ORDER BY) = total acumulado.", "¿Qué calcula esto?", "SUM with OVER(ORDER BY) = running total.",
+   ["Un total acumulado", "Solo el total de cada fecha", "El monto promedio", "La posición de cada pedido"]],
+  ["SQL", "What is the correct LOGICAL order of execution?", null, ["FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY", "SELECT → FROM → WHERE → GROUP BY", "FROM → SELECT → WHERE → ORDER BY", "WHERE → FROM → HAVING → SELECT"], 0,
+   "Por eso ORDER BY acepta alias y WHERE no.", "¿Cuál es el orden LÓGICO de ejecución correcto?", "That is why ORDER BY accepts aliases and WHERE does not."],
   // Python
-  ["Python", "What is the output?", "print(type(3 / 3))", ["<class 'float'>", "<class 'int'>", "1", "1.0"], 0, "El operador / siempre devuelve float."],
-  ["Python", "What is the output?", 'print("python"[1:4])', ["yth", "pyt", "ytho", "ython"], 0, "Índices 1, 2 y 3; el final (4) no se incluye."],
-  ["Python", "What is the output?", "x = [1, 2, 3]\ny = x\ny.append(4)\nprint(len(x))", ["3", "4", "An error", "None"], 1, "y = x no copia: es la misma lista."],
-  ["Python", "What is the output?", "print(2 ** 3 ** 2)", ["64", "512", "36", "18"], 1, "** asocia a la derecha: 3 ** 2 = 9 y 2 ** 9 = 512."],
-  ["Python", "What is the output?", 'print(bool("False"))', ["True", "False", "An error", "None"], 0, "Cualquier string no vacío es truthy."],
-  ["Python", "What is the output?", "print([n * n for n in range(4)])", ["[0, 1, 4, 9]", "[1, 4, 9, 16]", "[0, 1, 4, 9, 16]", "[0, 2, 4, 6]"], 0, "range(4) = 0, 1, 2, 3."],
-  ["Python", "What is the output?", "print(len({1, 1, 2, 3, 3}))", ["5", "3", "2", "An error"], 1, "Un set elimina los duplicados: {1, 2, 3}."],
-  ["Python", "Given d = {\"a\": 1}, which expression raises a KeyError?", null, ['d["z"]', 'd.get("z")', '"z" in d', 'd.pop("z", None)'], 0, "El acceso directo a una clave inexistente lanza KeyError; get devuelve None."],
-  ["Python", "What is the output?", "nums = [3, 1, 2]\nprint(nums.sort())", ["[1, 2, 3]", "None", "[3, 1, 2]", "An error"], 1, ".sort() ordena in-place y devuelve None."],
-  ["Python", "What is the output?", 'print("a-b-c".split("-", 1))', ["['a', 'b-c']", "['a', 'b', 'c']", "['a-b', 'c']", "['a']"], 0, "maxsplit = 1: divide solo una vez."],
-  ["Python", "Which of these types is IMMUTABLE?", null, ["tuple", "list", "dict", "set"], 0, "Las tuplas no se pueden modificar."],
-  ["Python", "What is the output?", "def f(x, acc=[]):\n    acc.append(x)\n    return acc\nf(1)\nprint(f(2))", ["[2]", "[1, 2]", "[1]", "An error"], 1, "El argumento por defecto mutable se comparte entre llamadas."],
-  ["Python", "What is the output?", 'print(sorted(["b", "A", "a"]))', ["['A', 'a', 'b']", "['a', 'A', 'b']", "['a', 'b', 'A']", "['b', 'a', 'A']"], 0, "Las mayúsculas van antes en el orden Unicode."],
-  ["Python", "In pandas, which call is equivalent to a SQL LEFT JOIN?", null, ['a.merge(b, on="k", how="left")', "a.join_left(b)", "pd.concat([a, b])", "a.groupby(b)"], 0, "merge con how='left'."],
-  ["Python", "What is the output?", "print(10 // 3, 10 % 3)", ["3 1", "3.33 1", "3 0", "1 3"], 0, "// es la división entera y % es el residuo."],
-  // Algoritmos
-  ["Algorithms", "What is the time complexity of binary search?", null, ["O(log n)", "O(n)", "O(1)", "O(n log n)"], 0, "Descarta la mitad en cada paso."],
-  ["Algorithms", "Which data structure is LIFO (Last In, First Out)?", null, ["Stack", "Queue", "Heap", "Hash table"], 0, "Pila: el último en entrar es el primero en salir."],
-  ["Algorithms", "Which data structure does Breadth-First Search (BFS) use?", null, ["Queue", "Stack", "Heap", "Tree"], 0, "BFS explora por niveles con una cola (FIFO)."],
-  ["Algorithms", "What is the WORST-CASE complexity of merge sort?", null, ["O(n log n)", "O(n²)", "O(n)", "O(log n)"], 0, "Merge sort siempre es O(n log n)."],
-  ["Algorithms", "What is the WORST-CASE complexity of quick sort?", null, ["O(n²)", "O(n log n)", "O(n)", "O(log n)"], 0, "Con un mal pivote, quick sort se degrada a O(n²)."],
-  ["Algorithms", "Two nested loops, each iterating over n elements, have a complexity of:", null, ["O(n²)", "O(2n)", "O(n)", "O(log n)"], 0, "Los bucles anidados se multiplican."],
-  ["Algorithms", "An in-order traversal of a binary search tree returns the values:", null, ["In sorted order", "In reverse insertion order", "Level by level", "In random order"], 0, "Izquierda → nodo → derecha = orden ascendente."],
-  ["Algorithms", "Which structure lets you check whether a value was already seen in O(1) on average?", null, ["A hash set", "A sorted list", "A linked list", "A stack"], 0, "Un set usa una tabla hash."],
-  ["Algorithms", "What is the value of x at the end?", "x ← 1\nfor i from 1 to 5:\n    x ← x * 2", ["32", "10", "16", "64"], 0, "2⁵ = 32."],
-  ["Algorithms", "Binary search REQUIRES that the data is:", null, ["Sorted", "Unique", "Numeric only", "Stored in a linked list"], 0, "Solo funciona sobre datos ordenados."],
-  ["Algorithms", "What is the optimal time complexity of Two Sum using a hash map?", null, ["O(n)", "O(n²)", "O(log n)", "O(1)"], 0, "Una pasada guardando los complementos en un dict."],
-  ["Algorithms", "What happens if a recursive function has no base case?", null, ["It causes a stack overflow (RecursionError)", "It returns None", "It runs in O(1)", "It sorts the input"], 0, "La recursión nunca termina."],
-  // Bases de datos
-  ["Databases", "Which ACID property guarantees that a transaction is completed entirely or not at all?", null, ["Atomicity", "Consistency", "Isolation", "Durability"], 0, "Atomicidad = todo o nada."],
-  ["Databases", "What is the main purpose of a foreign key?", null, ["To guarantee referential integrity between tables", "To make every query faster", "To encrypt a column", "To allow duplicate primary keys"], 0, "La FK referencia la PK de otra tabla."],
-  ["Databases", "Which normal form removes TRANSITIVE dependencies?", null, ["3NF", "1NF", "2NF", "None of them"], 0, "3NF: ninguna columna no clave depende de otra columna no clave."],
-  ["Databases", "What is a disadvantage of adding many indexes to a table?", null, ["INSERT, UPDATE and DELETE become slower", "SELECT queries become slower", "The table loses its primary key", "Data is deleted"], 0, "Cada escritura también actualiza los índices."],
-  ["Databases", "In a star schema, which table stores the numeric measures (revenue, quantity)?", null, ["The fact table", "A dimension table", "A lookup table", "A staging table"], 0, "Tabla de hechos = métricas + FKs a las dimensiones."],
-  ["Databases", "Which of the following describes an OLAP system?", null, ["Complex aggregations over millions of rows, often columnar", "Many short transactions that update a few rows", "Processing card payments in real time", "A cache for web sessions"], 0, "OLAP = análisis; OLTP = transacciones."],
-  ["Databases", "How is a many-to-many (N:M) relationship implemented in a relational database?", null, ["With a junction (bridge) table", "With a single foreign key", "With a view", "It is not possible"], 0, "Por ejemplo, order_items entre orders y products."],
-  ["Databases", "Which AWS service is a key-value NoSQL database?", null, ["Amazon DynamoDB", "Amazon Redshift", "Amazon RDS for MySQL", "Amazon Aurora"], 0, "DynamoDB es NoSQL key-value/documentos."],
+  ["Python", "What is the output?", "print(type(3 / 3))", ["<class 'float'>", "<class 'int'>", "1", "1.0"], 0,
+   "El operador / siempre devuelve float.", "¿Qué imprime?", "The / operator always returns a float."],
+  ["Python", "What is the output?", 'print("python"[1:4])', ["yth", "pyt", "ytho", "ython"], 0,
+   "Índices 1, 2 y 3; el final (4) no se incluye.", "¿Qué imprime?", "Indexes 1, 2 and 3; the end (4) is not included."],
+  ["Python", "What is the output?", "x = [1, 2, 3]\ny = x\ny.append(4)\nprint(len(x))", ["3", "4", "An error", "None"], 1,
+   "y = x no copia: es la misma lista.", "¿Qué imprime?", "y = x does not copy: it is the same list.", ["3", "4", "Un error", "None"]],
+  ["Python", "What is the output?", "print(2 ** 3 ** 2)", ["64", "512", "36", "18"], 1,
+   "** asocia a la derecha: 3 ** 2 = 9 y 2 ** 9 = 512.", "¿Qué imprime?", "** is right-associative: 3 ** 2 = 9 and 2 ** 9 = 512."],
+  ["Python", "What is the output?", 'print(bool("False"))', ["True", "False", "An error", "None"], 0,
+   "Cualquier string no vacío es truthy.", "¿Qué imprime?", "Any non-empty string is truthy.", ["True", "False", "Un error", "None"]],
+  ["Python", "What is the output?", "print([n * n for n in range(4)])", ["[0, 1, 4, 9]", "[1, 4, 9, 16]", "[0, 1, 4, 9, 16]", "[0, 2, 4, 6]"], 0,
+   "range(4) = 0, 1, 2, 3.", "¿Qué imprime?", "range(4) = 0, 1, 2, 3."],
+  ["Python", "What is the output?", "print(len({1, 1, 2, 3, 3}))", ["5", "3", "2", "An error"], 1,
+   "Un set elimina los duplicados: {1, 2, 3}.", "¿Qué imprime?", "A set removes duplicates: {1, 2, 3}.", ["5", "3", "2", "Un error"]],
+  ["Python", "Given d = {\"a\": 1}, which expression raises a KeyError?", null, ['d["z"]', 'd.get("z")', '"z" in d', 'd.pop("z", None)'], 0,
+   "El acceso directo a una clave inexistente lanza KeyError; get devuelve None.", "Dado d = {\"a\": 1}, ¿qué expresión lanza un KeyError?",
+   "Direct access to a missing key raises KeyError; get returns None."],
+  ["Python", "What is the output?", "nums = [3, 1, 2]\nprint(nums.sort())", ["[1, 2, 3]", "None", "[3, 1, 2]", "An error"], 1,
+   ".sort() ordena in-place y devuelve None.", "¿Qué imprime?", ".sort() sorts in-place and returns None.", ["[1, 2, 3]", "None", "[3, 1, 2]", "Un error"]],
+  ["Python", "What is the output?", 'print("a-b-c".split("-", 1))', ["['a', 'b-c']", "['a', 'b', 'c']", "['a-b', 'c']", "['a']"], 0,
+   "maxsplit = 1: divide solo una vez.", "¿Qué imprime?", "maxsplit = 1: it splits only once."],
+  ["Python", "Which of these types is IMMUTABLE?", null, ["tuple", "list", "dict", "set"], 0,
+   "Las tuplas no se pueden modificar.", "¿Cuál de estos tipos es INMUTABLE?", "Tuples cannot be modified."],
+  ["Python", "What is the output?", "def f(x, acc=[]):\n    acc.append(x)\n    return acc\nf(1)\nprint(f(2))", ["[2]", "[1, 2]", "[1]", "An error"], 1,
+   "El argumento por defecto mutable se comparte entre llamadas.", "¿Qué imprime?", "The mutable default argument is shared between calls.", ["[2]", "[1, 2]", "[1]", "Un error"]],
+  ["Python", "What is the output?", 'print(sorted(["b", "A", "a"]))', ["['A', 'a', 'b']", "['a', 'A', 'b']", "['a', 'b', 'A']", "['b', 'a', 'A']"], 0,
+   "Las mayúsculas van antes en el orden Unicode.", "¿Qué imprime?", "Uppercase letters come first in Unicode order."],
+  ["Python", "In pandas, which call is equivalent to a SQL LEFT JOIN?", null, ['a.merge(b, on="k", how="left")', "a.join_left(b)", "pd.concat([a, b])", "a.groupby(b)"], 0,
+   "merge con how='left'.", "En pandas, ¿qué llamada equivale a un LEFT JOIN de SQL?", "merge with how='left'."],
+  ["Python", "What is the output?", "print(10 // 3, 10 % 3)", ["3 1", "3.33 1", "3 0", "1 3"], 0,
+   "// es la división entera y % es el residuo.", "¿Qué imprime?", "// is floor division and % is the remainder."],
+  // Algoritmos / Algorithms
+  ["Algorithms", "What is the time complexity of binary search?", null, ["O(log n)", "O(n)", "O(1)", "O(n log n)"], 0,
+   "Descarta la mitad en cada paso.", "¿Cuál es la complejidad temporal de la búsqueda binaria?", "It discards half at each step."],
+  ["Algorithms", "Which data structure is LIFO (Last In, First Out)?", null, ["Stack", "Queue", "Heap", "Hash table"], 0,
+   "Pila: el último en entrar es el primero en salir.", "¿Qué estructura de datos es LIFO (el último en entrar es el primero en salir)?",
+   "Stack: the last one in is the first one out.", ["Pila", "Cola", "Heap (montículo)", "Tabla hash"]],
+  ["Algorithms", "Which data structure does Breadth-First Search (BFS) use?", null, ["Queue", "Stack", "Heap", "Tree"], 0,
+   "BFS explora por niveles con una cola (FIFO).", "¿Qué estructura de datos usa la búsqueda en anchura (BFS)?",
+   "BFS explores level by level with a queue (FIFO).", ["Cola", "Pila", "Heap (montículo)", "Árbol"]],
+  ["Algorithms", "What is the WORST-CASE complexity of merge sort?", null, ["O(n log n)", "O(n²)", "O(n)", "O(log n)"], 0,
+   "Merge sort siempre es O(n log n).", "¿Cuál es la complejidad de merge sort en el PEOR caso?", "Merge sort is always O(n log n)."],
+  ["Algorithms", "What is the WORST-CASE complexity of quick sort?", null, ["O(n²)", "O(n log n)", "O(n)", "O(log n)"], 0,
+   "Con un mal pivote, quick sort se degrada a O(n²).", "¿Cuál es la complejidad de quick sort en el PEOR caso?", "With a bad pivot, quick sort degrades to O(n²)."],
+  ["Algorithms", "Two nested loops, each iterating over n elements, have a complexity of:", null, ["O(n²)", "O(2n)", "O(n)", "O(log n)"], 0,
+   "Los bucles anidados se multiplican.", "Dos bucles anidados, cada uno sobre n elementos, tienen una complejidad de:", "Nested loops multiply."],
+  ["Algorithms", "An in-order traversal of a binary search tree returns the values:", null, ["In sorted order", "In reverse insertion order", "Level by level", "In random order"], 0,
+   "Izquierda → nodo → derecha = orden ascendente.", "Un recorrido in-order de un árbol binario de búsqueda devuelve los valores:",
+   "Left → node → right = ascending order.", ["Ordenados", "En orden inverso de inserción", "Nivel por nivel", "En orden aleatorio"]],
+  ["Algorithms", "Which structure lets you check whether a value was already seen in O(1) on average?", null, ["A hash set", "A sorted list", "A linked list", "A stack"], 0,
+   "Un set usa una tabla hash.", "¿Qué estructura permite comprobar si un valor ya apareció en O(1) en promedio?",
+   "A set uses a hash table.", ["Un set (tabla hash)", "Una lista ordenada", "Una lista enlazada", "Una pila"]],
+  ["Algorithms", "What is the value of x at the end?", "x ← 1\nfor i from 1 to 5:\n    x ← x * 2", ["32", "10", "16", "64"], 0,
+   "2⁵ = 32.", "¿Cuál es el valor de x al final?", "2⁵ = 32."],
+  ["Algorithms", "Binary search REQUIRES that the data is:", null, ["Sorted", "Unique", "Numeric only", "Stored in a linked list"], 0,
+   "Solo funciona sobre datos ordenados.", "La búsqueda binaria REQUIERE que los datos estén:",
+   "It only works on sorted data.", ["Ordenados", "Sin repetidos", "Solo numéricos", "En una lista enlazada"]],
+  ["Algorithms", "What is the optimal time complexity of Two Sum using a hash map?", null, ["O(n)", "O(n²)", "O(log n)", "O(1)"], 0,
+   "Una pasada guardando los complementos en un dict.", "¿Cuál es la complejidad óptima de Two Sum usando un hash map?",
+   "One pass storing the complements in a dict."],
+  ["Algorithms", "What happens if a recursive function has no base case?", null, ["It causes a stack overflow (RecursionError)", "It returns None", "It runs in O(1)", "It sorts the input"], 0,
+   "La recursión nunca termina.", "¿Qué pasa si una función recursiva no tiene caso base?",
+   "The recursion never ends.", ["Causa un desbordamiento de pila (RecursionError)", "Devuelve None", "Se ejecuta en O(1)", "Ordena la entrada"]],
+  // Bases de datos / Databases
+  ["Databases", "Which ACID property guarantees that a transaction is completed entirely or not at all?", null, ["Atomicity", "Consistency", "Isolation", "Durability"], 0,
+   "Atomicidad = todo o nada.", "¿Qué propiedad ACID garantiza que una transacción se complete entera o nada?",
+   "Atomicity = all or nothing.", ["Atomicidad", "Consistencia", "Aislamiento", "Durabilidad"]],
+  ["Databases", "What is the main purpose of a foreign key?", null, ["To guarantee referential integrity between tables", "To make every query faster", "To encrypt a column", "To allow duplicate primary keys"], 0,
+   "La FK referencia la PK de otra tabla.", "¿Cuál es el propósito principal de una llave foránea?",
+   "The FK references the PK of another table.",
+   ["Garantizar la integridad referencial entre tablas", "Hacer más rápida cualquier consulta", "Cifrar una columna", "Permitir llaves primarias duplicadas"]],
+  ["Databases", "Which normal form removes TRANSITIVE dependencies?", null, ["3NF", "1NF", "2NF", "None of them"], 0,
+   "3NF: ninguna columna no clave depende de otra columna no clave.", "¿Qué forma normal elimina las dependencias TRANSITIVAS?",
+   "3NF: no non-key column depends on another non-key column.", ["3NF", "1NF", "2NF", "Ninguna"]],
+  ["Databases", "What is a disadvantage of adding many indexes to a table?", null, ["INSERT, UPDATE and DELETE become slower", "SELECT queries become slower", "The table loses its primary key", "Data is deleted"], 0,
+   "Cada escritura también actualiza los índices.", "¿Qué desventaja tiene agregar muchos índices a una tabla?",
+   "Every write also updates the indexes.", ["INSERT, UPDATE y DELETE se vuelven más lentos", "Los SELECT se vuelven más lentos", "La tabla pierde su llave primaria", "Se borran datos"]],
+  ["Databases", "In a star schema, which table stores the numeric measures (revenue, quantity)?", null, ["The fact table", "A dimension table", "A lookup table", "A staging table"], 0,
+   "Tabla de hechos = métricas + FKs a las dimensiones.", "En un esquema estrella, ¿qué tabla guarda las medidas numéricas (ingresos, cantidad)?",
+   "Fact table = metrics + FKs to the dimensions.", ["La tabla de hechos", "Una tabla de dimensión", "Una tabla de consulta (lookup)", "Una tabla de staging"]],
+  ["Databases", "Which of the following describes an OLAP system?", null, ["Complex aggregations over millions of rows, often columnar", "Many short transactions that update a few rows", "Processing card payments in real time", "A cache for web sessions"], 0,
+   "OLAP = análisis; OLTP = transacciones.", "¿Cuál de las siguientes describe un sistema OLAP?",
+   "OLAP = analysis; OLTP = transactions.",
+   ["Agregaciones complejas sobre millones de filas, a menudo columnar", "Muchas transacciones cortas que actualizan pocas filas", "Procesar pagos con tarjeta en tiempo real", "Una caché para sesiones web"]],
+  ["Databases", "How is a many-to-many (N:M) relationship implemented in a relational database?", null, ["With a junction (bridge) table", "With a single foreign key", "With a view", "It is not possible"], 0,
+   "Por ejemplo, order_items entre orders y products.", "¿Cómo se implementa una relación muchos a muchos (N:M) en una base de datos relacional?",
+   "For example, order_items between orders and products.", ["Con una tabla intermedia (puente)", "Con una sola llave foránea", "Con una vista", "No es posible"]],
+  ["Databases", "Which AWS service is a key-value NoSQL database?", null, ["Amazon DynamoDB", "Amazon Redshift", "Amazon RDS for MySQL", "Amazon Aurora"], 0,
+   "DynamoDB es NoSQL key-value/documentos.", "¿Qué servicio de AWS es una base de datos NoSQL clave-valor?", "DynamoDB is a key-value/document NoSQL database."],
   // AWS
-  ["AWS", "Which service runs SQL queries directly on data in Amazon S3 without managing servers?", null, ["Amazon Athena", "Amazon RDS", "Amazon EC2", "Amazon DynamoDB"], 0, "Athena = SQL serverless sobre S3; se paga por datos escaneados."],
-  ["AWS", "Which service is a petabyte-scale, columnar data warehouse?", null, ["Amazon Redshift", "Amazon S3", "AWS Lambda", "Amazon ElastiCache"], 0, "Redshift = data warehouse MPP columnar."],
-  ["AWS", "What does an AWS Glue crawler do?", null, ["Scans data, infers the schema and creates tables in the Data Catalog", "Deletes old files in S3", "Creates BI dashboards", "Monitors EC2 instances"], 0, "El crawler llena el Glue Data Catalog."],
-  ["AWS", "Real-time clickstream ingestion with CUSTOM consumer applications. Which service is the best fit?", null, ["Amazon Kinesis Data Streams", "AWS Glue DataBrew", "Amazon S3 Glacier", "AWS Snowball"], 0, "Streams = tiempo real con consumidores propios."],
-  ["AWS", "Load streaming data into S3 in near real time, convert it to Parquet, and write NO code. Which service?", null, ["Amazon Data Firehose", "Amazon EMR", "Amazon MSK", "AWS Lambda"], 0, "Firehose es una entrega totalmente gestionada."],
-  ["AWS", "Which service creates interactive BI dashboards with the in-memory SPICE engine?", null, ["Amazon QuickSight", "AWS CloudTrail", "Amazon SQS", "AWS IAM"], 0, "QuickSight es el BI de AWS."],
-  ["AWS", "Under the shared responsibility model, what is the CUSTOMER responsible for?", null, ["Managing IAM users and permissions", "Physical security of data centers", "Server hardware", "The global network"], 0, "El cliente: seguridad EN la nube (datos, IAM, configuración)."],
-  ["AWS", "Which service shows WHO made an API call (for example, who deleted a bucket)?", null, ["AWS CloudTrail", "Amazon CloudWatch", "AWS Config", "Amazon Inspector"], 0, "CloudTrail audita las llamadas a la API."],
-  ["AWS", "A nightly batch job can be interrupted and restarted. What is the CHEAPEST EC2 option?", null, ["Spot Instances", "On-Demand Instances", "Dedicated Hosts", "Reserved Instances (3 years)"], 0, "Spot: hasta ~90 % de descuento para cargas interrumpibles."],
-  ["AWS", "Which actions reduce the cost of Amazon Athena queries?", null, ["Convert to Parquet and partition the data by date", "Store the data as many small CSV files", "Always use SELECT *", "Move the data to S3 Glacier Deep Archive"], 0, "Athena cobra por datos escaneados: columnar + particiones = menos datos escaneados."],
+  ["AWS", "Which service runs SQL queries directly on data in Amazon S3 without managing servers?", null, ["Amazon Athena", "Amazon RDS", "Amazon EC2", "Amazon DynamoDB"], 0,
+   "Athena = SQL serverless sobre S3; se paga por datos escaneados.", "¿Qué servicio ejecuta consultas SQL directamente sobre datos en Amazon S3 sin administrar servidores?",
+   "Athena = serverless SQL on S3; you pay per data scanned."],
+  ["AWS", "Which service is a petabyte-scale, columnar data warehouse?", null, ["Amazon Redshift", "Amazon S3", "AWS Lambda", "Amazon ElastiCache"], 0,
+   "Redshift = data warehouse MPP columnar.", "¿Qué servicio es un data warehouse columnar a escala de petabytes?", "Redshift = columnar MPP data warehouse."],
+  ["AWS", "What does an AWS Glue crawler do?", null, ["Scans data, infers the schema and creates tables in the Data Catalog", "Deletes old files in S3", "Creates BI dashboards", "Monitors EC2 instances"], 0,
+   "El crawler llena el Glue Data Catalog.", "¿Qué hace un crawler de AWS Glue?", "The crawler fills the Glue Data Catalog.",
+   ["Escanea datos, infiere el esquema y crea tablas en el Data Catalog", "Borra archivos viejos en S3", "Crea dashboards de BI", "Monitorea instancias EC2"]],
+  ["AWS", "Real-time clickstream ingestion with CUSTOM consumer applications. Which service is the best fit?", null, ["Amazon Kinesis Data Streams", "AWS Glue DataBrew", "Amazon S3 Glacier", "AWS Snowball"], 0,
+   "Streams = tiempo real con consumidores propios.", "Ingesta de clics en tiempo real con aplicaciones consumidoras PROPIAS. ¿Qué servicio es el más adecuado?",
+   "Streams = real time with your own consumers."],
+  ["AWS", "Load streaming data into S3 in near real time, convert it to Parquet, and write NO code. Which service?", null, ["Amazon Data Firehose", "Amazon EMR", "Amazon MSK", "AWS Lambda"], 0,
+   "Firehose es una entrega totalmente gestionada.", "Cargar datos en streaming en S3 casi en tiempo real, convertirlos a Parquet y NO escribir código. ¿Qué servicio?",
+   "Firehose is fully managed delivery."],
+  ["AWS", "Which service creates interactive BI dashboards with the in-memory SPICE engine?", null, ["Amazon QuickSight", "AWS CloudTrail", "Amazon SQS", "AWS IAM"], 0,
+   "QuickSight es el BI de AWS.", "¿Qué servicio crea dashboards de BI interactivos con el motor en memoria SPICE?", "QuickSight is AWS's BI service."],
+  ["AWS", "Under the shared responsibility model, what is the CUSTOMER responsible for?", null, ["Managing IAM users and permissions", "Physical security of data centers", "Server hardware", "The global network"], 0,
+   "El cliente: seguridad EN la nube (datos, IAM, configuración).", "Según el modelo de responsabilidad compartida, ¿de qué es responsable el CLIENTE?",
+   "The customer: security IN the cloud (data, IAM, configuration).",
+   ["Administrar usuarios y permisos de IAM", "La seguridad física de los centros de datos", "El hardware de los servidores", "La red global"]],
+  ["AWS", "Which service shows WHO made an API call (for example, who deleted a bucket)?", null, ["AWS CloudTrail", "Amazon CloudWatch", "AWS Config", "Amazon Inspector"], 0,
+   "CloudTrail audita las llamadas a la API.", "¿Qué servicio muestra QUIÉN hizo una llamada a la API (por ejemplo, quién borró un bucket)?", "CloudTrail audits API calls."],
+  ["AWS", "A nightly batch job can be interrupted and restarted. What is the CHEAPEST EC2 option?", null, ["Spot Instances", "On-Demand Instances", "Dedicated Hosts", "Reserved Instances (3 years)"], 0,
+   "Spot: hasta ~90 % de descuento para cargas interrumpibles.", "Un trabajo nocturno por lotes puede interrumpirse y reiniciarse. ¿Cuál es la opción de EC2 MÁS BARATA?",
+   "Spot: up to ~90% off for interruptible workloads.", ["Instancias Spot", "Instancias On-Demand", "Hosts dedicados", "Instancias reservadas (3 años)"]],
+  ["AWS", "Which actions reduce the cost of Amazon Athena queries?", null, ["Convert to Parquet and partition the data by date", "Store the data as many small CSV files", "Always use SELECT *", "Move the data to S3 Glacier Deep Archive"], 0,
+   "Athena cobra por datos escaneados: columnar + particiones = menos datos escaneados.", "¿Qué acciones reducen el costo de las consultas en Amazon Athena?",
+   "Athena charges per data scanned: columnar + partitions = less data scanned.",
+   ["Convertir a Parquet y particionar los datos por fecha", "Guardar los datos en muchos CSV pequeños", "Usar siempre SELECT *", "Mover los datos a S3 Glacier Deep Archive"]],
 ];
 const TECH_TOPICS = ["SQL", "Python", "Algorithms", "Databases", "AWS"];
-const TOPIC_ES = { SQL: "SQL", Python: "Python", Algorithms: "Algoritmos", Databases: "Bases de datos", AWS: "AWS" };
+const TOPIC_NAME = { SQL: { es: "SQL", en: "SQL" }, Python: { es: "Python", en: "Python" }, Algorithms: { es: "Algoritmos", en: "Algorithms" },
+  Databases: { es: "Bases de datos", en: "Databases" }, AWS: { es: "AWS", en: "AWS" } };
 
 function techQuestion(row) {
-  const [topic, prompt, code, opts, ans, explain] = row;
-  const order = shuffle(opts.map((t, i) => ({ t, i })));
-  return { topic: TOPIC_ES[topic], prompt, code, options: order.map(o => ({ text: o.t })), answer: order.findIndex(o => o.i === ans), explain };
+  const [topic, prompt, code, opts, ans, exEs, promptEs, exEn, optsEs] = row;
+  const order = shuffle(opts.map((txt, i) => ({ txt, i })));
+  return { topic: TOPIC_NAME[topic], prompt, es: promptEs, code, options: order.map(o => ({ text: o.txt })),
+    optsEs: optsEs ? order.map(o => optsEs[o.i]) : null, answer: order.findIndex(o => o.i === ans), explain: { es: exEs, en: exEn } };
 }
 function buildTechExam(n = 40) {
   const per = { SQL: 11, Python: 10, Algorithms: 8, Databases: 4, AWS: 7 };
   let qs = [];
-  for (const t of TECH_TOPICS) qs = qs.concat(shuffle(BANK.filter(r => r[0] === t)).slice(0, per[t]));
+  for (const tp of TECH_TOPICS) qs = qs.concat(shuffle(BANK.filter(r => r[0] === tp)).slice(0, per[tp]));
   return shuffle(qs).slice(0, n).map(techQuestion);
 }
 
 // ---------------------------------------------------------------- estado y almacenamiento
-const MODES = {
-  abstract: { name: "Razonamiento abstracto", minutes: 30, count: 30 },
-  tech: { name: "Técnico: opción múltiple", minutes: 50, count: 40 },
-};
+const MODES = { abstract: { minutes: 30, count: 30 }, tech: { minutes: 50, count: 40 } };
 let S = { view: "home", practiceTopic: "visual" };
 const store = {
   get() { try { return JSON.parse(localStorage.getItem("sim3090-history") || "[]"); } catch { return []; } },
@@ -459,11 +647,12 @@ let tick = null;
 function startExam(mode) {
   const m = MODES[mode];
   const questions = mode === "abstract" ? ABSTRACT_PLAN.map(g => g()) : buildTechExam(m.count);
-  S = { view: "exam", mode, questions, answers: Array(questions.length).fill(null), flags: Array(questions.length).fill(false), cur: 0, endsAt: Date.now() + m.minutes * 60000, startedAt: Date.now() };
+  S = { view: "exam", mode, questions, answers: Array(questions.length).fill(null), flags: Array(questions.length).fill(false), tr: {}, cur: 0,
+        endsAt: Date.now() + m.minutes * 60000, startedAt: Date.now() };
   runTimer(); render();
 }
 function startPractice(topic) {
-  S = { view: "practice", practiceTopic: topic, q: practiceQuestion(topic), chosen: null, done: 0, right: 0 };
+  S = { view: "practice", practiceTopic: topic, q: practiceQuestion(topic), chosen: null, done: 0, right: 0, tr: {} };
   render();
 }
 const VISUAL_GENS = [genRotation, genCount, genTwoRules, genPosition, genSides, genQuadrant, genMatrix, genLatin, genDomino];
@@ -478,8 +667,8 @@ function runTimer() {
     if (S.view !== "exam") return clearInterval(tick);
     const left = S.endsAt - Date.now();
     if (left <= 0) { finishExam(true); return; }
-    const t = $("#timer");
-    if (t) { t.textContent = fmtTime(left); t.classList.toggle("low", left < 5 * 60000); }
+    const el = $("#timer");
+    if (el) { el.textContent = fmtTime(left); el.classList.toggle("low", left < 5 * 60000); }
   }, 500);
 }
 const fmtTime = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; };
@@ -488,11 +677,17 @@ function finishExam(timeUp = false) {
   const correct = S.questions.filter((q, i) => S.answers[i] === q.answer).length;
   const used = Math.min(Date.now(), S.endsAt) - S.startedAt;
   S = { ...S, view: "results", correct, used, timeUp };
-  store.add({ mode: MODES[S.mode].name, score: `${correct}/${S.questions.length}`, date: new Date().toLocaleDateString("es-CO"), time: fmtTime(used) });
+  store.add({ mode: S.mode, score: `${correct}/${S.questions.length}`, date: new Date().toISOString(), time: fmtTime(used) });
   render(); window.scrollTo({ top: 0 });
 }
+const trKey = () => (S.view === "exam" ? S.cur : "p");
+function toggleTr() { if (!S.tr) S.tr = {}; S.tr[trKey()] = !S.tr[trKey()]; render(); }
 
 // ---------------------------------------------------------------- render
+function langSwitch() {
+  return `<div class="langsw" role="group" aria-label="${t("langLabel")}">${["es", "en"].map(l =>
+    `<button data-lang="${l}" aria-pressed="${LANG === l}" class="${LANG === l ? "on" : ""}">${l.toUpperCase()}</button>`).join("")}</div>`;
+}
 function figureBlock(q) {
   if (q.matrix) return `<div>${q.matrix}</div>`;
   if (q.seq) return `<div class="seq">${q.seq.map(s => `<div class="cell">${s}</div>`).join("")}<div class="cell q">?</div></div>`;
@@ -509,110 +704,119 @@ function optionsBlock(q, chosen, reveal) {
     return `<button class="${cls}" data-opt="${i}" role="radio" aria-checked="${i === chosen}"><span class="k">${KEYS[i]}</span>${body}</button>`;
   }).join("")}</div>`;
 }
-function questionCard(q, idx, total, chosen, reveal) {
+function trBlock(q, open) {
+  if (!q.es) return "";
+  const btn = `<button class="btn ghost trbtn" data-tr aria-expanded="${open}">${open ? t("hideTr") : t("showTr")}</button>`;
+  if (!open) return btn;
+  const opts = q.optsEs ? `<ol class="tropts">${q.optsEs.map((o, i) => `<li><strong>${KEYS[i]})</strong> ${esc(o)}</li>`).join("")}</ol>` : "";
+  return `${btn}<div class="tr"><span class="eyebrow">${t("trLabel")}</span><p>${esc(q.es)}</p>${opts}</div>`;
+}
+function questionCard(q, idx, total, chosen, reveal, trOpen) {
   return `<section class="qcard" aria-live="polite">
-    <div class="row"><span class="tag">${esc(q.topic)}</span>${total ? `<span class="progress">Pregunta ${idx + 1} de ${total}</span>` : ""}</div>
-    <p class="prompt">${esc(q.prompt)}${q.es ? `<span class="es">${esc(q.es)}</span>` : ""}</p>
+    <div class="row"><span class="tag">${esc(tx(q.topic))}</span>${total ? `<span class="progress">${t("question")(idx + 1, total)}</span>` : ""}</div>
+    <p class="prompt">${esc(q.prompt)}</p>
     ${q.code ? `<pre class="code">${esc(q.code)}</pre>` : ""}
     ${figureBlock(q)}
     ${optionsBlock(q, chosen, reveal)}
+    ${trBlock(q, !!trOpen)}
   </section>`;
 }
 function homeView() {
   const sample = genTwoRules();
   const hist = store.get();
+  const fmtDate = d => { const dt = new Date(d); return isNaN(dt) ? d : dt.toLocaleDateString(LANG === "es" ? "es-CO" : "en-US"); };
+  const opt = (v, label) => `<option value="${v}">${esc(label)}</option>`;
   return `<main class="wrap">
     <header class="hero">
-      <span class="eyebrow">Prueba de ingreso · 30 + 90 minutos</span>
+      <div class="row" style="justify-content:space-between"><span class="eyebrow">${t("eyebrow")}</span>${langSwitch()}</div>
       <h1>Simulacro 30·90</h1>
-      <p class="muted">Entrena las dos partes del examen: <strong>razonamiento abstracto (30 min)</strong> y la <strong>parte técnica</strong> (SQL, Python, algoritmos, bases de datos y AWS). Las preguntas técnicas están en inglés, como en la prueba real. Las figuras se generan al azar, así que cada intento es distinto.</p>
+      <p class="muted">${t("hero")}</p>
     </header>
     <section class="modes">
       <article class="mode featured">
-        <h2>Razonamiento abstracto</h2>
-        <p class="meta">30 preguntas · 30:00</p>
-        <p>Series, dominós D-48, matrices 3×3, rotaciones y figuras con dos reglas. La dificultad aumenta.</p>
-        <button class="btn primary" data-start="abstract">Empezar simulacro</button>
+        <h2>${t("modes").abstract}</h2>
+        <p class="meta">${t("absMeta")}</p>
+        <p>${t("absDesc")}</p>
+        <button class="btn primary" data-start="abstract">${t("start")}</button>
       </article>
       <article class="mode">
-        <h2>Técnico: opción múltiple</h2>
-        <p class="meta">40 preguntas · 50:00</p>
-        <p>Parte 1 del examen técnico, en inglés. Después, practica la parte de código con los problemas del repositorio.</p>
-        <button class="btn" data-start="tech">Empezar simulacro</button>
+        <h2>${t("modes").tech}</h2>
+        <p class="meta">${t("techMeta")}</p>
+        <p>${t("techDesc")}</p>
+        <button class="btn" data-start="tech">${t("start")}</button>
       </article>
       <article class="mode">
-        <h2>Práctica por tema</h2>
-        <p class="meta">Sin tiempo · retroalimentación inmediata</p>
-        <select id="ptopic" aria-label="Tema de práctica">
-          <option value="visual">Figuras (visual)</option><option value="series">Series y dominós</option>
-          <option value="SQL">SQL</option><option value="Python">Python</option><option value="Algorithms">Algoritmos</option>
-          <option value="Databases">Bases de datos</option><option value="AWS">AWS</option>
+        <h2>${t("pracTitle")}</h2>
+        <p class="meta">${t("pracMeta")}</p>
+        <select id="ptopic" aria-label="${t("pracTopic")}">
+          ${opt("visual", t("tVisual"))}${opt("series", t("tSeries"))}${TECH_TOPICS.map(tp => opt(tp, tx(TOPIC_NAME[tp]))).join("")}
         </select>
-        <button class="btn" data-practice>Practicar</button>
+        <button class="btn" data-practice>${t("practice")}</button>
       </article>
     </section>
     <section class="sample">
-      <div class="row"><span class="eyebrow">Ejemplo de pregunta</span><button class="btn ghost" data-resample>Otra figura</button></div>
-      ${questionCard(sample, 0, 0, null, false).replace('class="qcard"', 'class="qcard" style="border:none;padding:0"')}
-      <details><summary>Ver respuesta</summary><p style="margin-top:8px"><strong>${KEYS[sample.answer]}</strong>. ${esc(sample.explain)}</p></details>
+      <div class="row"><span class="eyebrow">${t("sample")}</span><button class="btn ghost" data-resample>${t("another")}</button></div>
+      ${questionCard(sample, 0, 0, null, false, false).replace('class="qcard"', 'class="qcard" style="border:none;padding:0"')}
+      <details><summary>${t("seeAnswer")}</summary><p style="margin-top:8px"><strong>${KEYS[sample.answer]}</strong>. ${esc(tx(sample.explain))}</p></details>
     </section>
     <section class="mode">
-      <h3>Tus últimos intentos</h3>
-      ${hist.length ? `<div class="history">${hist.map(h => `<div><span>${esc(h.date)} · ${esc(h.mode)}</span><span>${esc(h.score)} · ${esc(h.time)}</span></div>`).join("")}</div>`
-        : `<p class="muted">Aún no hay intentos guardados en este navegador. Al terminar un simulacro, tu puntaje aparece aquí.</p>`}
+      <h3>${t("lastTitle")}</h3>
+      ${hist.length ? `<div class="history">${hist.map(h => `<div><span>${esc(fmtDate(h.date))} · ${esc(t("modes")[h.mode] || h.mode)}</span><span>${esc(h.score)} · ${esc(h.time)}</span></div>`).join("")}</div>`
+        : `<p class="muted">${t("noHist")}</p>`}
     </section>
-    <p class="note">Material de estudio no oficial, creado para practicar. No contiene preguntas reales de ningún examen.</p>
+    <p class="note">${t("note")}</p>
   </main>`;
 }
 function examView() {
   const q = S.questions[S.cur], n = S.questions.length;
   const answered = S.answers.filter(a => a !== null).length;
   return `<div class="bar"><div class="in">
-      <strong>${esc(MODES[S.mode].name)}</strong>
-      <span class="progress">${answered}/${n} respondidas</span>
+      <strong>${esc(t("modes")[S.mode])}</strong>
+      <span class="progress">${answered}/${n} ${t("answered")}</span>
       <span class="timer" id="timer">${fmtTime(S.endsAt - Date.now())}</span>
-      <button class="btn ghost" data-finish>Terminar</button>
+      ${langSwitch()}
+      <button class="btn ghost" data-finish>${t("finish")}</button>
     </div></div>
     <main class="wrap">
-      ${questionCard(q, S.cur, n, S.answers[S.cur], false)}
+      ${questionCard(q, S.cur, n, S.answers[S.cur], false, S.tr && S.tr[S.cur])}
       <div class="nav">
-        <button class="btn ghost" data-prev ${S.cur === 0 ? "disabled" : ""}>← Anterior</button>
-        <button class="btn ghost" data-flag>${S.flags[S.cur] ? "Quitar marca" : "Marcar para revisar"}</button>
-        ${S.cur < n - 1 ? `<button class="btn primary" data-next>Siguiente →</button>` : `<button class="btn primary" data-finish>Terminar y ver resultado</button>`}
+        <button class="btn ghost" data-prev ${S.cur === 0 ? "disabled" : ""}>${t("prev")}</button>
+        <button class="btn ghost" data-flag>${S.flags[S.cur] ? t("unflag") : t("flag")}</button>
+        ${S.cur < n - 1 ? `<button class="btn primary" data-next>${t("next")}</button>` : `<button class="btn primary" data-finish>${t("finishSee")}</button>`}
       </div>
-      <nav class="palette" aria-label="Ir a la pregunta">${S.questions.map((_, i) =>
-        `<button data-go="${i}" class="${S.answers[i] !== null ? "done" : ""} ${i === S.cur ? "cur" : ""} ${S.flags[i] ? "flagged" : ""}" aria-label="Pregunta ${i + 1}">${i + 1}</button>`).join("")}</nav>
-      <p class="note">Atajos: teclas A–D o 1–4 para responder, ← y → para moverte. Si no ves la regla en 60 segundos: marca, responde algo y sigue.</p>
+      <nav class="palette" aria-label="${t("goTo")}">${S.questions.map((_, i) =>
+        `<button data-go="${i}" class="${S.answers[i] !== null ? "done" : ""} ${i === S.cur ? "cur" : ""} ${S.flags[i] ? "flagged" : ""}" aria-label="${t("question")(i + 1, n)}">${i + 1}</button>`).join("")}</nav>
+      <p class="note">${t("shortcuts")}</p>
     </main>`;
 }
 function practiceView() {
   const q = S.q, reveal = S.chosen !== null, ok = S.chosen === q.answer;
   return `<main class="wrap">
-    <div class="row" style="justify-content:space-between"><button class="btn ghost" data-home>← Inicio</button><span class="progress">${S.right}/${S.done} correctas</span></div>
-    ${questionCard(q, 0, 0, S.chosen, reveal)}
-    ${reveal ? `<div class="feedback ${ok ? "" : "bad"}"><strong>${ok ? "Correcto." : `Incorrecto. La respuesta es ${KEYS[q.answer]}.`}</strong> ${esc(q.explain)}</div>
-      <div class="row"><button class="btn primary" data-pnext>Siguiente pregunta →</button></div>` : ""}
+    <div class="row" style="justify-content:space-between"><button class="btn ghost" data-home>${t("home")}</button>${langSwitch()}<span class="progress">${S.right}/${S.done} ${t("correctCount")}</span></div>
+    ${questionCard(q, 0, 0, S.chosen, reveal, S.tr && S.tr.p)}
+    ${reveal ? `<div class="feedback ${ok ? "" : "bad"}"><strong>${ok ? t("right") : t("wrong")(KEYS[q.answer])}</strong> ${esc(tx(q.explain))}</div>
+      <div class="row"><button class="btn primary" data-pnext>${t("nextQ")}</button></div>` : ""}
   </main>`;
 }
 function resultsView() {
   const n = S.questions.length, pct = Math.round(100 * S.correct / n);
   const byTopic = {};
-  S.questions.forEach((q, i) => { const t = byTopic[q.topic] || (byTopic[q.topic] = { ok: 0, n: 0 }); t.n++; if (S.answers[i] === q.answer) t.ok++; });
-  const verdict = pct >= 85 ? "Excelente: estás listo para este bloque." : pct >= 70 ? "Bien. Repasa los temas más bajos y repite en 2–3 días." : "Todavía en construcción. Vuelve a los módulos de los temas con menor puntaje.";
+  S.questions.forEach((q, i) => { const k = tx(q.topic); const g = byTopic[k] || (byTopic[k] = { ok: 0, n: 0 }); g.n++; if (S.answers[i] === q.answer) g.ok++; });
+  const verdict = pct >= 85 ? t("v1") : pct >= 70 ? t("v2") : t("v3");
   return `<main class="wrap">
     <header class="hero">
-      <span class="eyebrow">${esc(MODES[S.mode].name)}${S.timeUp ? " · se acabó el tiempo" : ""}</span>
-      <div class="score"><span class="big">${S.correct}/${n}</span><span class="timer">${pct}%</span><span class="progress">Tiempo usado ${fmtTime(S.used)}</span></div>
+      <div class="row" style="justify-content:space-between"><span class="eyebrow">${esc(t("modes")[S.mode])}${S.timeUp ? t("timeUp") : ""}</span>${langSwitch()}</div>
+      <div class="score"><span class="big">${S.correct}/${n}</span><span class="timer">${pct}%</span><span class="progress">${t("timeUsed")} ${fmtTime(S.used)}</span></div>
       <p>${verdict}</p>
     </header>
-    <section class="qcard"><h3>Resultado por tema</h3><div class="topics">${Object.entries(byTopic).map(([t, v]) =>
-      `<div class="t"><span>${esc(t)}</span><span class="meter"><span style="width:${Math.round(100 * v.ok / v.n)}%"></span></span><span class="progress">${v.ok}/${v.n}</span></div>`).join("")}</div></section>
-    <div class="row"><button class="btn primary" data-start="${S.mode}">Repetir con preguntas nuevas</button><button class="btn ghost" data-home>Volver al inicio</button></div>
-    <section class="review"><h3>Revisión pregunta por pregunta</h3>${S.questions.map((q, i) => {
+    <section class="qcard"><h3>${t("byTopic")}</h3><div class="topics">${Object.entries(byTopic).map(([k, v]) =>
+      `<div class="t"><span>${esc(k)}</span><span class="meter"><span style="width:${Math.round(100 * v.ok / v.n)}%"></span></span><span class="progress">${v.ok}/${v.n}</span></div>`).join("")}</div></section>
+    <div class="row"><button class="btn primary" data-start="${S.mode}">${t("repeat")}</button><button class="btn ghost" data-home>${t("backHome")}</button></div>
+    <section class="review"><h3>${t("review")}</h3>${S.questions.map((q, i) => {
       const ok = S.answers[i] === q.answer;
-      return `<details ${ok ? "" : "open"}><summary><span class="pill ${ok ? "ok" : "no"}">${ok ? "Bien" : "Mal"}</span><span>${i + 1}. ${esc(q.prompt)}</span></summary>
-        <div style="display:grid;gap:10px;margin-top:10px">${q.code ? `<pre class="code">${esc(q.code)}</pre>` : ""}${figureBlock(q)}${optionsBlock(q, S.answers[i], true)}
-        <p class="ans">Tu respuesta: ${S.answers[i] === null ? "sin responder" : KEYS[S.answers[i]]} · Correcta: ${KEYS[q.answer]}</p><p>${esc(q.explain)}</p></div></details>`;
+      return `<details ${ok ? "" : "open"}><summary><span class="pill ${ok ? "ok" : "no"}">${ok ? t("ok") : t("ko")}</span><span>${i + 1}. ${esc(q.prompt)}</span></summary>
+        <div style="display:grid;gap:10px;margin-top:10px">${q.es ? `<p class="muted">${esc(q.es)}</p>` : ""}${q.code ? `<pre class="code">${esc(q.code)}</pre>` : ""}${figureBlock(q)}${optionsBlock(q, S.answers[i], true)}
+        <p class="ans">${t("yourAns")}: ${S.answers[i] === null ? t("unanswered") : KEYS[S.answers[i]]} · ${t("correctAns")}: ${KEYS[q.answer]}</p><p>${esc(tx(q.explain))}</p></div></details>`;
     }).join("")}</section>
   </main>`;
 }
@@ -626,8 +830,10 @@ function render() {
 document.addEventListener("click", e => {
   const b = e.target.closest("button");
   if (!b) return;
+  if (b.dataset.lang) return setLang(b.dataset.lang);
   if (b.dataset.start) return startExam(b.dataset.start);
   if (b.hasAttribute("data-practice")) return startPractice($("#ptopic").value);
+  if (b.hasAttribute("data-tr")) return toggleTr();
   if (b.hasAttribute("data-resample") || b.hasAttribute("data-home")) { clearInterval(tick); S = { view: "home", practiceTopic: S.practiceTopic }; return render(); }
   if (b.dataset.opt !== undefined) {
     const i = Number(b.dataset.opt);
@@ -635,21 +841,22 @@ document.addEventListener("click", e => {
     if (S.view === "practice" && S.chosen === null) { S.chosen = i; S.done++; if (i === S.q.answer) S.right++; return render(); }
     return;
   }
-  if (b.hasAttribute("data-pnext")) { S.q = practiceQuestion(S.practiceTopic); S.chosen = null; return render(); }
+  if (b.hasAttribute("data-pnext")) { S.q = practiceQuestion(S.practiceTopic); S.chosen = null; S.tr = {}; return render(); }
   if (b.hasAttribute("data-next")) { S.cur++; return render(); }
   if (b.hasAttribute("data-prev")) { S.cur--; return render(); }
   if (b.hasAttribute("data-flag")) { S.flags[S.cur] = !S.flags[S.cur]; return render(); }
   if (b.dataset.go !== undefined) { S.cur = Number(b.dataset.go); return render(); }
   if (b.hasAttribute("data-finish")) {
     const blank = S.answers.filter(a => a === null).length;
-    if (blank && !b.dataset.confirm) { b.dataset.confirm = "1"; b.textContent = `Hay ${blank} sin responder. ¿Terminar igual?`; return; }
+    if (blank && !b.dataset.confirm) { b.dataset.confirm = "1"; b.textContent = t("blank")(blank); return; }
     return finishExam(false);
   }
 });
 document.addEventListener("keydown", e => {
   if (e.target.closest("select, input, textarea") || e.metaKey || e.ctrlKey || e.altKey) return;
-  const k = e.key.toUpperCase();
+  const k = e.key.length === 1 ? e.key.toUpperCase() : e.key;
   const idx = "ABCD".indexOf(k) >= 0 ? "ABCD".indexOf(k) : "1234".indexOf(k);
+  if ((S.view === "exam" || S.view === "practice") && k === "T") return toggleTr();
   if (S.view === "exam") {
     if (idx >= 0 && idx < S.questions[S.cur].options.length) { S.answers[S.cur] = idx; render(); }
     else if (e.key === "ArrowRight" && S.cur < S.questions.length - 1) { S.cur++; render(); }
@@ -662,6 +869,7 @@ document.addEventListener("keydown", e => {
 // Conservar el intento en curso si la página se actualiza mientras está abierta.
 window.claude?.hot?.snapshot?.(() => S);
 function boot(data) {
+  document.documentElement.lang = LANG;
   if (data && data.view) { S = data; if (S.view === "exam") runTimer(); }
   render();
 }

@@ -1,5 +1,7 @@
 # 07 · Resolución de problemas (+ lógica, matemática y estadística básica)
 
+🌐 **Español** · [English](README.en.md)
+
 > "Resolución de problemas" en una prueba de una empresa de datos suele mezclar tres cosas:
 >
 > 1. **Problemas de programación** que debes descomponer y resolver.

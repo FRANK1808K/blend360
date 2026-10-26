@@ -1,5 +1,7 @@
 # Interactive simulator: Simulacro 30·90
 
+🌐 [Español](README.md) · **English**
+
 A browser simulator for both parts of the test, available in **English and Spanish** (ES/EN switch at the top):
 
 | Mode | Questions | Time | Content |

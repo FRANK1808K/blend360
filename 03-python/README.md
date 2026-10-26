@@ -1,5 +1,7 @@
 # 03 · Python — Lo que necesitas para la prueba técnica
 
+🌐 **Español** · [English](README.en.md)
+
 > Según los reportes de candidatos, la prueba online de Blend360 suele traer **problemas de programación en Python (o R) junto con SQL**, con tiempo limitado. Además, pueden aparecer preguntas de opción múltiple tipo "¿qué imprime este código?". Aquí cubres las dos cosas.
 
 **Material de este módulo:**
