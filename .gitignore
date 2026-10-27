@@ -4,6 +4,6 @@ __pycache__/
 .DS_Store
 .venv/
 node_modules/
-guide/_docs/
-guide/_site/
 _site/
+.quarto/
+_build/

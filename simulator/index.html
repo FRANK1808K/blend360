@@ -1097,7 +1097,7 @@ function homeView() {
         <h2>${u("guideTitle")}</h2>
         <p class="meta">${u("guideMeta")}</p>
         <p>${u("guideDesc")}</p>
-        <a class="btn" href="${GUIDE_URL}${LANG === "en" ? "en/" : ""}" target="_blank" rel="noopener">${u("guideBtn")}</a>
+        <a class="btn" href="${GUIDE_URL}${LANG === "en" ? "index.en.html" : ""}" target="_blank" rel="noopener">${u("guideBtn")}</a>
       </article>
       <article class="mode" style="border-color: #FF9900;">
         <span class="ico" style="background: rgba(255, 153, 0, 0.15); color: #FF9900;">
@@ -1107,8 +1107,8 @@ function homeView() {
         <p class="meta">${LANG === "en" ? "130 questions · 2 mock exams · Guide" : "130 preguntas · 2 simulacros · Guía"}</p>
         <p>${LANG === "en" ? "Official preparation: 5 domains, Bedrock, RAG, responsible AI, interactive simulator, and cheatsheets." : "Preparación oficial: 5 dominios, Bedrock, RAG, IA responsable, simulador interactivo y cheatsheets."}</p>
         <div class="row" style="gap:8px;margin-top:4px;">
-          <a class="btn primary mini" href="aws-ai-practitioner/simulator/" target="_blank" rel="noopener">${LANG === "en" ? "Open Simulator ↗" : "Abrir Simulador ↗"}</a>
-          <a class="btn ghost mini" href="${GUIDE_URL}${LANG === "en" ? "en/aws-ai-practitioner/" : "aws-ai-practitioner/"}" target="_blank" rel="noopener">${LANG === "en" ? "Read Guide ↗" : "Ver Guía ↗"}</a>
+          <a class="btn primary mini" href="${PAGES_URL}simulador-aif/" target="_blank" rel="noopener">${LANG === "en" ? "Open Simulator ↗" : "Abrir Simulador ↗"}</a>
+          <a class="btn ghost mini" href="${GUIDE_URL}${LANG === "en" ? "aws-ai-practitioner/index.en.html" : "aws-ai-practitioner/"}" target="_blank" rel="noopener">${LANG === "en" ? "Read Guide ↗" : "Ver Guía ↗"}</a>
         </div>
       </article>
       <article class="mode">
@@ -1202,7 +1202,8 @@ const LAB = JSON.parse(document.getElementById("lab-data").textContent);
 const CDN_SQL = "https://cdn.jsdelivr.net/npm/sql.js@1.10.3/dist/";
 const CDN_PY = "https://cdn.jsdelivr.net/npm/pyodide@0.26.4/";
 const PAGES_URL = "https://frank1808k.github.io/blend360/";
-const GUIDE_URL = PAGES_URL + "guia/";
+const GUIDE_URL = PAGES_URL;                 // Quarto study site / sitio de estudio Quarto
+const SIM_URL = PAGES_URL + "simulador/";
 const LEVEL = {
   basic: { es: "🟢 Básico", en: "🟢 Basic", min: 3 }, joins: { es: "🟡 JOINs y subconsultas", en: "🟡 JOINs and subqueries", min: 5 },
   windows: { es: "🟠 CASE y ventanas", en: "🟠 CASE and window functions", min: 7 }, challenge: { es: "🔴 Retos de entrevista", en: "🔴 Interview challenges", min: 10 },
@@ -1552,7 +1553,7 @@ async function prepareSql() {
     const el = $("#schema");
     if (el) el.innerHTML = schemaHtml();
   } catch (e) {
-    setStatus(`<div class="feedback bad">${t("lab").engineFail("SQL")} <a href="${PAGES_URL}">${PAGES_URL}</a></div>`);
+    setStatus(`<div class="feedback bad">${t("lab").engineFail("SQL")} <a href="${SIM_URL}">${SIM_URL}</a></div>`);
   }
 }
 function prepareEngineNote() {
@@ -1613,7 +1614,7 @@ async function pyRun() {
   try { r = await gradePy(S.set, item.name, code); }
   catch (e) {
     if (e.message === "timeout") return setOut(`<div class="feedback bad"><strong>${L.timeout}</strong></div>`);
-    return setOut(`<div class="feedback bad">${L.engineFail("Python")} <a href="${PAGES_URL}">${PAGES_URL}</a><br><code>${esc(e.message)}</code></div>`);
+    return setOut(`<div class="feedback bad">${L.engineFail("Python")} <a href="${SIM_URL}">${SIM_URL}</a><br><code>${esc(e.message)}</code></div>`);
   }
   setStatus("");
   const pending = r.cases.some(c => c.pending) || r.special === "pending";

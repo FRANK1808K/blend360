@@ -1,0 +1,42 @@
+---
+title: "Mi progreso"
+subtitle: "Páginas estudiadas, simulacros, cuaderno de errores y simuladores"
+---
+
+::: {.lang-switch}
+🌐 **Español** · [English](progreso.en.qmd)
+:::
+
+::: {.callout-note title="Tu progreso se guarda solo en este navegador"}
+No hay cuentas ni servidores: todo queda en este navegador y en este dispositivo. Si cambias de computador o de celular, usa [la copia de seguridad](#copia-de-seguridad). Las páginas que marcas como estudiadas cuentan igual en español y en inglés.
+:::
+
+## Páginas estudiadas
+
+<div id="b-progress">Activa JavaScript para ver tu progreso.</div>
+
+## Registro de simulacros
+
+Registra cada simulacro y cada bloque de ejercicios cronometrado. La línea punteada es la meta del 80 %; los puntos naranjas son del AIF-C01.
+
+<div id="b-scores"></div>
+
+## Cuaderno de errores
+
+Cada error que anotas aquí vuelve el día que elegiste para repasarlo. Al acertarlo de nuevo, márcalo como **dominado**. El día antes del examen, lee solo las reglas de este cuaderno.
+
+<div id="b-errors"></div>
+
+## Simuladores
+
+Lo que guardaron los simuladores en este navegador: ejercicios resueltos en el laboratorio de código y tus últimos intentos.
+
+<div id="b-sim"></div>
+
+[🎯 Simulador Blend360](simulador/index.html){.b-btn} [☁️ Simulador AIF-C01](simulador-aif/index.html){.b-btn}
+
+## Copia de seguridad
+
+Descarga tu progreso (páginas, simulacros, cuaderno y simuladores) en un archivo y restáuralo en otro navegador.
+
+<div id="b-backup"></div>

@@ -1,0 +1,47 @@
+/*-- scss:defaults --*/
+// Black mode: same palette as the simulator / Modo negro: la misma paleta del simulador.
+$body-bg: #000000;
+$body-color: #f6f6f8;
+$primary: #ff4fa3;
+$secondary: #a3a3ae;
+$success: #4ade80;
+$danger: #ff6b7e;
+$warning: #fbbf24;
+$info: #7cb7ff;
+$link-color: #ff4fa3;
+$navbar-bg: #000000;
+$navbar-fg: #f6f6f8;
+$navbar-hl: #ff4fa3;
+$sidebar-bg: #000000;
+$footer-bg: #000000;
+$code-bg: #121216;
+$code-block-bg: #0d0d10;
+$code-color: #ff8cc4;
+$border-color: #26262e;
+$table-border-color: #26262e;
+$input-bg: #0d0d10;
+$input-color: #f6f6f8;
+$input-border-color: #26262e;
+
+/*-- scss:rules --*/
+// Plain-text blocks (ASCII diagrams) must stay readable / Los bloques de texto plano deben leerse.
+pre, pre code, div.sourceCode pre { color: #e6e6ea; }
+:root {
+  --b-paper: #000000;
+  --b-card: #0d0d10;
+  --b-surface: #17171c;
+  --b-ink: #f6f6f8;
+  --b-muted: #a3a3ae;
+  --b-rule: #26262e;
+  --b-accent: #ff4fa3;
+  --b-accent-ink: #160009;
+  --b-accent-soft: #2a0c1b;
+  --b-ok: #4ade80;
+  --b-ok-bg: #0d2817;
+  --b-bad: #ff6b7e;
+  --b-bad-bg: #2d0e14;
+  --b-aws: #ffb050;
+  --b-aws-soft: #2a1a06;
+  --b-shadow: 0 0 0 1px rgb(255 255 255 / .02), 0 14px 34px -22px rgb(0 0 0 / .9);
+  --b-shadow-hi: 0 0 0 1px rgb(255 79 163 / .35), 0 18px 44px -20px rgb(255 79 163 / .45);
+}

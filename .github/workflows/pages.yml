@@ -1,15 +1,15 @@
 name: Pages
 
-# Publishes the simulator at the site root and the study guide at /guia/.
-# Publica el simulador en la raíz del sitio y la guía de estudio en /guia/.
+# Publishes the Quarto study website at the site root, with the simulators at /simulador/ and /simulador-aif/.
+# Publica el sitio de estudio Quarto en la raíz, con los simuladores en /simulador/ y /simulador-aif/.
 on:
   push:
     paths:
       - "simulator/**"
-      - "guide/**"
+      - "quarto/**"
       - "aws-ai-practitioner/**"
       - "**.md"
-      - "scripts/build_guide.py"
+      - "scripts/build_site.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -35,15 +35,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-      - name: Build the study guide
-        run: |
-          pip install --quiet -r guide/requirements.txt
-          python scripts/build_guide.py --strict --out _site/guia
-      - name: Add the simulator
-        run: |
-          cp -r simulator/. _site/
-          mkdir -p _site/aws-ai-practitioner/simulator
-          cp -r aws-ai-practitioner/simulator/. _site/aws-ai-practitioner/simulator/
+        with:
+          python-version: "3.12"
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.10.18
+      - name: Build the study website (includes both simulators)
+        run: python scripts/build_site.py --strict --out _site
       - uses: actions/configure-pages@v5
         with:
           enablement: true

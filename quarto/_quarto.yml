@@ -1,0 +1,105 @@
+# Study website / Sitio web de estudio (Quarto).
+# Do not render this folder directly: scripts/build_site.py copies it to _build/site together with the
+# repository's Markdown (adapted), writes _sidebar.yml and assets/manifest.js, and runs `quarto render`.
+# No se renderiza directamente: scripts/build_site.py lo copia a _build/site junto con el Markdown del
+# repositorio (adaptado), genera _sidebar.yml y assets/manifest.js y ejecuta `quarto render`.
+project:
+  type: website
+  resources:
+    - simulador/
+    - simulador-aif/
+    - assets/
+    - guia/
+
+# Navigation sidebars, generated from NAV in scripts/build_site.py.
+# Barras laterales, generadas desde NAV en scripts/build_site.py.
+metadata-files:
+  - _sidebar.yml
+
+lang: es
+
+website:
+  title: "Blend360 · Centro de estudio"
+  description: "Preparación para la prueba de ingreso de Blend360 All Star y la certificación AWS AI Practitioner (AIF-C01), en español e inglés."
+  site-url: https://frank1808k.github.io/blend360/
+  repo-url: https://github.com/FRANK1808K/blend360
+  favicon: assets/favicon.svg
+  open-graph: true
+  page-navigation: true
+  back-to-top-navigation: true
+  reader-mode: true
+  search:
+    location: navbar
+    type: overlay
+    copy-button: true
+  navbar:
+    logo: assets/favicon.svg
+    title: "Blend360"
+    collapse-below: lg
+    left:
+      - text: "📚 Estudiar"
+        href: estudiar.qmd
+      - text: "🧪 Evaluar"
+        href: evaluar.qmd
+      - text: "🔁 Repasar"
+        href: cheatsheets/index.qmd
+      - text: "☁️ AIF-C01"
+        href: aws-ai-practitioner/index.qmd
+      - text: "📈 Progreso"
+        href: progreso.qmd
+    right:
+      - text: "🎯 Simuladores"
+        menu:
+          - text: "Simulador Blend360 (30 · 90 + laboratorio de código)"
+            href: simulador/index.html
+          - text: "Simulador AWS AIF-C01 (65 preguntas · 90 min)"
+            href: simulador-aif/index.html
+      - text: "🌐 English"
+        menu:
+          - text: "Home"
+            href: index.en.qmd
+          - text: "Study"
+            href: estudiar.en.qmd
+          - text: "Practice and assess"
+            href: evaluar.en.qmd
+          - text: "Review"
+            href: cheatsheets/index.en.qmd
+          - text: "My progress"
+            href: progreso.en.qmd
+      - icon: github
+        href: https://github.com/FRANK1808K/blend360
+        aria-label: GitHub
+  page-footer:
+    left: "Material comunitario **no oficial**: sin relación con Blend360 ni con AWS. Las preguntas son originales."
+    right:
+      - text: "Simulador"
+        href: simulador/index.html
+      - text: "Mi progreso"
+        href: progreso.qmd
+      - icon: github
+        href: https://github.com/FRANK1808K/blend360
+
+format:
+  html:
+    # GitHub-flavoured details: same anchors as GitHub, "$5" is money (not math), "2^10" is plain text.
+    # Como en GitHub: mismas anclas, "$5" es dinero (no matemáticas), "2^10" es texto.
+    from: markdown+gfm_auto_identifiers-tex_math_dollars-subscript-superscript
+    theme:
+      light: [cosmo, assets/theme.scss, assets/theme-light.scss]
+      dark: [cosmo, assets/theme.scss, assets/theme-dark.scss]
+    respect-user-color-scheme: true
+    toc: true
+    toc-depth: 3
+    toc-title: "En esta página"
+    toc-expand: 1
+    number-sections: false
+    anchor-sections: true
+    smooth-scroll: true
+    code-copy: true
+    highlight-style: github
+    code-overflow: wrap
+    link-external-newwindow: true
+    link-external-icon: false
+    mermaid:
+      theme: neutral
+    include-after-body: assets/loader.html

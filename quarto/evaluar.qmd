@@ -1,0 +1,78 @@
+---
+title: "Ruta de evaluación"
+subtitle: "Cómo medir tu nivel, qué meta cumplir y qué hacer con cada error"
+---
+
+::: {.lang-switch}
+🌐 **Español** · [English](evaluar.en.qmd)
+:::
+
+Evaluarte no es el final del estudio: es la forma más rápida de aprender. Sube esta escalera en orden y registra cada resultado en [Mi progreso](progreso.qmd).
+
+<ol class="b-steps">
+<li class="b-step"><strong>Comprobar (al terminar cada módulo)</strong><p>Responde la autoevaluación del final del módulo y sus ejercicios <em>sin mirar</em>. Con 80 % o más, pasa al siguiente tema.</p></li>
+<li class="b-step"><strong>Practicar con reloj (desde la semana 2)</strong><p>Ejercicios por tema con tiempo objetivo y el <a href="simulador/index.html">laboratorio de código</a>: 12 min por consulta SQL, 15 min por problema de Python.</p></li>
+<li class="b-step"><strong>Simulacros por parte (semanas 3, 6 y 7)</strong><p>Razonamiento de 30 min, técnico de 40 preguntas en 50 min y el reto de 5 consultas SQL en 60 min.</p></li>
+<li class="b-step"><strong>Ensayo general (semana 8)</strong><p>Razonamiento 30 min + técnico 90 min <em>seguidos</em>, con el celular lejos, como el 18 de diciembre.</p></li>
+</ol>
+
+## Todo lo que tienes para evaluarte
+
+### Blend360 All Star
+
+| Recurso | Qué mide | Preguntas | Tiempo | Meta |
+|---|---|---|---|---|
+| [Razonamiento · 50 ejercicios](01-razonamiento-abstracto/ejercicios.qmd) | Series, matrices, dominós, figuras | 50 | 1 min c/u | ≥ 40 |
+| [SQL · 35 ejercicios](02-sql/ejercicios.qmd) | De `SELECT` a funciones de ventana | 35 | 2–10 min c/u | ≥ 30 sin mirar |
+| [Laboratorio SQL](simulador/index.html) | Escribes la consulta y se corrige el resultado | 36 | Meta por nivel | ≥ 30 |
+| [Laboratorio Python](simulador/index.html) | 25 ejercicios de Python con pruebas automáticas | 25 | Meta por ejercicio | 25 |
+| [Laboratorio de algoritmos](simulador/index.html) | 20 problemas clásicos con pruebas automáticas | 20 | Meta por problema | ≥ 17 |
+| [AWS · 30 preguntas](06-aws/preguntas.qmd) | Nube y análisis de datos en AWS | 30 | 30 min | ≥ 24 |
+| [Estadística y ML · 25 preguntas](08-estadistica-y-ml/preguntas.qmd) | Descriptiva, pruebas A/B, ML, métricas | 25 | 25 min | ≥ 20 |
+| [Inglés · ejercicios](english/ejercicios-ingles.qmd) | Comprensión de enunciados técnicos | — | — | Sin errores de palabras clave |
+| [Simulacro de razonamiento #1](simulacros/simulacro-razonamiento-01.qmd) | La parte 1 completa | 30 | 30 min | ≥ 24 |
+| [Simulacro técnico #1](simulacros/simulacro-tecnico-01.qmd) | La parte 2 completa | 40 + 3 de código | 90 min | ≥ 34/40 |
+| [Simulador: razonamiento](simulador/index.html) | Figuras generadas al azar: nunca se repite | 30 | 30 min | ≥ 24 |
+| [Simulador: técnico](simulador/index.html) | Banco de 60 preguntas en inglés | 40 | 50 min | ≥ 34 |
+| [Simulador: reto SQL](simulador/index.html) | 5 consultas 🟡–🔴 sin ver soluciones | 5 | 60 min | 5/5 |
+
+### AWS AI Practitioner (AIF-C01)
+
+| Recurso | Preguntas | Tiempo | Meta |
+|---|---|---|---|
+| Preguntas por dominio: [D1](aws-ai-practitioner/practice-questions/domain-01-questions.qmd) · [D2](aws-ai-practitioner/practice-questions/domain-02-questions.qmd) · [D3](aws-ai-practitioner/practice-questions/domain-03-questions.qmd) · [D4](aws-ai-practitioner/practice-questions/domain-04-questions.qmd) · [D5](aws-ai-practitioner/practice-questions/domain-05-questions.qmd) | 6 por dominio | Al terminar cada dominio | 5/6 |
+| [Simulacro 01](aws-ai-practitioner/practice-questions/mock-exam-01.qmd) ([en inglés](aws-ai-practitioner/practice-questions/en/mock-exam-01.qmd)) | 65 | 90 min | ≥ 85 % |
+| [Simulacro 02](aws-ai-practitioner/practice-questions/mock-exam-02.qmd) ([en inglés](aws-ai-practitioner/practice-questions/en/mock-exam-02.qmd)) | 65 de escenario | 90 min | ≥ 85 % |
+| [Simulador AIF-C01](simulador-aif/index.html): informe por dominio, refuerzo de dominios débiles | 65 / 40 | 90 / 55 min | ≥ 85 % |
+
+## Metas para el 15 de diciembre
+
+| Prueba | Meta | Por qué |
+|---|---|---|
+| SQL | ≥ 30/35 sin mirar | Los candidatos reportan SQL difícil, ~12 min por pregunta y sin margen de error |
+| Python | 25/25 | Son ejercicios cortos: no deberías fallar ninguno el día del examen |
+| Algoritmos | ≥ 17/20 | Big O y trazado de pseudocódigo salen en opción múltiple |
+| Razonamiento | ≥ 24/30 en 30 min | Lo describen como "bastante exigente" |
+| Técnico (simulador) | ≥ 34/40 | 85 % deja margen para los nervios del día real |
+
+## Después de cada simulacro
+
+1. **Registra** el puntaje en [Mi progreso](progreso.qmd#registro-de-simulacros): la gráfica te muestra si vas subiendo.
+2. **Clasifica cada error** por su causa y anótalo en el [cuaderno de errores](progreso.qmd#cuaderno-de-errores).
+3. **Ataca la causa más frecuente**, no el tema más largo:
+
+| Causa | Qué hacer |
+|---|---|
+| No sabía el concepto | Vuelve a la teoría de ese punto y rehaz los ejercicios fallados dentro de 2 días |
+| No entendí el inglés | [Cómo leer preguntas](english/como-leer-preguntas.qmd) + flashcards con las palabras que no sabías |
+| Me faltó tiempo | Bloques cronometrados; en el examen, salta la pregunta difícil y vuelve al final |
+| Descuido | Subraya la palabra que cambia todo (NOT, EXCEPT, LEAST, MOST) y revisa una vez |
+| Caí en una trampa | Escríbela como regla en el cuaderno; para AIF-C01, repasa los [pares que se confunden](aws-ai-practitioner/cheatsheets/confusable-pairs.qmd) |
+
+## Estrategia para el día del examen
+
+- **Primera pasada rápida:** responde lo que sabes y marca lo dudoso. Vuelve al final.
+- **Presupuesto de tiempo:** razonamiento ≈ 1 min por pregunta; técnico ≈ 1 min por pregunta de opción múltiple y 12–15 min por problema de código.
+- **Nunca dejes en blanco** una pregunta de opción múltiple, salvo que el reclutador confirme que los errores restan puntos ([preguntas para el reclutador](guides/que-evalua-blend360.qmd#5-preguntas-que-conviene-hacerle-al-reclutador)).
+- **SQL:** antes de escribir, mira el resultado esperado: ¿una fila por qué? Eso te dice el `GROUP BY`.
+- Las 48 horas previas: el [repaso final](cheatsheets/repaso-final-48h.qmd) (Blend360) y el [repaso final AIF-C01](aws-ai-practitioner/cheatsheets/final-review-48h.qmd).

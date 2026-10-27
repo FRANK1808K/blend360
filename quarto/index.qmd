@@ -1,0 +1,71 @@
+---
+pagetitle: "Blend360 · Centro de estudio"
+title-block-style: none
+toc: false
+page-layout: full
+sidebar: false
+---
+
+::: {.b-hero}
+[Blend360 All Star · AWS AI Practitioner]{.b-kicker}
+
+<h1>Todo lo que necesitas para pasar las dos pruebas, en un solo lugar</h1>
+
+[Estudia en español, practica en inglés y mide tu avance con simulacros cronometrados. Tu progreso se guarda en este navegador.]{.b-lead}
+
+<a class="b-btn primary" href="estudiar.html">📚 Empezar a estudiar</a>
+<a class="b-btn" href="evaluar.html">🧪 Medir mi nivel</a>
+<a class="b-btn" href="simulador/index.html">🎯 Abrir el simulador</a>
+<a class="b-btn" href="index.en.html">🌐 English</a>
+
+<div class="b-countdowns">
+<div class="b-count aws" data-countdown="aws"><div class="b-count-num">16 nov</div><div class="b-count-label">AWS AI Practitioner (AIF-C01)</div></div>
+<div class="b-count blend" data-countdown="blend"><div class="b-count-num">18 dic</div><div class="b-count-label">Prueba Blend360 All Star</div></div>
+</div>
+:::
+
+## Qué toca hoy
+
+<div class="b-timeline">
+<div class="aws" data-phase="1">Fase 1 · 26 oct – 16 nov<br>AWS AIF-C01 + base Blend360</div>
+<div class="blend" data-phase="2">Fase 2 · 17 nov – 15 dic<br>Blend360 a fondo</div>
+<div data-phase="3">16–17 dic<br>Repaso</div>
+<div class="blend" data-phase="4">18 dic<br>Examen</div>
+</div>
+
+<div id="b-today" class="b-today">Abre el [plan de estudio](guides/plan-de-estudio.qmd) para ver la tarea de esta semana.</div>
+
+## Cómo está organizado
+
+<div class="b-grid">
+<a class="b-card" href="estudiar.html"><span class="b-card-icon">📚</span><span class="b-card-title">Estudiar</span><span class="b-card-text">La teoría de cada tema de la prueba: razonamiento abstracto, SQL, Python, algoritmos, bases de datos, AWS, resolución de problemas, estadística e inglés técnico.</span><span class="b-card-meta">10 temas + inglés técnico · ruta y prioridades</span></a>
+<a class="b-card" href="evaluar.html"><span class="b-card-icon">🧪</span><span class="b-card-title">Practicar y evaluar</span><span class="b-card-text">Ejercicios con solución, simulacros cronometrados como el examen real y el laboratorio para escribir SQL y Python en el navegador.</span><span class="b-card-meta">185 ejercicios · 2 simulacros · simulador</span></a>
+<a class="b-card" href="cheatsheets/index.html"><span class="b-card-icon">🔁</span><span class="b-card-title">Repasar</span><span class="b-card-text">Hojas de una página para imprimir, el plan de las últimas 48 horas y las flashcards para Anki.</span><span class="b-card-meta">6 cheatsheets · 209 flashcards</span></a>
+<a class="b-card aws" href="aws-ai-practitioner/index.html"><span class="b-card-icon">☁️</span><span class="b-card-title">AWS AI Practitioner</span><span class="b-card-text">Los 5 dominios de la guía v1.1, cheatsheets de decisión, laboratorio RAG y estrategia para el examen del 16 de noviembre.</span><span class="b-card-meta">160 preguntas · simulador · 109 flashcards</span></a>
+<a class="b-card" href="progreso.html"><span class="b-card-icon">📈</span><span class="b-card-title">Mi progreso</span><span class="b-card-text">Páginas estudiadas, registro de simulacros con gráfica, cuaderno de errores con fechas de repaso y copia de seguridad.</span><span class="b-card-meta">Se guarda en tu navegador</span></a>
+</div>
+
+## Tu avance
+
+<div id="b-home-progress" class="b-grid">Marca cada página como estudiada con el botón que aparece debajo de su título.</div>
+
+## Las dos pruebas
+
+| Prueba | Fecha | Formato | Qué evalúa |
+|---|---|---|---|
+| **AWS Certified AI Practitioner (AIF-C01)** | 16 nov 2026 | 65 preguntas · 90 min · aprueba con 700/1000 | IA y ML, IA generativa, modelos fundacionales en AWS, IA responsable, seguridad y gobernanza |
+| **Blend360 All Star: razonamiento abstracto** | 18 dic 2026 | 30 min | Series de figuras, matrices, dominós, series numéricas y de letras |
+| **Blend360 All Star: prueba técnica** (en inglés) | 18 dic 2026 | 90 min | SQL · Python · AWS y análisis de datos · algoritmos · bases de datos · estructuras de datos · resolución de problemas |
+
+## El método en cuatro pasos
+
+<ol class="b-steps">
+<li class="b-step"><strong>Aprende en español</strong><p>Lee el módulo con un objetivo: al terminar debes poder responder su autoevaluación sin mirar.</p></li>
+<li class="b-step"><strong>Relee y practica en inglés</strong><p>Cada página tiene su versión en inglés (🌐 arriba). Los ejercicios vienen en inglés, como en la prueba, con la traducción escondida.</p></li>
+<li class="b-step"><strong>Evalúate con reloj</strong><p>Haz los ejercicios sin abrir la solución y después los simulacros cronometrados. Registra cada puntaje en <a href="progreso.html">Mi progreso</a>.</p></li>
+<li class="b-step"><strong>Repasa tus errores, no todo</strong><p>Cada fallo va al cuaderno de errores con la regla que aprendiste y una fecha de repaso. Ahí está tu mejor material de estudio.</p></li>
+</ol>
+
+::: {.callout-note title="Material no oficial"}
+Material de estudio comunitario, sin relación con Blend360 ni con AWS. Las preguntas son originales. Lo que se sabe del proceso de Blend360 viene de reseñas públicas de candidatos: ver [Qué evalúa Blend360](guides/que-evalua-blend360.qmd).
+:::

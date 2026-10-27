@@ -32,9 +32,9 @@ No options to choose from here: **you write the code**, run it, and the lab grad
 
 ## How to open it
 
-- **Online (recommended, works on your phone):** the published version at the link Claude shared with you.
+- **Online (recommended, works on your phone):** [frank1808k.github.io/blend360/simulador](https://frank1808k.github.io/blend360/simulador/).
 - **Locally:** double-click `simulator/index.html` to open it in any browser (nothing to install).
-- **GitHub Pages:** [frank1808k.github.io/blend360](https://frank1808k.github.io/blend360/). The [`pages.yml`](../.github/workflows/pages.yml) workflow republishes it every time the simulator or the documentation changes on the repository's default branch, together with the [study guide website](https://frank1808k.github.io/blend360/guia/en/). If it ever stops publishing, check *Settings → Pages → Source: **GitHub Actions***.
+- **GitHub Pages:** the [`pages.yml`](../.github/workflows/pages.yml) workflow republishes it at `/simulador/` every time the simulator or the documentation changes on the repository's default branch, together with the [study hub website](https://frank1808k.github.io/blend360/index.en.html). If it ever stops publishing, check *Settings → Pages → Source: **GitHub Actions***.
 
 **Keyboard shortcuts:** `A`–`D` or `1`–`4` to answer, `←` `→` to move between questions, `T` to show the translation.
 

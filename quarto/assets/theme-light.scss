@@ -1,0 +1,42 @@
+/*-- scss:defaults --*/
+// White mode: same palette as the simulator / Modo blanco: la misma paleta del simulador.
+$body-bg: #ffffff;
+$body-color: #0b0b0f;
+$primary: #d1006b;
+$secondary: #5e5e6a;
+$success: #0d7a3c;
+$danger: #c0172b;
+$warning: #a35400;
+$info: #1f4e79;
+$link-color: #d1006b;
+$navbar-bg: #ffffff;
+$navbar-fg: #0b0b0f;
+$navbar-hl: #d1006b;
+$sidebar-bg: #ffffff;
+$footer-bg: #ffffff;
+$code-bg: #f4f4f6;
+$code-block-bg: #f7f7f9;
+$code-color: #a3004f;
+$border-color: #e3e3e8;
+$table-border-color: #e3e3e8;
+
+/*-- scss:rules --*/
+:root {
+  --b-paper: #ffffff;
+  --b-card: #ffffff;
+  --b-surface: #f4f4f6;
+  --b-ink: #0b0b0f;
+  --b-muted: #5e5e6a;
+  --b-rule: #e3e3e8;
+  --b-accent: #d1006b;
+  --b-accent-ink: #ffffff;
+  --b-accent-soft: #fde6f1;
+  --b-ok: #0d7a3c;
+  --b-ok-bg: #e2f6e9;
+  --b-bad: #c0172b;
+  --b-bad-bg: #fde8eb;
+  --b-aws: #b35c00;
+  --b-aws-soft: #fff1e0;
+  --b-shadow: 0 1px 0 rgb(0 0 0 / .03), 0 10px 30px -18px rgb(0 0 0 / .35);
+  --b-shadow-hi: 0 2px 0 rgb(0 0 0 / .04), 0 18px 40px -20px rgb(209 0 107 / .45);
+}

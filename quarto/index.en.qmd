@@ -1,0 +1,72 @@
+---
+pagetitle: "Blend360 · Study hub"
+lang: en
+title-block-style: none
+toc: false
+page-layout: full
+sidebar: false
+---
+
+::: {.b-hero}
+[Blend360 All Star · AWS AI Practitioner]{.b-kicker}
+
+<h1>Everything you need to pass both tests, in one place</h1>
+
+[Learn in Spanish, practise in English and track your level with timed mock exams. Your progress is saved in this browser.]{.b-lead}
+
+<a class="b-btn primary" href="estudiar.en.html">📚 Start studying</a>
+<a class="b-btn" href="evaluar.en.html">🧪 Check my level</a>
+<a class="b-btn" href="simulador/index.html">🎯 Open the simulator</a>
+<a class="b-btn" href="index.html">🌐 Español</a>
+
+<div class="b-countdowns">
+<div class="b-count aws" data-countdown="aws"><div class="b-count-num">Nov 16</div><div class="b-count-label">AWS AI Practitioner (AIF-C01)</div></div>
+<div class="b-count blend" data-countdown="blend"><div class="b-count-num">Dec 18</div><div class="b-count-label">Blend360 All Star test</div></div>
+</div>
+:::
+
+## What to do today
+
+<div class="b-timeline">
+<div class="aws" data-phase="1">Phase 1 · Oct 26 – Nov 16<br>AWS AIF-C01 + Blend360 base</div>
+<div class="blend" data-phase="2">Phase 2 · Nov 17 – Dec 15<br>Blend360 in depth</div>
+<div data-phase="3">Dec 16–17<br>Review</div>
+<div class="blend" data-phase="4">Dec 18<br>Exam</div>
+</div>
+
+<div id="b-today" class="b-today">Open the [study plan](guides/plan-de-estudio.en.qmd) to see this week's tasks.</div>
+
+## How it is organised
+
+<div class="b-grid">
+<a class="b-card" href="estudiar.en.html"><span class="b-card-icon">📚</span><span class="b-card-title">Study</span><span class="b-card-text">The theory for every topic of the test: abstract reasoning, SQL, Python, algorithms, databases, AWS, problem solving, statistics and technical English.</span><span class="b-card-meta">10 topics + technical English · path and priorities</span></a>
+<a class="b-card" href="evaluar.en.html"><span class="b-card-icon">🧪</span><span class="b-card-title">Practice and assess</span><span class="b-card-text">Exercises with solutions, timed mock exams like the real one and the lab to write SQL and Python in the browser.</span><span class="b-card-meta">185 exercises · 2 mock exams · simulator</span></a>
+<a class="b-card" href="cheatsheets/index.en.html"><span class="b-card-icon">🔁</span><span class="b-card-title">Review</span><span class="b-card-text">One-page sheets to print, the plan for the last 48 hours and the Anki flashcards.</span><span class="b-card-meta">6 cheat sheets · 209 flashcards</span></a>
+<a class="b-card aws" href="aws-ai-practitioner/index.en.html"><span class="b-card-icon">☁️</span><span class="b-card-title">AWS AI Practitioner</span><span class="b-card-text">Overview of the certification and both 65-question mock exams in English. The five domains are in the Spanish section.</span><span class="b-card-meta">130 questions in English · simulator</span></a>
+<a class="b-card" href="progreso.en.html"><span class="b-card-icon">📈</span><span class="b-card-title">My progress</span><span class="b-card-text">Pages studied, mock exam log with a chart, mistake notebook with review dates and a backup.</span><span class="b-card-meta">Saved in your browser</span></a>
+</div>
+
+## Your progress
+
+<div id="b-home-progress" class="b-grid">Mark each page as studied with the button under its title.</div>
+
+## The two tests
+
+| Test | Date | Format | What it evaluates |
+|---|---|---|---|
+| **AWS Certified AI Practitioner (AIF-C01)** | Nov 16, 2026 | 65 questions · 90 min · pass mark 700/1000 | AI and ML, generative AI, foundation models on AWS, responsible AI, security and governance |
+| **Blend360 All Star: abstract reasoning** | Dec 18, 2026 | 30 min | Figure series, matrices, dominoes, number and letter series |
+| **Blend360 All Star: technical test** (in English) | Dec 18, 2026 | 90 min | SQL · Python · AWS and data analytics · algorithms · databases · data structures · problem solving |
+
+## The method in four steps
+
+<ol class="b-steps">
+<li class="b-step"><strong>Learn in Spanish</strong><p>Read each module with a goal: when you finish it you must be able to answer its self-assessment without looking.</p></li>
+<li class="b-step"><strong>Re-read and practise in English</strong><p>Every page has an English twin (🌐 at the top). Exercises are in English, like the test, with the translation hidden.</p></li>
+<li class="b-step"><strong>Test yourself against the clock</strong><p>Do the exercises without opening the solution, then the timed mock exams. Log every score in <a href="progreso.en.html">My progress</a>.</p></li>
+<li class="b-step"><strong>Review your mistakes, not everything</strong><p>Every miss goes to the mistake notebook with the rule you learned and a review date. That is your best study material.</p></li>
+</ol>
+
+::: {.callout-note title="Unofficial material"}
+Community study material, not affiliated with Blend360 or AWS. The questions are original. What is known about Blend360's process comes from public candidate reviews: see [What Blend360 evaluates](guides/que-evalua-blend360.en.qmd).
+:::

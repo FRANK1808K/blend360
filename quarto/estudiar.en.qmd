@@ -1,0 +1,74 @@
+---
+title: "Study map"
+subtitle: "What to study, in which order, and how much each topic weighs in the test"
+lang: en
+toc-title: "On this page"
+---
+
+::: {.lang-switch}
+🌐 [Español](estudiar.qmd) · **English**
+:::
+
+Every topic has three pieces: the **theory** (this section), **practice** with solutions and a one-page **review sheet**. Study a module, do its practice without looking and mark the page as studied with the button under its title, so [My progress](progreso.en.qmd) knows where you are.
+
+::: {.callout-tip title="Not sure where to start?"}
+Follow the [study plan](guides/plan-de-estudio.en.qmd): it says what to do each week until December 18. The [home page](index.en.qmd) shows this week's tasks.
+:::
+
+## Part 1 · Abstract reasoning (30 minutes)
+
+It is trained with **daily timed practice**, not by studying theory: 15–20 minutes a day beat one long session a week.
+
+| Theory | Practice | Mock exam |
+|---|---|---|
+| [Abstract reasoning](01-razonamiento-abstracto/index.en.qmd): question types, the **FORMA-CPR** checklist, strategy for the 30 minutes | [50 exercises](01-razonamiento-abstracto/ejercicios.en.qmd) + unlimited figures in the [simulator](simulador/index.html) | [Reasoning #1](simulacros/simulacro-razonamiento-01.en.qmd) (30 questions, 30 min) |
+
+## Part 2 · Technical test (90 minutes, in English)
+
+Sorted by **priority** according to what candidates report ([research](guides/que-evalua-blend360.en.qmd)): SQL weighs the most and is asked against the clock. Hours are a guide.
+
+| Priority | Topic | Hours | Theory | Practice | Review |
+|---|---|---|---|---|---|
+| ⭐⭐⭐ | **SQL**: JOINs, aggregations, CTEs, window functions | 12 h | [SQL guide](02-sql/index.en.qmd) | [35 exercises](02-sql/ejercicios.en.qmd) · [SQL lab](simulador/index.html) | [Cheat sheet](cheatsheets/sql.en.qmd) |
+| ⭐⭐⭐ | **Python** for data | 10 h | [Python guide](03-python/index.en.qmd) · [pandas](03-python/pandas.en.qmd) | [25 exercises in the lab](simulador/index.html) | [Cheat sheet](cheatsheets/python.en.qmd) |
+| ⭐⭐ | **Algorithms and data structures** | 8 h | [Guide](04-algoritmos-y-estructuras/index.en.qmd) | [20 problems in the lab](simulador/index.html) | [Cheat sheet](cheatsheets/algoritmos.en.qmd) |
+| ⭐⭐ | **AWS and data analytics on AWS** (Blend is an AWS Premier Partner) | 6 h | [Fundamentals](06-aws/index.en.qmd) · [data analytics ⭐](06-aws/analisis-de-datos.en.qmd) | [30 questions](06-aws/preguntas.en.qmd) | [Cheat sheet](cheatsheets/aws-y-bases-de-datos.en.qmd) |
+| ⭐⭐ | **Databases**: keys, normalisation, ACID, OLTP/OLAP | 4 h | [Guide](05-bases-de-datos/index.en.qmd) | Self-assessment at the end of the guide | [Cheat sheet](cheatsheets/aws-y-bases-de-datos.en.qmd) |
+| ⭐⭐ | **Problem solving**, logic and maths | 4 h | [Guide](07-resolucion-de-problemas/index.en.qmd) | Worked exercises in the guide | [Final review](cheatsheets/repaso-final-48h.en.qmd) |
+| ⭐⭐ (⭐⭐⭐ for Data Science) | **Statistics and machine learning** | 6 h | [Guide](08-estadistica-y-ml/index.en.qmd) | [25 questions](08-estadistica-y-ml/preguntas.en.qmd) | [Cheat sheet](cheatsheets/estadistica-ml.en.qmd) |
+
+::: {.callout-note title="What about the Python and algorithm exercises?"}
+They live in `.py` files with an automatic grader. Do them in the **[simulator's code lab](simulador/index.html)** (in the browser, also on your phone) or on your computer with `python3 test_ejercicios.py` and `python3 test_problemas.py` (see the [Python](03-python/index.en.qmd) and [algorithms](04-algoritmos-y-estructuras/index.en.qmd) guides).
+:::
+
+## Technical English (every day)
+
+The technical test is in English. With 30–40 minutes a day you go from A2 to understanding any question.
+
+| Order | Page | What for |
+|---|---|---|
+| 1 | [English plan](english/index.en.qmd) | The 8-week path |
+| 2 | [How to read questions](english/como-leer-preguntas.en.qmd) | Key words in questions, false friends, traps |
+| 3 | [Technical vocabulary](english/vocabulario-tecnico.en.qmd) | SQL, Python, AWS, data, interview |
+| 4 | [Minimum grammar](english/gramatica-minima.en.qmd) | Just enough to understand and answer |
+| 5 | [Interview and phrases](english/entrevista-y-frases.en.qmd) | Self-introduction and STAR stories |
+| ✍️ | [English exercises](english/ejercicios-ingles.en.qmd) + [flashcards](flashcards/index.en.qmd) | Practise and lock in the vocabulary |
+
+## How to study a module
+
+<ol class="b-steps">
+<li class="b-step"><strong>Before: look at the self-assessment</strong><p>Read the questions at the end of the module first. You then read looking for answers instead of turning pages.</p></li>
+<li class="b-step"><strong>During: write and run</strong><p>Copy the SQL and Python examples into the <a href="simulador/index.html">lab</a> and change them. What you write sticks; what you only read does not.</p></li>
+<li class="b-step"><strong>After: practise without looking</strong><p>Do the exercises without opening the solution. When you miss one, write the mistake and the rule in the <a href="progreso.en.html#mistake-notebook">mistake notebook</a>.</p></li>
+<li class="b-step"><strong>Two days later: redo the misses</strong><p>Redo only what you missed. If it works, mark it as mastered; if not, go back to that point of the theory.</p></li>
+</ol>
+
+## Techniques that pay off most
+
+| Technique | How to apply it here |
+|---|---|
+| **Active recall** | Try to answer before looking. Solutions are hidden on purpose: open them only after trying. |
+| **Spaced repetition** | 20 new [flashcards](flashcards/index.en.qmd) a day in Anki + the reviews. The mistake notebook schedules your reviews. |
+| **Interleaved practice** | In the simulator, mix topics (technical mode) instead of 40 questions on one topic. |
+| **Practise like the exam** | From week 3, everything is timed: 12 min per SQL problem, 1 min per multiple-choice question. |
+| **Explain out loud (in English)** | Explain a query or an algorithm out loud in English: you train the topic and the interview at once. |

@@ -1,0 +1,14 @@
+<script>
+/* Loads the site scripts relative to the site root (works on GitHub Pages sub-paths and locally).
+   Carga los scripts del sitio relativos a la raíz (funciona en GitHub Pages y en local). */
+(function () {
+  var meta = document.querySelector('meta[name="quarto:offset"]');
+  var root = meta ? meta.getAttribute("content") : "./";
+  ["assets/manifest.js", "assets/site.js"].forEach(function (src) {
+    var s = document.createElement("script");
+    s.src = root + src;
+    s.async = false;
+    document.body.appendChild(s);
+  });
+})();
+</script>

@@ -14,6 +14,6 @@
     "MD060": false
   },
   "globs": ["**/*.md"],
-  // guide/_docs es una copia generada por scripts/build_guide.py.
-  "ignores": ["node_modules/**", "guide/_docs/**", "guide/_site/**", "_site/**"]
+  // _site es el sitio generado por scripts/build_site.py.
+  "ignores": ["node_modules/**", "_site/**", "_build/**"]
 }

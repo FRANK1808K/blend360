@@ -43,8 +43,9 @@ jobs:
         run: python scripts/check_docs.py
       - name: Simulator lab data matches the repository
         run: python scripts/build_lab.py --check
-      - name: Study guide builds without broken links
-        run: |
-          pip install --quiet -r guide/requirements.txt
-          python scripts/build_guide.py --strict
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.10.18
+      - name: Study website builds without warnings or broken links/anchors
+        run: python scripts/build_site.py --strict
       - uses: DavidAnson/markdownlint-cli2-action@v20

@@ -1,0 +1,44 @@
+---
+title: "My progress"
+subtitle: "Pages studied, mock exams, mistake notebook and simulators"
+lang: en
+toc-title: "On this page"
+---
+
+::: {.lang-switch}
+🌐 [Español](progreso.qmd) · **English**
+:::
+
+::: {.callout-note title="Your progress is saved only in this browser"}
+There are no accounts or servers: everything stays in this browser on this device. If you switch computer or phone, use [the backup](#backup). Pages you mark as studied count the same in Spanish and English.
+:::
+
+## Pages studied
+
+<div id="b-progress">Turn on JavaScript to see your progress.</div>
+
+## Mock exam log
+
+Log every mock exam and every timed block of exercises. The dashed line is the 80 % goal; orange dots are AIF-C01.
+
+<div id="b-scores"></div>
+
+## Mistake notebook
+
+Every mistake you write here comes back on the day you chose to review it. When you get it right again, mark it as **mastered**. The day before the exam, read only the rules in this notebook.
+
+<div id="b-errors"></div>
+
+## Simulators
+
+What the simulators saved in this browser: exercises solved in the code lab and your latest attempts.
+
+<div id="b-sim"></div>
+
+[🎯 Blend360 simulator](simulador/index.html){.b-btn} [☁️ AIF-C01 simulator](simulador-aif/index.html){.b-btn}
+
+## Backup
+
+Download your progress (pages, mock exams, notebook and simulators) to a file and restore it in another browser.
+
+<div id="b-backup"></div>

@@ -1,0 +1,80 @@
+---
+title: "Assessment path"
+subtitle: "How to measure your level, which goal to reach and what to do with each mistake"
+lang: en
+toc-title: "On this page"
+---
+
+::: {.lang-switch}
+🌐 [Español](evaluar.qmd) · **English**
+:::
+
+Testing yourself is not the end of studying: it is the fastest way to learn. Climb this ladder in order and log every result in [My progress](progreso.en.qmd).
+
+<ol class="b-steps">
+<li class="b-step"><strong>Check (after each module)</strong><p>Answer the module's self-assessment and its exercises <em>without looking</em>. With 80 % or more, move to the next topic.</p></li>
+<li class="b-step"><strong>Timed practice (from week 2)</strong><p>Exercises by topic with a target time and the <a href="simulador/index.html">code lab</a>: 12 min per SQL query, 15 min per Python problem.</p></li>
+<li class="b-step"><strong>Mock exams per part (weeks 3, 6 and 7)</strong><p>30-minute reasoning, 40 technical questions in 50 minutes and the 5-query SQL challenge in 60 minutes.</p></li>
+<li class="b-step"><strong>Dress rehearsal (week 8)</strong><p>Reasoning 30 min + technical 90 min <em>back to back</em>, phone away, like December 18.</p></li>
+</ol>
+
+## Everything you have to test yourself
+
+### Blend360 All Star
+
+| Resource | What it measures | Questions | Time | Goal |
+|---|---|---|---|---|
+| [Reasoning · 50 exercises](01-razonamiento-abstracto/ejercicios.en.qmd) | Series, matrices, dominoes, figures | 50 | 1 min each | ≥ 40 |
+| [SQL · 35 exercises](02-sql/ejercicios.en.qmd) | From `SELECT` to window functions | 35 | 2–10 min each | ≥ 30 without looking |
+| [SQL lab](simulador/index.html) | You write the query and the result is graded | 36 | Target per level | ≥ 30 |
+| [Python lab](simulador/index.html) | 25 Python exercises with automatic tests | 25 | Target per exercise | 25 |
+| [Algorithms lab](simulador/index.html) | 20 classic problems with automatic tests | 20 | Target per problem | ≥ 17 |
+| [AWS · 30 questions](06-aws/preguntas.en.qmd) | Cloud and data analytics on AWS | 30 | 30 min | ≥ 24 |
+| [Statistics and ML · 25 questions](08-estadistica-y-ml/preguntas.en.qmd) | Descriptive stats, A/B tests, ML, metrics | 25 | 25 min | ≥ 20 |
+| [English · exercises](english/ejercicios-ingles.en.qmd) | Understanding technical questions | — | — | No key-word mistakes |
+| [Reasoning mock #1](simulacros/simulacro-razonamiento-01.en.qmd) | All of part 1 | 30 | 30 min | ≥ 24 |
+| [Technical mock #1](simulacros/simulacro-tecnico-01.en.qmd) | All of part 2 | 40 + 3 coding | 90 min | ≥ 34/40 |
+| [Simulator: reasoning](simulador/index.html) | Randomly generated figures: never the same | 30 | 30 min | ≥ 24 |
+| [Simulator: technical](simulador/index.html) | Bank of 60 questions in English | 40 | 50 min | ≥ 34 |
+| [Simulator: SQL challenge](simulador/index.html) | 5 🟡–🔴 queries without solutions | 5 | 60 min | 5/5 |
+
+### AWS AI Practitioner (AIF-C01)
+
+| Resource | Questions | Time | Goal |
+|---|---|---|---|
+| [Mock exam 01 in English](aws-ai-practitioner/practice-questions/en/mock-exam-01.qmd) | 65 | 90 min | ≥ 85 % |
+| [Mock exam 02 in English](aws-ai-practitioner/practice-questions/en/mock-exam-02.qmd) | 65 scenarios | 90 min | ≥ 85 % |
+| [AIF-C01 simulator](simulador-aif/index.html): report per domain, weak-domain drills | 65 / 40 | 90 / 55 min | ≥ 85 % |
+| Questions per domain and the five domains: [Spanish section](aws-ai-practitioner/index.qmd) | 6 per domain | After each domain | 5/6 |
+
+## Goals for December 15
+
+| Test | Goal | Why |
+|---|---|---|
+| SQL | ≥ 30/35 without looking | Candidates report hard SQL, ~12 min per question and no margin for error |
+| Python | 25/25 | They are short exercises: you should not miss any on exam day |
+| Algorithms | ≥ 17/20 | Big O and pseudocode tracing appear as multiple choice |
+| Reasoning | ≥ 24/30 in 30 min | Described as "quite demanding" |
+| Technical (simulator) | ≥ 34/40 | 85 % leaves room for exam-day nerves |
+
+## After every mock exam
+
+1. **Log** the score in [My progress](progreso.en.qmd#mock-exam-log): the chart shows whether you are improving.
+2. **Classify each mistake** by its cause and write it in the [mistake notebook](progreso.en.qmd#mistake-notebook).
+3. **Attack the most frequent cause**, not the longest topic:
+
+| Cause | What to do |
+|---|---|
+| Didn't know the concept | Go back to that point of the theory and redo the missed exercises within 2 days |
+| Didn't understand the English | [How to read questions](english/como-leer-preguntas.en.qmd) + flashcards with the words you didn't know |
+| Ran out of time | Timed blocks; in the exam, skip the hard question and come back at the end |
+| Careless | Underline the word that changes everything (NOT, EXCEPT, LEAST, MOST) and check once |
+| Fell for a trap | Write it as a rule in the notebook; for AIF-C01, review the confusable pairs (Spanish section) |
+
+## Exam-day strategy
+
+- **Fast first pass:** answer what you know and flag the doubtful ones. Come back at the end.
+- **Time budget:** reasoning ≈ 1 min per question; technical ≈ 1 min per multiple-choice question and 12–15 min per coding problem.
+- **Never leave a multiple-choice question blank**, unless the recruiter confirms that wrong answers cost points ([questions for the recruiter](guides/que-evalua-blend360.en.qmd#5-questions-worth-asking-the-recruiter)).
+- **SQL:** before writing, look at the expected result: one row per what? That tells you the `GROUP BY`.
+- The last 48 hours: the [final review](cheatsheets/repaso-final-48h.en.qmd).

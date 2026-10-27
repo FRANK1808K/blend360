@@ -18,7 +18,7 @@ Every document exists in **English and Spanish**. The exercises and mock exams a
 
 > **Disclaimer:** community study material, **unofficial** and not affiliated with Blend360. All questions are original. What is known about the hiring process comes from public candidate reviews ([see the research](guides/que-evalua-blend360.en.md)).
 
-**Online, nothing to install (also on your phone):** 🎯 [Simulator + code lab](https://frank1808k.github.io/blend360/) · 📖 [Study guide website](https://frank1808k.github.io/blend360/guia/en/) (search, white/black mode, English and Spanish)
+**Online, nothing to install (also on your phone):** 📖 [Study hub website](https://frank1808k.github.io/blend360/index.en.html) (all the material organised into *Study · Assess · Review*, search, white/black mode, **saved progress**) · 🎯 [Simulator + code lab](https://frank1808k.github.io/blend360/simulador/) · ☁️ [AIF-C01 simulator](https://frank1808k.github.io/blend360/simulador-aif/)
 
 ---
 
@@ -71,6 +71,29 @@ cd ../04-algoritmos-y-estructuras && python3 test_problemas.py
 # Simulator: open simulator/index.html in your browser
 ```
 
+## Study website (Quarto)
+
+The [study hub](https://frank1808k.github.io/blend360/index.en.html) brings the whole repository together in a site built with [Quarto](https://quarto.org/), organised by goal:
+
+| Section | What it contains |
+|---|---|
+| 📚 **Study** | Study map with priorities and hours, the theory of every module and technical English |
+| 🧪 **Assess** | Assessment path with goals, exercises by topic, mock exams and the simulator |
+| 🔁 **Review** | Cheat sheets (with a print button), the final 48-hour review and flashcards |
+| ☁️ **AIF-C01** | The 5 domains, questions per domain, 2 mock exams, cheat sheets, strategy, lab and resources |
+| 📈 **Progress** | Pages studied, mock exam log with a chart, mistake notebook with review dates, simulator attempts and a backup |
+
+Also: the home page shows **what to do this week** according to the plan and the countdown to both exams; the study plan's checkboxes can be ticked and are saved; every page has buttons to mark it as studied, show or hide all solutions and print it; and the AIF-C01 module's diagrams are drawn.
+
+The repository's Markdown remains the single source: [`scripts/build_site.py`](scripts/build_site.py) adapts it and renders it together with [`quarto/`](quarto/) (config, theme, home page, hubs and JavaScript). To build it on your computer you need [Quarto](https://quarto.org/docs/get-started/) 1.10 or later (CI uses 1.10.18):
+
+```bash
+python3 scripts/build_site.py            # → _site/ (open _site/index.html)
+python3 scripts/build_site.py --preview  # live preview
+```
+
+> When you add a new document, add it to `NAV` in `scripts/build_site.py`: the build fails if a page is not in the navigation.
+
 You only need **Python 3.8+** (and `pip install pandas` for the pandas practice). There are no other dependencies.
 
 ## Structure
@@ -90,8 +113,8 @@ blend360/
 ├── english/                    Technical English for A2 speakers
 ├── simulacros/                 Mock exams: technical (90 min) + reasoning (30 min)
 ├── simulator/                  Simulator + code lab (ES/EN, white/black mode)
-├── guide/                      Study guide website (MkDocs, published at /guia/)
-├── scripts/                    Document checks and the lab and guide builders
+├── quarto/                     Study website (Quarto): config, theme, home page, hubs and progress
+├── scripts/                    Document checks and the lab and website builders
 ├── cheatsheets/                One-page reviews + 48-hour plan
 └── flashcards/                 209 Anki cards
 ```
@@ -105,7 +128,7 @@ The CI pipeline ([`checks.yml`](.github/workflows/checks.yml)) verifies on every
 - The **36 SQL solutions** in both languages run and produce exactly the published "expected result" (`02-sql/check_solutions.py`).
 - The **25 Python solutions**, the **20 algorithm solutions** and the statistics and ML formulas (`08-estadistica-y-ml/estadistica_ml_practica.py`) pass their tests.
 - The Markdown follows the style rules (`markdownlint`), every document has its twin in the other language and every internal link works (`scripts/check_docs.py`).
-- The study guide website builds with no broken links or anchors (`scripts/build_guide.py --strict`).
+- The Quarto study website builds with no warnings or broken links/anchors, and every page is in the navigation (`scripts/build_site.py --strict`).
 - The simulator's code lab uses exactly the same exercises, solutions and tests as the repository (`scripts/build_lab.py --check`).
 
 ## Key dates

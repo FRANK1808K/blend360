@@ -18,7 +18,7 @@ Cada documento existe **en español y en inglés**. Los ejercicios y simulacros 
 
 > **Aviso:** material de estudio comunitario, **no oficial** y sin relación con Blend360. Las preguntas son originales. Lo que se sabe del proceso viene de reseñas públicas de candidatos ([ver investigación](guides/que-evalua-blend360.md)).
 
-**En línea, sin instalar nada (también en el celular):** 🎯 [Simulador + laboratorio de código](https://frank1808k.github.io/blend360/) · 📖 [Guía de estudio web](https://frank1808k.github.io/blend360/guia/) (búsqueda, modo blanco/negro, español e inglés)
+**En línea, sin instalar nada (también en el celular):** 📖 [Centro de estudio web](https://frank1808k.github.io/blend360/) (todo el material organizado en *Estudiar · Evaluar · Repasar*, búsqueda, modo blanco/negro, **progreso guardado**) · 🎯 [Simulador + laboratorio de código](https://frank1808k.github.io/blend360/simulador/) · ☁️ [Simulador AIF-C01](https://frank1808k.github.io/blend360/simulador-aif/)
 
 ---
 
@@ -73,6 +73,29 @@ cd ../04-algoritmos-y-estructuras && python3 test_problemas.py
 # Simulador: abre simulator/index.html en el navegador
 ```
 
+## Sitio web de estudio (Quarto)
+
+El [centro de estudio](https://frank1808k.github.io/blend360/) reúne todo el repositorio en un sitio hecho con [Quarto](https://quarto.org/), organizado por objetivo:
+
+| Sección | Qué contiene |
+|---|---|
+| 📚 **Estudiar** | Mapa de estudio con prioridades y horas, la teoría de cada módulo y el inglés técnico |
+| 🧪 **Evaluar** | Ruta de evaluación con metas, ejercicios por tema, simulacros y el simulador |
+| 🔁 **Repasar** | Cheatsheets (con botón para imprimir), repaso final de 48 h y flashcards |
+| ☁️ **AIF-C01** | Los 5 dominios, preguntas por dominio, 2 simulacros, cheatsheets, estrategia, laboratorio y recursos |
+| 📈 **Progreso** | Páginas estudiadas, registro de simulacros con gráfica, cuaderno de errores con fechas de repaso, intentos de los simuladores y copia de seguridad |
+
+Además: la portada muestra **qué toca esta semana** según el plan y la cuenta regresiva a los dos exámenes; las casillas del plan de estudio se pueden marcar y se guardan; cada página tiene botones para marcarla como estudiada, mostrar u ocultar todas las soluciones e imprimirla; y los diagramas del módulo AIF-C01 se dibujan.
+
+El Markdown del repositorio sigue siendo la única fuente: [`scripts/build_site.py`](scripts/build_site.py) lo adapta y lo renderiza junto con [`quarto/`](quarto/) (configuración, tema, portada, centros y JavaScript). Para construirlo en tu computador necesitas [Quarto](https://quarto.org/docs/get-started/) 1.10 o superior (la CI usa la 1.10.18):
+
+```bash
+python3 scripts/build_site.py            # → _site/ (abre _site/index.html)
+python3 scripts/build_site.py --preview  # vista previa en vivo
+```
+
+> Si agregas un documento nuevo, añádelo a `NAV` en `scripts/build_site.py`: la construcción falla si una página no está en la navegación.
+
 Solo necesitas **Python 3.8+** (y `pip install pandas` para la práctica de pandas). No hay otras dependencias.
 
 ## Estructura
@@ -92,8 +115,8 @@ blend360/
 ├── english/                    Inglés técnico para A2
 ├── simulacros/                 Simulacro técnico (90 min) + razonamiento (30 min)
 ├── simulator/                  Simulador + laboratorio de código (ES/EN, modo blanco/negro)
-├── guide/                      Sitio web de la guía de estudio (MkDocs, se publica en /guia/)
-├── scripts/                    Verificación de documentos y generación del laboratorio y la guía
+├── quarto/                     Sitio web de estudio (Quarto): configuración, tema, portada, centros y progreso
+├── scripts/                    Verificación de documentos y generación del laboratorio y del sitio
 ├── cheatsheets/                Repasos de una página + plan de 48 h
 └── flashcards/                 209 tarjetas para Anki
 ```
@@ -105,7 +128,7 @@ La CI ([`checks.yml`](.github/workflows/checks.yml)) verifica en cada cambio que
 - Las **36 soluciones SQL**, en los dos idiomas, se ejecutan y producen exactamente el "resultado esperado" publicado (`02-sql/check_solutions.py`).
 - Las **25 soluciones de Python**, los **20 problemas de algoritmos** y las fórmulas de estadística y ML (`08-estadistica-y-ml/estadistica_ml_practica.py`) pasan sus pruebas.
 - El Markdown cumple las reglas de estilo (`markdownlint`), cada documento tiene su versión en el otro idioma y todos los enlaces internos funcionan (`scripts/check_docs.py`).
-- La guía web se construye sin enlaces ni anclas rotas (`scripts/build_guide.py --strict`).
+- El sitio web Quarto se construye sin advertencias ni enlaces o anclas rotas, y todas las páginas están en la navegación (`scripts/build_site.py --strict`).
 - El laboratorio del simulador usa exactamente los mismos ejercicios, soluciones y pruebas del repositorio (`scripts/build_lab.py --check`).
 
 ## Fechas clave
