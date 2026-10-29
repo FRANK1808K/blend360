@@ -1,15 +1,15 @@
 # 06 · What is AWS? Cloud fundamentals
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 > **Why it matters so much for Blend360:** Blend360 is an **AWS Premier Tier Services Partner** (the highest tier for services partners). It holds AWS competencies in **Data & Analytics**, **Generative AI**, Financial Services, DevOps and Migration, and it is a *delivery partner* for **Amazon EMR** and **Amazon QuickSight**. In other words, much of its client work is built on AWS. See [what Blend360 evaluates](../guides/que-evalua-blend360.en.md).
 >
-> 💡 **Your advantage:** since you take the **AWS Certified AI Practitioner on November 16**, you will be studying much of this anyway. The complete study material is integrated in the [AWS AI Practitioner (AIF-C01) module](../aws-ai-practitioner/README.en.md).
+> **Your advantage:** since you take the **AWS Certified AI Practitioner on November 16**, you will be studying much of this anyway. The complete study material is integrated in the [AWS AI Practitioner (AIF-C01) module](../aws-ai-practitioner/README.en.md).
 
 | File | Content |
 |---|---|
 | This README | What the cloud and AWS are, global infrastructure, shared responsibility, IAM, core services, pricing |
-| [analisis-de-datos.en.md](analisis-de-datos.en.md) | ⭐ Data analytics on AWS: S3, Glue, Athena, Redshift, EMR, Kinesis, QuickSight, architectures |
+| [analisis-de-datos.en.md](analisis-de-datos.en.md) | ★ Data analytics on AWS: S3, Glue, Athena, Redshift, EMR, Kinesis, QuickSight, architectures |
 | [preguntas.en.md](preguntas.en.md) | 30 practice questions with explanations |
 
 ---
@@ -35,7 +35,7 @@ Instead of buying and maintaining your own servers (*on-premises*), you **rent**
 
 ### Service models
 
-| Model | You manage | The provider manages | AWS example | Analogy (pizza 🍕) |
+| Model | You manage | The provider manages | AWS example | Analogy (pizza) |
 |---|---|---|---|---|
 | **IaaS** (Infrastructure as a Service) | OS, apps, data | Hardware, network, virtualization | **Amazon EC2** | You buy the ingredients and bake it at home |
 | **PaaS** (Platform as a Service) | Apps and data | + OS, runtime | **AWS Elastic Beanstalk**, RDS | You order delivery |
@@ -75,7 +75,7 @@ Region (e.g., us-east-1, sa-east-1 São Paulo)
 | **Edge location** | A point of presence for caching and CDN | **CloudFront**, Route 53: low global latency |
 | **Local Zones / Outposts** | AWS closer to cities / in your own data center | Ultra-low latency / hybrid |
 
-## 3. Shared responsibility model ⭐
+## 3. Shared responsibility model
 
 | AWS is responsible for security **OF** the cloud | The customer is responsible for security **IN** the cloud |
 |---|---|
@@ -97,7 +97,7 @@ Region (e.g., us-east-1, sa-east-1 São Paulo)
 | **Group** | A set of users who share permissions (e.g., "Analysts") |
 | **Role** | An identity with **temporary credentials** that is *assumed*. It is the right way to give permissions to services (e.g., letting EC2 or Glue read from S3) |
 | **Policy** | A **JSON** document that allows (`Allow`) or denies (`Deny`) actions. An explicit `Deny` **always wins** |
-| **Least privilege** | Give **only** the minimum permissions needed ⭐ |
+| **Least privilege** | Give **only** the minimum permissions needed |
 | **MFA** | Multi-factor authentication |
 
 ```json
@@ -131,7 +131,7 @@ Other security services: **KMS** (encryption keys), **Secrets Manager** (passwor
 
 | Service | Type | Detail |
 |---|---|---|
-| **Amazon S3** ⭐ | **Objects** (files) in *buckets* | 99.999999999% durability (**11 nines**), practically unlimited capacity. The foundation of **data lakes** |
+| **Amazon S3** | **Objects** (files) in *buckets* | 99.999999999% durability (**11 nines**), practically unlimited capacity. The foundation of **data lakes** |
 | **Amazon EBS** | **Block** storage (the hard drive of an EC2 instance) | Tied to one AZ |
 | **Amazon EFS** | Shared **file** storage (NFS) | Several EC2 instances at once |
 | **S3 Glacier** | Long-term archive | Very cheap; retrieval from minutes to hours |
@@ -155,7 +155,7 @@ Other security services: **KMS** (encryption keys), **Secrets Manager** (passwor
 | **Amazon RDS** | Managed relational (PostgreSQL, MySQL, MariaDB, Oracle, SQL Server) | Transactional applications (OLTP) |
 | **Amazon Aurora** | AWS relational DB, compatible with MySQL/PostgreSQL; higher performance | High-performance OLTP |
 | **Amazon DynamoDB** | **Key-value**/document NoSQL, serverless, millisecond latency | Massive scale, low latency |
-| **Amazon Redshift** | Columnar **data warehouse** (OLAP) | Analytics and BI ⭐ |
+| **Amazon Redshift** | Columnar **data warehouse** (OLAP) | Analytics and BI |
 | **Amazon ElastiCache** | In-memory cache (Redis/Memcached) | Speed up reads |
 | **Amazon Neptune** | Graphs | Relationships, fraud, recommendations |
 | **Amazon DocumentDB** | Documents (MongoDB-compatible) | JSON |
@@ -242,4 +242,4 @@ Other security services: **KMS** (encryption keys), **Secrets Manager** (passwor
 
 ---
 
-**Next:** ⭐ [Data analytics on AWS](analisis-de-datos.en.md)
+**Next:** [Data analytics on AWS](analisis-de-datos.en.md)

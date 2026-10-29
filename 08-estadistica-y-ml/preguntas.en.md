@@ -1,6 +1,6 @@
 # 08b · Statistics and ML: 25 practice questions
 
-🌐 [Español](preguntas.md) · **English**
+[Español](preguntas.md) · **English**
 
 > Try to answer each question in **≤ 60 seconds**. Answers and explanations at the end. Theory: [README.en.md](README.en.md).
 

@@ -1,6 +1,6 @@
 # 06c · AWS y análisis de datos: 30 preguntas de práctica
 
-🌐 **Español** · [English](preguntas.en.md)
+**Español** · [English](preguntas.en.md)
 
 > Las preguntas están **en inglés**, como en la prueba. Intenta responder en **≤ 60 segundos** cada una. **Primero intenta en inglés**; abre la traducción solo si te bloqueas y anota las palabras nuevas en tus [flashcards](../flashcards/README.md). Las respuestas y explicaciones están al final.
 
@@ -16,7 +16,7 @@
 - D) Pay upfront for all resources
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál de las siguientes es una ventaja de la computación en la nube según AWS?
 
@@ -35,7 +35,7 @@
 - D) Replacing failed hard drives
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Según el modelo de responsabilidad compartida de AWS, ¿qué tarea es responsabilidad del cliente?
 
@@ -54,7 +54,7 @@ Según el modelo de responsabilidad compartida de AWS, ¿qué tarea es responsab
 - D) Store the data in S3 Glacier Deep Archive
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una empresa necesita que su aplicación siga disponible si falla un centro de datos. ¿Qué debe hacer?
 
@@ -73,7 +73,7 @@ Una empresa necesita que su aplicación siga disponible si falla un centro de da
 - D) A security group
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué identidad de AWS se debe usar para que un job de AWS Glue pueda leer datos de un bucket de S3?
 
@@ -92,7 +92,7 @@ Una empresa necesita que su aplicación siga disponible si falla un centro de da
 - D) Amazon Inspector
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué servicio registra las llamadas a la API de una cuenta de AWS, para ver QUIÉN borró un recurso?
 
@@ -106,7 +106,7 @@ Una empresa necesita que su aplicación siga disponible si falla un centro de da
 - D) Reserved Instances for 3 years
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Un trabajo de procesamiento se ejecuta cada noche, puede detenerse y reiniciarse en cualquier momento, y la empresa quiere el MENOR costo. ¿Qué opción de compra de EC2 es la mejor?
 
@@ -125,7 +125,7 @@ Un trabajo de procesamiento se ejecuta cada noche, puede detenerse y reiniciarse
 - D) High availability
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué principio significa dar a los usuarios SOLO los permisos que necesitan para su trabajo?
 
@@ -144,7 +144,7 @@ Un trabajo de procesamiento se ejecuta cada noche, puede detenerse y reiniciarse
 - D) S3 Glacier Deep Archive
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué clase de almacenamiento de S3 es la MÁS económica para datos que se guardan 7 años por cumplimiento normativo y casi nunca se consultan?
 
@@ -158,7 +158,7 @@ Un trabajo de procesamiento se ejecuta cada noche, puede detenerse y reiniciarse
 - D) Amazon VPC
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué servicio permite ejecutar código sin aprovisionar ni administrar servidores, pagando solo por el tiempo de cómputo usado?
 
@@ -172,7 +172,7 @@ Un trabajo de procesamiento se ejecuta cada noche, puede detenerse y reiniciarse
 - D) Sustainability
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál de los siguientes NO es uno de los seis pilares del AWS Well-Architected Framework?
 
@@ -193,7 +193,7 @@ Un trabajo de procesamiento se ejecuta cada noche, puede detenerse y reiniciarse
 - D) Amazon DynamoDB
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Un analista quiere ejecutar consultas SQL estándar directamente sobre archivos CSV y Parquet guardados en Amazon S3, sin administrar infraestructura. ¿Qué servicio debe usar?
 
@@ -207,7 +207,7 @@ Un analista quiere ejecutar consultas SQL estándar directamente sobre archivos 
 - D) Glue Data Quality
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué función de AWS Glue escanea automáticamente los datos en S3, infiere el esquema y crea tablas en el Data Catalog?
 
@@ -222,7 +222,7 @@ Un analista quiere ejecutar consultas SQL estándar directamente sobre archivos 
 - E) Store the data in S3 Glacier Deep Archive
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una empresa quiere reducir el costo y mejorar el rendimiento de sus consultas en Amazon Athena. ¿Qué acciones debe tomar? (Elige DOS.)
 
@@ -242,7 +242,7 @@ Una empresa quiere reducir el costo y mejorar el rendimiento de sus consultas en
 - D) Amazon ElastiCache
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué servicio es un data warehouse totalmente gestionado, a escala de petabytes, con almacenamiento columnar y procesamiento masivamente paralelo?
 
@@ -256,7 +256,7 @@ Una empresa quiere reducir el costo y mejorar el rendimiento de sus consultas en
 - D) Amazon S3 Glacier
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una empresa necesita capturar los clics de su sitio web en tiempo real y procesarlos con aplicaciones consumidoras propias en milisegundos. ¿Qué servicio es el MÁS adecuado?
 
@@ -270,7 +270,7 @@ Una empresa necesita capturar los clics de su sitio web en tiempo real y procesa
 - D) Amazon MSK
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Un equipo quiere cargar datos en streaming en Amazon S3 casi en tiempo real, convertirlos a Parquet y NO escribir código. ¿Qué servicio debe usar?
 
@@ -284,7 +284,7 @@ Un equipo quiere cargar datos en streaming en Amazon S3 casi en tiempo real, con
 - D) AWS Snowball
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una empresa tiene una base de datos Oracle en sus instalaciones y quiere replicar continuamente sus cambios a Amazon S3 para analítica. ¿Qué servicio debe usar?
 
@@ -303,7 +303,7 @@ Una empresa tiene una base de datos Oracle en sus instalaciones y quiere replica
 - D) Amazon QuickSight
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Un equipo de ciencia de datos necesita control total de un clúster de Apache Spark y Hive, quiere usar frameworks open source y reducir costos con instancias Spot. ¿Qué servicio encaja mejor?
 
@@ -317,7 +317,7 @@ Un equipo de ciencia de datos necesita control total de un clúster de Apache Sp
 - D) Amazon CloudWatch
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Los usuarios de negocio necesitan dashboards interactivos con un motor en memoria (SPICE) que también puedan incrustar en una aplicación web. ¿Qué servicio se debe usar?
 
@@ -331,7 +331,7 @@ Los usuarios de negocio necesitan dashboards interactivos con un motor en memori
 - D) Amazon Route 53
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una empresa quiere restringir el acceso para que los analistas vean solo algunas COLUMNAS de una tabla de su data lake en S3. ¿Qué servicio ofrece este control de acceso detallado?
 
@@ -345,7 +345,7 @@ Una empresa quiere restringir el acceso para que los analistas vean solo algunas
 - D) Using AWS CloudTrail
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál es la forma MÁS eficiente de cargar una gran cantidad de datos de Amazon S3 en Amazon Redshift?
 
@@ -364,7 +364,7 @@ Una empresa quiere restringir el acceso para que los analistas vean solo algunas
 - D) AWS Step Functions
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Un analista de marketing que no sabe programar necesita limpiar y normalizar un conjunto de datos de forma visual antes del análisis. ¿Qué servicio debe usar?
 
@@ -378,7 +378,7 @@ Un analista de marketing que no sabe programar necesita limpiar y normalizar un 
 - D) Amazon GuardDuty
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué servicio puede descubrir y clasificar datos sensibles, como información de identificación personal (PII), guardados en Amazon S3?
 
@@ -392,7 +392,7 @@ Un analista de marketing que no sabe programar necesita limpiar y normalizar un 
 - D) AWS Snowball
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una empresa necesita orquestar un pipeline de datos con varios pasos (crawler → job ETL → control de calidad → notificación), con reintentos y manejo de errores, usando un flujo visual serverless. ¿Qué servicio encaja mejor?
 
@@ -406,7 +406,7 @@ Una empresa necesita orquestar un pipeline de datos con varios pasos (crawler �
 - D) Presentation layer
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 En un data lake, ¿qué capa suele guardar los datos exactamente como llegaron de la fuente, sin transformaciones?
 
@@ -425,7 +425,7 @@ En un data lake, ¿qué capa suele guardar los datos exactamente como llegaron d
 - D) TXT
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué formato de archivo es columnar, comprimido y generalmente recomendado para analítica en Athena y Redshift Spectrum?
 
@@ -439,7 +439,7 @@ En un data lake, ¿qué capa suele guardar los datos exactamente como llegaron d
 - D) AWS Direct Connect
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una empresa quiere importar datos de Salesforce a Amazon S3 de forma programada y sin escribir código. ¿Qué servicio debe usar?
 
@@ -453,7 +453,7 @@ Una empresa quiere importar datos de Salesforce a Amazon S3 de forma programada 
 - D) Prescriptive
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué tipo de analítica responde la pregunta "¿Qué es probable que pase el próximo mes?"
 
@@ -472,7 +472,7 @@ Una empresa quiere importar datos de Salesforce a Amazon S3 de forma programada 
 - D) AWS Glue Data Catalog
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una empresa necesita buscar y analizar grandes volúmenes de logs de aplicaciones con búsqueda de texto completo y dashboards. ¿Qué servicio es el MÁS adecuado?
 
@@ -486,7 +486,7 @@ Una empresa necesita buscar y analizar grandes volúmenes de logs de aplicacione
 - D) AWS Glue
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué servicio de AWS permite a los desarrolladores crear aplicaciones de IA generativa usando modelos fundacionales a través de una API?
 

@@ -1,6 +1,6 @@
 # 07 · Problem solving (+ logic, math and basic statistics)
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 > In a test from a data company, "problem solving" usually mixes three things:
 >
@@ -23,7 +23,7 @@
 | **R**eview | Walk through the code by hand with the example **and** with the edge cases | 3 min |
 | **E**valuate | State the complexity and whether it can be improved | 1 min |
 
-> 🔑 **A correct O(n²) solution is worth more than an O(n) one that does not work.** Make it work first, then optimize if you have time left.
+> **A correct O(n²) solution is worth more than an O(n) one that does not work.** Make it work first, then optimize if you have time left.
 
 ### Edge case checklist
 
@@ -63,7 +63,7 @@ def big_customers(transactions, threshold=1000):
     return [c for c, _ in selected]
 ```
 
-**R:** `[(1, 600), (2, 1500), (1, 500)]` → totals `{1: 1100, 2: 1500}` → `[2, 1]` ✅. Empty list → `[]` ✅. Exactly 1000 → included (≥) ✅.
+**R:** `[(1, 600), (2, 1500), (1, 500)]` → totals `{1: 1100, 2: 1500}` → `[2, 1]` ✓. Empty list → `[]` ✓. Exactly 1000 → included (≥) ✓.
 **E:** O(n + k log k), where k = number of customers. Space O(k).
 
 **The same problem in SQL:**

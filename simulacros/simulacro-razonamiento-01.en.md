@@ -1,6 +1,6 @@
 # Mock abstract reasoning test #1: 30 minutes
 
-🌐 [Español](simulacro-razonamiento-01.md) · **English**
+[Español](simulacro-razonamiento-01.md) · **English**
 
 > **Instructions:** 30 questions in **30 minutes** (60 s per question). The difficulty **increases**. Do not spend more than 1 minute on a question: flag it, guess and move on. Choose the option that best completes each sequence. Answers at the end.
 >

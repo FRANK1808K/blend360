@@ -3,7 +3,7 @@
 > **Peso en el examen:** 14 % (≈ 7 de las 50 preguntas que cuentan).
 > **Objetivo:** identificar los pilares de la IA responsable, saber qué herramienta de AWS aborda cada riesgo (sesgo, explicabilidad, drift, contenido dañino, supervisión humana) y comprender las garantías de privacidad de los servicios gestionados.
 >
-> 🆕 **Guía v1.1:** el objetivo 4.2.2 cita explícitamente **SageMaker Clarify** y **Amazon Bedrock Model Evaluations** como herramientas de explicabilidad/transparencia. Ver [novedades v1.1](../00-exam-guide-v1.1-changes.md#12-objetivos-ampliados).
+> **Guía v1.1:** el objetivo 4.2.2 cita explícitamente **SageMaker Clarify** y **Amazon Bedrock Model Evaluations** como herramientas de explicabilidad/transparencia. Ver [novedades v1.1](../00-exam-guide-v1.1-changes.md#12-objetivos-ampliados).
 
 ## Mapeo a los task statements oficiales
 
@@ -168,7 +168,7 @@ Monitorea endpoints en producción comparando el tráfico real con una **línea 
 
 | Garantía | Amazon Bedrock | Amazon Q Business | Servicios de IA (Comprehend, Rekognition, Transcribe…) |
 |---|---|---|---|
-| **Uso de datos para entrenar modelos** | ❌ Los prompts y respuestas **no se usan** para entrenar modelos base ni se comparten con los proveedores. | ❌ No se usan para entrenar los modelos subyacentes. | Algunos servicios pueden usar contenido para mejorar el servicio **salvo que la organización lo desactive** mediante una **AI services opt-out policy** de AWS Organizations. |
+| **Uso de datos para entrenar modelos** | ✗ Los prompts y respuestas **no se usan** para entrenar modelos base ni se comparten con los proveedores. | ✗ No se usan para entrenar los modelos subyacentes. | Algunos servicios pueden usar contenido para mejorar el servicio **salvo que la organización lo desactive** mediante una **AI services opt-out policy** de AWS Organizations. |
 | **Personalización** | Los modelos ajustados son **copias privadas** en tu cuenta. | — | Modelos personalizados (Custom Labels, clasificadores de Comprehend) privados de tu cuenta. |
 | **Cifrado en reposo** | AWS KMS (claves gestionadas por AWS o **customer managed keys**). | KMS | KMS |
 | **Cifrado en tránsito** | TLS 1.2+ | TLS | TLS |
@@ -221,4 +221,4 @@ Monitorea endpoints en producción comparando el tráfico real con una **línea 
 - [ ] Explico el compromiso entre interpretabilidad y desempeño.
 - [ ] Conozco las garantías de Bedrock sobre no uso de datos para entrenamiento y el efecto de *cross-region inference* en la residencia de datos.
 
-⬅️ Anterior: [Dominio 3](../03-applications-foundation-models/README.md) · ➡️ Siguiente: [Dominio 5 — Seguridad, Cumplimiento y Gobernanza](../05-security-compliance-governance/README.md)
+← Anterior: [Dominio 3](../03-applications-foundation-models/README.md) · Siguiente: [Dominio 5 — Seguridad, Cumplimiento y Gobernanza](../05-security-compliance-governance/README.md)

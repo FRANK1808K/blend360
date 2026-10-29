@@ -1,6 +1,6 @@
 # 01 · Razonamiento abstracto (30 minutos)
 
-🌐 **Español** · [English](README.en.md)
+**Español** · [English](README.en.md)
 
 > Un candidato que presentó el proceso de Blend360 en **Bogotá (mayo de 2026)** reportó pruebas de **lógica y razonamiento abstracto "bastante exigentes"**. La buena noticia es que el razonamiento abstracto **se entrena**: hay pocos tipos de reglas y se repiten. Si aprendes a reconocerlas, vas a ir mucho más rápido.
 
@@ -46,7 +46,7 @@ Cuando veas una secuencia, revisa **en este orden** qué cambia de una figura a 
 | **P**roporción / tamaño | Grande, mediano, pequeño | ¿Crece y decrece? |
 | **R**epetición / ciclo | Patrón que vuelve a empezar | ¿Se repite cada 2, 3 o 4 pasos? |
 
-> 💡 **Clave:** casi siempre hay **2 o 3 reglas a la vez** sobre elementos **distintos**. Por ejemplo, la flecha gira 90° **y** el punto alterna entre negro y blanco. Analiza **cada elemento por separado**.
+> **Clave:** casi siempre hay **2 o 3 reglas a la vez** sobre elementos **distintos**. Por ejemplo, la flecha gira 90° **y** el punto alterna entre negro y blanco. Analiza **cada elemento por separado**.
 
 ### Rotaciones que debes reconocer al instante
 

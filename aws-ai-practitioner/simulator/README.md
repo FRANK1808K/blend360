@@ -14,7 +14,7 @@ Simulador del examen con **interfaz en blanco** (como la del examen real), **cro
 | Simulacro 01 | 65 (pesos oficiales, incluye v1.1) | 90 min |
 | Simulacro 02 | 65 de escenario, más difícil | 90 min |
 | Refuerzo D1 · D3 · D4 · D5 | 40 al azar de los dominios débiles | 55 min |
-| Novedades v1.1 | Todas las preguntas 🆕 de ambos simulacros | ≈ 1,4 min por pregunta |
+| Novedades v1.1 | Todas las preguntas de ambos simulacros | ≈ 1,4 min por pregunta |
 
 **Ver en inglés:** cada pregunta tiene un botón que despliega su versión en inglés (pregunta y opciones) para que te familiarices con los términos del examen original. Si lo dejas abierto, se mantiene abierto en las siguientes preguntas. En el informe final, cada pregunta revisada también tiene su versión en inglés.
 

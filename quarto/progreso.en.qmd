@@ -6,7 +6,7 @@ toc-title: "On this page"
 ---
 
 ::: {.lang-switch}
-🌐 [Español](progreso.qmd) · **English**
+[Español](progreso.qmd) · **English**
 :::
 
 ::: {.callout-note title="Your progress is saved only in this browser"}
@@ -35,7 +35,7 @@ What the simulators saved in this browser: exercises solved in the code lab and 
 
 <div id="b-sim"></div>
 
-[🎯 Blend360 simulator](simulador/index.html){.b-btn} [☁️ AIF-C01 simulator](simulador-aif/index.html){.b-btn}
+<a class="b-btn dark" href="simulador/index.html">Blend360 simulator <span class="b-ico b-ico-arrow"></span></a> <a class="b-btn" href="simulador-aif/index.html">AIF-C01 simulator <span class="b-ico b-ico-arrow"></span></a>
 
 ## Backup
 

@@ -1,6 +1,6 @@
 # 08b · Estadística y ML: 25 preguntas de práctica
 
-🌐 **Español** · [English](preguntas.en.md)
+**Español** · [English](preguntas.en.md)
 
 > Las preguntas están **en inglés**, como en la prueba. **Primero intenta en inglés**; abre la traducción solo si te bloqueas. Respuestas y explicaciones al final. Teoría: [README.md](README.md).
 
@@ -16,7 +16,7 @@
 - D) Variance
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Un conjunto de salarios está sesgado a la derecha por unos pocos valores muy altos. ¿Qué medida representa mejor el salario típico?
 
@@ -35,7 +35,7 @@ Un conjunto de salarios está sesgado a la derecha por unos pocos valores muy al
 - D) To get a number in the original units
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Por qué se divide entre n − 1 al calcular la varianza MUESTRAL?
 
@@ -54,7 +54,7 @@ Un conjunto de salarios está sesgado a la derecha por unos pocos valores muy al
 - D) 75
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Q1 = 20 y Q3 = 40. Según la regla de Tukey, ¿qué valor es un outlier?
 
@@ -68,7 +68,7 @@ Q1 = 20 y Q3 = 40. Según la regla de Tukey, ¿qué valor es un outlier?
 - D) 99.7%
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 En una distribución normal, ¿aproximadamente qué porcentaje de los datos está a ±2 desviaciones estándar de la media?
 
@@ -82,7 +82,7 @@ En una distribución normal, ¿aproximadamente qué porcentaje de los datos est�
 - D) Large samples have no outliers
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué dice el teorema del límite central?
 
@@ -101,7 +101,7 @@ En una distribución normal, ¿aproximadamente qué porcentaje de los datos est�
 - D) Bernoulli
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué distribución modela mejor el NÚMERO DE PEDIDOS recibidos por hora?
 
@@ -115,7 +115,7 @@ En una distribución normal, ¿aproximadamente qué porcentaje de los datos est�
 - D) 17%
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una prueba detecta fraude con 99 % de sensibilidad y 5 % de falsos positivos. El fraude ocurre en el 1 % de las transacciones. Si una transacción sale positiva, la probabilidad de que sea fraude es cercana a:
 
@@ -129,7 +129,7 @@ Una prueba detecta fraude con 99 % de sensibilidad y 5 % de falsos positivos. El
 - D) The size of the effect
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál es la definición correcta del p-valor?
 
@@ -148,7 +148,7 @@ Una prueba detecta fraude con 99 % de sensibilidad y 5 % de falsos positivos. El
 - D) Correct decision
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Rechazar la hipótesis nula cuando en realidad es VERDADERA es un:
 
@@ -167,7 +167,7 @@ Rechazar la hipótesis nula cuando en realidad es VERDADERA es un:
 - D) Undefined
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Si aumentas el tamaño de la muestra, el intervalo de confianza del 95 % para la media se vuelve:
 
@@ -186,7 +186,7 @@ Si aumentas el tamaño de la muestra, el intervalo de confianza del 95 % para la
 - D) Two-proportion z-test
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Quieres comparar el ticket promedio entre 4 canales de marketing. ¿Qué prueba debes usar?
 
@@ -205,7 +205,7 @@ Quieres comparar el ticket promedio entre 4 canales de marketing. ¿Qué prueba 
 - D) z-test
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué prueba compara dos grupos INDEPENDIENTES cuando los datos NO son normales?
 
@@ -224,7 +224,7 @@ Quieres comparar el ticket promedio entre 4 canales de marketing. ¿Qué prueba 
 - D) The test must be repeated with the same users
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una prueba A/B muestra conversión de 10 % (A) vs. 12 % (B) con 2.000 usuarios por grupo y p = 0,043. Con α = 0,05, ¿qué concluyes?
 
@@ -243,7 +243,7 @@ Una prueba A/B muestra conversión de 10 % (A) vs. 12 % (B) con 2.000 usuarios p
 - D) It makes the test one-sided
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Un equipo revisa su prueba A/B todos los días y la detiene apenas p < 0,05. ¿Cuál es el problema?
 
@@ -262,7 +262,7 @@ Un equipo revisa su prueba A/B todos los días y la detiene apenas p < 0,05. ¿C
 - D) Drownings cause ice cream sales
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Las ventas de helado y los ahogamientos tienen correlación positiva. ¿Cuál es la mejor explicación?
 
@@ -283,7 +283,7 @@ Las ventas de helado y los ahogamientos tienen correlación positiva. ¿Cuál es
 - D) A perfect model
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Un modelo tiene 99 % de exactitud en entrenamiento pero 70 % en prueba. Lo más probable es:
 
@@ -302,7 +302,7 @@ Un modelo tiene 99 % de exactitud en entrenamiento pero 70 % en prueba. Lo más 
 - D) Dimensionality reduction problem
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Predecir si un cliente cancelará su suscripción (sí/no) es un problema de:
 
@@ -321,7 +321,7 @@ Predecir si un cliente cancelará su suscripción (sí/no) es un problema de:
 - D) Random forest
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué técnica agrupa clientes en segmentos SIN etiquetas?
 
@@ -335,7 +335,7 @@ Predecir si un cliente cancelará su suscripción (sí/no) es un problema de:
 - D) 0.30
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Un modelo de fraude: TP = 30, FN = 20, FP = 10, TN = 940. ¿Cuál es el RECALL?
 
@@ -349,7 +349,7 @@ Un modelo de fraude: TP = 30, FN = 20, FP = 10, TN = 940. ¿Cuál es el RECALL?
 - D) MAE
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Solo el 5 % de las transacciones son fraude. Un modelo que siempre predice "no fraude" tiene 95 % de exactitud. ¿Qué métrica revela que es inútil?
 
@@ -368,7 +368,7 @@ Solo el 5 % de las transacciones son fraude. Un modelo que siempre predice "no f
 - D) Do not scale the training data
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Al ajustar un StandardScaler, ¿cuál es la forma correcta de evitar la fuga de datos?
 
@@ -387,7 +387,7 @@ Al ajustar un StandardScaler, ¿cuál es la forma correcta de evitar la fuga de 
 - D) Batch normalization
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué regularización puede llevar algunos coeficientes exactamente a CERO, seleccionando variables?
 
@@ -401,7 +401,7 @@ Al ajustar un StandardScaler, ¿cuál es la forma correcta de evitar la fuga de 
 - D) Naive Bayes
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué algoritmo construye MUCHOS árboles de decisión sobre muestras aleatorias de filas y variables y combina sus votos?
 
@@ -415,7 +415,7 @@ Al ajustar un StandardScaler, ¿cuál es la forma correcta de evitar la fuga de 
 - D) SVM
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Para qué algoritmo es MENOS importante escalar las variables?
 
@@ -434,7 +434,7 @@ Al ajustar un StandardScaler, ¿cuál es la forma correcta de evitar la fuga de 
 - D) Nothing changes
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 En el descenso del gradiente, ¿qué pasa si la tasa de aprendizaje es demasiado ALTA?
 

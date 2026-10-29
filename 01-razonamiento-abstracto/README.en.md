@@ -1,6 +1,6 @@
 # 01 · Abstract reasoning (30 minutes)
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 > A candidate who went through the Blend360 process in **Bogotá (May 2026)** reported **logic and abstract reasoning tests that were "quite demanding"**. The good news: abstract reasoning **can be trained**. There are only a few types of rules and they repeat. Once you learn to recognize them, you get much faster.
 
@@ -46,7 +46,7 @@ The mnemonic comes from Spanish, so you learn one checklist for both languages. 
 | **P**roportion / size | Big, medium, small | Does it grow and shrink? |
 | **R**epetition / cycle | A pattern that starts again | Does it repeat every 2, 3 or 4 steps? |
 
-> 💡 **Key:** there are almost always **2 or 3 rules at the same time** on **different** elements. For example, the arrow rotates 90° **and** the dot alternates black/white. Analyze **each element separately**.
+> **Key:** there are almost always **2 or 3 rules at the same time** on **different** elements. For example, the arrow rotates 90° **and** the dot alternates black/white. Analyze **each element separately**.
 
 ### Rotations you must recognize instantly
 

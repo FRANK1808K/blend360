@@ -1,6 +1,6 @@
 # 02 · SQL — De cero a nivel prueba técnica
 
-🌐 **Español** · [English](README.en.md)
+**Español** · [English](README.en.md)
 
 > SQL es probablemente **el tema con más peso** en una prueba de una empresa de analítica como Blend360. Aquí cubres todo lo que suele preguntarse: desde `SELECT` hasta funciones de ventana.
 
@@ -91,10 +91,10 @@ Pero el motor lo **evalúa** así:
 
 Consecuencias que preguntan mucho:
 
-- ❌ `WHERE SUM(x) > 10` → error. ✅ Va en `HAVING`.
-- ❌ `WHERE alias > 10` (alias definido en SELECT) → error en la mayoría de motores. ✅ Usa subconsulta/CTE.
-- ❌ `WHERE ROW_NUMBER() OVER(...) = 1` → error. ✅ Calcula la ventana en una CTE y filtra afuera.
-- ✅ `ORDER BY alias` funciona.
+- ✗ `WHERE SUM(x) > 10` → error. ✓ Va en `HAVING`.
+- ✗ `WHERE alias > 10` (alias definido en SELECT) → error en la mayoría de motores. ✓ Usa subconsulta/CTE.
+- ✗ `WHERE ROW_NUMBER() OVER(...) = 1` → error. ✓ Calcula la ventana en una CTE y filtra afuera.
+- ✓ `ORDER BY alias` funciona.
 
 ## 3. SELECT, WHERE, ORDER BY, LIMIT
 
@@ -130,7 +130,7 @@ Operadores de filtro:
 | `COUNT(*)` | Cuenta **todas** las filas |
 | `COUNT(columna)` | Cuenta filas donde la columna **no** es NULL |
 | `AVG(columna)` | Ignora los NULL (divide solo entre los no nulos) |
-| `col NOT IN (1, 2, NULL)` | Nunca devuelve filas ⚠️ (si la subconsulta del `NOT IN` puede traer NULL, usa `NOT EXISTS`) |
+| `col NOT IN (1, 2, NULL)` | Nunca devuelve filas (si la subconsulta del `NOT IN` puede traer NULL, usa `NOT EXISTS`) |
 
 ```sql
 SELECT COUNT(*) AS total, COUNT(city) AS con_ciudad FROM customers;  -- 10 y 9
@@ -187,7 +187,7 @@ FROM employees e
 LEFT JOIN employees m ON m.emp_id = e.manager_id;
 ```
 
-⚠️ **Trampa clásica:** si pones una condición sobre la tabla de la derecha en el `WHERE` de un `LEFT JOIN`, este se convierte en `INNER JOIN`. Ponla en el `ON`:
+**Trampa clásica:** si pones una condición sobre la tabla de la derecha en el `WHERE` de un `LEFT JOIN`, este se convierte en `INNER JOIN`. Ponla en el `ON`:
 
 ```sql
 -- MAL: elimina a los clientes sin pedidos entregados (y a los que no tienen pedidos)
@@ -200,7 +200,7 @@ SELECT c.name, o.order_id FROM customers c
 LEFT JOIN orders o ON o.customer_id = c.customer_id AND o.status = 'delivered';
 ```
 
-⚠️ **Cardinalidad:** si unes A con B y cada fila de A tiene 3 coincidencias en B, obtienes 3 filas por fila de A. Por eso un `SUM` después de un JOIN puede salir **inflado**. Pregúntate siempre: ¿cuántas filas por clave hay en cada lado?
+**Cardinalidad:** si unes A con B y cada fila de A tiene 3 coincidencias en B, obtienes 3 filas por fila de A. Por eso un `SUM` después de un JOIN puede salir **inflado**. Pregúntate siempre: ¿cuántas filas por clave hay en cada lado?
 
 ## 7. Subconsultas y CTEs
 
@@ -257,7 +257,7 @@ SELECT
 FROM orders;
 ```
 
-> 💡 `100.0 * x / y`: el `.0` evita la **división entera** (en SQLite, PostgreSQL y SQL Server `3/2 = 1`).
+> **Consejo:** `100.0 * x / y`: el `.0` evita la **división entera** (en SQLite, PostgreSQL y SQL Server `3/2 = 1`).
 
 ## 9. Funciones de ventana (window functions)
 
@@ -303,7 +303,7 @@ SELECT order_id, AVG(order_id) OVER (ORDER BY order_id ROWS BETWEEN 2 PRECEDING 
 FROM orders;
 ```
 
-> ⚠️ `LAST_VALUE` con `ORDER BY` usa por defecto el marco `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, así que devuelve la fila **actual**. Para el último de verdad, usa `ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`.
+> **Atención:** `LAST_VALUE` con `ORDER BY` usa por defecto el marco `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, así que devuelve la fila **actual**. Para el último de verdad, usa `ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`.
 
 ## 10. UNION, INTERSECT, EXCEPT
 
@@ -345,7 +345,7 @@ CREATE TABLE reviews (
     created_at DATE DEFAULT CURRENT_DATE
 );
 INSERT INTO reviews (review_id, product_id, rating) VALUES (1, 2, 5);
-UPDATE products SET price = price * 1.10 WHERE category = 'Stationery';   -- ⚠️ sin WHERE actualiza TODO
+UPDATE products SET price = price * 1.10 WHERE category = 'Stationery';   -- sin WHERE actualiza TODO
 DELETE FROM reviews WHERE rating < 2;
 CREATE INDEX idx_orders_customer ON orders(customer_id);
 CREATE VIEW v_delivered AS SELECT * FROM orders WHERE status = 'delivered';
@@ -387,7 +387,7 @@ Si en la prueba no te dicen qué motor usan, lo más probable es que sea **Postg
 | Si es nulo | `COALESCE(a,b)` | `IFNULL(a,b)` / `COALESCE` | `ISNULL(a,b)` / `COALESCE` |
 | Autoincremento | `SERIAL` / `GENERATED AS IDENTITY` | `AUTO_INCREMENT` | `IDENTITY(1,1)` |
 
-> 💡 `COALESCE` funciona en **todos**. Úsalo y no te equivocas.
+> **Consejo:** `COALESCE` funciona en **todos**. Úsalo y no te equivocas.
 
 ---
 

@@ -1,8 +1,8 @@
 # Technical vocabulary EN → ES (by topic)
 
-🌐 [Español](vocabulario-tecnico.md) · **English**
+[Español](vocabulario-tecnico.md) · **English**
 
-> Study **one topic per day** and add the words you did not know to Anki ([flashcards](../flashcards/README.en.md)). Words marked with 🔊 have a tricky pronunciation: the hint in quotes is written the way a Spanish speaker would read it. Listen to them on [YouGlish](https://youglish.com/) or in the [Cambridge Dictionary](https://dictionary.cambridge.org/).
+> Study **one topic per day** and add the words you did not know to Anki ([flashcards](../flashcards/README.en.md)). Words marked *(pron.)* or followed by their pronunciation have a tricky pronunciation: the hint in quotes is written the way a Spanish speaker would read it. Listen to them on [YouGlish](https://youglish.com/) or in the [Cambridge Dictionary](https://dictionary.cambridge.org/).
 
 ## Contents
 
@@ -51,12 +51,12 @@
 
 | English | Spanish | Example |
 |---|---|---|
-| query 🔊 (/ˈkwɪəri/ "kuíri") | consulta | *Write a query that…* |
+| query (/ˈkwɪəri/ "kuíri") | consulta | *Write a query that…* |
 | table / row / column | tabla / fila / columna | |
 | record / field | registro / campo | |
 | primary key / foreign key | llave primaria / foránea | |
 | constraint | restricción | *NOT NULL constraint* |
-| schema 🔊 ("skíma") | esquema | |
+| schema ("skíma") | esquema | |
 | join / inner / outer / self join | unión / interna / externa / autounión | |
 | subquery / nested query | subconsulta / consulta anidada | |
 | aggregate function | función de agregación | *SUM, COUNT, AVG* |
@@ -110,10 +110,10 @@
 | English | Spanish |
 |---|---|
 | variable / value / type | variable / valor / tipo |
-| string 🔊 | cadena de texto |
+| string *(pron.)* | cadena de texto |
 | integer / float | entero / decimal |
 | boolean | booleano |
-| list / tuple 🔊 ("túpol") / set / dictionary | lista / tupla / conjunto / diccionario |
+| list / tuple ("túpol") / set / dictionary | lista / tupla / conjunto / diccionario |
 | key / value / key-value pair | clave / valor / par clave-valor |
 | array | arreglo |
 | element / item | elemento |
@@ -155,7 +155,7 @@
 | quotient | cociente |
 | lowercase / uppercase | minúsculas / mayúsculas |
 | whitespace / blank | espacio en blanco |
-| character / char 🔊 ("char", como *charcoal*) | carácter |
+| character / char ("char", como *charcoal*) | carácter |
 | punctuation | signos de puntuación |
 | vowel / consonant | vocal / consonante |
 | digit | dígito |
@@ -168,13 +168,13 @@
 | algorithm | algoritmo |
 | data structure | estructura de datos |
 | time complexity / space complexity | complejidad temporal / espacial |
-| Big O notation 🔊 ("big ou") | notación O grande |
+| Big O notation ("big ou") | notación O grande |
 | constant / linear / logarithmic / quadratic | constante / lineal / logarítmica / cuadrática |
 | worst case / best case / average case | peor / mejor caso / caso promedio |
 | brute force | fuerza bruta |
 | efficient / inefficient | eficiente / ineficiente |
 | stack / push / pop | pila / apilar / desapilar |
-| queue 🔊 ("kiú") / enqueue / dequeue | cola / encolar / desencolar |
+| queue ("kiú") / enqueue / dequeue | cola / encolar / desencolar |
 | linked list / node / pointer | lista enlazada / nodo / puntero |
 | hash table / hash map | tabla hash |
 | tree / root / leaf / leaves | árbol / raíz / hoja / hojas |
@@ -203,7 +203,7 @@
 | row / column / diagonal | fila / columna / diagonal |
 | overflow | desbordamiento |
 | off-by-one error | error por uno (índices) |
-| pseudocode 🔊 ("súdo-code") | pseudocódigo |
+| pseudocode ("súdo-code") | pseudocódigo |
 
 ## AWS and cloud
 
@@ -329,7 +329,7 @@
 | `n!` | n factorial | |
 | `( )` `[ ]` `{ }` | parentheses, square brackets, curly braces | |
 
-> ⚠️ **Very important:** in English **3,500** = three thousand five hundred and **3.5** = three point five. It is the opposite of the Colombian convention.
+> **Very important:** in English **3,500** = three thousand five hundred and **3.5** = three point five. It is the opposite of the Colombian convention.
 
 ## Work and interview
 

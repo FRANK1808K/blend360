@@ -20,12 +20,13 @@ EXAMS = [
 ]
 QUESTION_RE = re.compile(r"^\*\*(\d+)\.\*\*\s+(.*)$")
 OPTION_RE = re.compile(r"^- ([A-E])\. (.*)$")
-KEY_RE = re.compile(r"^\| (\d+) \| ([A-E](?:, [A-E])*) \| (D\d)( 🆕)? \| (.*) \|$")
+KEY_RE = re.compile(r"^\| (\d+) \| ([A-E](?:, [A-E])*) \| (D\d)( \(v1\.1\))? \| (.*) \|$")
+NEW_MARK = re.compile(r"^\(v1\.1\)\s*")  # questions on v1.1 topics / preguntas de temas v1.1
 
 
 def inline(text: str) -> str:
     """Escapa HTML y convierte **negrita** y `código` de Markdown."""
-    text = html.escape(text.replace("🆕", "").strip(), quote=False)
+    text = html.escape(NEW_MARK.sub("", text.strip()), quote=False)
     text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
     text = re.sub(r"\*(.+?)\*", r"<em>\1</em>", text)
     return re.sub(r"`(.+?)`", r"<code>\1</code>", text)

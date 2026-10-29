@@ -47,7 +47,7 @@
 | **Model Registry** vs. **Model Cards** | **Versionar y aprobar** modelos para desplegar | **Documentar** el uso previsto y los riesgos | "*aprobación del despliegue*" → Registry |
 | **Serverless** vs. **Asynchronous** inference | Tráfico **intermitente**, payload pequeño | Payload **grande**, procesos **largos**, cola | "*1 GB / 1 hora*" → Async |
 | **Asynchronous** vs. **Batch Transform** | Peticiones individuales encoladas cerca del tiempo real | Dataset **completo** offline, sin endpoint | "*todo el dataset de una vez*" → Batch Transform |
-| **ML tradicional** vs. **FM** 🆕 | Tabular, regulado, explicable, barato | Lenguaje, generación, datos no estructurados | "*explicar cada decisión al regulador*" → ML tradicional |
+| **ML tradicional** vs. **FM** (v1.1) | Tabular, regulado, explicable, barato | Lenguaje, generación, datos no estructurados | "*explicar cada decisión al regulador*" → ML tradicional |
 
 ## 3. Dominio 4 — IA responsable (14 %)
 
@@ -76,7 +76,7 @@
 | **On-Demand** vs. **Provisioned Throughput** | Tráfico variable, sin compromiso | Throughput **garantizado**, tráfico alto y estable, modelo personalizado | "*garantizado / sin throttling*" → PT |
 | **On-Demand** vs. **Batch** | Tiempo real | Masivo, **no urgente**, ≈ 50 % más barato | "*no requiere tiempo real*" → Batch |
 | **KMS AWS managed key** vs. **customer managed key** | Cifrado sin gestionar nada | **Control** de la política, rotación y revocación | "*control / auditar el uso de la clave*" → CMK |
-| **AgentCore Identity** vs. **Policy** 🆕 | **Quién** invoca al agente y **qué credenciales** usa el agente | **Qué acciones** puede ejecutar el agente (Cedar, determinista) | "*nunca permitir la acción X*" → Policy |
+| **AgentCore Identity** vs. **Policy** (v1.1) | **Quién** invoca al agente y **qué credenciales** usa el agente | **Qué acciones** puede ejecutar el agente (Cedar, determinista) | "*nunca permitir la acción X*" → Policy |
 | **Responsabilidad de AWS** vs. **del cliente** | Infraestructura, operación del servicio, aislamiento de modelos | IAM, datos, cifrado, red, logging, guardrails, uso responsable | En servicios gestionados, los **datos y la configuración** son siempre del cliente |
 
 ## 5. Dominio 2 — Para mantener tu fortaleza (24 %)
@@ -86,5 +86,5 @@
 | **Temperatura baja** vs. **alta** | Factual, consistente | Creativo, variado | "*extracción / clasificación*" → baja |
 | **Top-P** vs. **Top-K** | Umbral de probabilidad **acumulada** | Número **fijo** de candidatos | ¿Porcentaje o cantidad? |
 | **ROUGE** vs. **BLEU** | Resumen | Traducción | R de "resumen" |
-| **Prompt engineering** vs. **Context engineering** 🆕 | Redactar la instrucción | Gestionar **todo** lo que entra en la ventana de contexto | "*memoria, herramientas, datos recuperados*" → context engineering |
-| **MCP** vs. **action group** 🆕 | Estándar abierto para conectar agentes con herramientas | Mecanismo propio de Bedrock Agents (OpenAPI + Lambda) | "*estándar abierto / interoperable*" → MCP |
+| **Prompt engineering** vs. **Context engineering** (v1.1) | Redactar la instrucción | Gestionar **todo** lo que entra en la ventana de contexto | "*memoria, herramientas, datos recuperados*" → context engineering |
+| **MCP** vs. **action group** (v1.1) | Estándar abierto para conectar agentes con herramientas | Mecanismo propio de Bedrock Agents (OpenAPI + Lambda) | "*estándar abierto / interoperable*" → MCP |

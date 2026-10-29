@@ -1,6 +1,6 @@
 # Minimum grammar for the technical test
 
-🌐 [Español](gramatica-minima.md) · **English**
+[Español](gramatica-minima.md) · **English**
 
 > Only what **really** appears in technical statements, and what you need to **explain your solution**. No more, no less. Each example has its Spanish meaning so you can check that you understood.
 
@@ -15,7 +15,7 @@ The most common structure in exam statements.
 | The function **returns** a list. | The function **does not (doesn't) return** anything. | **Does** the function **return** a list? |
 | The tables **contain** data. | The tables **don't contain** nulls. | **Do** the tables **contain** nulls? |
 
-> ⚠️ With *he / she / it / the function / the query*, add **-s** to the verb: *it return**s***, *it sort**s***, *it do**es***.
+> **Warning:** With *he / she / it / the function / the query*, add **-s** to the verb: *it return**s***, *it sort**s***, *it do**es***.
 
 ## 2. Passive voice: the most used structure in technical documentation
 

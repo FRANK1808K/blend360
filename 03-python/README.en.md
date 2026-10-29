@@ -1,6 +1,6 @@
 # 03 · Python — what you need for the technical test
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 > According to candidate reports, Blend360's online test usually includes **Python (or R) programming problems together with SQL**, with limited time. There may also be multiple-choice questions such as "what does this code print?". This module covers both.
 
@@ -46,11 +46,11 @@ python3 test_ejercicios.py soluciones   # checks the reference solutions
 | `int` | `42` | — |
 | `float` | `3.14` | — |
 | `bool` | `True`, `False` (they are a subclass of `int`: `True + True == 2`) | — |
-| `str` | `"hello"` | ❌ No |
-| `list` | `[1, 2, 3]` | ✅ Yes |
-| `tuple` | `(1, 2, 3)` — a one-element tuple is `(1,)` | ❌ No |
-| `set` | `{1, 2, 3}` — no order, no duplicates. **`{}` is an empty dict**; empty set = `set()` | ✅ Yes |
-| `dict` | `{"a": 1}` — keeps insertion order (Python 3.7+) | ✅ Yes |
+| `str` | `"hello"` | ✗ No |
+| `list` | `[1, 2, 3]` | ✓ Yes |
+| `tuple` | `(1, 2, 3)` — a one-element tuple is `(1,)` | ✗ No |
+| `set` | `{1, 2, 3}` — no order, no duplicates. **`{}` is an empty dict**; empty set = `set()` | ✓ Yes |
+| `dict` | `{"a": 1}` — keeps insertion order (Python 3.7+) | ✓ Yes |
 | `None` | Absence of a value | — |
 
 | Operator | Result | Watch out |
@@ -154,7 +154,7 @@ sorted(words, key=len)               # a lambda/function as the sort criterion
 
 - A function without `return` returns `None`.
 - `*args` receives extra positional arguments as a **tuple**; `**kwargs` receives extra keyword arguments as a **dict**.
-- ⚠️ **Mutable default argument:** `def f(x, lst=[])` shares the **same** list between calls. Use `lst=None` and inside `if lst is None: lst = []`.
+- **Mutable default argument:** `def f(x, lst=[])` shares the **same** list between calls. Use `lst=None` and inside `if lst is None: lst = []`.
 - **Scope (LEGB):** Local → Enclosing → Global → Built-in.
 
 ## 6. Comprehensions
@@ -254,9 +254,9 @@ c = a.copy()     # shallow copy (also a[:] or list(a))
 import copy
 d = copy.deepcopy(matrix)   # deep copy (lists inside lists)
 
-m = [[0] * 3] * 3   # ⚠️ 3 references to the SAME row
+m = [[0] * 3] * 3   # 3 references to the SAME row
 m[0][0] = 1         # [[1,0,0],[1,0,0],[1,0,0]]
-m = [[0] * 3 for _ in range(3)]   # ✅ the right way
+m = [[0] * 3 for _ in range(3)]   # ✓ the right way
 ```
 
 ## 11. Quiz: what is the output?

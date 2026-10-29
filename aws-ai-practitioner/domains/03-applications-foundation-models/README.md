@@ -3,7 +3,7 @@
 > **Peso en el examen:** 28 % — **el dominio más importante** (≈ 14 de las 50 preguntas que cuentan).
 > **Objetivo:** saber diseñar soluciones con Amazon Bedrock (modelos, Knowledge Bases, Agents, Guardrails), decidir entre Bedrock y SageMaker JumpStart, y elegir el servicio de IA aplicada correcto para cada caso de uso.
 >
-> 🆕 **Guía v1.1:** objetivos nuevos **3.2.5 versionado de prompts (Prompt Management)** y **3.4.5 métricas de negocio**; *distillation* y *LLM-as-a-judge* añadidos; servicios nuevos **AgentCore, Strands Agents, Kiro, AWS Transform** y Amazon Quick. Ver [novedades v1.1](../00-exam-guide-v1.1-changes.md#55-servicios-y-herramientas-agénticas-de-aws).
+> **Guía v1.1:** objetivos nuevos **3.2.5 versionado de prompts (Prompt Management)** y **3.4.5 métricas de negocio**; *distillation* y *LLM-as-a-judge* añadidos; servicios nuevos **AgentCore, Strands Agents, Kiro, AWS Transform** y Amazon Quick. Ver [novedades v1.1](../00-exam-guide-v1.1-changes.md#55-servicios-y-herramientas-agénticas-de-aws).
 
 ## Mapeo a los task statements oficiales
 
@@ -372,4 +372,4 @@ Pregunta de cliente ──► Lex ──► Lambda ──► Bedrock Knowledge B
 - [ ] Asocio cada servicio de IA aplicada con su caso de uso y su "anti-caso".
 - [ ] Conozco los métodos de evaluación disponibles en Bedrock.
 
-⬅️ Anterior: [Dominio 2](../02-fundamentals-generative-ai/README.md) · ➡️ Siguiente: [Dominio 4 — IA Responsable](../04-responsible-ai/README.md)
+← Anterior: [Dominio 2](../02-fundamentals-generative-ai/README.md) · Siguiente: [Dominio 4 — IA Responsable](../04-responsible-ai/README.md)

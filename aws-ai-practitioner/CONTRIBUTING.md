@@ -63,7 +63,7 @@ Gracias por ayudar a mejorar esta guía de preparación para **AWS Certified AI 
 
 - Usa la plantilla de [`practice-questions/README.md`](practice-questions/README.md).
 - Escenario realista, una sola pregunta, opciones plausibles.
-- Justifica **todas** las opciones (✅/❌) y enlaza la sección del dominio que la respalda.
+- Justifica **todas** las opciones (✓/✗) y enlaza la sección del dominio que la respalda.
 - Varía los tipos: opción múltiple, respuesta múltiple, ordenación y emparejamiento.
 
 ## 6. Flujo de trabajo

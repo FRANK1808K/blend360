@@ -1,6 +1,6 @@
 # Technical English exercises (with answers)
 
-🌐 [Español](ejercicios-ingles.md) · **English**
+[Español](ejercicios-ingles.md) · **English**
 
 > Do them **without a translator**. The answers are at the end of each section. These exercises check whether you understand English, so some answers are in Spanish (that is how you prove you understood).
 

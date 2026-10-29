@@ -1,11 +1,11 @@
 # Blend360 All Star: preparación para la prueba de ingreso
 
-🌐 **Español** · [English](README.en.md)
+**Español** · [English](README.en.md)
 
 [![Checks](https://github.com/FRANK1808K/blend360/actions/workflows/checks.yml/badge.svg)](https://github.com/FRANK1808K/blend360/actions/workflows/checks.yml)
-![Examen](https://img.shields.io/badge/examen-18%20dic%202026-0d6e66)
+![Examen](https://img.shields.io/badge/examen-18%20dic%202026-043058)
 ![AWS AIF-C01](https://img.shields.io/badge/AWS%20AIF--C01-16%20nov%202026-FF9900?logo=amazonwebservices&logoColor=white)
-![Idiomas](https://img.shields.io/badge/idiomas-Espa%C3%B1ol%20%7C%20English-1f4e79)
+![Idiomas](https://img.shields.io/badge/idiomas-Espa%C3%B1ol%20%7C%20English-0b6e86)
 
 Repositorio de estudio para la prueba del **programa All Star (semillero) de Blend360 en Colombia**:
 
@@ -18,7 +18,7 @@ Cada documento existe **en español y en inglés**. Los ejercicios y simulacros 
 
 > **Aviso:** material de estudio comunitario, **no oficial** y sin relación con Blend360. Las preguntas son originales. Lo que se sabe del proceso viene de reseñas públicas de candidatos ([ver investigación](guides/que-evalua-blend360.md)).
 
-**En línea, sin instalar nada (también en el celular):** 📖 [Centro de estudio web](https://frank1808k.github.io/blend360/) (todo el material organizado en *Estudiar · Evaluar · Repasar*, búsqueda, modo blanco/negro, **progreso guardado**) · 🎯 [Simulador + laboratorio de código](https://frank1808k.github.io/blend360/simulador/) · ☁️ [Simulador AIF-C01](https://frank1808k.github.io/blend360/simulador-aif/)
+**En línea, sin instalar nada (también en el celular):** [Centro de estudio web](https://frank1808k.github.io/blend360/) (todo el material organizado en *Estudiar · Evaluar · Repasar*, búsqueda, modo claro/oscuro, **progreso guardado**) · [Simulador + laboratorio de código](https://frank1808k.github.io/blend360/simulador/) · [Simulador AIF-C01](https://frank1808k.github.io/blend360/simulador-aif/)
 
 ---
 
@@ -26,12 +26,12 @@ Cada documento existe **en español y en inglés**. Los ejercicios y simulacros 
 
 | Tu situación | Empieza aquí |
 |---|---|
-| 📅 **Quiero saber qué estudiar cada día** | [Plan de estudio 26 oct → 18 dic](guides/plan-de-estudio.md) (incluye el AWS AIF-C01 del 16 de nov) |
-| 🔎 **Quiero saber cómo evalúa Blend360** | [Qué evalúa Blend360](guides/que-evalua-blend360.md): proceso reportado por candidatos, relación con AWS, preguntas para el reclutador |
-| 🧪 **Quiero medir mi nivel ya** | [Simulador interactivo](simulator/README.md) · [Simulacro técnico](simulacros/simulacro-tecnico-01.md) · [Simulacro de razonamiento](simulacros/simulacro-razonamiento-01.md) |
-| ⌨️ **Quiero practicar escribiendo código** | [Laboratorio del simulador](simulator/README.md#laboratorio-de-código): escribes SQL o Python en el navegador (también en el celular) y se corrige al instante |
-| 🇬🇧 **Mi inglés es A2 y me preocupa** | [Plan de inglés](english/README.md) → [cómo leer preguntas en inglés](english/como-leer-preguntas.md) |
-| ⏰ **El examen es en 2 días** | [Repaso final de 48 h](cheatsheets/repaso-final-48h.md) + [cheatsheets](cheatsheets/README.md) |
+| **Quiero saber qué estudiar cada día** | [Plan de estudio 26 oct → 18 dic](guides/plan-de-estudio.md) (incluye el AWS AIF-C01 del 16 de nov) |
+| **Quiero saber cómo evalúa Blend360** | [Qué evalúa Blend360](guides/que-evalua-blend360.md): proceso reportado por candidatos, relación con AWS, preguntas para el reclutador |
+| **Quiero medir mi nivel ya** | [Simulador interactivo](simulator/README.md) · [Simulacro técnico](simulacros/simulacro-tecnico-01.md) · [Simulacro de razonamiento](simulacros/simulacro-razonamiento-01.md) |
+| **Quiero practicar escribiendo código** | [Laboratorio del simulador](simulator/README.md#laboratorio-de-código): escribes SQL o Python en el navegador (también en el celular) y se corrige al instante |
+| **Mi inglés es A2 y me preocupa** | [Plan de inglés](english/README.md) → [cómo leer preguntas en inglés](english/como-leer-preguntas.md) |
+| **El examen es en 2 días** | [Repaso final de 48 h](cheatsheets/repaso-final-48h.md) + [cheatsheets](cheatsheets/README.md) |
 
 ## Cómo usar los dos idiomas
 
@@ -39,7 +39,7 @@ Cada documento existe **en español y en inglés**. Los ejercicios y simulacros 
 2. **Relee** la misma sección en inglés ([English](README.en.md)). Como ya conoces el contenido, aprendes las palabras en inglés en contexto.
 3. **Practica** siempre en inglés. Abre la traducción al español solo cuando te bloquees, y anota las palabras que no sabías en tus [flashcards](flashcards/README.md).
 
-> Cada archivo `X.md` (español) tiene su gemelo `X.en.md` (inglés). Arriba de cada documento está el selector 🌐 para cambiar de idioma.
+> Cada archivo `X.md` (español) tiene su gemelo `X.en.md` (inglés). Arriba de cada documento está el selector para cambiar de idioma.
 
 ## Módulos
 
@@ -79,11 +79,13 @@ El [centro de estudio](https://frank1808k.github.io/blend360/) reúne todo el re
 
 | Sección | Qué contiene |
 |---|---|
-| 📚 **Estudiar** | Mapa de estudio con prioridades y horas, la teoría de cada módulo y el inglés técnico |
-| 🧪 **Evaluar** | Ruta de evaluación con metas, ejercicios por tema, simulacros y el simulador |
-| 🔁 **Repasar** | Cheatsheets (con botón para imprimir), repaso final de 48 h y flashcards |
-| ☁️ **AIF-C01** | Los 5 dominios, preguntas por dominio, 2 simulacros, cheatsheets, estrategia, laboratorio y recursos |
-| 📈 **Progreso** | Páginas estudiadas, registro de simulacros con gráfica, cuaderno de errores con fechas de repaso, intentos de los simuladores y copia de seguridad |
+| **Estudiar** | Mapa de estudio con prioridades y horas, la teoría de cada módulo y el inglés técnico |
+| **Evaluar** | Ruta de evaluación con metas, ejercicios por tema, simulacros y el simulador |
+| **Repasar** | Cheatsheets (con botón para imprimir), repaso final de 48 h y flashcards |
+| **AIF-C01** | Los 5 dominios, preguntas por dominio, 2 simulacros, cheatsheets, estrategia, laboratorio y recursos |
+| **Progreso** | Páginas estudiadas, registro de simulacros con gráfica, cuaderno de errores con fechas de repaso, intentos de los simuladores y copia de seguridad |
+
+**Diseño:** la paleta de Blend360 (azul marino `#043058`, cian `#1DF3F4`, aguamarina `#A2F3F3` sobre un fondo cálido), tipografía geométrica (Urbanist, títulos en Archivo), íconos de línea sin emojis, modo claro u oscuro, transiciones entre páginas y animaciones suaves que se desactivan si tu sistema pide reducir el movimiento. El simulador usa la misma identidad y una interfaz de plataforma de evaluación.
 
 Además: la portada muestra **qué toca esta semana** según el plan y la cuenta regresiva a los dos exámenes; las casillas del plan de estudio se pueden marcar y se guardan; cada página tiene botones para marcarla como estudiada, mostrar u ocultar todas las soluciones e imprimirla; y los diagramas del módulo AIF-C01 se dibujan.
 
@@ -114,7 +116,7 @@ blend360/
 ├── 08-estadistica-y-ml/        Estadística, pruebas A/B y ML + 25 preguntas
 ├── english/                    Inglés técnico para A2
 ├── simulacros/                 Simulacro técnico (90 min) + razonamiento (30 min)
-├── simulator/                  Simulador + laboratorio de código (ES/EN, modo blanco/negro)
+├── simulator/                  Simulador + laboratorio de código (ES/EN, modo claro/oscuro)
 ├── quarto/                     Sitio web de estudio (Quarto): configuración, tema, portada, centros y progreso
 ├── scripts/                    Verificación de documentos y generación del laboratorio y del sitio
 ├── cheatsheets/                Repasos de una página + plan de 48 h

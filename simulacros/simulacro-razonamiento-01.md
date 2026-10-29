@@ -1,6 +1,6 @@
 # Simulacro de razonamiento abstracto #1: 30 minutos
 
-🌐 **Español** · [English](simulacro-razonamiento-01.en.md)
+**Español** · [English](simulacro-razonamiento-01.en.md)
 
 > **Instrucciones:** 30 preguntas en **30 minutos** (60 s por pregunta). La dificultad **aumenta**. No te quedes más de 1 minuto en una pregunta: marca, adivina y sigue. Respuestas al final.
 >

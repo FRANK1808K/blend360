@@ -3,7 +3,7 @@
 > **Peso en el examen:** 14 % (≈ 7 de las 50 preguntas que cuentan).
 > **Objetivo:** aplicar el modelo de responsabilidad compartida a cargas GenAI, controlar el acceso a Bedrock y SageMaker con IAM y redes privadas, auditar y monitorear el uso de modelos y elegir el modelo de precios adecuado.
 >
-> 🆕 **Guía v1.1:** seguridad de agentes con **AgentCore Identity y Policy** (5.1.1) y objetivo nuevo **5.1.5 detección de alucinaciones y grounding**. Ver [novedades v1.1](../00-exam-guide-v1.1-changes.md#56-seguridad-de-agentes-agentcore-identity-y-policy-511).
+> **Guía v1.1:** seguridad de agentes con **AgentCore Identity y Policy** (5.1.1) y objetivo nuevo **5.1.5 detección de alucinaciones y grounding**. Ver [novedades v1.1](../00-exam-guide-v1.1-changes.md#56-seguridad-de-agentes-agentcore-identity-y-policy-511).
 
 ## Mapeo a los task statements oficiales
 
@@ -389,4 +389,4 @@ El **OWASP Top 10 for LLM Applications** es una referencia útil: prompt injecti
 - [ ] Distingo CloudTrail (quién/cuándo) de Model Invocation Logging (qué prompt/respuesta).
 - [ ] Elijo entre On-Demand, Batch y Provisioned Throughput según latencia, volumen y personalización.
 
-⬅️ Anterior: [Dominio 4](../04-responsible-ai/README.md) · 🏠 [Volver al inicio](../../README.md)
+← Anterior: [Dominio 4](../04-responsible-ai/README.md) · [Volver al inicio](../../README.md)

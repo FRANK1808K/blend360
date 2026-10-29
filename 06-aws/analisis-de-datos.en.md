@@ -1,6 +1,6 @@
-# 06b · Data analytics on AWS ⭐
+# 06b · Data analytics on AWS
 
-🌐 [Español](analisis-de-datos.md) · **English**
+[Español](analisis-de-datos.md) · **English**
 
 > This is the core of Blend360's work with AWS: **building data and analytics platforms for clients**. Blend holds the **AWS Data & Analytics** competency and is a *delivery partner* for **Amazon EMR** and **Amazon QuickSight**, so those services deserve special attention.
 
@@ -49,11 +49,11 @@
 |---|---|---|
 | **AWS Glue (ETL jobs)** | **Serverless** ETL based on **Apache Spark** (PySpark/Scala) or Python Shell | ETL without managing clusters; you pay per DPU-hour |
 | **AWS Glue DataBrew** | **No-code** visual data preparation (more than 250 transformations) | Analysts who clean and profile data without programming |
-| **Amazon EMR** ⭐ | Managed clusters for **Spark, Hadoop, Hive, Presto/Trino, HBase**. Available as EMR on EC2, **EMR Serverless** and EMR on EKS | Large-scale big data, fine-grained cluster control, open-source frameworks. Cut costs with **Spot** instances |
+| **Amazon EMR** | Managed clusters for **Spark, Hadoop, Hive, Presto/Trino, HBase**. Available as EMR on EC2, **EMR Serverless** and EMR on EKS | Large-scale big data, fine-grained cluster control, open-source frameworks. Cut costs with **Spot** instances |
 | **AWS Lambda** | Short event-driven functions | Small transformations (e.g., when a file lands in S3) |
 | **Amazon Managed Service for Apache Flink** (formerly Kinesis Data Analytics) | Real-time **stream** processing with SQL/Java/Python | Real-time aggregations, anomaly detection |
 
-> 🧠 **Glue vs. EMR:** Glue is **serverless** and simpler: nothing to manage. EMR gives **more control and flexibility** (versions, frameworks, instance types) and is usually cheaper for large, continuous workloads.
+> **Glue vs. EMR:** Glue is **serverless** and simpler: nothing to manage. EMR gives **more control and flexibility** (versions, frameworks, instance types) and is usually cheaper for large, continuous workloads.
 
 ### Ingestion
 
@@ -67,14 +67,14 @@
 | **AWS DataSync** | **File** transfer | On-premises file servers → S3/EFS |
 | **AWS Snow Family** | Physical devices | Petabytes without a good connection |
 
-> 🧠 **Kinesis Data Streams vs. Firehose:** *Streams* = real time, custom consumers, you manage the capacity. *Firehose* = a fully managed "hose" that **delivers** data to a destination in near real time (seconds to minutes of buffering), without code.
+> **Kinesis Data Streams vs. Firehose:** *Streams* = real time, custom consumers, you manage the capacity. *Firehose* = a fully managed "hose" that **delivers** data to a destination in near real time (seconds to minutes of buffering), without code.
 
 ### Query and data warehouse
 
 | Service | What it is | How you pay | When |
 |---|---|---|---|
-| **Amazon Athena** ⭐ | **Serverless SQL** directly on files in **S3** (Trino/Presto engine) using the Glue Data Catalog | Per **data scanned** (TB) | Ad hoc queries on the data lake, without infrastructure |
-| **Amazon Redshift** ⭐ | Columnar **data warehouse** with massively parallel processing (**MPP**) | Per node/hour (provisioned) or per use (**Redshift Serverless**) | BI with many repeated, complex queries on structured data, at large scale |
+| **Amazon Athena** | **Serverless SQL** directly on files in **S3** (Trino/Presto engine) using the Glue Data Catalog | Per **data scanned** (TB) | Ad hoc queries on the data lake, without infrastructure |
+| **Amazon Redshift** | Columnar **data warehouse** with massively parallel processing (**MPP**) | Per node/hour (provisioned) or per use (**Redshift Serverless**) | BI with many repeated, complex queries on structured data, at large scale |
 | **Redshift Spectrum** | Query data in S3 from Redshift without loading it | Per data scanned | Join the warehouse with the lake |
 | **Amazon OpenSearch Service** | Search and **log** analytics (Elasticsearch/OpenSearch + dashboards) | Per instance / serverless | Text search, observability, log analysis |
 
@@ -104,14 +104,14 @@
 | **Amazon Macie** | Discover **sensitive data (PII)** in S3 |
 | **Amazon DataZone / SageMaker Unified Studio** | Business catalog, data discovery and governance across teams |
 
-### Visualization: Amazon QuickSight ⭐
+### Visualization: Amazon QuickSight
 
 - A **serverless BI** service in the cloud: interactive dashboards, reports and *embedded analytics* (embedding dashboards in applications).
 - **SPICE:** an **in-memory** engine that speeds up dashboards (you import the data into SPICE instead of querying the source on every click).
 - Sources: Athena, Redshift, RDS/Aurora, S3, Snowflake, Salesforce, files…
 - **ML Insights** (anomaly detection, forecasting) and **natural-language** questions with generative AI (Amazon Q in QuickSight).
 - Priced per user (authors and readers).
-- ℹ️ In 2025, AWS brought QuickSight into **Amazon Quick Suite** (as "Quick Sight"). If you see either name, it is AWS's BI service.
+- In 2025, AWS brought QuickSight into **Amazon Quick Suite** (as "Quick Sight"). If you see either name, it is AWS's BI service.
 
 ### Machine learning and AI (just enough)
 

@@ -1,11 +1,11 @@
 # Study plan: October 26 → December 18, 2026
 
-🌐 [Español](plan-de-estudio.md) · **English**
+[Español](plan-de-estudio.md) · **English**
 
 > **Two exams, one plan.**
 >
-> - 🟧 **November 16 (Monday):** AWS Certified AI Practitioner (AIF-C01).
-> - 🟦 **December 18 (Friday):** Blend360 All Star test (abstract reasoning, 30 min + technical test, 90 min, in English).
+> - **November 16 (Monday):** AWS Certified AI Practitioner (AIF-C01).
+> - **December 18 (Friday):** Blend360 All Star test (abstract reasoning, 30 min + technical test, 90 min, in English).
 >
 > Until November 16 the priority is **AWS**, but **every day** you keep a base for Blend360 (English + reasoning + SQL). What you study for AWS also counts for Blend360: Blend is an **AWS Premier Tier Partner** and the test covers "what AWS is and data analytics on AWS".
 
@@ -62,7 +62,7 @@ For AWS, use the integrated module **[AWS AI Practitioner in Spanish](../aws-ai-
 - [ ] Reasoning: [reasoning mock exam #1](../simulacros/simulacro-razonamiento-01.en.md) (30 min) → write down your score.
 - [ ] Nov 14–15: final AIF-C01 review (no new topics).
 
-### 🟧 Monday, Nov 16: AWS AIF-C01 exam
+### Monday, Nov 16: AWS AIF-C01 exam
 
 Do not study anything for Blend360 that day. Rest after the exam.
 
@@ -83,16 +83,16 @@ Do not study anything for Blend360 that day. Rest after the exam.
 
 - [ ] Python: exercises 14–25 + [pandas](../03-python/pandas.en.md) + run `pandas_practica.py`.
 - [ ] Algorithms: the whole [04-algorithms README](../04-algoritmos-y-estructuras/README.en.md) (Big O, data structures, sorting, pseudocode tracing).
-- [ ] Algorithms: [problemas.py](../04-algoritmos-y-estructuras/problemas.py) 🟢 (the first 11).
+- [ ] Algorithms: [problemas.py](../04-algoritmos-y-estructuras/problemas.py) (the first 11).
 - [ ] English: write and memorize your **self-introduction** ([interview and phrases](../english/entrevista-y-frases.en.md)).
 - [ ] Reasoning: simulator, 1 full 30-minute mock exam.
 
 ### Week 6 · Nov 30 – Dec 6: algorithms + databases + problem solving + statistics/ML
 
-- [ ] Algorithms: the 🟡 problems (the remaining 9).
+- [ ] Algorithms: the intermediate problems (the remaining 9).
 - [ ] The whole [05-databases](../05-bases-de-datos/README.en.md) module.
 - [ ] The whole [07-problem solving](../07-resolucion-de-problemas/README.en.md) module (includes logic, statistics and business cases).
-- [ ] [08-statistics and ML](../08-estadistica-y-ml/README.en.md): sections 2–6 and 9 + the 🔴 rows of the route through your Drive notes + [25 questions](../08-estadistica-y-ml/preguntas.en.md). If you are placed on the Data Science track, give it priority.
+- [ ] [08-statistics and ML](../08-estadistica-y-ml/README.en.md): sections 2–6 and 9 + the priority 1 rows of the route through your Drive notes + [25 questions](../08-estadistica-y-ml/preguntas.en.md). If you are placed on the Data Science track, give it priority.
 - [ ] **Saturday, Dec 5:** [technical mock exam #1](../simulacros/simulacro-tecnico-01.en.md) (90 min, real conditions).
 - [ ] Sunday, Dec 6: analyze your mistakes in the mock exam and review those topics.
 - [ ] English: [English exercises](../english/ejercicios-ingles.en.md) + record yourself answering 3 interview questions.
@@ -115,7 +115,7 @@ Do not study anything for Blend360 that day. Rest after the exam.
 ## PHASE 3: final review + exam
 
 - **Dec 16 – 17:** follow the [48-hour final review](../cheatsheets/repaso-final-48h.en.md). Nothing new.
-- 🟦 **Friday, Dec 18: Blend360 exam.** Let's win this!
+- **Friday, Dec 18: Blend360 exam.** Let's win this!
 
 ---
 

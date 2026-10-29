@@ -4,7 +4,7 @@ subtitle: "Páginas estudiadas, simulacros, cuaderno de errores y simuladores"
 ---
 
 ::: {.lang-switch}
-🌐 **Español** · [English](progreso.en.qmd)
+**Español** · [English](progreso.en.qmd)
 :::
 
 ::: {.callout-note title="Tu progreso se guarda solo en este navegador"}
@@ -33,7 +33,7 @@ Lo que guardaron los simuladores en este navegador: ejercicios resueltos en el l
 
 <div id="b-sim"></div>
 
-[🎯 Simulador Blend360](simulador/index.html){.b-btn} [☁️ Simulador AIF-C01](simulador-aif/index.html){.b-btn}
+<a class="b-btn dark" href="simulador/index.html">Simulador Blend360 <span class="b-ico b-ico-arrow"></span></a> <a class="b-btn" href="simulador-aif/index.html">Simulador AIF-C01 <span class="b-ico b-ico-arrow"></span></a>
 
 ## Copia de seguridad
 

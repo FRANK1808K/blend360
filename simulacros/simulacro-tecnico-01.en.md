@@ -1,6 +1,6 @@
 # Mock technical exam #1: 90 minutes
 
-🌐 [Español](simulacro-tecnico-01.md) · **English**
+[Español](simulacro-tecnico-01.md) · **English**
 
 > **Instructions (like the real exam):**
 >
@@ -386,7 +386,7 @@ longest_consecutive([])                       # 0
 - **4:** DENSE_RANK → 500 = 1, 400 = 2, 400 = 2, 300 = **3** (no gaps; with `RANK` it would be 4).
 - **5:** C uses `= NULL`, which is never true. Use `IS NULL`.
 - **6:** **Integer** division between integers. To get 3.5: `7.0 / 2` or `CAST(7 AS DECIMAL) / 2`.
-- **9:** `_` = exactly one character of any kind, followed by an "a". "M**a**ria" ✅; "Ana" has an "n" in the 2nd position.
+- **9:** `_` = exactly one character of any kind, followed by an "a". "M**a**ria" ✓; "Ana" has an "n" in the 2nd position.
 - **11:** "Blend 360" has 9 characters: **the space counts**.
 - **14:** `b = a` does not copy: both variables point to the same list.
 - **25:** Quick sort is O(n²) in the worst case; merge sort is always O(n log n).

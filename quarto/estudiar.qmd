@@ -4,7 +4,7 @@ subtitle: "Qué estudiar, en qué orden y cuánto pesa cada tema en la prueba"
 ---
 
 ::: {.lang-switch}
-🌐 **Español** · [English](estudiar.en.qmd)
+**Español** · [English](estudiar.en.qmd)
 :::
 
 Cada tema tiene tres piezas: la **teoría** (esta sección), la **práctica** con solución y una **hoja de repaso** de una página. Estudia un módulo, haz su práctica sin mirar y marca la página como estudiada con el botón que aparece debajo de su título: así [Mi progreso](progreso.qmd) sabe por dónde vas.
@@ -27,13 +27,13 @@ Ordenados por **prioridad** según lo que reportan los candidatos ([investigaci�
 
 | Prioridad | Tema | Horas | Teoría | Práctica | Repaso |
 |---|---|---|---|---|---|
-| ⭐⭐⭐ | **SQL**: JOINs, agregaciones, CTEs, funciones de ventana | 12 h | [Guía SQL](02-sql/index.qmd) | [35 ejercicios](02-sql/ejercicios.qmd) · [laboratorio SQL](simulador/index.html) | [Cheatsheet](cheatsheets/sql.qmd) |
-| ⭐⭐⭐ | **Python** orientado a datos | 10 h | [Guía Python](03-python/index.qmd) · [pandas](03-python/pandas.qmd) | [25 ejercicios en el laboratorio](simulador/index.html) | [Cheatsheet](cheatsheets/python.qmd) |
-| ⭐⭐ | **Algoritmos y estructuras de datos** | 8 h | [Guía](04-algoritmos-y-estructuras/index.qmd) | [20 problemas en el laboratorio](simulador/index.html) | [Cheatsheet](cheatsheets/algoritmos.qmd) |
-| ⭐⭐ | **AWS y análisis de datos en AWS** (Blend es AWS Premier Partner) | 6 h | [Fundamentos](06-aws/index.qmd) · [análisis de datos ⭐](06-aws/analisis-de-datos.qmd) | [30 preguntas](06-aws/preguntas.qmd) | [Cheatsheet](cheatsheets/aws-y-bases-de-datos.qmd) |
-| ⭐⭐ | **Bases de datos**: llaves, normalización, ACID, OLTP/OLAP | 4 h | [Guía](05-bases-de-datos/index.qmd) | Autoevaluación al final de la guía | [Cheatsheet](cheatsheets/aws-y-bases-de-datos.qmd) |
-| ⭐⭐ | **Resolución de problemas**, lógica y matemática | 4 h | [Guía](07-resolucion-de-problemas/index.qmd) | Ejercicios resueltos en la guía | [Repaso final](cheatsheets/repaso-final-48h.qmd) |
-| ⭐⭐ (⭐⭐⭐ en Data Science) | **Estadística y machine learning** | 6 h | [Guía](08-estadistica-y-ml/index.qmd) | [25 preguntas](08-estadistica-y-ml/preguntas.qmd) | [Cheatsheet](cheatsheets/estadistica-ml.qmd) |
+| Alta | **SQL**: JOINs, agregaciones, CTEs, funciones de ventana | 12 h | [Guía SQL](02-sql/index.qmd) | [35 ejercicios](02-sql/ejercicios.qmd) · [laboratorio SQL](simulador/index.html) | [Cheatsheet](cheatsheets/sql.qmd) |
+| Alta | **Python** orientado a datos | 10 h | [Guía Python](03-python/index.qmd) · [pandas](03-python/pandas.qmd) | [25 ejercicios en el laboratorio](simulador/index.html) | [Cheatsheet](cheatsheets/python.qmd) |
+| Media | **Algoritmos y estructuras de datos** | 8 h | [Guía](04-algoritmos-y-estructuras/index.qmd) | [20 problemas en el laboratorio](simulador/index.html) | [Cheatsheet](cheatsheets/algoritmos.qmd) |
+| Media | **AWS y análisis de datos en AWS** (Blend es AWS Premier Partner) | 6 h | [Fundamentos](06-aws/index.qmd) · [análisis de datos](06-aws/analisis-de-datos.qmd) | [30 preguntas](06-aws/preguntas.qmd) | [Cheatsheet](cheatsheets/aws-y-bases-de-datos.qmd) |
+| Media | **Bases de datos**: llaves, normalización, ACID, OLTP/OLAP | 4 h | [Guía](05-bases-de-datos/index.qmd) | Autoevaluación al final de la guía | [Cheatsheet](cheatsheets/aws-y-bases-de-datos.qmd) |
+| Media | **Resolución de problemas**, lógica y matemática | 4 h | [Guía](07-resolucion-de-problemas/index.qmd) | Ejercicios resueltos en la guía | [Repaso final](cheatsheets/repaso-final-48h.qmd) |
+| Media (alta en Data Science) | **Estadística y machine learning** | 6 h | [Guía](08-estadistica-y-ml/index.qmd) | [25 preguntas](08-estadistica-y-ml/preguntas.qmd) | [Cheatsheet](cheatsheets/estadistica-ml.qmd) |
 
 ::: {.callout-note title="¿Y los ejercicios de Python y algoritmos?"}
 Están en archivos `.py` con corrector automático. Hay dos formas de hacerlos: en el **[laboratorio del simulador](simulador/index.html)** (en el navegador, también en el celular) o en tu computador con `python3 test_ejercicios.py` y `python3 test_problemas.py` (ver la guía de [Python](03-python/index.qmd) y la de [algoritmos](04-algoritmos-y-estructuras/index.qmd)).
@@ -50,7 +50,7 @@ La prueba técnica es en inglés. Con 30–40 minutos diarios pasas de A2 a ente
 | 3 | [Vocabulario técnico](english/vocabulario-tecnico.qmd) | SQL, Python, AWS, datos, entrevista |
 | 4 | [Gramática mínima](english/gramatica-minima.qmd) | Lo justo para entender y responder |
 | 5 | [Entrevista y frases](english/entrevista-y-frases.qmd) | Presentación personal e historias STAR |
-| ✍️ | [Ejercicios de inglés](english/ejercicios-ingles.qmd) + [flashcards](flashcards/index.qmd) | Practicar y fijar el vocabulario |
+| 6 | [Ejercicios de inglés](english/ejercicios-ingles.qmd) + [flashcards](flashcards/index.qmd) | Practicar y fijar el vocabulario |
 
 ## Cómo estudiar un módulo
 

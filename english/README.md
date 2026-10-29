@@ -1,6 +1,6 @@
-# 🇬🇧 English for the Blend360 exam: de A2 a "funcional" en 8 semanas
+# English for the Blend360 exam: de A2 a "funcional" en 8 semanas
 
-🌐 **Español** · [English](README.en.md)
+**Español** · [English](README.en.md)
 
 > **Tu situación:** nivel A2, examen técnico en inglés el **18 de diciembre**. En 8 semanas no vas a llegar a C1, ni hace falta. Lo que necesitas es:
 >
@@ -12,12 +12,12 @@
 
 | Archivo | Para qué | Prioridad |
 |---|---|---|
-| [como-leer-preguntas.md](como-leer-preguntas.md) | Palabras clave de los enunciados, falsos amigos, estrategia de lectura | 🔴 Máxima |
-| [vocabulario-tecnico.md](vocabulario-tecnico.md) | ~300 términos por tema (EN → ES) con ejemplos | 🔴 Máxima |
-| [gramatica-minima.md](gramatica-minima.md) | Solo la gramática que necesitas para leer y explicar | 🟡 Media |
-| [entrevista-y-frases.md](entrevista-y-frases.md) | Presentación personal, explicar código, preguntas típicas con respuesta modelo, pronunciación | 🟡 Media (🔴 si hay entrevista) |
-| [ejercicios-ingles.md](ejercicios-ingles.md) | Lectura de enunciados, traducción, completar, con respuestas | 🔴 Máxima |
-| [../flashcards/](../flashcards/README.md) | Tarjetas para Anki (vocabulario + conceptos) | 🔴 Diario |
+| [como-leer-preguntas.md](como-leer-preguntas.md) | Palabras clave de los enunciados, falsos amigos, estrategia de lectura | Máxima |
+| [vocabulario-tecnico.md](vocabulario-tecnico.md) | ~300 términos por tema (EN → ES) con ejemplos | Máxima |
+| [gramatica-minima.md](gramatica-minima.md) | Solo la gramática que necesitas para leer y explicar | Media |
+| [entrevista-y-frases.md](entrevista-y-frases.md) | Presentación personal, explicar código, preguntas típicas con respuesta modelo, pronunciación | Media (si hay entrevista) |
+| [ejercicios-ingles.md](ejercicios-ingles.md) | Lectura de enunciados, traducción, completar, con respuestas | Máxima |
+| [../flashcards/](../flashcards/README.md) | Tarjetas para Anki (vocabulario + conceptos) | Diario |
 
 ---
 
@@ -30,7 +30,7 @@
 | 3. Escucha | 10 | Un video técnico corto **en inglés con subtítulos en inglés** (ver recursos abajo). Velocidad 0,75× si hace falta |
 | 4. Habla | 5–10 | Lee **en voz alta** tu presentación personal o explica en inglés el ejercicio que resolviste hoy (grábate con el celular) |
 
-> 💡 **Truco de alto impacto:** cambia **ya** el idioma de tu celular, de VS Code y de tu navegador a inglés. Y desde hoy, **lee todos los enunciados de práctica en inglés primero**.
+> **Truco de alto impacto:** cambia **ya** el idioma de tu celular, de VS Code y de tu navegador a inglés. Y desde hoy, **lee todos los enunciados de práctica en inglés primero**.
 
 ## Plan por semanas
 

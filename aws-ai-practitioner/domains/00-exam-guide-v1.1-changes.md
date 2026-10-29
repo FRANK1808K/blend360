@@ -2,7 +2,7 @@
 
 > **Por qué importa:** AWS publicó la **versión 1.1** de la guía del examen el **30 de abril de 2026**. Los cambios llegan al examen aproximadamente un mes después de publicarse, así que **ya están en vigor**. Los cinco dominios y sus pesos (20/24/28/14/14) no cambian, pero se añadieron objetivos sobre **IA agéntica, MCP, context engineering, precios por token y detección de alucinaciones**, además de varios servicios nuevos.
 >
-> ⚠️ Muchos cursos, libros y bancos de preguntas publicados **antes de mayo de 2026** no incluyen estos temas. Estudia este documento aunque uses otro material.
+> **Atención:** Muchos cursos, libros y bancos de preguntas publicados **antes de mayo de 2026** no incluyen estos temas. Estudia este documento aunque uses otro material.
 
 **Fuentes:** [página de revisiones oficial](https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/aif-01-revisions.html), [servicios en alcance](https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/aif-01-in-scope-services.html), [guía en PDF (inglés)](https://docs.aws.amazon.com/pdfs/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.pdf) y [guía en PDF (español)](https://docs.aws.amazon.com/es_es/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.pdf). Compilado en 2026-10 a partir de extractos de esas páginas y de análisis de terceros; **contrasta siempre con la página de revisiones**, que es la referencia autoritativa.
 
@@ -38,9 +38,9 @@
 
 | Cambio | Servicios |
 |---|---|
-| ➕ **Añadidos** | Amazon Aurora · **Amazon Bedrock AgentCore** · **Kiro** · **Strands Agents** · Amazon Q · Amazon SageMaker JumpStart · **AWS Transform** |
-| ➖ **Eliminado** | Amazon MemoryDB |
-| ℹ️ **Mencionado en objetivos** | **Amazon Quick** (evolución de QuickSight) aparece como ejemplo al mapear servicios a las etapas del pipeline de IA/ML. |
+| **Añadidos** | Amazon Aurora · **Amazon Bedrock AgentCore** · **Kiro** · **Strands Agents** · Amazon Q · Amazon SageMaker JumpStart · **AWS Transform** |
+| **Eliminado** | Amazon MemoryDB |
+| **Mencionado en objetivos** | **Amazon Quick** (evolución de QuickSight) aparece como ejemplo al mapear servicios a las etapas del pipeline de IA/ML. |
 
 > Algunas fuentes secundarias citan "Amazon Quick" en lugar de "AWS Transform" en la lista de añadidos. Estudia ambos: son ligeros y aparecen en preguntas de "¿qué servicio usarías?".
 
@@ -214,7 +214,7 @@ Una aplicación GenAI puede tener un ROUGE excelente y aun así fracasar. Mide s
 | Métrica | Qué mide | Ejemplo |
 |---|---|---|
 | **Tasa de tareas completadas** (*task completion rate*) | % de interacciones en que el usuario logra su objetivo sin escalar. | El agente reprograma la cita sin intervención humana. |
-| **Satisfacción del usuario** (CSAT, 👍/👎, NPS) | Percepción de utilidad y calidad. | Valoración media de 4,3/5. |
+| **Satisfacción del usuario** (CSAT, valoraciones positivas/negativas, NPS) | Percepción de utilidad y calidad. | Valoración media de 4,3/5. |
 | **Costo por interacción** | Tokens + infraestructura + revisión humana por conversación. | USD 0,02 frente a USD 4 de una llamada atendida por una persona. |
 | **Tasa de deflexión / contención** | % de consultas resueltas sin agente humano. | 60 % de tickets resueltos por el asistente. |
 | **Tiempo de resolución** | Rapidez con que se resuelve la tarea. | De 2 días a 5 minutos. |
@@ -237,6 +237,6 @@ Una aplicación GenAI puede tener un ROUGE excelente y aun así fracasar. Mide s
 
 ## 9. Preguntas de repaso de la v1.1
 
-Las preguntas sobre estos temas están integradas en el [Simulacro 01](../practice-questions/mock-exam-01.md) (marcadas con 🆕) y en las [flashcards](../flashcards/README.md).
+Las preguntas sobre estos temas están integradas en el [Simulacro 01](../practice-questions/mock-exam-01.md) (marcadas con «v1.1») y en las [flashcards](../flashcards/README.md).
 
-⬅️ [Volver al índice](../README.md) · ➡️ [Dominio 1](01-fundamentals-ai-ml/README.md)
+← [Volver al índice](../README.md) · → [Dominio 1](01-fundamentals-ai-ml/README.md)

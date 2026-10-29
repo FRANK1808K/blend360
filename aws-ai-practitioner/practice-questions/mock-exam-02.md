@@ -2,7 +2,7 @@
 
 > **Instrucciones:** 90 minutos (120 si usas ESL +30), sin consultar material. Hazlo **después** del [Simulacro 01](mock-exam-01.md) y de repasar los [pares que se confunden](../cheatsheets/confusable-pairs.md).
 >
-> - Distribución por pesos oficiales: **D1 13 · D2 16 · D3 18 · D4 9 · D5 9** preguntas. 🆕 = tema de la guía v1.1.
+> - Distribución por pesos oficiales: **D1 13 · D2 16 · D3 18 · D4 9 · D5 9** preguntas. «(v1.1)» = tema de la guía v1.1.
 > - Más difícil que el Simulacro 01: en casi todas hay **dos opciones plausibles** y la restricción del enunciado decide.
 > - También disponible en el [simulador interactivo con cronómetro](../simulator/README.md).
 > - **Objetivo:** ≥ 80 % (52/65) en el primer intento.
@@ -60,14 +60,14 @@
 - C. Amazon SageMaker Model Monitor
 - D. Amazon SageMaker Autopilot
 
-**8.** 🆕 Una fábrica quiere predecir averías a partir de **lecturas numéricas de sensores**, con millones de predicciones al día, latencia de milisegundos y bajo costo. ¿Qué enfoque es el más adecuado?
+**8.** (v1.1) Una fábrica quiere predecir averías a partir de **lecturas numéricas de sensores**, con millones de predicciones al día, latencia de milisegundos y bajo costo. ¿Qué enfoque es el más adecuado?
 
 - A. Un modelo de ML tradicional entrenado y desplegado en Amazon SageMaker AI
 - B. Un LLM de Amazon Bedrock con un prompt por cada lectura
 - C. Amazon Lex
 - D. Amazon Q Business
 
-**9.** 🆕 ¿Qué capacidad distingue a un **agente de IA** de un chatbot de IA generativa básico?
+**9.** (v1.1) ¿Qué capacidad distingue a un **agente de IA** de un chatbot de IA generativa básico?
 
 - A. Generar texto en lenguaje natural
 - B. Usar una arquitectura Transformer
@@ -139,35 +139,35 @@
 - C. Model drift; usar SageMaker Model Monitor
 - D. DDoS; usar AWS Shield
 
-**19.** 🆕 Las respuestas de un asistente son muy largas y el costo se dispara. ¿Qué medida reduce el costo **de inmediato**?
+**19.** (v1.1) Las respuestas de un asistente son muy largas y el costo se dispara. ¿Qué medida reduce el costo **de inmediato**?
 
 - A. Limitar `maxTokens` y pedir en el prompt respuestas concisas
 - B. Aumentar la temperatura
 - C. Aumentar el número de chunks recuperados
 - D. Cambiar a Provisioned Throughput con poco tráfico
 
-**20.** 🆕 Miles de peticiones reutilizan el mismo system prompt largo y el mismo documento de referencia. ¿Qué técnica de Bedrock reduce el costo y la latencia de esa parte repetida?
+**20.** (v1.1) Miles de peticiones reutilizan el mismo system prompt largo y el mismo documento de referencia. ¿Qué técnica de Bedrock reduce el costo y la latencia de esa parte repetida?
 
 - A. Batch inference
 - B. Continued pre-training
 - C. Prompt caching
 - D. Cross-region inference
 
-**21.** 🆕 Las respuestas de un agente empeoran en sesiones largas porque el contexto se llena con el historial completo y salidas de herramientas irrelevantes. ¿Qué enfoque lo resuelve?
+**21.** (v1.1) Las respuestas de un agente empeoran en sesiones largas porque el contexto se llena con el historial completo y salidas de herramientas irrelevantes. ¿Qué enfoque lo resuelve?
 
 - A. Context engineering: resumir el historial, recortar lo irrelevante y recuperar solo lo necesario
 - B. Aumentar la temperatura
 - C. Fine-tuning semanal
 - D. Desactivar las herramientas del agente
 
-**22.** 🆕 Una empresa tiene agentes construidos con frameworks distintos y quiere que todos reutilicen **las mismas integraciones** con su CRM y su sistema de tickets de forma estándar. ¿Qué enfoque es el adecuado?
+**22.** (v1.1) Una empresa tiene agentes construidos con frameworks distintos y quiere que todos reutilicen **las mismas integraciones** con su CRM y su sistema de tickets de forma estándar. ¿Qué enfoque es el adecuado?
 
 - A. Copiar el código de integración en cada agente
 - B. Hacer fine-tuning de cada modelo con la documentación de las APIs
 - C. Usar un único prompt muy largo con todas las APIs descritas
 - D. Exponer las integraciones como servidores MCP (Model Context Protocol)
 
-**23.** 🆕 Un flujo procesa contratos en tres agentes: uno **extrae** los datos, otro los **valida** y un tercero **resume**. Cada uno recibe la salida del anterior. ¿Qué patrón multi-agente es?
+**23.** (v1.1) Un flujo procesa contratos en tres agentes: uno **extrae** los datos, otro los **valida** y un tercero **resume**. Cada uno recibe la salida del anterior. ¿Qué patrón multi-agente es?
 
 - A. Supervisor
 - B. Secuencial (pipeline)
@@ -338,7 +338,7 @@
 - C. Amazon Comprehend Medical
 - D. Amazon Translate
 
-**47.** 🆕 Un equipo quiere escribir un agente en Python con muy poco código (modelo + prompt + herramientas) y desplegarlo en un **runtime serverless gestionado** con aislamiento de sesiones. ¿Qué combinación es la adecuada?
+**47.** (v1.1) Un equipo quiere escribir un agente en Python con muy poco código (modelo + prompt + herramientas) y desplegarlo en un **runtime serverless gestionado** con aislamiento de sesiones. ¿Qué combinación es la adecuada?
 
 - A. Kiro + Amazon EC2
 - B. Amazon Lex + AWS Lambda
@@ -462,14 +462,14 @@
 - C. Amazon Inspector
 - D. AWS Artifact
 
-**64.** 🆕 Un agente tiene un rol IAM de administrador y, tras un prompt injection, podría borrar recursos. ¿Qué mitigación aborda el riesgo de **agencia excesiva**?
+**64.** (v1.1) Un agente tiene un rol IAM de administrador y, tras un prompt injection, podría borrar recursos. ¿Qué mitigación aborda el riesgo de **agencia excesiva**?
 
 - A. Aumentar la temperatura
 - B. Escribir un system prompt más largo
 - C. Permisos de mínimo privilegio para cada herramienta y políticas deterministas fuera del modelo (p. ej., Policy in AgentCore)
 - D. Desactivar el logging del agente
 
-**65.** 🆕 En una aplicación RAG, cuando las puntuaciones de recuperación son muy bajas, el asistente no debe inventar una respuesta. ¿Qué técnica de la guía aplica?
+**65.** (v1.1) En una aplicación RAG, cuando las puntuaciones de recuperación son muy bajas, el asistente no debe inventar una respuesta. ¿Qué técnica de la guía aplica?
 
 - A. Puntuación de confianza con un umbral: si no se alcanza, responder que no se sabe o escalar a un humano
 - B. Aumentar la temperatura para generar más alternativas
@@ -481,7 +481,7 @@
 ## Clave de respuestas
 
 <details>
-<summary>▶ Mostrar clave (corrige solo al terminar)</summary>
+<summary>Mostrar clave (corrige solo al terminar)</summary>
 
 | # | Resp. | Dom. | Justificación breve |
 |---|---|---|---|
@@ -492,8 +492,8 @@
 | 5 | C | D1 | Validación = ajuste de hiperparámetros; el test se usa una sola vez al final. |
 | 6 | B | D1 | Features compartidas y consistentes online/offline → Feature Store. |
 | 7 | D | D1 | AutoML con visibilidad para data scientists → Autopilot (Canvas es para analistas sin código). |
-| 8 | A | D1 🆕 | Datos numéricos, alto volumen, baja latencia y bajo costo → ML tradicional (1.2.6). |
-| 9 | D | D1 🆕 | Herramientas + acciones autónomas de varios pasos = agente. |
+| 8 | A | D1 (v1.1) | Datos numéricos, alto volumen, baja latencia y bajo costo → ML tradicional (1.2.6). |
+| 9 | D | D1 (v1.1) | Herramientas + acciones autónomas de varios pasos = agente. |
 | 10 | A | D1 | Versionado + aprobación antes del despliegue → Model Registry. |
 | 11 | C | D1 | Milisegundos + tráfico constante → endpoint en tiempo real. |
 | 12 | B | D1 | Datos no estructurados (imágenes) → deep learning. |
@@ -503,11 +503,11 @@
 | 16 | A | D2 | Sin ejemplos = zero-shot. |
 | 17 | C | D2 | Lógica de varios pasos → chain-of-thought. |
 | 18 | B | D2 | Prompt injection / prompt leaking → filtro prompt attack de Guardrails. |
-| 19 | A | D2 🆕 | Menos tokens de salida = menos costo (2.1.4). |
-| 20 | C | D2 🆕 | Prefijos repetidos → prompt caching. |
-| 21 | A | D2 🆕 | Gestionar qué entra en el contexto = context engineering (2.1.5). |
-| 22 | D | D2 🆕 | Integraciones estándar y reutilizables entre frameworks → MCP (2.1.6). |
-| 23 | B | D2 🆕 | Salida de uno → entrada del siguiente = secuencial. |
+| 19 | A | D2 (v1.1) | Menos tokens de salida = menos costo (2.1.4). |
+| 20 | C | D2 (v1.1) | Prefijos repetidos → prompt caching. |
+| 21 | A | D2 (v1.1) | Gestionar qué entra en el contexto = context engineering (2.1.5). |
+| 22 | D | D2 (v1.1) | Integraciones estándar y reutilizables entre frameworks → MCP (2.1.6). |
+| 23 | B | D2 (v1.1) | Salida de uno → entrada del siguiente = secuencial. |
 | 24 | A | D2 | Self-attention relaciona cada token con todos los demás. |
 | 25 | C | D2 | Imagen + texto → multimodal. |
 | 26 | D | D2 | Pre-entrenamiento auto-supervisado (predecir el siguiente token). |
@@ -531,7 +531,7 @@
 | 44 | D | D3 | Traducir (Translate) y luego sintetizar voz (Polly). |
 | 45 | B | D3 | Recomendaciones → Personalize. |
 | 46 | C | D3 | Entidades clínicas → Comprehend Medical. |
-| 47 | D | D3 🆕 | SDK de agentes con poco código + runtime serverless gestionado → Strands + AgentCore Runtime. |
+| 47 | D | D3 (v1.1) | SDK de agentes con poco código + runtime serverless gestionado → Strands + AgentCore Runtime. |
 | 48 | A | D4 | Diferencias en las predicciones por grupo → sesgo post-entrenamiento (Clarify). |
 | 49 | C | D4 | Informar y documentar las limitaciones = transparencia. |
 | 50 | B | D4 | Alto impacto → supervisión humana (A2I). |
@@ -548,8 +548,8 @@
 | 61 | B | D5 | Invocación en la región + SCP; los perfiles cross-region pueden procesar fuera. |
 | 62 | D | D5 | Alerta operativa → CloudWatch alarm sobre `InvocationThrottles`. |
 | 63 | A | D5 | PII en S3 → Macie. |
-| 64 | C | D5 🆕 | Mínimo privilegio + autorización determinista fuera del LLM. |
-| 65 | A | D5 🆕 | Puntuación de confianza y escalado (5.1.5). |
+| 64 | C | D5 (v1.1) | Mínimo privilegio + autorización determinista fuera del LLM. |
+| 65 | A | D5 (v1.1) | Puntuación de confianza y escalado (5.1.5). |
 
 </details>
 

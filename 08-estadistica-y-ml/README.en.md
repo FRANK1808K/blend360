@@ -1,6 +1,6 @@
 # 08 · Statistics and Machine Learning for data analysis
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 > **Why this module?** Blend360 is a data science company, and the All Star program has **Data Science**, Data Engineering and BI tracks. Candidates report interviews with **statistics and machine learning concepts**: A/B tests, model metrics, bias and variance. This module covers the essentials for the test and the interview, and it is **aligned with your notes** from *AI and Data Scientist Roadmap* (Google Drive).
 
@@ -41,25 +41,25 @@ Your notes are **very complete** (hundreds of notebooks). You do not need all of
 
 | Priority | Topic | Section here | Your notes (Drive / Colab) |
 |---|---|---|---|
-| 🔴 1 | Central tendency and dispersion | [§2](#2-descriptive-statistics) | [2.14 · 2_Exploracion_de_Datos](https://colab.research.google.com/drive/1Y7Th93YoCECN2sQdfh9GnAoL0Mmc94ke) |
-| 🔴 1 | Probability | [§3](#3-probability-and-distributions) | [2.14 · 4_Probabilidades](https://colab.research.google.com/drive/160mjn6EGhD7PcXBWnKsXRBY4ghzV1UkW) |
-| 🔴 1 | Sampling, estimation and confidence intervals | [§4](#4-inference-sampling-intervals-and-hypothesis-tests) | [2.14 · 5_Inferencia_Estadistica](https://colab.research.google.com/drive/1DZKE4lqH36PKPbpwK2h0biBdo0SWuV4q) |
-| 🔴 1 | Hypothesis tests (t, z, Wilcoxon, Mann-Whitney) | [§4](#4-inference-sampling-intervals-and-hypothesis-tests) | [2.14 · 6_Pruebas_de_Hipotesis](https://colab.research.google.com/drive/1ZE1wdffToTFR0PyMMM5Z92j6-IqlHw7o) |
-| 🔴 1 | A/B tests and sample size | [§5](#5-ab-tests-step-by-step) | [2.4 · 01 Statistical tests guide](https://colab.research.google.com/drive/12rSdaGatp0pxuDGohbh6hVXMdA_2LOzt) · [2.4 · 02 Planning an A/B test](https://colab.research.google.com/drive/1-T_MmnHkE8mE3mn90XXh7yKfjLsyLtDK) |
-| 🔴 1 | Regression and correlation | [§6](#6-correlation-and-regression) | [2.14 · 7_Regresion_y_Correlacion](https://colab.research.google.com/drive/1XKMxtZeCgeY2kFGKXEYlCXIoBh2Q1C8a) |
-| 🔴 1 | Introduction to ML, supervised learning and metrics | [§7](#7-machine-learning-fundamentals)–[§9](#9-evaluation-metrics) | [6.6 · 1_Introducción](https://colab.research.google.com/drive/1rjcCgp-4bGShLpbhaMHscueHHlPogs95) · [6.6 · 3_Aprendizaje_Supervisado](https://colab.research.google.com/drive/1oBGFIvpHb8aKkttwrzubDtBQt_Q4_Zx5) |
-| 🟡 2 | Unsupervised learning (clustering, PCA) | [§8](#8-algorithms-you-must-recognize) | [6.6 · 4_Aprendizaje_No_Supervisado](https://colab.research.google.com/drive/17CRby9GwGD_2RYj2WE_J8ZwcxhHBazRl) |
-| 🟡 2 | Optimization and hyperparameters | [§10](#10-optimization-and-hyperparameters) | [6.6 · 6_Optimizacion_y_Ajuste_de_Modelos](https://colab.research.google.com/drive/19xt9q9yDQMIFepefqm3xRhOJYlkXslrt) |
-| 🟡 2 | ANOVA | [§4](#4-inference-sampling-intervals-and-hypothesis-tests) | [2.14 · 8_Analisis_de_Varianza](https://colab.research.google.com/drive/17P-GChbs0RkW4i5VogdRquHdNPPZLU_S) |
-| 🟡 2 | Cleaning: imputation, outliers, feature selection, class balance | [§7](#7-machine-learning-fundamentals) | [Folder 5.6 Python for Data Science](https://drive.google.com/drive/folders/1gPElqNmiRgILVW8BxcmaEGe2P_cPy46q) |
-| 🟡 2 | Statistics applied to business (30 short notebooks) | §2–§6 | [Folder 2.7 Statistics for DS and business analysis](https://drive.google.com/drive/folders/195rqdNaTDYkgSabS_J4LjLDJlqO6w6qq) |
-| 🟡 2 | Advanced challenges (imbalance, interpretability…) | [§7](#7-machine-learning-fundamentals) | [6.6 · 7_Desafios_Especificos_y_Avanzados](https://colab.research.google.com/drive/1fZXWsLrTa9jgzzoTu9dXbZfmZxq-iwj8) |
-| 🟢 3 | BI: Power BI and Tableau (if you are placed on the BI track) | — | [9.1 Power BI](https://drive.google.com/drive/folders/1VCb3HzCAn993uOKz3GMbm80IBzOwkyDP) · [9.2 Power BI BI](https://drive.google.com/drive/folders/1CEtcyNU_0ApDLeyKs_85YrwsLuU6qKsf) · [9.3 Tableau](https://drive.google.com/drive/folders/10CT_Oqul35pgpj18jvPr4dfD0D0AAjuw) |
-| 🟢 3 | Bayesian statistics, time series | [§3](#3-probability-and-distributions) | [2.11 Bayesian](https://drive.google.com/drive/folders/1w8DdhE8nJEcUjhy3xvFzHpVpQl2BYx07) · [6.3 Time series](https://drive.google.com/drive/folders/1b81vt_LsJoByu2OJFOSboBlwTLL8mXJU) |
+| 1 · High | Central tendency and dispersion | [§2](#2-descriptive-statistics) | [2.14 · 2_Exploracion_de_Datos](https://colab.research.google.com/drive/1Y7Th93YoCECN2sQdfh9GnAoL0Mmc94ke) |
+| 1 · High | Probability | [§3](#3-probability-and-distributions) | [2.14 · 4_Probabilidades](https://colab.research.google.com/drive/160mjn6EGhD7PcXBWnKsXRBY4ghzV1UkW) |
+| 1 · High | Sampling, estimation and confidence intervals | [§4](#4-inference-sampling-intervals-and-hypothesis-tests) | [2.14 · 5_Inferencia_Estadistica](https://colab.research.google.com/drive/1DZKE4lqH36PKPbpwK2h0biBdo0SWuV4q) |
+| 1 · High | Hypothesis tests (t, z, Wilcoxon, Mann-Whitney) | [§4](#4-inference-sampling-intervals-and-hypothesis-tests) | [2.14 · 6_Pruebas_de_Hipotesis](https://colab.research.google.com/drive/1ZE1wdffToTFR0PyMMM5Z92j6-IqlHw7o) |
+| 1 · High | A/B tests and sample size | [§5](#5-ab-tests-step-by-step) | [2.4 · 01 Statistical tests guide](https://colab.research.google.com/drive/12rSdaGatp0pxuDGohbh6hVXMdA_2LOzt) · [2.4 · 02 Planning an A/B test](https://colab.research.google.com/drive/1-T_MmnHkE8mE3mn90XXh7yKfjLsyLtDK) |
+| 1 · High | Regression and correlation | [§6](#6-correlation-and-regression) | [2.14 · 7_Regresion_y_Correlacion](https://colab.research.google.com/drive/1XKMxtZeCgeY2kFGKXEYlCXIoBh2Q1C8a) |
+| 1 · High | Introduction to ML, supervised learning and metrics | [§7](#7-machine-learning-fundamentals)–[§9](#9-evaluation-metrics) | [6.6 · 1_Introducción](https://colab.research.google.com/drive/1rjcCgp-4bGShLpbhaMHscueHHlPogs95) · [6.6 · 3_Aprendizaje_Supervisado](https://colab.research.google.com/drive/1oBGFIvpHb8aKkttwrzubDtBQt_Q4_Zx5) |
+| 2 · Medium | Unsupervised learning (clustering, PCA) | [§8](#8-algorithms-you-must-recognize) | [6.6 · 4_Aprendizaje_No_Supervisado](https://colab.research.google.com/drive/17CRby9GwGD_2RYj2WE_J8ZwcxhHBazRl) |
+| 2 · Medium | Optimization and hyperparameters | [§10](#10-optimization-and-hyperparameters) | [6.6 · 6_Optimizacion_y_Ajuste_de_Modelos](https://colab.research.google.com/drive/19xt9q9yDQMIFepefqm3xRhOJYlkXslrt) |
+| 2 · Medium | ANOVA | [§4](#4-inference-sampling-intervals-and-hypothesis-tests) | [2.14 · 8_Analisis_de_Varianza](https://colab.research.google.com/drive/17P-GChbs0RkW4i5VogdRquHdNPPZLU_S) |
+| 2 · Medium | Cleaning: imputation, outliers, feature selection, class balance | [§7](#7-machine-learning-fundamentals) | [Folder 5.6 Python for Data Science](https://drive.google.com/drive/folders/1gPElqNmiRgILVW8BxcmaEGe2P_cPy46q) |
+| 2 · Medium | Statistics applied to business (30 short notebooks) | §2–§6 | [Folder 2.7 Statistics for DS and business analysis](https://drive.google.com/drive/folders/195rqdNaTDYkgSabS_J4LjLDJlqO6w6qq) |
+| 2 · Medium | Advanced challenges (imbalance, interpretability…) | [§7](#7-machine-learning-fundamentals) | [6.6 · 7_Desafios_Especificos_y_Avanzados](https://colab.research.google.com/drive/1fZXWsLrTa9jgzzoTu9dXbZfmZxq-iwj8) |
+| 3 · Low | BI: Power BI and Tableau (if you are placed on the BI track) | — | [9.1 Power BI](https://drive.google.com/drive/folders/1VCb3HzCAn993uOKz3GMbm80IBzOwkyDP) · [9.2 Power BI BI](https://drive.google.com/drive/folders/1CEtcyNU_0ApDLeyKs_85YrwsLuU6qKsf) · [9.3 Tableau](https://drive.google.com/drive/folders/10CT_Oqul35pgpj18jvPr4dfD0D0AAjuw) |
+| 3 · Low | Bayesian statistics, time series | [§3](#3-probability-and-distributions) | [2.11 Bayesian](https://drive.google.com/drive/folders/1w8DdhE8nJEcUjhy3xvFzHpVpQl2BYx07) · [6.3 Time series](https://drive.google.com/drive/folders/1b81vt_LsJoByu2OJFOSboBlwTLL8mXJU) |
 
-> 🔒 The links open **your** Google Drive and Colab: they only work with your account. Root folder: [AI_and_Data_Scientist_Roadmap](https://drive.google.com/drive/folders/1VTugpYpYc67DBrTzooJ5gnMk9HXcgcqp).
+> The links open **your** Google Drive and Colab: they only work with your account. Root folder: [AI_and_Data_Scientist_Roadmap](https://drive.google.com/drive/folders/1VTugpYpYc67DBrTzooJ5gnMk9HXcgcqp).
 >
-> ⏱️ **Short on time:** do only the 🔴 rows. Deep learning and MLOps (folders 7 and 8) are **not** a priority for this test.
+> **Short on time:** do only the priority 1 rows. Deep learning and MLOps (folders 7 and 8) are **not** a priority for this test.
 
 ## 2. Descriptive statistics
 
@@ -111,14 +111,14 @@ Your notes are **very complete** (hundreds of notebooks). You do not need all of
 | **Stratified** | Split into strata (e.g., by country) and sample each one | You must know the strata |
 | Systematic | One out of every k | Hidden periodicity in the data |
 | Cluster | Whole groups are chosen (e.g., stores) | Unrepresentative groups |
-| Convenience | Whoever is at hand | **Selection bias** ❌ |
+| Convenience | Whoever is at hand | **Selection bias** ✗ |
 
 ### Confidence interval (CI)
 
 **95 % CI for the mean:** x̄ ± 1.96 · s / √n (with a small n, use the t value instead of 1.96).
 
 - **Correct interpretation:** if you repeated the sampling many times, 95 % of the intervals built this way would contain the true mean.
-- ❌ **Common mistake:** "there is a 95 % probability that the mean is in *this* interval".
+- ✗ **Common mistake:** "there is a 95 % probability that the mean is in *this* interval".
 - A **larger n** gives a **narrower** interval (more precision): the standard error falls with √n.
 
 Verified example: data 10, 12, 9, 11, 13, 10, 12, 11, 9, 13 → x̄ = 11, s ≈ 1.49 → 95 % CI ≈ **(10.08, 11.92)**.
@@ -136,7 +136,7 @@ Verified example: data 10, 12, 9, 11, 13, 10, 12, 11, 9, 13 → x̄ = 11, s ≈ 
 | **Type II error (β)** | Not rejecting H₀ when it is false (**false negative**) |
 | **Power (1 − β)** | Probability of detecting an effect that really exists (goal: ≥ 0.8) |
 
-> ❌ The p-value is **not** the probability that H₀ is true. And "not rejecting H₀" does **not** prove H₀ is true.
+> ✗ The p-value is **not** the probability that H₀ is true. And "not rejecting H₀" does **not** prove H₀ is true.
 
 **Which test do I use?**
 
@@ -184,7 +184,7 @@ Based on your notebook *02 Planning an A/B test*, plus the analysis of the resul
 | **Spearman (ρ)** | **Monotonic** relationship (with ranks) | Ordinal data or outliers |
 | **Kendall (τ)** | Agreement between rankings | Small samples, rankings |
 
-> ⚠️ **Correlation ≠ causation.** Ice cream sales and drownings are correlated because both depend on hot weather (a **confounding variable**). To prove causation you need an **experiment** (A/B) or causal methods.
+> **Correlation ≠ causation.** Ice cream sales and drownings are correlated because both depend on hot weather (a **confounding variable**). To prove causation you need an **experiment** (A/B) or causal methods.
 
 **Linear regression:** Y = β₀ + β₁X + ε. Least squares: β₁ = cov(X, Y) / var(X) and β₀ = ȳ − β₁x̄.
 
@@ -270,7 +270,7 @@ accuracy = (TP + TN) / total = 8/10 = 0.80        F1 = 2·P·R / (P + R) = 0.75
 | **F1** | Balance between precision and recall | Imbalanced classes |
 | **ROC-AUC** | Ability to rank positives above negatives (0.5 = chance; 1 = perfect) | Comparing models without fixing a threshold |
 
-> ⚠️ **Accuracy paradox:** with 5 % fraud, a model that always says "no fraud" has **95 % accuracy** and **0 % recall** (verified in the script). With imbalanced classes, look at precision, recall, F1 or AUC.
+> **Accuracy paradox:** with 5 % fraud, a model that always says "no fraud" has **95 % accuracy** and **0 % recall** (verified in the script). With imbalanced classes, look at precision, recall, F1 or AUC.
 
 ## 10. Optimization and hyperparameters
 

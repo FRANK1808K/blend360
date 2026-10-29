@@ -1,6 +1,6 @@
 # 08 · Estadística y Machine Learning para análisis de datos
 
-🌐 **Español** · [English](README.en.md)
+**Español** · [English](README.en.md)
 
 > **¿Por qué este módulo?** Blend360 es una empresa de ciencia de datos, y el programa All Star tiene rutas de **Data Science**, Data Engineering y BI. Los candidatos reportan entrevistas con **conceptos de estadística y machine learning**: pruebas A/B, métricas de modelos, sesgo y varianza. Este módulo cubre lo esencial para la prueba y la entrevista, y está **alineado con tus apuntes** de *AI and Data Scientist Roadmap* (Google Drive).
 
@@ -41,25 +41,25 @@ Tus apuntes son **muy completos** (cientos de notebooks). Para el examen no nece
 
 | Prioridad | Tema | Sección aquí | Tus apuntes (Drive / Colab) |
 |---|---|---|---|
-| 🔴 1 | Medidas de tendencia central y dispersión | [§2](#2-estadística-descriptiva) | [2.14 · 2_Exploracion_de_Datos](https://colab.research.google.com/drive/1Y7Th93YoCECN2sQdfh9GnAoL0Mmc94ke) |
-| 🔴 1 | Probabilidad | [§3](#3-probabilidad-y-distribuciones) | [2.14 · 4_Probabilidades](https://colab.research.google.com/drive/160mjn6EGhD7PcXBWnKsXRBY4ghzV1UkW) |
-| 🔴 1 | Muestreo, estimación e intervalos de confianza | [§4](#4-inferencia-muestreo-intervalos-y-pruebas-de-hipótesis) | [2.14 · 5_Inferencia_Estadistica](https://colab.research.google.com/drive/1DZKE4lqH36PKPbpwK2h0biBdo0SWuV4q) |
-| 🔴 1 | Pruebas de hipótesis (t, z, Wilcoxon, Mann-Whitney) | [§4](#4-inferencia-muestreo-intervalos-y-pruebas-de-hipótesis) | [2.14 · 6_Pruebas_de_Hipotesis](https://colab.research.google.com/drive/1ZE1wdffToTFR0PyMMM5Z92j6-IqlHw7o) |
-| 🔴 1 | Pruebas A/B y tamaño de muestra | [§5](#5-pruebas-ab-paso-a-paso) | [2.4 · 01 Guía de pruebas estadísticas](https://colab.research.google.com/drive/12rSdaGatp0pxuDGohbh6hVXMdA_2LOzt) · [2.4 · 02 Planificar una prueba A/B](https://colab.research.google.com/drive/1-T_MmnHkE8mE3mn90XXh7yKfjLsyLtDK) |
-| 🔴 1 | Regresión y correlación | [§6](#6-correlación-y-regresión) | [2.14 · 7_Regresion_y_Correlacion](https://colab.research.google.com/drive/1XKMxtZeCgeY2kFGKXEYlCXIoBh2Q1C8a) |
-| 🔴 1 | Introducción a ML, aprendizaje supervisado y métricas | [§7](#7-fundamentos-de-machine-learning)–[§9](#9-métricas-de-evaluación) | [6.6 · 1_Introducción](https://colab.research.google.com/drive/1rjcCgp-4bGShLpbhaMHscueHHlPogs95) · [6.6 · 3_Aprendizaje_Supervisado](https://colab.research.google.com/drive/1oBGFIvpHb8aKkttwrzubDtBQt_Q4_Zx5) |
-| 🟡 2 | Aprendizaje no supervisado (clustering, PCA) | [§8](#8-algoritmos-que-debes-reconocer) | [6.6 · 4_Aprendizaje_No_Supervisado](https://colab.research.google.com/drive/17CRby9GwGD_2RYj2WE_J8ZwcxhHBazRl) |
-| 🟡 2 | Optimización e hiperparámetros | [§10](#10-optimización-e-hiperparámetros) | [6.6 · 6_Optimizacion_y_Ajuste_de_Modelos](https://colab.research.google.com/drive/19xt9q9yDQMIFepefqm3xRhOJYlkXslrt) |
-| 🟡 2 | ANOVA | [§4](#4-inferencia-muestreo-intervalos-y-pruebas-de-hipótesis) | [2.14 · 8_Analisis_de_Varianza](https://colab.research.google.com/drive/17P-GChbs0RkW4i5VogdRquHdNPPZLU_S) |
-| 🟡 2 | Limpieza: imputación, outliers, selección de características, balance de clases | [§7](#7-fundamentos-de-machine-learning) | [Carpeta 5.6 Python para Ciencia de Datos](https://drive.google.com/drive/folders/1gPElqNmiRgILVW8BxcmaEGe2P_cPy46q) |
-| 🟡 2 | Estadística aplicada a negocios (30 notebooks cortos) | §2–§6 | [Carpeta 2.7 Estadística para DS y análisis de negocios](https://drive.google.com/drive/folders/195rqdNaTDYkgSabS_J4LjLDJlqO6w6qq) |
-| 🟡 2 | Desafíos avanzados (desbalance, interpretabilidad…) | [§7](#7-fundamentos-de-machine-learning) | [6.6 · 7_Desafios_Especificos_y_Avanzados](https://colab.research.google.com/drive/1fZXWsLrTa9jgzzoTu9dXbZfmZxq-iwj8) |
-| 🟢 3 | BI: Power BI y Tableau (si te asignan a la ruta de BI) | — | [9.1 Power BI](https://drive.google.com/drive/folders/1VCb3HzCAn993uOKz3GMbm80IBzOwkyDP) · [9.2 Power BI BI](https://drive.google.com/drive/folders/1CEtcyNU_0ApDLeyKs_85YrwsLuU6qKsf) · [9.3 Tableau](https://drive.google.com/drive/folders/10CT_Oqul35pgpj18jvPr4dfD0D0AAjuw) |
-| 🟢 3 | Estadística bayesiana, series de tiempo | [§3](#3-probabilidad-y-distribuciones) | [2.11 Bayesiana](https://drive.google.com/drive/folders/1w8DdhE8nJEcUjhy3xvFzHpVpQl2BYx07) · [6.3 Series temporales](https://drive.google.com/drive/folders/1b81vt_LsJoByu2OJFOSboBlwTLL8mXJU) |
+| 1 · Alta | Medidas de tendencia central y dispersión | [§2](#2-estadística-descriptiva) | [2.14 · 2_Exploracion_de_Datos](https://colab.research.google.com/drive/1Y7Th93YoCECN2sQdfh9GnAoL0Mmc94ke) |
+| 1 · Alta | Probabilidad | [§3](#3-probabilidad-y-distribuciones) | [2.14 · 4_Probabilidades](https://colab.research.google.com/drive/160mjn6EGhD7PcXBWnKsXRBY4ghzV1UkW) |
+| 1 · Alta | Muestreo, estimación e intervalos de confianza | [§4](#4-inferencia-muestreo-intervalos-y-pruebas-de-hipótesis) | [2.14 · 5_Inferencia_Estadistica](https://colab.research.google.com/drive/1DZKE4lqH36PKPbpwK2h0biBdo0SWuV4q) |
+| 1 · Alta | Pruebas de hipótesis (t, z, Wilcoxon, Mann-Whitney) | [§4](#4-inferencia-muestreo-intervalos-y-pruebas-de-hipótesis) | [2.14 · 6_Pruebas_de_Hipotesis](https://colab.research.google.com/drive/1ZE1wdffToTFR0PyMMM5Z92j6-IqlHw7o) |
+| 1 · Alta | Pruebas A/B y tamaño de muestra | [§5](#5-pruebas-ab-paso-a-paso) | [2.4 · 01 Guía de pruebas estadísticas](https://colab.research.google.com/drive/12rSdaGatp0pxuDGohbh6hVXMdA_2LOzt) · [2.4 · 02 Planificar una prueba A/B](https://colab.research.google.com/drive/1-T_MmnHkE8mE3mn90XXh7yKfjLsyLtDK) |
+| 1 · Alta | Regresión y correlación | [§6](#6-correlación-y-regresión) | [2.14 · 7_Regresion_y_Correlacion](https://colab.research.google.com/drive/1XKMxtZeCgeY2kFGKXEYlCXIoBh2Q1C8a) |
+| 1 · Alta | Introducción a ML, aprendizaje supervisado y métricas | [§7](#7-fundamentos-de-machine-learning)–[§9](#9-métricas-de-evaluación) | [6.6 · 1_Introducción](https://colab.research.google.com/drive/1rjcCgp-4bGShLpbhaMHscueHHlPogs95) · [6.6 · 3_Aprendizaje_Supervisado](https://colab.research.google.com/drive/1oBGFIvpHb8aKkttwrzubDtBQt_Q4_Zx5) |
+| 2 · Media | Aprendizaje no supervisado (clustering, PCA) | [§8](#8-algoritmos-que-debes-reconocer) | [6.6 · 4_Aprendizaje_No_Supervisado](https://colab.research.google.com/drive/17CRby9GwGD_2RYj2WE_J8ZwcxhHBazRl) |
+| 2 · Media | Optimización e hiperparámetros | [§10](#10-optimización-e-hiperparámetros) | [6.6 · 6_Optimizacion_y_Ajuste_de_Modelos](https://colab.research.google.com/drive/19xt9q9yDQMIFepefqm3xRhOJYlkXslrt) |
+| 2 · Media | ANOVA | [§4](#4-inferencia-muestreo-intervalos-y-pruebas-de-hipótesis) | [2.14 · 8_Analisis_de_Varianza](https://colab.research.google.com/drive/17P-GChbs0RkW4i5VogdRquHdNPPZLU_S) |
+| 2 · Media | Limpieza: imputación, outliers, selección de características, balance de clases | [§7](#7-fundamentos-de-machine-learning) | [Carpeta 5.6 Python para Ciencia de Datos](https://drive.google.com/drive/folders/1gPElqNmiRgILVW8BxcmaEGe2P_cPy46q) |
+| 2 · Media | Estadística aplicada a negocios (30 notebooks cortos) | §2–§6 | [Carpeta 2.7 Estadística para DS y análisis de negocios](https://drive.google.com/drive/folders/195rqdNaTDYkgSabS_J4LjLDJlqO6w6qq) |
+| 2 · Media | Desafíos avanzados (desbalance, interpretabilidad…) | [§7](#7-fundamentos-de-machine-learning) | [6.6 · 7_Desafios_Especificos_y_Avanzados](https://colab.research.google.com/drive/1fZXWsLrTa9jgzzoTu9dXbZfmZxq-iwj8) |
+| 3 · Baja | BI: Power BI y Tableau (si te asignan a la ruta de BI) | — | [9.1 Power BI](https://drive.google.com/drive/folders/1VCb3HzCAn993uOKz3GMbm80IBzOwkyDP) · [9.2 Power BI BI](https://drive.google.com/drive/folders/1CEtcyNU_0ApDLeyKs_85YrwsLuU6qKsf) · [9.3 Tableau](https://drive.google.com/drive/folders/10CT_Oqul35pgpj18jvPr4dfD0D0AAjuw) |
+| 3 · Baja | Estadística bayesiana, series de tiempo | [§3](#3-probabilidad-y-distribuciones) | [2.11 Bayesiana](https://drive.google.com/drive/folders/1w8DdhE8nJEcUjhy3xvFzHpVpQl2BYx07) · [6.3 Series temporales](https://drive.google.com/drive/folders/1b81vt_LsJoByu2OJFOSboBlwTLL8mXJU) |
 
-> 🔒 Los enlaces abren **tu** Google Drive y Colab: solo funcionan con tu cuenta. Carpeta raíz: [AI_and_Data_Scientist_Roadmap](https://drive.google.com/drive/folders/1VTugpYpYc67DBrTzooJ5gnMk9HXcgcqp).
+> Los enlaces abren **tu** Google Drive y Colab: solo funcionan con tu cuenta. Carpeta raíz: [AI_and_Data_Scientist_Roadmap](https://drive.google.com/drive/folders/1VTugpYpYc67DBrTzooJ5gnMk9HXcgcqp).
 >
-> ⏱️ **Si tienes poco tiempo:** haz solo las filas 🔴. Deep learning y MLOps (carpetas 7 y 8) **no** son prioridad para esta prueba.
+> **Si tienes poco tiempo:** haz solo las filas de prioridad 1. Deep learning y MLOps (carpetas 7 y 8) **no** son prioridad para esta prueba.
 
 ## 2. Estadística descriptiva
 
@@ -111,14 +111,14 @@ Tus apuntes son **muy completos** (cientos de notebooks). Para el examen no nece
 | **Estratificado** | Se divide en estratos (p. ej., por país) y se muestrea cada uno | Requiere conocer los estratos |
 | Sistemático | Uno de cada k | Periodicidad oculta en los datos |
 | Por conglomerados | Se eligen grupos completos (p. ej., tiendas) | Grupos poco representativos |
-| Por conveniencia | Los que están a la mano | **Sesgo de selección** ❌ |
+| Por conveniencia | Los que están a la mano | **Sesgo de selección** ✗ |
 
 ### Intervalo de confianza (IC)
 
 **IC del 95 % para la media:** x̄ ± 1,96 · s / √n (con n pequeño, usa el valor t en lugar de 1,96).
 
 - **Interpretación correcta:** si repitieras el muestreo muchas veces, el 95 % de los intervalos construidos así contendría la media real.
-- ❌ **Error común:** "hay 95 % de probabilidad de que la media esté en *este* intervalo".
+- ✗ **Error común:** "hay 95 % de probabilidad de que la media esté en *este* intervalo".
 - Un **n mayor** produce un intervalo **más estrecho** (más precisión): el error estándar baja con √n.
 
 Ejemplo verificado: datos 10, 12, 9, 11, 13, 10, 12, 11, 9, 13 → x̄ = 11, s ≈ 1,49 → IC 95 % ≈ **(10,08; 11,92)**.
@@ -136,7 +136,7 @@ Ejemplo verificado: datos 10, 12, 9, 11, 13, 10, 12, 11, 9, 13 → x̄ = 11, s �
 | **Error tipo II (β)** | No rechazar H₀ cuando es falsa (**falso negativo**) |
 | **Potencia (1 − β)** | Probabilidad de detectar un efecto que sí existe (meta: ≥ 0,8) |
 
-> ❌ El p-valor **no** es la probabilidad de que H₀ sea cierta. Y "no rechazar H₀" **no** prueba que H₀ sea cierta.
+> ✗ El p-valor **no** es la probabilidad de que H₀ sea cierta. Y "no rechazar H₀" **no** prueba que H₀ sea cierta.
 
 **¿Qué prueba uso?**
 
@@ -184,7 +184,7 @@ Basado en tu notebook *02 Planificar una prueba A/B*, más el análisis del resu
 | **Spearman (ρ)** | Relación **monótona** (con rangos) | Ordinales u outliers |
 | **Kendall (τ)** | Concordancia de rankings | Muestras pequeñas, rankings |
 
-> ⚠️ **Correlación ≠ causalidad.** Las ventas de helado y los ahogamientos se correlacionan porque ambos dependen del calor (**variable de confusión**). Para probar causalidad se necesita un **experimento** (A/B) o métodos causales.
+> **Correlación ≠ causalidad.** Las ventas de helado y los ahogamientos se correlacionan porque ambos dependen del calor (**variable de confusión**). Para probar causalidad se necesita un **experimento** (A/B) o métodos causales.
 
 **Regresión lineal:** Y = β₀ + β₁X + ε. Mínimos cuadrados: β₁ = cov(X, Y) / var(X) y β₀ = ȳ − β₁x̄.
 
@@ -270,7 +270,7 @@ accuracy = (TP + TN) / total = 8/10 = 0.80        F1 = 2·P·R / (P + R) = 0.75
 | **F1** | Equilibrio entre precision y recall | Clases desbalanceadas |
 | **ROC-AUC** | Capacidad de ordenar positivos sobre negativos (0,5 = azar; 1 = perfecto) | Comparar modelos sin fijar un umbral |
 
-> ⚠️ **Paradoja de la exactitud:** con 5 % de fraude, un modelo que dice siempre "no fraude" tiene **95 % de accuracy** y **0 % de recall** (verificado en el script). Con clases desbalanceadas, mira precision, recall, F1 o AUC.
+> **Paradoja de la exactitud:** con 5 % de fraude, un modelo que dice siempre "no fraude" tiene **95 % de accuracy** y **0 % de recall** (verificado en el script). Con clases desbalanceadas, mira precision, recall, F1 o AUC.
 
 ## 10. Optimización e hiperparámetros
 

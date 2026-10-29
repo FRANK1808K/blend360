@@ -1,6 +1,6 @@
 # Entrevista y frases útiles (nivel A2 → B1)
 
-🌐 **Español** · [English](entrevista-y-frases.en.md)
+**Español** · [English](entrevista-y-frases.en.md)
 
 > Las respuestas modelo usan **frases cortas y simples a propósito**. En una entrevista técnica es mucho mejor decir algo simple y claro que una frase larga con errores. **Adapta, memoriza y practica en voz alta.**
 
@@ -25,10 +25,10 @@ Completa la plantilla con tus datos, apréndela de memoria y grábate diciéndol
 |---|---|
 | *Sorry, could you repeat the question, please?* | No entendiste |
 | *Could you speak a little more slowly, please?* | Hablan muy rápido |
-| *Just to make sure I understand: you want me to… , right?* | Confirmar el enunciado ⭐ |
+| *Just to make sure I understand: you want me to… , right?* | Confirmar el enunciado |
 | *What does "___" mean in this context?* | Una palabra concreta |
-| *Can I assume that the input is always valid?* | Preguntar por supuestos ⭐ |
-| *Should I consider null values / empty lists?* | Casos borde ⭐ |
+| *Can I assume that the input is always valid?* | Preguntar por supuestos |
+| *Should I consider null values / empty lists?* | Casos borde |
 | *Is it OK if I write the solution in Python / SQL?* | Lenguaje |
 
 ### Ganar tiempo para pensar
@@ -38,7 +38,7 @@ Completa la plantilla con tus datos, apréndela de memoria y grábate diciéndol
 - *Give me a second to organize my ideas.*
 - *I'm going to write down the main steps first.*
 
-### Explicar tu solución ⭐
+### Explicar tu solución
 
 - *My approach is to…* (Mi enfoque es…)
 - *First, I… Then, I… Finally, I…*
@@ -77,7 +77,7 @@ Completa la plantilla con tus datos, apréndela de memoria y grábate diciéndol
 
 > *"My English is not perfect yet, but I'm working on it every day. I practice with technical videos and flashcards, and I'm improving quickly. I can read technical documentation without problems."*
 
-💡 Esta respuesta convierte tu A2 en una **fortaleza** (mejora activa). Es honesta y muestra disciplina.
+**Consejo:** Esta respuesta convierte tu A2 en una **fortaleza** (mejora activa). Es honesta y muestra disciplina.
 
 ### "Tell me about a challenge you faced." (método **STAR**)
 
@@ -96,7 +96,7 @@ Completa la plantilla con tus datos, apréndela de memoria y grábate diciéndol
 
 > *"I see myself as a data professional, maybe a data engineer or data scientist, working on important projects with AWS and AI. I also want to help and mentor new people."*
 
-### "Do you have any questions for us?" ⭐ (siempre di que sí)
+### "Do you have any questions for us?" (siempre di que sí)
 
 - *What does a typical day look like for an All Star?*
 - *What technologies will I use in the first months?*
@@ -118,20 +118,20 @@ Completa la plantilla con tus datos, apréndela de memoria y grábate diciéndol
 | *Athena vs. Redshift?* | *Athena is serverless SQL directly on S3, good for ad hoc queries. Redshift is a data warehouse, better for complex and frequent BI queries.* |
 | *What is ETL?* | *Extract, Transform, Load: you take data from sources, clean and transform it, and load it into a destination like a data warehouse.* |
 
-## 5. Pronunciación de palabras técnicas 🔊
+## 5. Pronunciación de palabras técnicas
 
 | Palabra | Suena aproximadamente como | Error común |
 |---|---|---|
 | SQL | "és-kiu-él" o "síkuel" (ambas válidas) | |
-| query | "kuíri" | ❌ "kuéri" |
-| data | "déira" (EE. UU.) o "déita" | ❌ "dáta" |
-| Python | "páizon" | ❌ "pitón" |
+| query | "kuíri" | ✗ "kuéri" |
+| data | "déira" (EE. UU.) o "déita" | ✗ "dáta" |
+| Python | "páizon" | ✗ "pitón" |
 | tuple | "túpol" o "tiúpol" | |
-| queue | "kiú" (igual que la letra Q) | ❌ "kuéue" |
-| cache | "kash" (como *cash*) | ❌ "cáche" |
+| queue | "kiú" (igual que la letra Q) | ✗ "kuéue" |
+| cache | "kash" (como *cash*) | ✗ "cáche" |
 | char | "char" (como *charcoal*) o "kar" | |
-| schema | "skíma" | ❌ "chema" |
-| width / height | "uíz" / "jáit" | ❌ "jeigt" |
+| schema | "skíma" | ✗ "chema" |
+| width / height | "uíz" / "jáit" | ✗ "jeigt" |
 | algorithm | "álgo-ri-zem" | |
 | analysis / analytics | "anális-is" / "ana-lí-tiks" | |
 | AWS | "éi-dábliu-és" | |
@@ -139,13 +139,13 @@ Completa la plantilla con tus datos, apréndela de memoria y grábate diciéndol
 | EC2 | "í-sí-tú" | |
 | Lambda | "lámda" (la *b* no suena) | |
 | Azure | "ázher" | |
-| GitHub | "guít-jab" | ❌ "jit-jub" |
-| null | "nal" | ❌ "nul" |
+| GitHub | "guít-jab" | ✗ "jit-jub" |
+| null | "nal" | ✗ "nul" |
 | integer | "ín-ti-yer" | |
 | array | "aréi" | |
 | method | "mézod" | |
 | pseudocode | "súdo-coud" (la *p* no suena) | |
-| suite | "suít" (como *sweet*) | ❌ "suíte" |
+| suite | "suít" (como *sweet*) | ✗ "suíte" |
 
 ## 6. Números en voz alta
 

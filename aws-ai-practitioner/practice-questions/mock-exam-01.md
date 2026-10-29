@@ -3,7 +3,7 @@
 > **Instrucciones:** 90 minutos (120 si usas ESL +30), sin consultar material. Anota tus respuestas en papel y corrige con la [clave de respuestas](#clave-de-respuestas) al final.
 >
 > - Distribución por pesos oficiales: **D1 13 · D2 16 · D3 18 · D4 9 · D5 9** preguntas.
-> - Las preguntas marcadas con 🆕 cubren temas añadidos en la **guía v1.1** (abril 2026).
+> - Las preguntas marcadas con «v1.1» cubren temas añadidos en la **guía v1.1** (abril 2026).
 > - Preguntas originales, no extraídas del examen real. Están ordenadas por dominio para que puedas calcular tu puntuación por dominio, a diferencia del examen real, donde aparecen mezcladas.
 > - **Objetivo:** ≥ 85 % (56/65) en el primer intento.
 
@@ -18,7 +18,7 @@
 - C. Clustering (aprendizaje no supervisado)
 - D. Aprendizaje por refuerzo
 
-**2.** 🆕 ¿Qué describe mejor un sistema de **IA agéntica**?
+**2.** (v1.1) ¿Qué describe mejor un sistema de **IA agéntica**?
 
 - A. Un sistema que usa un FM para planificar, invocar herramientas y ejecutar acciones de varios pasos hacia un objetivo.
 - B. Un modelo de difusión que genera imágenes a partir de texto.
@@ -46,7 +46,7 @@
 - C. RMSE
 - D. MAE
 
-**6.** 🆕 Un banco necesita un modelo para aprobar o rechazar préstamos a partir de datos **tabulares**. El regulador exige **explicar cada decisión** individual. ¿Qué enfoque es el más adecuado?
+**6.** (v1.1) Un banco necesita un modelo para aprobar o rechazar préstamos a partir de datos **tabulares**. El regulador exige **explicar cada decisión** individual. ¿Qué enfoque es el más adecuado?
 
 - A. Un LLM de Amazon Bedrock con un prompt que decida la aprobación
 - B. Un modelo de ML tradicional (p. ej., XGBoost) con explicaciones de SageMaker Clarify
@@ -118,42 +118,42 @@
 - C. Cambiar a un modelo de generación de imágenes
 - D. Aumentar Top-P
 
-**16.** 🆕 Una aplicación envía un manual de 200 páginas completo en **cada** petición al modelo y los costos son muy altos. ¿Qué cambio reduce más el costo sin perder calidad?
+**16.** (v1.1) Una aplicación envía un manual de 200 páginas completo en **cada** petición al modelo y los costos son muy altos. ¿Qué cambio reduce más el costo sin perder calidad?
 
 - A. Aumentar `maxTokens`
 - B. Contratar Provisioned Throughput aunque el tráfico sea bajo
 - C. Aumentar la temperatura
 - D. Usar RAG para enviar solo los fragmentos relevantes del manual
 
-**17.** 🆕 ¿Qué afirmación sobre el **precio por tokens** de los FMs en Bedrock On-Demand es correcta?
+**17.** (v1.1) ¿Qué afirmación sobre el **precio por tokens** de los FMs en Bedrock On-Demand es correcta?
 
 - A. Solo se facturan los tokens de salida.
 - B. Se facturan tokens de entrada y de salida, y los de salida suelen ser más caros por token.
 - C. Se factura un precio fijo por petición independientemente de su tamaño.
 - D. Se factura por hora de instancia.
 
-**18.** 🆕 ¿Qué es el **context engineering**?
+**18.** (v1.1) ¿Qué es el **context engineering**?
 
 - A. Ajustar los pesos del modelo con datos etiquetados
 - B. Cifrar los prompts con AWS KMS
 - C. Decidir y estructurar qué información (instrucciones, datos recuperados, herramientas, memoria) entra en el contexto del modelo
 - D. Elegir el tipo de instancia GPU para el entrenamiento
 
-**19.** 🆕 ¿Qué es el **Model Context Protocol (MCP)**?
+**19.** (v1.1) ¿Qué es el **Model Context Protocol (MCP)**?
 
 - A. Un protocolo abierto que estandariza cómo los agentes y aplicaciones de IA se conectan con herramientas y fuentes de datos externas
 - B. Un protocolo propietario de facturación de AWS
 - C. Una técnica de compresión de modelos
 - D. Una métrica de evaluación de LLMs
 
-**20.** 🆕 Un asistente de viajes tiene un agente coordinador que delega en agentes especialistas de vuelos, hoteles y pagos, y combina sus resultados. ¿Qué patrón es?
+**20.** (v1.1) Un asistente de viajes tiene un agente coordinador que delega en agentes especialistas de vuelos, hoteles y pagos, y combina sus resultados. ¿Qué patrón es?
 
 - A. RLHF
 - B. Supervisor (orquestador) multi-agente
 - C. Inferencia por lotes
 - D. Few-shot prompting
 
-**21.** 🆕 Un asistente debe **recordar las preferencias del usuario entre sesiones distintas** (p. ej., asiento de pasillo). ¿Qué capacidad necesita?
+**21.** (v1.1) Un asistente debe **recordar las preferencias del usuario entre sesiones distintas** (p. ej., asiento de pasillo). ¿Qué capacidad necesita?
 
 - A. Una temperatura más baja
 - B. Stop sequences
@@ -240,7 +240,7 @@
 - C. Amazon RDS for MySQL
 - D. Amazon OpenSearch Serverless
 
-**33.** 🆕 Una empresa ya usa **Amazon Aurora PostgreSQL** y quiere guardar los embeddings de su Knowledge Base junto a sus datos relacionales. ¿Qué opción es la adecuada?
+**33.** (v1.1) Una empresa ya usa **Amazon Aurora PostgreSQL** y quiere guardar los embeddings de su Knowledge Base junto a sus datos relacionales. ¿Qué opción es la adecuada?
 
 - A. Aurora PostgreSQL con la extensión pgvector
 - B. Amazon S3 Glacier
@@ -254,28 +254,28 @@
 - C. Action group
 - D. Provisioned Throughput
 
-**35.** 🆕 Un equipo ha construido agentes con un framework open-source (LangGraph) y quiere ejecutarlos en producción con **runtime serverless, memoria, identidad y observabilidad gestionadas**. ¿Qué servicio debe usar?
+**35.** (v1.1) Un equipo ha construido agentes con un framework open-source (LangGraph) y quiere ejecutarlos en producción con **runtime serverless, memoria, identidad y observabilidad gestionadas**. ¿Qué servicio debe usar?
 
 - A. Amazon Lex
 - B. Amazon Bedrock AgentCore
 - C. Amazon SageMaker Canvas
 - D. Amazon Kendra
 
-**36.** 🆕 ¿Qué es **Strands Agents**?
+**36.** (v1.1) ¿Qué es **Strands Agents**?
 
 - A. Un IDE agéntico de AWS
 - B. Un servicio de modernización de mainframes
 - C. Un SDK open source de AWS para construir agentes "model-driven" con poco código
 - D. Un vector store gestionado
 
-**37.** 🆕 Un equipo de desarrollo quiere un IDE que, antes de generar código, convierta la petición en **requisitos, diseño y lista de tareas** (desarrollo guiado por especificaciones). ¿Qué herramienta encaja?
+**37.** (v1.1) Un equipo de desarrollo quiere un IDE que, antes de generar código, convierta la petición en **requisitos, diseño y lista de tareas** (desarrollo guiado por especificaciones). ¿Qué herramienta encaja?
 
 - A. Kiro
 - B. Amazon Q Business
 - C. AWS CodeCommit
 - D. Amazon SageMaker Canvas
 
-**38.** 🆕 Una aseguradora quiere modernizar aplicaciones **COBOL de mainframe** y migrar aplicaciones **.NET** de Windows a Linux con ayuda de agentes de IA. ¿Qué servicio debe usar?
+**38.** (v1.1) Una aseguradora quiere modernizar aplicaciones **COBOL de mainframe** y migrar aplicaciones **.NET** de Windows a Linux con ayuda de agentes de IA. ¿Qué servicio debe usar?
 
 - A. Amazon Textract
 - B. Amazon Translate
@@ -289,7 +289,7 @@
 - C. Amazon Macie sobre las respuestas
 - D. Una política IAM que deniegue `bedrock:InvokeModel`
 
-**40.** 🆕 El equipo necesita **versionar** los prompts de producción, compararlos entre modelos y **volver a una versión anterior** si la calidad empeora. ¿Qué debe usar?
+**40.** (v1.1) El equipo necesita **versionar** los prompts de producción, compararlos entre modelos y **volver a una versión anterior** si la calidad empeora. ¿Qué debe usar?
 
 - A. AWS CloudTrail
 - B. Amazon S3 Lifecycle
@@ -317,7 +317,7 @@
 - C. Amazon Lex
 - D. Amazon Personalize
 
-**44.** 🆕 Los analistas de negocio quieren hacer **preguntas en lenguaje natural** sobre sus dashboards, generar investigaciones con fuentes citadas y crear **automatizaciones sin código**. ¿Qué servicio encaja mejor?
+**44.** (v1.1) Los analistas de negocio quieren hacer **preguntas en lenguaje natural** sobre sus dashboards, generar investigaciones con fuentes citadas y crear **automatizaciones sin código**. ¿Qué servicio encaja mejor?
 
 - A. Amazon EMR
 - B. AWS Glue DataBrew
@@ -331,14 +331,14 @@
 - C. SageMaker Clarify (sesgo pre-entrenamiento)
 - D. AWS Trusted Advisor
 
-**46.** 🆕 Un equipo necesita evaluar la **corrección y completitud** de miles de respuestas de un FM a escala, sin revisores humanos y con explicaciones. ¿Qué método es el adecuado?
+**46.** (v1.1) Un equipo necesita evaluar la **corrección y completitud** de miles de respuestas de un FM a escala, sin revisores humanos y con explicaciones. ¿Qué método es el adecuado?
 
 - A. Solo la métrica BLEU
 - B. RMSE
 - C. Revisión manual de todas las respuestas
 - D. LLM-as-a-judge en Amazon Bedrock Model Evaluation
 
-**47.** 🆕 ¿Qué métrica muestra mejor si un asistente de soporte aporta **valor de negocio**?
+**47.** (v1.1) ¿Qué métrica muestra mejor si un asistente de soporte aporta **valor de negocio**?
 
 - A. Perplexity
 - B. Tasa de tareas completadas sin escalar a un humano
@@ -382,7 +382,7 @@
 - C. Cifrado con KMS
 - D. Batch Transform
 
-**53.** 🆕 Elige **DOS** herramientas de AWS que la guía cita para la **explicabilidad y transparencia** de soluciones de IA.
+**53.** (v1.1) Elige **DOS** herramientas de AWS que la guía cita para la **explicabilidad y transparencia** de soluciones de IA.
 
 - A. AWS Shield
 - B. Amazon SageMaker Clarify
@@ -455,21 +455,21 @@
 - C. Batch inference
 - D. Prompt caching
 
-**63.** 🆕 Un agente de atención al cliente puede emitir reembolsos. La empresa debe garantizar que el agente **nunca** pueda ejecutar reembolsos superiores a 500 USD, **aunque sufra un ataque de prompt injection**. ¿Qué solución es la adecuada?
+**63.** (v1.1) Un agente de atención al cliente puede emitir reembolsos. La empresa debe garantizar que el agente **nunca** pueda ejecutar reembolsos superiores a 500 USD, **aunque sufra un ataque de prompt injection**. ¿Qué solución es la adecuada?
 
 - A. Añadir la regla al system prompt del agente
 - B. Aumentar la temperatura
 - C. Policy in AgentCore con políticas deterministas (Cedar) aplicadas a las llamadas a herramientas en AgentCore Gateway
 - D. Una alarma de CloudWatch
 
-**64.** 🆕 Un agente debe acceder al calendario y al CRM del usuario **en su nombre** mediante OAuth, sin guardar secretos en el código. ¿Qué servicio gestiona estas credenciales?
+**64.** (v1.1) Un agente debe acceder al calendario y al CRM del usuario **en su nombre** mediante OAuth, sin guardar secretos en el código. ¿Qué servicio gestiona estas credenciales?
 
 - A. Amazon Bedrock AgentCore Identity
 - B. Amazon Inspector
 - C. Un bucket S3 con las claves
 - D. AWS Shield
 
-**65.** 🆕 Elige **DOS** técnicas para **detectar alucinaciones** en una aplicación RAG.
+**65.** (v1.1) Elige **DOS** técnicas para **detectar alucinaciones** en una aplicación RAG.
 
 - A. El *contextual grounding check* de Amazon Bedrock Guardrails
 - B. Aumentar la temperatura
@@ -482,16 +482,16 @@
 ## Clave de respuestas
 
 <details>
-<summary>▶ Mostrar clave (corrige solo al terminar)</summary>
+<summary>Mostrar clave (corrige solo al terminar)</summary>
 
 | # | Resp. | Dom. | Justificación breve |
 |---|---|---|---|
 | 1 | C | D1 | Sin etiquetas + agrupar = clustering. |
-| 2 | A | D1 🆕 | Agente = FM que planifica, usa herramientas y actúa hacia un objetivo. |
+| 2 | A | D1 (v1.1) | Agente = FM que planifica, usa herramientas y actúa hacia un objetivo. |
 | 3 | D | D1 | El learning rate se fija antes de entrenar; los pesos son parámetros. |
 | 4 | C | D1 | El falso negativo es caro → recall. |
 | 5 | A | D1 | El falso positivo es caro → precisión. |
-| 6 | B | D1 🆕 | Decisión regulada sobre datos tabulares que debe explicarse → ML tradicional + Clarify (1.2.6). |
+| 6 | B | D1 (v1.1) | Decisión regulada sobre datos tabulares que debe explicarse → ML tradicional + Clarify (1.2.6). |
 | 7 | C | D1 | RMSE eleva al cuadrado los errores y penaliza los grandes. |
 | 8 | D | D1 | Overfitting → regularización y más datos. |
 | 9 | A | D1 | Etiquetado humano + automático → Ground Truth. |
@@ -501,12 +501,12 @@
 | 13 | B | D1 | Información del objetivo filtrada a las features → data leakage. |
 | 14 | C | D2 | Más creatividad → temperatura alta. |
 | 15 | A | D2 | Se supera la ventana de contexto → resumir o recortar el historial (context engineering). |
-| 16 | D | D2 🆕 | Menos tokens de entrada con RAG → menos costo (2.1.4). |
-| 17 | B | D2 🆕 | Se pagan entrada y salida; la salida es más cara. |
-| 18 | C | D2 🆕 | Definición de context engineering (2.1.5). |
-| 19 | A | D2 🆕 | MCP = protocolo abierto agente ↔ herramientas/datos (2.1.6). |
-| 20 | B | D2 🆕 | Coordinador que delega en especialistas → patrón supervisor. |
-| 21 | C | D2 🆕 | Recordar entre sesiones → memoria a largo plazo. |
+| 16 | D | D2 (v1.1) | Menos tokens de entrada con RAG → menos costo (2.1.4). |
+| 17 | B | D2 (v1.1) | Se pagan entrada y salida; la salida es más cara. |
+| 18 | C | D2 (v1.1) | Definición de context engineering (2.1.5). |
+| 19 | A | D2 (v1.1) | MCP = protocolo abierto agente ↔ herramientas/datos (2.1.6). |
+| 20 | B | D2 (v1.1) | Coordinador que delega en especialistas → patrón supervisor. |
+| 21 | C | D2 (v1.1) | Recordar entre sesiones → memoria a largo plazo. |
 | 22 | A | D2 | Datos cambiantes sin re-entrenar → RAG. |
 | 23 | D | D2 | El fine-tuning con instrucciones necesita pares etiquetados. |
 | 24 | A | D2 | Definición de alucinación. |
@@ -518,27 +518,27 @@
 | 30 | C | D3 | Serverless, varios proveedores, menor esfuerzo → Bedrock. |
 | 31 | A | D3 | Control de la instancia y del entrenamiento → JumpStart. |
 | 32 | D | D3 | *Quick create* usa OpenSearch Serverless. MemoryDB salió del alcance en la v1.1. |
-| 33 | A | D3 🆕 | Aurora (añadido en la v1.1) admite vectores con pgvector y es un vector store soportado por las KB. |
+| 33 | A | D3 (v1.1) | Aurora (añadido en la v1.1) admite vectores con pgvector y es un vector store soportado por las KB. |
 | 34 | C | D3 | Action groups = APIs (OpenAPI) + Lambda. |
-| 35 | B | D3 🆕 | Cualquier framework + runtime/memoria/identidad/observabilidad gestionados → AgentCore. |
-| 36 | C | D3 🆕 | Strands Agents = SDK open source model-driven. |
-| 37 | A | D3 🆕 | Kiro = IDE agéntico spec-driven. |
-| 38 | D | D3 🆕 | Modernización de mainframe/.NET con agentes → AWS Transform. |
+| 35 | B | D3 (v1.1) | Cualquier framework + runtime/memoria/identidad/observabilidad gestionados → AgentCore. |
+| 36 | C | D3 (v1.1) | Strands Agents = SDK open source model-driven. |
+| 37 | A | D3 (v1.1) | Kiro = IDE agéntico spec-driven. |
+| 38 | D | D3 (v1.1) | Modernización de mainframe/.NET con agentes → AWS Transform. |
 | 39 | B | D3 | Filtro de información sensible de Guardrails con MASK. |
-| 40 | C | D3 🆕 | Versionado y rollback de prompts → Prompt Management (3.2.5). |
+| 40 | C | D3 (v1.1) | Versionado y rollback de prompts → Prompt Management (3.2.5). |
 | 41 | A | D3 | Formularios y tablas en documentos → Textract. |
 | 42 | D | D3 | Voz → texto (Transcribe) → sentimiento (Comprehend). |
 | 43 | B | D3 | Datos corporativos + permisos + listo para usar → Q Business. |
-| 44 | C | D3 🆕 | BI en lenguaje natural, investigación y automatización → Amazon Quick. |
+| 44 | C | D3 (v1.1) | BI en lenguaje natural, investigación y automatización → Amazon Quick. |
 | 45 | A | D3 | Criterios subjetivos (tono) → evaluación humana. |
-| 46 | D | D3 🆕 | Evaluación a escala con explicaciones → LLM-as-a-judge (3.4.2). |
-| 47 | B | D3 🆕 | Métrica de negocio → tasa de tareas completadas (3.4.5). |
+| 46 | D | D3 (v1.1) | Evaluación a escala con explicaciones → LLM-as-a-judge (3.4.2). |
+| 47 | B | D3 (v1.1) | Métrica de negocio → tasa de tareas completadas (3.4.5). |
 | 48 | C | D4 | Sesgo pre-entrenamiento → Clarify. |
 | 49 | A | D4 | Drift en producción → Model Monitor. |
 | 50 | D | D4 | Documentación del modelo → Model Cards. |
 | 51 | B | D4 | Revisión humana por baja confianza → A2I. |
 | 52 | A | D4 | Explicación por predicción → SHAP (Clarify). |
-| 53 | B, C | D4 🆕 | La guía cita Clarify y Bedrock Model Evaluations (4.2.2). |
+| 53 | B, C | D4 (v1.1) | La guía cita Clarify y Bedrock Model Evaluations (4.2.2). |
 | 54 | C | D4 | Bedrock no usa tus datos para entrenar modelos base. |
 | 55 | B | D4 | Grupo infrarrepresentado → sesgo de muestreo → datos representativos. |
 | 56 | C | D4 | Más complejidad suele implicar menos interpretabilidad. |
@@ -548,9 +548,9 @@
 | 60 | B | D5 | Contenido de prompts y respuestas → Model Invocation Logging. |
 | 61 | D | D5 | Masivo, no urgente, barato → Batch inference. |
 | 62 | A | D5 | Rendimiento garantizado / modelo personalizado → Provisioned Throughput. |
-| 63 | C | D5 🆕 | La autorización determinista fuera del LLM no se puede saltar con prompt injection (5.1.1). |
-| 64 | A | D5 🆕 | Credenciales OAuth del agente → AgentCore Identity. |
-| 65 | A, C | D5 🆕 | Grounding check + validación de la salida (5.1.5). |
+| 63 | C | D5 (v1.1) | La autorización determinista fuera del LLM no se puede saltar con prompt injection (5.1.1). |
+| 64 | A | D5 (v1.1) | Credenciales OAuth del agente → AgentCore Identity. |
+| 65 | A, C | D5 (v1.1) | Grounding check + validación de la salida (5.1.5). |
 
 </details>
 

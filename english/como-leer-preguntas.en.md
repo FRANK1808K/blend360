@@ -1,6 +1,6 @@
 # How to read exam questions in English (without freezing)
 
-🌐 [Español](como-leer-preguntas.md) · **English**
+[Español](como-leer-preguntas.md) · **English**
 
 > In a technical test, **one single word** can change the answer: *NOT*, *EXCEPT*, *LEAST*, *at least*. This guide teaches you to spot them and to avoid "false friends".
 
@@ -13,7 +13,7 @@
 3. **Read the scenario** looking for the **technical keywords** (*real-time*, *serverless*, *lowest cost*, *without code*). You do not need to understand every word.
 4. **Eliminate options** and choose. If a word blocks you, **skip it** and infer it from the context.
 
-> 🧠 **Do not translate word by word.** Look for *what they ask* + the *constraints*.
+> **Do not translate word by word.** Look for *what they ask* + the *constraints*.
 
 ## 2. Words that change EVERYTHING (memorize them)
 
@@ -71,7 +71,7 @@
 
 ## 4. False friends (words that look like Spanish but are NOT)
 
-| English | ❌ It does not mean | ✅ It means |
+| English | ✗ It does not mean | ✓ It means |
 |---|---|---|
 | **actual / actually** | actual / actualmente | **real / in reality** |
 | **eventually** | eventualmente (sometimes) | **finally, over time** (*eventual consistency* = consistency reached over time) |

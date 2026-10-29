@@ -59,14 +59,14 @@ def run(module_name):
             _check_special(module, name)
         except NotImplementedError:
             pending += 1
-            print(f"  ⏳ {name}: pending / pendiente")
+            print(f"  · {name}: pending / pendiente")
             continue
         except Exception as exc:  # noqa: BLE001 - mostrar cualquier fallo al estudiante
             failed += 1
-            print(f"  ❌ {name}: {exc}")
+            print(f"  ✗ {name}: {exc}")
             continue
         passed += 1
-        print(f"  ✅ {name}")
+        print(f"  ✓ {name}")
     total = len(TESTS)
     print(f"\n{module_name}.py → {passed}/{total} correct / correctos, {failed} failed / con errores, {pending} pending / pendientes")
     return failed == 0 and pending == 0

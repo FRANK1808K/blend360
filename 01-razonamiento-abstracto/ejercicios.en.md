@@ -1,6 +1,6 @@
 # 01 · Abstract reasoning: 50 exercises with solutions
 
-🌐 [Español](ejercicios.md) · **English**
+[Español](ejercicios.md) · **English**
 
 > **How to practice:** use a timer. Goal: **≤ 60 s per exercise**. Write down your answer and check the solutions at the **end of each section**. For "real" (drawn) figures, also use the [simulator](../simulator/README.en.md).
 
@@ -60,7 +60,7 @@ A B C D E F G H I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
 ```
 
-> 💡 Write the alphabet with its numbers on your scratch paper at the start of the test: it saves a lot of time.
+> **Tip:** Write the alphabet with its numbers on your scratch paper at the start of the test: it saves a lot of time.
 
 | # | Series | A | B | C | D |
 |---|---|---|---|---|---|

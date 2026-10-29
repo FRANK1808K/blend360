@@ -1,6 +1,6 @@
 # Repaso final: últimas 48 horas (16–17 de diciembre)
 
-🌐 **Español** · [English](repaso-final-48h.en.md)
+**Español** · [English](repaso-final-48h.en.md)
 
 > **Regla de oro:** las últimas 48 horas **no** son para aprender cosas nuevas. Son para **repasar, descansar y llegar con la mente fresca**.
 
@@ -50,4 +50,4 @@
 14. Kinesis Data Streams = tiempo real; Firehose = entrega sin código.
 15. CloudTrail = quién hizo qué; responsabilidad compartida: los datos y el IAM son del cliente.
 
-**¡Tú puedes! 💪 You've got this!**
+**¡Tú puedes! You've got this!**

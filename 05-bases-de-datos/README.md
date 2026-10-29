@@ -1,6 +1,6 @@
 # 05 · Bases de datos: teoría que preguntan
 
-🌐 **Español** · [English](README.en.md)
+**Español** · [English](README.en.md)
 
 > SQL es el *lenguaje*; este módulo es la *teoría*: modelado, llaves, normalización, ACID, índices, OLTP vs OLAP, NoSQL, data warehouse y data lake. Son preguntas típicas de opción múltiple y de entrevista técnica.
 
@@ -66,7 +66,7 @@ Proceso para **eliminar redundancia** y **anomalías** (de inserción, actualiza
 | **3NF** | 2NF + sin dependencias **transitivas** (una columna no clave no depende de otra columna no clave) | `customer_city` depende de `customer`, no del pedido → tabla `customers` |
 | **BCNF** | Versión más estricta de 3NF: todo determinante es llave candidata | — |
 
-> 📌 Frase para memorizar (en inglés, como la preguntan): *"Every non-key attribute must depend on **the key** (1NF), **the whole key** (2NF), and **nothing but the key** (3NF)."*
+> Frase para memorizar (en inglés, como la preguntan): *"Every non-key attribute must depend on **the key** (1NF), **the whole key** (2NF), and **nothing but the key** (3NF)."*
 
 **Desnormalización:** duplicar datos **a propósito** para que las lecturas sean más rápidas (menos JOINs). Es común en data warehouses y reportes.
 
@@ -96,7 +96,7 @@ COMMIT;      -- o ROLLBACK; si algo falló
 
 Un **índice** es una estructura auxiliar (normalmente un **árbol B / B-tree**) que permite encontrar filas sin recorrer toda la tabla, como el índice de un libro.
 
-| ✅ Ventajas | ❌ Desventajas |
+| ✓ Ventajas | ✗ Desventajas |
 |---|---|
 | Búsquedas, `JOIN`, `WHERE` y `ORDER BY` mucho más rápidos (O(log n) vs. O(n) del *full table scan*) | Ocupan espacio |
 | Garantizan unicidad (índice `UNIQUE`) | Hacen **más lentos** los `INSERT`, `UPDATE` y `DELETE` (hay que actualizar el índice) |
@@ -196,7 +196,7 @@ dim_customer ── fact_sales ── dim_product
 |---|---|---|
 | CSV | Texto, por filas | Simple, sin tipos, pesado |
 | JSON | Texto, semiestructurado | Flexible, pesado |
-| **Parquet** | Binario, **columnar**, comprimido | ⭐ El estándar para analítica (Athena, Redshift Spectrum, Spark) |
+| **Parquet** | Binario, **columnar**, comprimido | ★ El estándar para analítica (Athena, Redshift Spectrum, Spark) |
 | ORC | Binario, columnar | Similar a Parquet (ecosistema Hive) |
 | Avro | Binario, por filas, con esquema | Streaming / Kafka |
 

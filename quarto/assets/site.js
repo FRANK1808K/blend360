@@ -3,6 +3,7 @@
    - Task lists (- [ ]) become real checkboxes saved in the browser (the study plan, for example).
    - Home: countdowns, "what to do this week" and progress per area.
    - "My progress": pages studied, mock exam log, mistake notebook, simulator attempts, backup.
+   - Motion: the particle wave of the home hero, count-up numbers and elements that appear as you scroll.
    Everything is saved only in this browser (localStorage). / Todo se guarda solo en este navegador. */
 (function () {
   "use strict";
@@ -13,6 +14,7 @@
   var REPO = "https://github.com/FRANK1808K/blend360/blob/HEAD/";
   var MANIFEST = window.B360_MANIFEST || { es: [], en: [] };
   var DAY = 864e5;
+  var REDUCE = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var T = {
     es: {
@@ -37,7 +39,7 @@
       },
       sim: "Intentos en el simulador Blend360", simAif: "Intentos en el simulador AIF-C01", lab: "Laboratorio de código",
       noSim: "Sin intentos todavía (o los hiciste en otro navegador).", solved: "resueltos",
-      modes: { abstract: "Razonamiento", tech: "Técnico (opción múltiple)", sql: "Reto SQL" }
+      modes: { abstract: "Razonamiento", tech: "Técnico (opción múltiple)", sql: "Reto SQL", full: "Evaluación completa" }
     },
     en: {
       mark: "Mark as studied", done: "Studied", min: function (n) { return "~" + n + " min read"; },
@@ -61,7 +63,7 @@
       },
       sim: "Blend360 simulator attempts", simAif: "AIF-C01 simulator attempts", lab: "Code lab",
       noSim: "No attempts yet (or you took them in another browser).", solved: "solved",
-      modes: { abstract: "Reasoning", tech: "Technical (multiple choice)", sql: "SQL challenge" }
+      modes: { abstract: "Reasoning", tech: "Technical (multiple choice)", sql: "SQL challenge", full: "Full assessment" }
     }
   }[LANG];
 
@@ -83,6 +85,7 @@
     if (html !== undefined) e.innerHTML = html;
     return e;
   }
+  function ico(name) { return '<span class="b-ico b-ico-' + name + '" aria-hidden="true"></span>'; }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function today() { var d = new Date(); d.setHours(0, 0, 0, 0); return d; }
   function parseDay(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
@@ -98,26 +101,26 @@
       var on = isDone(key);
       doneBtn.classList.toggle("is-done", on);
       doneBtn.setAttribute("aria-pressed", on);
-      doneBtn.innerHTML = on ? "✅ " + T.done : "☐ " + T.mark;
+      doneBtn.innerHTML = (on ? ico("done") + T.done : ico("todo") + T.mark);
     };
     doneBtn.addEventListener("click", function () { setDone(key, !isDone(key)); paint(); });
     paint();
     tools.appendChild(doneBtn);
-    tools.appendChild(el("span", { class: "b-pill is-static" }, "⏱ " + T.min(tools.getAttribute("data-min"))));
+    tools.appendChild(el("span", { class: "b-pill is-static" }, ico("clock") + T.min(tools.getAttribute("data-min"))));
     var details = document.querySelectorAll("main details");
     if (details.length >= 2) {
-      var solBtn = el("button", { type: "button", class: "b-pill" }, "👁 " + T.show(details.length));
+      var solBtn = el("button", { type: "button", class: "b-pill" }, ico("eye") + T.show(details.length));
       solBtn.addEventListener("click", function () {
         var open = !Array.prototype.every.call(details, function (d) { return d.open; });
         details.forEach(function (d) { d.open = open; });
-        solBtn.innerHTML = open ? "🙈 " + T.hide : "👁 " + T.show(details.length);
+        solBtn.innerHTML = open ? ico("eyeoff") + T.hide : ico("eye") + T.show(details.length);
       });
       tools.appendChild(solBtn);
     }
-    var printBtn = el("button", { type: "button", class: "b-pill" }, "🖨 " + T.print);
+    var printBtn = el("button", { type: "button", class: "b-pill" }, ico("print") + T.print);
     printBtn.addEventListener("click", function () { window.print(); });
     tools.appendChild(printBtn);
-    tools.appendChild(el("a", { class: "b-pill", href: REPO + tools.getAttribute("data-src"), target: "_blank", rel: "noopener" }, "↗ " + T.github));
+    tools.appendChild(el("a", { class: "b-pill", href: REPO + tools.getAttribute("data-src"), target: "_blank", rel: "noopener" }, ico("github") + T.github));
   }
 
   // ---------------------------------------------------------------- task lists / listas de tareas
@@ -145,6 +148,7 @@
     box.classList.toggle("past", n < 0);
     box.innerHTML = '<div class="b-count-num">' + (n > 0 ? n + " " + T.days(n) : n === 0 ? T.today : T.past) + "</div>" +
       '<div class="b-count-label">' + T[which] + " · " + fmtDay(EXAMS[which]) + "</div>";
+    if (n > 1) countUp(box.querySelector(".b-count-num"), n, function (v) { return v + " " + T.days(v); });
   });
 
   // The study plan week by week (guides/plan-de-estudio.md) / El plan semana a semana.
@@ -164,7 +168,7 @@
       ["06-aws/analisis-de-datos.html", "Blend (ligero): análisis de datos en AWS + 30 preguntas", "Blend (light): data analytics on AWS + 30 questions"],
       ["simulacros/simulacro-razonamiento-01.html", "Simulacro de razonamiento #1 (30 min): anota el puntaje", "Reasoning mock #1 (30 min): log your score"],
       ["aws-ai-practitioner/cheatsheets/final-review-48h.html", "14–15 nov: repaso final del AIF-C01, sin temas nuevos", "Nov 14–15: AIF-C01 final review, nothing new"]]],
-    ["2026-11-16", "2026-11-16", 1, { es: "🟧 Hoy: examen AWS AIF-C01", en: "🟧 Today: AWS AIF-C01 exam" }, [
+    ["2026-11-16", "2026-11-16", 1, { es: "Hoy: examen AWS AIF-C01", en: "Today: AWS AIF-C01 exam" }, [
       ["aws-ai-practitioner/guides/exam-playbook.html", "Repasa el playbook del examen y descansa después. ¡Éxitos!", "Read the exam playbook and rest afterwards. Good luck!"]]],
     ["2026-11-17", "2026-11-22", 2, { es: "Fase 2 · Semana 4: SQL + Python base", en: "Phase 2 · Week 4: SQL + Python basics" }, [
       ["02-sql/ejercicios.html", "SQL: ejercicios 22–35 (CASE y ventanas) + repetir los fallados", "SQL: exercises 22–35 (CASE and windows) + redo the missed ones"],
@@ -173,11 +177,11 @@
       ["english/vocabulario-tecnico.html", "Inglés: vocabulario de SQL y Python", "English: SQL and Python vocabulary"]]],
     ["2026-11-23", "2026-11-29", 2, { es: "Fase 2 · Semana 5: Python avanzado + algoritmos", en: "Phase 2 · Week 5: advanced Python + algorithms" }, [
       ["03-python/pandas.html", "Python: ejercicios 14–25 + pandas", "Python: exercises 14–25 + pandas"],
-      ["04-algoritmos-y-estructuras/index.html", "Algoritmos: teoría completa + problemas 🟢", "Algorithms: full theory + 🟢 problems"],
+      ["04-algoritmos-y-estructuras/index.html", "Algoritmos: teoría completa + problemas básicos", "Algorithms: full theory + basic problems"],
       ["english/entrevista-y-frases.html", "Inglés: escribe y memoriza tu presentación personal", "English: write and memorise your self-introduction"],
       ["simulador/index.html", "Razonamiento: 1 simulacro completo de 30 min", "Reasoning: 1 full 30-minute mock"]]],
     ["2026-11-30", "2026-12-06", 2, { es: "Fase 2 · Semana 6: algoritmos, BD, problemas, estadística", en: "Phase 2 · Week 6: algorithms, DB, problem solving, statistics" }, [
-      ["05-bases-de-datos/index.html", "Algoritmos 🟡 + bases de datos completo", "Algorithms 🟡 + all of databases"],
+      ["05-bases-de-datos/index.html", "Algoritmos intermedios + bases de datos completo", "Intermediate algorithms + all of databases"],
       ["07-resolucion-de-problemas/index.html", "Resolución de problemas completo", "All of problem solving"],
       ["08-estadistica-y-ml/index.html", "Estadística y ML + 25 preguntas", "Statistics and ML + 25 questions"],
       ["simulacros/simulacro-tecnico-01.html", "Sábado 5 dic: simulacro técnico #1 (90 min, condiciones reales)", "Saturday Dec 5: technical mock #1 (90 min, real conditions)"]]],
@@ -190,7 +194,7 @@
       ["cheatsheets/index.html", "Repaso de errores + los cheatsheets", "Review mistakes + the cheat sheets"]]],
     ["2026-12-16", "2026-12-17", 3, { es: "Fase 3 · Repaso final", en: "Phase 3 · Final review" }, [
       ["cheatsheets/repaso-final-48h.html", "Sigue el repaso final de 48 h. Nada nuevo.", "Follow the final 48-hour review. Nothing new."]]],
-    ["2026-12-18", "2026-12-18", 4, { es: "🟦 Hoy: prueba Blend360 All Star", en: "🟦 Today: Blend360 All Star test" }, [
+    ["2026-12-18", "2026-12-18", 4, { es: "Hoy: prueba Blend360 All Star", en: "Today: Blend360 All Star test" }, [
       ["cheatsheets/repaso-final-48h.html", "Lee solo tu lista de errores y el plan del día. ¡A ganar!", "Read only your mistake list and the day plan. Go win it!"]]]
   ];
   // English pages link to the English twins (the AIF-C01 domains and the simulators exist only once).
@@ -213,7 +217,7 @@
           return '<li><a href="' + ROOT + localHref(it) + '">' + esc(LANG === "en" ? it[2] : it[1]) + "</a></li>";
         }).join("") + "</ul><p class=\"b-empty\" style=\"margin:.6rem 0 0\">" + T.daily + "</p>";
     } else {
-      plan.innerHTML = "<h3>" + (LANG === "en" ? "The plan is over. Well done! 🎉" : "El plan terminó. ¡Bien hecho! 🎉") + "</h3>";
+      plan.innerHTML = "<h3>" + (LANG === "en" ? "The plan is over. Well done." : "El plan terminó. Bien hecho.") + "</h3>";
     }
   }
 
@@ -238,7 +242,7 @@
     var s = stats(MANIFEST[LANG]);
     homeProgress.innerHTML = Object.keys(s.areas).map(function (k) {
       var a = s.areas[k], p = pct(a.done, a.all);
-      return '<div class="b-card"><div class="b-card-title">' + esc(a.title) + "</div>" + bar(p) +
+      return '<div class="b-card"><div class="b-card-meta" style="margin:0">' + (p >= 100 ? T.areaDone : p + "%") + '</div><div class="b-card-title">' + esc(a.title) + "</div>" + bar(p) +
         '<div class="b-card-meta">' + a.done + T.of + a.all + " · " + p + "%</div></div>";
     }).join("");
   }
@@ -297,7 +301,7 @@
       '<label>' + (L ? "Out of" : "De") + '<input type="number" name="total" min="1" required value="30"></label>' +
       '<label>' + (L ? "Minutes used" : "Minutos usados") + '<input type="number" name="minutes" min="0"></label>' +
       '<label>' + (L ? "Main cause of mistakes" : "Causa principal de error") + '<select name="cause"><option value="">—</option>' + causeOptions() + "</select></label>" +
-      '<button class="b-btn primary" type="submit">＋ ' + (L ? "Log result" : "Registrar resultado") + "</button></form>" +
+      '<button class="b-btn dark" type="submit">' + ico("plus") + (L ? "Log result" : "Registrar resultado") + "</button></form>" +
       chart(rows) + table(rows);
     var form = box.querySelector("form");
     form.type.addEventListener("change", function () { form.total.value = examType(form.type.value)[1]; });
@@ -336,7 +340,7 @@
         var e = examType(r.type), p = pct(r.score, r.total);
         return "<tr><td>" + fmtDay(r.date) + "</td><td>" + esc(L ? e[4] : e[3]) + "</td><td>" + r.score + "/" + r.total +
           ' <span class="b-chip ' + (p >= e[2] ? "ok" : "bad") + '">' + p + "%</span></td><td>" + (r.minutes != null ? r.minutes + " min" : "—") +
-          "</td><td>" + (r.cause ? esc(T.causes[r.cause]) : "—") + '</td><td><button class="b-x" title="' + T.del + '" data-del="' + i + '">✕</button></td></tr>';
+          "</td><td>" + (r.cause ? esc(T.causes[r.cause]) : "—") + '</td><td><button class="b-x" title="' + T.del + '" aria-label="' + T.del + '" data-del="' + i + '">' + ico("x") + "</button></td></tr>";
       }).join("") + "</tbody></table>";
   }
 
@@ -358,10 +362,10 @@
     var item = function (x) {
       var r = x[0], late = r.due <= t0;
       return '<div class="b-group"><div class="b-group-head"><span>' + esc(r.topic) + " · " + esc(r.what) + '</span><small><span class="b-chip ' + (late ? "bad" : "") + '">' +
-        (late ? "⏰ " : "📅 ") + fmtDay(r.due) + "</span></small></div>" +
-        (r.rule ? "<div>💡 " + esc(r.rule) + "</div>" : "") + (r.cause ? '<div class="b-empty">' + esc(T.causes[r.cause]) + "</div>" : "") +
-        '<div class="b-actions"><button class="b-pill" data-ok="' + x[1] + '">✅ ' + T.mastered + '</button><button class="b-pill" data-again="' + x[1] + '">↻ ' + T.again + "</button>" +
-        '<button class="b-pill" data-rm="' + x[1] + '">✕ ' + T.del + "</button></div></div>";
+        ico(late ? "alert" : "calendar") + fmtDay(r.due) + "</span></small></div>" +
+        (r.rule ? '<div class="b-rule-line">' + ico("bulb") + "<span>" + esc(r.rule) + "</span></div>" : "") + (r.cause ? '<div class="b-empty">' + esc(T.causes[r.cause]) + "</div>" : "") +
+        '<div class="b-actions"><button class="b-pill" data-ok="' + x[1] + '">' + ico("done") + T.mastered + '</button><button class="b-pill" data-again="' + x[1] + '">' + ico("again") + T.again + "</button>" +
+        '<button class="b-pill" data-rm="' + x[1] + '">' + ico("x") + T.del + "</button></div></div>";
     };
     var due = active.filter(function (x) { return x[0].due <= t0; }), later = active.filter(function (x) { return x[0].due > t0; });
     box.innerHTML =
@@ -371,11 +375,11 @@
       '<label>' + (L ? "Review on" : "Repasar el") + '<input type="date" name="due" value="' + plus(2) + '"></label>' +
       '<label class="wide">' + (L ? "What did I get wrong?" : "¿Qué fallé?") + '<input name="what" required placeholder="' + (L ? "e.g. LEFT JOIN + WHERE turned it into an INNER JOIN" : "p. ej. LEFT JOIN + WHERE lo convirtió en INNER JOIN") + '"></label>' +
       '<label class="wide">' + (L ? "Rule so it does not happen again" : "Regla para que no se repita") + '<input name="rule" placeholder="' + (L ? "e.g. filter the right table in ON, not in WHERE" : "p. ej. el filtro de la tabla derecha va en el ON, no en el WHERE") + '"></label>' +
-      '<button class="b-btn primary" type="submit">＋ ' + (L ? "Add to notebook" : "Agregar al cuaderno") + "</button></form>" +
+      '<button class="b-btn dark" type="submit">' + ico("plus") + (L ? "Add to notebook" : "Agregar al cuaderno") + "</button></form>" +
       (top ? '<div class="callout callout-style-default callout-tip"><div class="callout-body-container callout-body" style="padding:.8rem 1rem"><strong>' + T.top + ": " + esc(T.causes[top]) + " (" + counts[top] + ")</strong><br>" + esc(T.advice[top]) + "</div></div>" : "") +
-      "<h4>" + T.due + " (" + due.length + ")</h4>" + (due.length ? due.map(item).join("") : '<p class="b-empty">' + (rows.length ? "✓" : T.noErrors) + "</p>") +
+      "<h4>" + T.due + " (" + due.length + ")</h4>" + (due.length ? due.map(item).join("") : '<p class="b-empty">' + (rows.length ? (L ? "Nothing to review today." : "Nada para repasar hoy.") : T.noErrors) + "</p>") +
       (later.length ? "<h4>" + T.later + " (" + later.length + ")</h4>" + later.map(item).join("") : "") +
-      (rows.length - active.length ? '<p class="b-empty">✅ ' + T.mastered + ": " + (rows.length - active.length) + "</p>" : "");
+      (rows.length - active.length ? '<p class="b-empty">' + ico("done") + " " + T.mastered + ": " + (rows.length - active.length) + "</p>" : "");
     var form = box.querySelector("form");
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
@@ -420,9 +424,9 @@
   if (backup) {
     var L2 = LANG === "en";
     backup.innerHTML = '<div class="b-actions">' +
-      '<button class="b-btn" id="b-export">⬇ ' + (L2 ? "Download backup" : "Descargar copia") + "</button>" +
-      '<label class="b-btn" style="cursor:pointer">⬆ ' + (L2 ? "Restore backup" : "Restaurar copia") + '<input type="file" accept="application/json" id="b-import" hidden></label>' +
-      '<button class="b-btn" id="b-reset">🗑 ' + (L2 ? "Delete everything" : "Borrar todo") + "</button></div>";
+      '<button class="b-btn dark" id="b-export">' + ico("download") + (L2 ? "Download backup" : "Descargar copia") + "</button>" +
+      '<label class="b-btn" style="cursor:pointer">' + ico("upload") + (L2 ? "Restore backup" : "Restaurar copia") + '<input type="file" accept="application/json" id="b-import" hidden></label>' +
+      '<button class="b-btn" id="b-reset">' + ico("trash") + (L2 ? "Delete everything" : "Borrar todo") + "</button></div>";
     var KEYS = /^(b360:|sim3090-history$|sim3090-lab$|aifc01-sim-history$)/;
     document.getElementById("b-export").addEventListener("click", function () {
       var data = {};
@@ -445,6 +449,79 @@
       if (!confirm(T.confirmReset)) return;
       try { Object.keys(localStorage).forEach(function (k) { if (/^b360:/.test(k)) localStorage.removeItem(k); }); } catch (e) { /* none */ }
       location.reload();
+    });
+  }
+  // ---------------------------------------------------------------- motion / movimiento
+  function countUp(node, to, fmt) {
+    if (REDUCE) return;
+    var t0 = null, dur = 1100;
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var k = Math.min(1, (ts - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - k, 3)));
+      node.textContent = fmt(Math.max(1, v));
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Home hero: a slow wave of data points, like the one on Blend's site (drawn here from scratch).
+  // Portada: una onda lenta de puntos de datos, dibujada desde cero.
+  document.querySelectorAll(".b-hero-canvas").forEach(function (cv) {
+    var ctx = cv.getContext && cv.getContext("2d");
+    if (!ctx) return;
+    var W = 0, H = 0, dpr = 1, visible = true, raf = 0, COLS = 72, ROWS = 20;
+    function size() {
+      var r = cv.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = cv.width = Math.round(r.width * dpr); H = cv.height = Math.round(r.height * dpr);
+      COLS = r.width < 600 ? 40 : 72;
+    }
+    function frame(t) {
+      t = t / 1000;
+      ctx.clearRect(0, 0, W, H);
+      for (var j = 0; j < ROWS; j++) {
+        var z = j / (ROWS - 1), persp = .55 + z * .9;
+        for (var i = 0; i < COLS; i++) {
+          var x = i / (COLS - 1);
+          var y = Math.sin(x * 5.2 + t * .55 + z * 2.4) * .16 + Math.sin(x * 11 - t * .35 + z) * .04 + Math.cos(z * 3.1 + t * .3) * .05;
+          var sx = W * (.5 + (x - .5) * persp * 1.15), sy = H * (.5 + z * .42 + y * (.35 + z * .4));
+          if (sx < -4 || sx > W + 4 || sy > H + 4) continue;
+          var a = .06 + z * z * .6 + (y + .2) * .25;
+          ctx.fillStyle = "rgba(" + (29 + Math.round(133 * (1 - z))) + ",243,244," + Math.max(.03, Math.min(.85, a)).toFixed(3) + ")";
+          var s = (.7 + z * 1.9) * dpr;
+          ctx.fillRect(sx - s / 2, sy - s / 2, s, s);
+        }
+      }
+    }
+    function loop(ts) { frame(ts); if (visible && !document.hidden) raf = requestAnimationFrame(loop); }
+    size();
+    window.addEventListener("resize", function () { size(); if (REDUCE) frame(8000); });
+    if (REDUCE) { frame(8000); cv.classList.add("is-on"); return; }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        visible = es[0].isIntersecting;
+        cancelAnimationFrame(raf);
+        if (visible) raf = requestAnimationFrame(loop);
+      }).observe(cv);
+    }
+    document.addEventListener("visibilitychange", function () { cancelAnimationFrame(raf); if (!document.hidden && visible) raf = requestAnimationFrame(loop); });
+    raf = requestAnimationFrame(loop);
+    requestAnimationFrame(function () { cv.classList.add("is-on"); });
+  });
+
+  // Elements below the fold rise in as they enter the screen / Lo que está más abajo aparece al llegar a la pantalla.
+  if (!REDUCE && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: .06 });
+    var limit = window.innerHeight * .95;
+    document.querySelectorAll("main .b-card, main .b-step, main .b-group, main table, main .callout, main details, main .b-today, " +
+      "main .b-timeline, main .b-section-head, main > h2, main section > h2, main .sourceCode, main blockquote").forEach(function (node) {
+      if (node.getBoundingClientRect().top < limit) return;
+      var sib = node.parentNode ? Array.prototype.indexOf.call(node.parentNode.children, node) : 0;
+      node.style.setProperty("--d", (/b-card|b-step/.test(node.className) ? (sib % 4) * 70 : 0) + "ms");
+      node.classList.add("b-reveal");
+      io.observe(node);
     });
   }
 })();

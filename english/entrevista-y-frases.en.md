@@ -1,6 +1,6 @@
 # Interview and useful phrases (A2 → B1 level)
 
-🌐 [Español](entrevista-y-frases.md) · **English**
+[Español](entrevista-y-frases.md) · **English**
 
 > The model answers use **short, simple sentences on purpose**. In a technical interview, saying something simple and clear is much better than a long sentence with mistakes. **Adapt them, memorize them and practice out loud.**
 
@@ -25,10 +25,10 @@ Fill in the template with your details, learn it by heart and record yourself sa
 |---|---|
 | *Sorry, could you repeat the question, please?* | You did not understand |
 | *Could you speak a little more slowly, please?* | They speak too fast |
-| *Just to make sure I understand: you want me to… , right?* | Confirm the statement ⭐ |
+| *Just to make sure I understand: you want me to… , right?* | Confirm the statement |
 | *What does "___" mean in this context?* | A specific word |
-| *Can I assume that the input is always valid?* | Ask about assumptions ⭐ |
-| *Should I consider null values / empty lists?* | Edge cases ⭐ |
+| *Can I assume that the input is always valid?* | Ask about assumptions |
+| *Should I consider null values / empty lists?* | Edge cases |
 | *Is it OK if I write the solution in Python / SQL?* | Language |
 
 ### Buying time to think
@@ -38,7 +38,7 @@ Fill in the template with your details, learn it by heart and record yourself sa
 - *Give me a second to organize my ideas.*
 - *I'm going to write down the main steps first.*
 
-### Explaining your solution ⭐
+### Explaining your solution
 
 - *My approach is to…*
 - *First, I… Then, I… Finally, I…*
@@ -77,7 +77,7 @@ Fill in the template with your details, learn it by heart and record yourself sa
 
 > *"My English is not perfect yet, but I'm working on it every day. I practice with technical videos and flashcards, and I'm improving quickly. I can read technical documentation without problems."*
 
-💡 This answer turns your A2 level into a **strength** (active improvement). It is honest and it shows discipline.
+**Tip:** This answer turns your A2 level into a **strength** (active improvement). It is honest and it shows discipline.
 
 ### "Tell me about a challenge you faced." (the **STAR** method)
 
@@ -96,7 +96,7 @@ Fill in the template with your details, learn it by heart and record yourself sa
 
 > *"I see myself as a data professional, maybe a data engineer or data scientist, working on important projects with AWS and AI. I also want to help and mentor new people."*
 
-### "Do you have any questions for us?" ⭐ (always say yes)
+### "Do you have any questions for us?" (always say yes)
 
 - *What does a typical day look like for an All Star?*
 - *What technologies will I use in the first months?*
@@ -118,22 +118,22 @@ Fill in the template with your details, learn it by heart and record yourself sa
 | *Athena vs. Redshift?* | *Athena is serverless SQL directly on S3, good for ad hoc queries. Redshift is a data warehouse, better for complex and frequent BI queries.* |
 | *What is ETL?* | *Extract, Transform, Load: you take data from sources, clean and transform it, and load it into a destination like a data warehouse.* |
 
-## 5. Pronunciation of technical words 🔊
+## 5. Pronunciation of technical words
 
 The hints are written the way a Spanish speaker would read them.
 
 | Word | Sounds roughly like | Common mistake |
 |---|---|---|
 | SQL | "és-kiu-él" or "síkuel" (both are valid) | |
-| query | "kuíri" | ❌ "kuéri" |
-| data | "déira" (US) or "déita" | ❌ "dáta" |
-| Python | "páizon" | ❌ "pitón" |
+| query | "kuíri" | ✗ "kuéri" |
+| data | "déira" (US) or "déita" | ✗ "dáta" |
+| Python | "páizon" | ✗ "pitón" |
 | tuple | "túpol" or "tiúpol" | |
-| queue | "kiú" (same as the letter Q) | ❌ "kuéue" |
-| cache | "kash" (like *cash*) | ❌ "cáche" |
+| queue | "kiú" (same as the letter Q) | ✗ "kuéue" |
+| cache | "kash" (like *cash*) | ✗ "cáche" |
 | char | "char" (like *charcoal*) or "kar" | |
-| schema | "skíma" | ❌ "chema" |
-| width / height | "uíz" / "jáit" | ❌ "jeigt" |
+| schema | "skíma" | ✗ "chema" |
+| width / height | "uíz" / "jáit" | ✗ "jeigt" |
 | algorithm | "álgo-ri-zem" | |
 | analysis / analytics | "anális-is" / "ana-lí-tiks" | |
 | AWS | "éi-dábliu-és" | |
@@ -141,13 +141,13 @@ The hints are written the way a Spanish speaker would read them.
 | EC2 | "í-sí-tú" | |
 | Lambda | "lámda" (the *b* is silent) | |
 | Azure | "ázher" | |
-| GitHub | "guít-jab" | ❌ "jit-jub" |
-| null | "nal" | ❌ "nul" |
+| GitHub | "guít-jab" | ✗ "jit-jub" |
+| null | "nal" | ✗ "nul" |
 | integer | "ín-ti-yer" | |
 | array | "aréi" | |
 | method | "mézod" | |
 | pseudocode | "súdo-coud" (the *p* is silent) | |
-| suite | "suít" (like *sweet*) | ❌ "suíte" |
+| suite | "suít" (like *sweet*) | ✗ "suíte" |
 
 ## 6. Numbers out loud
 
