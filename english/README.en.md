@@ -1,6 +1,6 @@
-# 🇬🇧 English for the Blend360 exam: from A2 to "functional" in 8 weeks
+# English for the Blend360 exam: from A2 to "functional" in 8 weeks
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 > **Your situation:** A2 level, a technical exam in English on **December 18**. In 8 weeks you will not reach C1, and you do not need to. What you need is:
 >
@@ -12,14 +12,14 @@
 
 | File | Purpose | Priority |
 |---|---|---|
-| [como-leer-preguntas.en.md](como-leer-preguntas.en.md) | Exam keywords, false friends, reading strategy | 🔴 Highest |
-| [vocabulario-tecnico.en.md](vocabulario-tecnico.en.md) | ~300 terms by topic (EN → ES) with examples | 🔴 Highest |
-| [gramatica-minima.en.md](gramatica-minima.en.md) | Only the grammar you need to read and explain | 🟡 Medium |
-| [entrevista-y-frases.en.md](entrevista-y-frases.en.md) | Self-introduction, explaining code, typical questions with model answers, pronunciation | 🟡 Medium (🔴 if there is an interview) |
-| [ejercicios-ingles.en.md](ejercicios-ingles.en.md) | Reading questions, translation, fill in the blanks, with answers | 🔴 Highest |
-| [../flashcards/](../flashcards/README.en.md) | Anki cards (vocabulary + concepts) | 🔴 Daily |
+| [como-leer-preguntas.en.md](como-leer-preguntas.en.md) | Exam keywords, false friends, reading strategy | Highest |
+| [vocabulario-tecnico.en.md](vocabulario-tecnico.en.md) | ~300 terms by topic (EN → ES) with examples | Highest |
+| [gramatica-minima.en.md](gramatica-minima.en.md) | Only the grammar you need to read and explain | Medium |
+| [entrevista-y-frases.en.md](entrevista-y-frases.en.md) | Self-introduction, explaining code, typical questions with model answers, pronunciation | Medium (if there is an interview) |
+| [ejercicios-ingles.en.md](ejercicios-ingles.en.md) | Reading questions, translation, fill in the blanks, with answers | Highest |
+| [../flashcards/](../flashcards/README.en.md) | Anki cards (vocabulary + concepts) | Daily |
 
-> 💡 **Each file has a Spanish twin** (same name without `.en`). Read the Spanish version first if you need to, then come back to this one: reading the same content in both languages is one of the fastest ways to learn vocabulary in context.
+> **Each file has a Spanish twin** (same name without `.en`). Read the Spanish version first if you need to, then come back to this one: reading the same content in both languages is one of the fastest ways to learn vocabulary in context.
 
 ---
 
@@ -32,7 +32,7 @@
 | 3. Listening | 10 | A short technical video **in English with English subtitles** (see resources below). Use 0.75× speed if needed |
 | 4. Speaking | 5–10 | Read your self-introduction **out loud** or explain in English the exercise you solved today (record yourself on your phone) |
 
-> 💡 **High-impact trick:** switch the language of your phone, VS Code and browser to English **today**. And from now on, **always read the practice statements in English first**.
+> **High-impact trick:** switch the language of your phone, VS Code and browser to English **today**. And from now on, **always read the practice statements in English first**.
 
 ## Week-by-week plan
 

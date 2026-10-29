@@ -244,7 +244,7 @@ def main():
     assert labels == [0, 0, 0, 1, 1, 1] and centroids == [[1.33, 1.33], [8.33, 8.33]]
     assert gini(["a", "a", "a", "a"]) == 0 and gini(["a", "a", "b", "b"]) == 0.5
     print("5. ML: split 80/20 ✓ · scaling ✓ · one-hot", cats, "· k-NN ✓ · k-means centroids", centroids, "· Gini ✓")
-    print("\nAll checks passed / Todas las verificaciones pasaron ✅")
+    print("\nAll checks passed / Todas las verificaciones pasaron ✓")
 
 
 if __name__ == "__main__":

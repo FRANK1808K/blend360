@@ -6,7 +6,7 @@ toc-title: "On this page"
 ---
 
 ::: {.lang-switch}
-🌐 [Español](estudiar.qmd) · **English**
+[Español](estudiar.qmd) · **English**
 :::
 
 Every topic has three pieces: the **theory** (this section), **practice** with solutions and a one-page **review sheet**. Study a module, do its practice without looking and mark the page as studied with the button under its title, so [My progress](progreso.en.qmd) knows where you are.
@@ -29,13 +29,13 @@ Sorted by **priority** according to what candidates report ([research](guides/qu
 
 | Priority | Topic | Hours | Theory | Practice | Review |
 |---|---|---|---|---|---|
-| ⭐⭐⭐ | **SQL**: JOINs, aggregations, CTEs, window functions | 12 h | [SQL guide](02-sql/index.en.qmd) | [35 exercises](02-sql/ejercicios.en.qmd) · [SQL lab](simulador/index.html) | [Cheat sheet](cheatsheets/sql.en.qmd) |
-| ⭐⭐⭐ | **Python** for data | 10 h | [Python guide](03-python/index.en.qmd) · [pandas](03-python/pandas.en.qmd) | [25 exercises in the lab](simulador/index.html) | [Cheat sheet](cheatsheets/python.en.qmd) |
-| ⭐⭐ | **Algorithms and data structures** | 8 h | [Guide](04-algoritmos-y-estructuras/index.en.qmd) | [20 problems in the lab](simulador/index.html) | [Cheat sheet](cheatsheets/algoritmos.en.qmd) |
-| ⭐⭐ | **AWS and data analytics on AWS** (Blend is an AWS Premier Partner) | 6 h | [Fundamentals](06-aws/index.en.qmd) · [data analytics ⭐](06-aws/analisis-de-datos.en.qmd) | [30 questions](06-aws/preguntas.en.qmd) | [Cheat sheet](cheatsheets/aws-y-bases-de-datos.en.qmd) |
-| ⭐⭐ | **Databases**: keys, normalisation, ACID, OLTP/OLAP | 4 h | [Guide](05-bases-de-datos/index.en.qmd) | Self-assessment at the end of the guide | [Cheat sheet](cheatsheets/aws-y-bases-de-datos.en.qmd) |
-| ⭐⭐ | **Problem solving**, logic and maths | 4 h | [Guide](07-resolucion-de-problemas/index.en.qmd) | Worked exercises in the guide | [Final review](cheatsheets/repaso-final-48h.en.qmd) |
-| ⭐⭐ (⭐⭐⭐ for Data Science) | **Statistics and machine learning** | 6 h | [Guide](08-estadistica-y-ml/index.en.qmd) | [25 questions](08-estadistica-y-ml/preguntas.en.qmd) | [Cheat sheet](cheatsheets/estadistica-ml.en.qmd) |
+| High | **SQL**: JOINs, aggregations, CTEs, window functions | 12 h | [SQL guide](02-sql/index.en.qmd) | [35 exercises](02-sql/ejercicios.en.qmd) · [SQL lab](simulador/index.html) | [Cheat sheet](cheatsheets/sql.en.qmd) |
+| High | **Python** for data | 10 h | [Python guide](03-python/index.en.qmd) · [pandas](03-python/pandas.en.qmd) | [25 exercises in the lab](simulador/index.html) | [Cheat sheet](cheatsheets/python.en.qmd) |
+| Medium | **Algorithms and data structures** | 8 h | [Guide](04-algoritmos-y-estructuras/index.en.qmd) | [20 problems in the lab](simulador/index.html) | [Cheat sheet](cheatsheets/algoritmos.en.qmd) |
+| Medium | **AWS and data analytics on AWS** (Blend is an AWS Premier Partner) | 6 h | [Fundamentals](06-aws/index.en.qmd) · [data analytics](06-aws/analisis-de-datos.en.qmd) | [30 questions](06-aws/preguntas.en.qmd) | [Cheat sheet](cheatsheets/aws-y-bases-de-datos.en.qmd) |
+| Medium | **Databases**: keys, normalisation, ACID, OLTP/OLAP | 4 h | [Guide](05-bases-de-datos/index.en.qmd) | Self-assessment at the end of the guide | [Cheat sheet](cheatsheets/aws-y-bases-de-datos.en.qmd) |
+| Medium | **Problem solving**, logic and maths | 4 h | [Guide](07-resolucion-de-problemas/index.en.qmd) | Worked exercises in the guide | [Final review](cheatsheets/repaso-final-48h.en.qmd) |
+| Medium (high for Data Science) | **Statistics and machine learning** | 6 h | [Guide](08-estadistica-y-ml/index.en.qmd) | [25 questions](08-estadistica-y-ml/preguntas.en.qmd) | [Cheat sheet](cheatsheets/estadistica-ml.en.qmd) |
 
 ::: {.callout-note title="What about the Python and algorithm exercises?"}
 They live in `.py` files with an automatic grader. Do them in the **[simulator's code lab](simulador/index.html)** (in the browser, also on your phone) or on your computer with `python3 test_ejercicios.py` and `python3 test_problemas.py` (see the [Python](03-python/index.en.qmd) and [algorithms](04-algoritmos-y-estructuras/index.en.qmd) guides).
@@ -52,7 +52,7 @@ The technical test is in English. With 30–40 minutes a day you go from A2 to u
 | 3 | [Technical vocabulary](english/vocabulario-tecnico.en.qmd) | SQL, Python, AWS, data, interview |
 | 4 | [Minimum grammar](english/gramatica-minima.en.qmd) | Just enough to understand and answer |
 | 5 | [Interview and phrases](english/entrevista-y-frases.en.qmd) | Self-introduction and STAR stories |
-| ✍️ | [English exercises](english/ejercicios-ingles.en.qmd) + [flashcards](flashcards/index.en.qmd) | Practise and lock in the vocabulary |
+| 6 | [English exercises](english/ejercicios-ingles.en.qmd) + [flashcards](flashcards/index.en.qmd) | Practise and lock in the vocabulary |
 
 ## How to study a module
 

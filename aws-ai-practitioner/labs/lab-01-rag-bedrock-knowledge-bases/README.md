@@ -358,11 +358,11 @@ python scripts/query_kb.py --kb-id "$KB_ID" --model-arn "$GEN_MODEL_ARN" --regio
 | **Amazon S3** | Almacenamiento y peticiones. | < USD 0,01 |
 | **Bedrock Knowledge Bases** | Sin cargo adicional por la KB: pagas embeddings, modelo generador y vector store. | USD 0 |
 
-> ⚠️ **El vector store domina el costo.** Una colección de OpenSearch Serverless olvidada puede costar **del orden de USD 175 o más al mes** aunque no reciba consultas. Si necesitas mantener la KB activa a bajo costo, valora **Amazon S3 Vectors** o **Aurora PostgreSQL Serverless (pgvector)**. Precios de referencia a 2026-10: verifica en la [AWS Pricing Calculator](https://calculator.aws/).
+> **El vector store domina el costo.** Una colección de OpenSearch Serverless olvidada puede costar **del orden de USD 175 o más al mes** aunque no reciba consultas. Si necesitas mantener la KB activa a bajo costo, valora **Amazon S3 Vectors** o **Aurora PostgreSQL Serverless (pgvector)**. Precios de referencia a 2026-10: verifica en la [AWS Pricing Calculator](https://calculator.aws/).
 
 ## Limpieza
 
-> ⚠️ Ejecútala en este orden: el data source debe borrarse **antes** que la colección para que Bedrock pueda eliminar los vectores.
+> **Atención:** Ejecútala en este orden: el data source debe borrarse **antes** que la colección para que Bedrock pueda eliminar los vectores.
 
 ```bash
 aws bedrock-agent delete-data-source --knowledge-base-id "$KB_ID" --data-source-id "$DS_ID"

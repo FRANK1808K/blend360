@@ -33,28 +33,29 @@ website:
     type: overlay
     copy-button: true
   navbar:
-    logo: assets/favicon.svg
-    title: "Blend360"
+    logo: assets/logo.svg
+    logo-alt: "Blend360 Prep"
+    title: "Blend360 Prep"
     collapse-below: lg
     left:
-      - text: "📚 Estudiar"
+      - text: "Estudiar"
         href: estudiar.qmd
-      - text: "🧪 Evaluar"
+      - text: "Evaluar"
         href: evaluar.qmd
-      - text: "🔁 Repasar"
+      - text: "Repasar"
         href: cheatsheets/index.qmd
-      - text: "☁️ AIF-C01"
+      - text: "AWS AIF-C01"
         href: aws-ai-practitioner/index.qmd
-      - text: "📈 Progreso"
+      - text: "Progreso"
         href: progreso.qmd
     right:
-      - text: "🎯 Simuladores"
+      - text: "Simuladores"
         menu:
-          - text: "Simulador Blend360 (30 · 90 + laboratorio de código)"
+          - text: "Simulador de la prueba de ingreso (30 + 90 min y laboratorio de código)"
             href: simulador/index.html
           - text: "Simulador AWS AIF-C01 (65 preguntas · 90 min)"
             href: simulador-aif/index.html
-      - text: "🌐 English"
+      - text: "English"
         menu:
           - text: "Home"
             href: index.en.qmd
@@ -70,7 +71,7 @@ website:
         href: https://github.com/FRANK1808K/blend360
         aria-label: GitHub
   page-footer:
-    left: "Material comunitario **no oficial**: sin relación con Blend360 ni con AWS. Las preguntas son originales."
+    left: "**Blend360 Prep** · material comunitario **no oficial**, sin relación con Blend360 ni con AWS. Las preguntas son originales."
     right:
       - text: "Simulador"
         href: simulador/index.html

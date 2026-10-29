@@ -1,27 +1,27 @@
 # 02 · SQL — 35 exercises with solutions
 
-🌐 [Español](ejercicios.md) · **English**
+[Español](ejercicios.md) · **English**
 
 > **How to use this file:**
 >
 > 1. Run `python3 setup_db.py --shell` (or open `practice.db` in DB Browser).
 > 2. Read the statement. If you get stuck on the English, the Spanish version is in [ejercicios.md](ejercicios.md).
 > 3. Write your query **before** opening the solution. Compare your result with the "Expected result".
-> 4. Mark ✅ the ones you solve on the first try and redo the ❌ ones two days later.
+> 4. Mark ✓ the ones you solve on the first try and redo the ✗ ones two days later.
 >
 > The solutions are verified automatically with `python3 check_solutions.py`.
 > Data model: see [README.en.md](README.en.md#1-the-practice-data-model).
 
 | Level | Exercises | Target time per exercise |
 |---|---|---|
-| 🟢 Basic | 1–10 | 2–3 min |
-| 🟡 JOINs and subqueries | 11–21 | 4–5 min |
-| 🟠 CASE and window functions | 22–32 | 5–7 min |
-| 🔴 Interview challenges | 33–35 | 8–10 min |
+| Basic | 1–10 | 2–3 min |
+| JOINs and subqueries | 11–21 | 4–5 min |
+| CASE and window functions | 22–32 | 5–7 min |
+| Interview challenges | 33–35 | 8–10 min |
 
 ---
 
-## 🟢 Basic level
+## Basic level
 
 ### 1. Filter and sort
 
@@ -104,7 +104,7 @@ customer_id | name
 (1 row)
 ```
 
-> ❌ `WHERE city = NULL` returns 0 rows.
+> ✗ `WHERE city = NULL` returns 0 rows.
 
 </details>
 
@@ -300,7 +300,7 @@ Stationery  | 204.50
 
 ---
 
-## 🟡 JOINs and subqueries
+## JOINs and subqueries
 
 ### 11. INNER JOIN
 
@@ -642,13 +642,13 @@ orders | avg_order_value
 (1 row)
 ```
 
-> ⚠️ `AVG(quantity * unit_price)` directly on `order_items` gives the average **per line**, not per order. First sum per order, then average.
+> **Warning:** `AVG(quantity * unit_price)` directly on `order_items` gives the average **per line**, not per order. First sum per order, then average.
 
 </details>
 
 ---
 
-## 🟠 CASE and window functions
+## CASE and window functions
 
 ### 22. Price buckets
 
@@ -1079,7 +1079,7 @@ Stationery  | Gel Pens (x10) | 7
 
 ---
 
-## 🔴 Interview challenges
+## Interview challenges
 
 ### 33. Duplicates
 
@@ -1140,7 +1140,7 @@ Sofía Torres
 (4 rows)
 ```
 
-> ❌ `WHERE category = 'Electronics' AND category = 'Furniture'` is never true: a **row** cannot have two categories. The "both" condition is evaluated per **group** with `HAVING`. Alternative: `INTERSECT`.
+> ✗ `WHERE category = 'Electronics' AND category = 'Furniture'` is never true: a **row** cannot have two categories. The "both" condition is evaluated per **group** with `HAVING`. Alternative: `INTERSECT`.
 
 </details>
 

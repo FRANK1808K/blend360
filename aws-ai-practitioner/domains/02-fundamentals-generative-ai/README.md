@@ -3,7 +3,7 @@
 > **Peso en el examen:** 24 % (≈ 12 de las 50 preguntas que cuentan).
 > **Objetivo:** entender cómo funcionan los Foundation Models, cómo se controla su salida en inferencia, qué técnica de adaptación elegir según costo/datos/complejidad y cuáles son sus limitaciones.
 >
-> 🆕 **Guía v1.1:** objetivos nuevos **2.1.4 precios por token**, **2.1.5 context engineering** y **2.1.6 IA agéntica y MCP**. Ver [novedades v1.1](../00-exam-guide-v1.1-changes.md#3-precios-basados-en-tokens-214).
+> **Guía v1.1:** objetivos nuevos **2.1.4 precios por token**, **2.1.5 context engineering** y **2.1.6 IA agéntica y MCP**. Ver [novedades v1.1](../00-exam-guide-v1.1-changes.md#3-precios-basados-en-tokens-214).
 
 ## Mapeo a los task statements oficiales
 
@@ -141,11 +141,11 @@ flowchart TD
 |---|---|---|---|---|---|
 | **Qué cambia** | Solo la entrada | La entrada (se añade contexto recuperado) | Los **pesos** del modelo | Los **pesos** del modelo | Todo: se crea un modelo nuevo |
 | **Datos requeridos** | Ninguno o pocos ejemplos | Corpus de documentos **sin etiquetar** (indexados como embeddings) | Pares **prompt–respuesta etiquetados** (cientos a miles) | Gran volumen de texto de dominio **sin etiquetar** | Billones de tokens (TB de datos) |
-| **Costo** | 💲 Muy bajo | 💲💲 Bajo–medio (embeddings + vector store + tokens extra) | 💲💲💲 Medio–alto (entrenamiento + alojamiento del modelo personalizado) | 💲💲💲💲 Alto | 💲💲💲💲💲 Extremo (millones USD, clusters de GPU) |
+| **Costo** | $ Muy bajo | $$ Bajo–medio (embeddings + vector store + tokens extra) | $$$ Medio–alto (entrenamiento + alojamiento del modelo personalizado) | $$$$ Alto | $$$$$ Extremo (millones USD, clusters de GPU) |
 | **Complejidad** | Baja | Media | Media–alta | Alta | Muy alta |
 | **Tiempo hasta valor** | Minutos | Horas–días | Días–semanas | Semanas | Meses |
-| **Información actualizada** | No (solo lo que pongas en el prompt) | ✅ Sí: re-sincronizas la fuente | ❌ Se congela en el entrenamiento | ❌ Se congela | ❌ Se congela |
-| **Reduce alucinaciones** | Parcialmente | ✅ Sí, ancla la respuesta en fuentes y permite **citas** | Parcialmente | Parcialmente | Depende |
+| **Información actualizada** | No (solo lo que pongas en el prompt) | ✓ Sí: re-sincronizas la fuente | ✗ Se congela en el entrenamiento | ✗ Se congela | ✗ Se congela |
+| **Reduce alucinaciones** | Parcialmente | ✓ Sí, ancla la respuesta en fuentes y permite **citas** | Parcialmente | Parcialmente | Depende |
 | **Ideal para** | Formato, tono, tareas genéricas | Q&A sobre documentación interna, soporte, políticas | Estilo de marca, tarea muy específica, formato estricto, clasificación | Vocabulario especializado (médico, legal, financiero) | Proveedores de modelos / casos únicos |
 | **Soporte en AWS** | Bedrock, Prompt Management | **Bedrock Knowledge Bases**, Amazon Kendra, OpenSearch | **Bedrock Custom Models** (fine-tuning), SageMaker JumpStart | Bedrock (continued pre-training), SageMaker AI | SageMaker HyperPod, EC2 Trn/P-instances |
 
@@ -222,4 +222,4 @@ Eficiencia operativa, tasa de resolución en el primer contacto, conversión, *a
 - [ ] Asocio ROUGE → resumen, BLEU → traducción, BERTScore → similitud semántica.
 - [ ] Propongo una mitigación AWS para alucinaciones, sesgo, fuga de datos y prompt injection.
 
-⬅️ Anterior: [Dominio 1](../01-fundamentals-ai-ml/README.md) · ➡️ Siguiente: [Dominio 3 — Aplicaciones de Modelos Fundacionales](../03-applications-foundation-models/README.md)
+← Anterior: [Dominio 1](../01-fundamentals-ai-ml/README.md) · Siguiente: [Dominio 3 — Aplicaciones de Modelos Fundacionales](../03-applications-foundation-models/README.md)

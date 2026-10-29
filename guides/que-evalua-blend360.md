@@ -1,6 +1,6 @@
 # ¿Qué evalúa Blend360? (investigación)
 
-🌐 **Español** · [English](que-evalua-blend360.en.md)
+**Español** · [English](que-evalua-blend360.en.md)
 
 > Resumen de lo que se sabe públicamente sobre el proceso, investigado el **26 de octubre de 2026**. Las fuentes son reseñas de candidatos y guías de terceros, **no** información oficial de Blend360, y el formato puede cambiar. Confirma siempre con tu reclutador (ver [preguntas para el reclutador](#5-preguntas-que-conviene-hacerle-al-reclutador)).
 

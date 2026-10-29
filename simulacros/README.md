@@ -1,6 +1,6 @@
 # Simulacros
 
-🌐 **Español** · [English](README.en.md)
+**Español** · [English](README.en.md)
 
 | Simulacro | Duración | Contenido | Cuándo hacerlo |
 |---|---|---|---|

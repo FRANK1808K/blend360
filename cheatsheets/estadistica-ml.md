@@ -1,6 +1,6 @@
 # Cheatsheet: estadística y ML (1 página)
 
-🌐 **Español** · [English](estadistica-ml.en.md)
+**Español** · [English](estadistica-ml.en.md)
 
 **Descriptiva:** media (sensible a outliers) · **mediana** (robusta; úsala con ingresos) · moda · varianza muestral Σ(x − x̄)²/(**n − 1**) · desviación estándar = √var · IQR = Q3 − Q1 · outlier si < Q1 − 1,5·IQR o > Q3 + 1,5·IQR · z = (x − x̄)/s · sesgo a la derecha ⇒ media > mediana.
 
@@ -19,7 +19,7 @@
 | Categóricas | Chi-cuadrado |
 | No normal: independientes / pareadas | Mann-Whitney U / Wilcoxon |
 
-**A/B:** hipótesis → línea base → efecto mínimo → **tamaño de muestra** (α = 0,05, potencia = 0,8) → duración en semanas completas → aleatorizar usuarios → **no hacer peeking** → z de proporciones. Ejemplos: 10 % vs. 12 % con 2.000 por grupo → p = 0,043 ✅ · con 200 por grupo → p = 0,52 ❌ · detectar 10 % → 10,5 % requiere ≈ 57.763 por grupo.
+**A/B:** hipótesis → línea base → efecto mínimo → **tamaño de muestra** (α = 0,05, potencia = 0,8) → duración en semanas completas → aleatorizar usuarios → **no hacer peeking** → z de proporciones. Ejemplos: 10 % vs. 12 % con 2.000 por grupo → p = 0,043 ✓ · con 200 por grupo → p = 0,52 ✗ · detectar 10 % → 10,5 % requiere ≈ 57.763 por grupo.
 
 **Correlación ≠ causalidad** · Pearson (lineal) · Spearman (rangos) · **Regresión lineal:** β₁ = cov/var, β₀ = ȳ − β₁x̄; R² = varianza explicada; supuestos LINE · **Logística** = clasificación (sigmoide).
 

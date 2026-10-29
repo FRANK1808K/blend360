@@ -1,6 +1,6 @@
 # 04 · Basic algorithms and data structures
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 > The syllabus says **"skills in basic algorithms, data structures and problem solving"**. In 90-minute tests this usually shows up in two ways:
 >
@@ -115,13 +115,13 @@ def binary_search(arr, target):
 
 | Algorithm | Best | Average | Worst | Space | Stable | Idea |
 |---|---|---|---|---|---|---|
-| Bubble sort | O(n) | O(n²) | O(n²) | O(1) | ✅ | Swaps out-of-order neighbors; the largest "bubbles up" to the end |
-| Selection sort | O(n²) | O(n²) | O(n²) | O(1) | ❌ | Finds the minimum and puts it at the start |
-| Insertion sort | O(n) | O(n²) | O(n²) | O(1) | ✅ | Inserts each element in its place (like cards in your hand). Very good with almost-sorted data |
-| Merge sort | O(n log n) | O(n log n) | O(n log n) | O(n) | ✅ | Splits in half, sorts each half and **merges** |
-| Quick sort | O(n log n) | O(n log n) | O(n²) | O(log n) | ❌ | Picks a pivot, puts smaller elements on the left and larger ones on the right |
-| Heap sort | O(n log n) | O(n log n) | O(n log n) | O(1) | ❌ | Uses a heap |
-| Timsort (Python's `sorted()`) | O(n) | O(n log n) | O(n log n) | O(n) | ✅ | Hybrid of merge + insertion |
+| Bubble sort | O(n) | O(n²) | O(n²) | O(1) | ✓ | Swaps out-of-order neighbors; the largest "bubbles up" to the end |
+| Selection sort | O(n²) | O(n²) | O(n²) | O(1) | ✗ | Finds the minimum and puts it at the start |
+| Insertion sort | O(n) | O(n²) | O(n²) | O(1) | ✓ | Inserts each element in its place (like cards in your hand). Very good with almost-sorted data |
+| Merge sort | O(n log n) | O(n log n) | O(n log n) | O(n) | ✓ | Splits in half, sorts each half and **merges** |
+| Quick sort | O(n log n) | O(n log n) | O(n²) | O(log n) | ✗ | Picks a pivot, puts smaller elements on the left and larger ones on the right |
+| Heap sort | O(n log n) | O(n log n) | O(n log n) | O(1) | ✗ | Uses a heap |
+| Timsort (Python's `sorted()`) | O(n) | O(n log n) | O(n log n) | O(n) | ✓ | Hybrid of merge + insertion |
 
 - **Stable:** keeps the relative order of equal elements.
 - The lower bound for **comparison-based** sorting is O(n log n).

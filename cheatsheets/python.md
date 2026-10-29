@@ -1,6 +1,6 @@
 # Cheatsheet: Python + pandas (1 página)
 
-🌐 **Español** · [English](python.en.md)
+**Español** · [English](python.en.md)
 
 ```python
 # Strings

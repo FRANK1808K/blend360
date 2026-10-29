@@ -23,7 +23,7 @@ Fuente: [AWS Certification — Before testing](https://aws.amazon.com/certificat
 |---|---|---|
 | Riesgos técnicos | Ninguno para ti | Conexión, webcam, comprobación del entorno |
 | Normas | Estándar | Muy estrictas: sala vacía, mesa despejada, no hablar, no tapar la boca, no mirar fuera de la pantalla |
-| Recomendación | ✅ Si tienes un centro cerca, **reduce el estrés** | Haz el *system test* el día anterior y conéctate 30 min antes |
+| Recomendación | ✓ Si tienes un centro cerca, **reduce el estrés** | Haz el *system test* el día anterior y conéctate 30 min antes |
 
 ## 2. Formato y gestión del tiempo
 

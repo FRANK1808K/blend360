@@ -1,6 +1,6 @@
 # Gramática mínima para la prueba técnica
 
-🌐 **Español** · [English](gramatica-minima.en.md)
+**Español** · [English](gramatica-minima.en.md)
 
 > Solo lo que **realmente** aparece en enunciados técnicos y lo que necesitas para **explicar tu solución**. Ni más ni menos.
 
@@ -15,7 +15,7 @@ La estructura más común en los enunciados.
 | The function **returns** a list. | The function **does not (doesn't) return** anything. | **Does** the function **return** a list? |
 | The tables **contain** data. | The tables **don't contain** nulls. | **Do** the tables **contain** nulls? |
 
-> ⚠️ Con *he / she / it / the function / the query* se agrega **-s** al verbo: *it return**s***, *it sort**s***, *it do**es***.
+> **Atención:** Con *he / she / it / the function / the query* se agrega **-s** al verbo: *it return**s***, *it sort**s***, *it do**es***.
 
 ## 2. Voz pasiva: lo que más se usa en documentación técnica
 

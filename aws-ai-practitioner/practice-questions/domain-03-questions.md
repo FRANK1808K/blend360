@@ -10,16 +10,16 @@ Una startup quiere añadir un asistente GenAI a su producto lo antes posible, pr
 - D. Amazon Comprehend
 
 <details>
-<summary>▶ Ver respuesta</summary>
+<summary>Ver respuesta</summary>
 
 **Respuesta correcta:** C
 
-- **C ✅** Bedrock es serverless y ofrece FMs de múltiples proveedores mediante una API unificada.
-- **A ❌** Exige gestionar toda la infraestructura.
-- **B ❌** Despliega modelos en endpoints que el cliente dimensiona y gestiona.
-- **D ❌** Es un servicio de NLP, no una plataforma de FMs.
+- **C ✓** Bedrock es serverless y ofrece FMs de múltiples proveedores mediante una API unificada.
+- **A ✗** Exige gestionar toda la infraestructura.
+- **B ✗** Despliega modelos en endpoints que el cliente dimensiona y gestiona.
+- **D ✗** Es un servicio de NLP, no una plataforma de FMs.
 
-📚 [Dominio 3 — Bedrock vs. JumpStart](../domains/03-applications-foundation-models/README.md#21-bedrock-vs-sagemaker-jumpstart)
+[Dominio 3 — Bedrock vs. JumpStart](../domains/03-applications-foundation-models/README.md#21-bedrock-vs-sagemaker-jumpstart)
 </details>
 
 ## Pregunta 2 — Opción múltiple
@@ -32,16 +32,16 @@ Una aerolínea quiere un asistente que, a partir de la petición del cliente, co
 - D. Bedrock Model Evaluation
 
 <details>
-<summary>▶ Ver respuesta</summary>
+<summary>Ver respuesta</summary>
 
 **Respuesta correcta:** B
 
-- **B ✅** Los agentes planifican tareas multi-paso, invocan APIs mediante action groups (Lambda + OpenAPI) y pueden consultar Knowledge Bases.
-- **A ❌** Solo recupera información; no ejecuta acciones.
-- **C ❌** Aplica políticas de seguridad.
-- **D ❌** Compara la calidad de los modelos.
+- **B ✓** Los agentes planifican tareas multi-paso, invocan APIs mediante action groups (Lambda + OpenAPI) y pueden consultar Knowledge Bases.
+- **A ✗** Solo recupera información; no ejecuta acciones.
+- **C ✗** Aplica políticas de seguridad.
+- **D ✗** Compara la calidad de los modelos.
 
-📚 [Dominio 3 — Bedrock Agents](../domains/03-applications-foundation-models/README.md#15-amazon-bedrock-agents)
+[Dominio 3 — Bedrock Agents](../domains/03-applications-foundation-models/README.md#15-amazon-bedrock-agents)
 </details>
 
 ## Pregunta 3 — Opción múltiple
@@ -54,16 +54,16 @@ Una empresa necesita extraer automáticamente los importes, fechas y líneas de 
 - D. Amazon Polly
 
 <details>
-<summary>▶ Ver respuesta</summary>
+<summary>Ver respuesta</summary>
 
 **Respuesta correcta:** C
 
-- **C ✅** Textract extrae texto, formularios y tablas, y ofrece una API especializada para facturas y recibos (AnalyzeExpense).
-- **A ❌** Rekognition analiza imágenes/video (objetos, rostros), no la estructura de documentos.
-- **B ❌** Comprehend analiza texto ya extraído; no hace OCR.
-- **D ❌** Polly convierte texto en voz.
+- **C ✓** Textract extrae texto, formularios y tablas, y ofrece una API especializada para facturas y recibos (AnalyzeExpense).
+- **A ✗** Rekognition analiza imágenes/video (objetos, rostros), no la estructura de documentos.
+- **B ✗** Comprehend analiza texto ya extraído; no hace OCR.
+- **D ✗** Polly convierte texto en voz.
 
-📚 [Dominio 3 — NLP y Visión](../domains/03-applications-foundation-models/README.md#31-nlp-y-visión)
+[Dominio 3 — NLP y Visión](../domains/03-applications-foundation-models/README.md#31-nlp-y-visión)
 </details>
 
 ## Pregunta 4 — Opción múltiple
@@ -76,16 +76,16 @@ Un banco usa Bedrock para un chatbot público. Debe impedir que el asistente ofr
 - D. Una política IAM que deniegue `bedrock:InvokeModel`.
 
 <details>
-<summary>▶ Ver respuesta</summary>
+<summary>Ver respuesta</summary>
 
 **Respuesta correcta:** B
 
-- **B ✅** Los *denied topics* bloquean temas definidos en lenguaje natural y los filtros PII bloquean o enmascaran datos como tarjetas de crédito.
-- **A ❌** Costoso y sin garantías.
-- **C ❌** Macie analiza datos en S3, no filtra respuestas en tiempo real.
-- **D ❌** Bloquearía el chatbot por completo.
+- **B ✓** Los *denied topics* bloquean temas definidos en lenguaje natural y los filtros PII bloquean o enmascaran datos como tarjetas de crédito.
+- **A ✗** Costoso y sin garantías.
+- **C ✗** Macie analiza datos en S3, no filtra respuestas en tiempo real.
+- **D ✗** Bloquearía el chatbot por completo.
 
-📚 [Dominio 3 — Guardrails](../domains/03-applications-foundation-models/README.md#16-amazon-bedrock-guardrails)
+[Dominio 3 — Guardrails](../domains/03-applications-foundation-models/README.md#16-amazon-bedrock-guardrails)
 </details>
 
 ## Pregunta 5 — Opción múltiple
@@ -98,16 +98,16 @@ Un equipo de data science necesita desplegar un modelo open-source específico, 
 - D. Amazon Bedrock Knowledge Bases
 
 <details>
-<summary>▶ Ver respuesta</summary>
+<summary>Ver respuesta</summary>
 
 **Respuesta correcta:** B
 
-- **B ✅** JumpStart despliega modelos en endpoints de SageMaker con control de la instancia, de la red y de la personalización.
-- **A ❌** No permite elegir infraestructura ni modificar el entrenamiento.
-- **C ❌** Es un asistente empresarial listo para usar.
-- **D ❌** Es una funcionalidad de RAG.
+- **B ✓** JumpStart despliega modelos en endpoints de SageMaker con control de la instancia, de la red y de la personalización.
+- **A ✗** No permite elegir infraestructura ni modificar el entrenamiento.
+- **C ✗** Es un asistente empresarial listo para usar.
+- **D ✗** Es una funcionalidad de RAG.
 
-📚 [Dominio 3 — Criterios de decisión](../domains/03-applications-foundation-models/README.md#2-amazon-sagemaker-jumpstart-y-criterios-de-decisión)
+[Dominio 3 — Criterios de decisión](../domains/03-applications-foundation-models/README.md#2-amazon-sagemaker-jumpstart-y-criterios-de-decisión)
 </details>
 
 ## Pregunta 6 — Emparejamiento
@@ -122,9 +122,9 @@ Relaciona cada necesidad con el servicio:
 | 4. Chatbot de IVR basado en intents | d. Amazon Lex |
 
 <details>
-<summary>▶ Ver respuesta</summary>
+<summary>Ver respuesta</summary>
 
 **Solución:** 1 → c, 2 → a, 3 → b, 4 → d
 
-📚 [Dominio 3 — Tabla resumen](../domains/03-applications-foundation-models/README.md#35-tabla-resumen-servicio--caso-de-uso-principal--cuándo-no-usarlo)
+[Dominio 3 — Tabla resumen](../domains/03-applications-foundation-models/README.md#35-tabla-resumen-servicio--caso-de-uso-principal--cuándo-no-usarlo)
 </details>

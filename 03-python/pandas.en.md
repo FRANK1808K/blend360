@@ -1,6 +1,6 @@
 # 03b · pandas for data analysis
 
-🌐 [Español](pandas.md) · **English**
+[Español](pandas.md) · **English**
 
 > Blend360 is a **data analytics** company: in the test (or in the technical interview) you may be asked to clean, aggregate or join data in Python. pandas is the standard tool for that. If you already know SQL, pandas is the same thing with a different syntax.
 
@@ -75,7 +75,7 @@ df.iloc[0:3, 0:2]                     # by POSITION (excludes the end, like Pyth
 df.at[0, "col"], df.iat[0, 0]         # a single value (fast)
 ```
 
-> ⚠️ **`SettingWithCopyWarning`:** avoid `df[df.x > 5]["y"] = 0`. Use `df.loc[df.x > 5, "y"] = 0`.
+> **`SettingWithCopyWarning`:** avoid `df[df.x > 5]["y"] = 0`. Use `df.loc[df.x > 5, "y"] = 0`.
 
 ## 4. Data cleaning (always asked)
 
@@ -112,7 +112,7 @@ df["month"] = df["date"].dt.to_period("M")                   # also .dt.year, .d
 df["domain"] = df["email"].str.split("@").str[1]
 ```
 
-> 💡 **Vectorize.** Operations on whole columns (`df["a"] * df["b"]`) are much faster than looping over rows with `for` or `iterrows()`. Saying this in the interview earns points.
+> **Vectorize.** Operations on whole columns (`df["a"] * df["b"]`) are much faster than looping over rows with `for` or `iterrows()`. Saying this in the interview earns points.
 
 ## 6. Reshaping: pivot and melt
 

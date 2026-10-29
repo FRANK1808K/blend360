@@ -1,11 +1,11 @@
 # Blend360 All Star: entrance exam preparation
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 [![Checks](https://github.com/FRANK1808K/blend360/actions/workflows/checks.yml/badge.svg)](https://github.com/FRANK1808K/blend360/actions/workflows/checks.yml)
-![Exam](https://img.shields.io/badge/exam-Dec%2018%2C%202026-0d6e66)
+![Exam](https://img.shields.io/badge/exam-Dec%2018%2C%202026-043058)
 ![AWS AIF-C01](https://img.shields.io/badge/AWS%20AIF--C01-Nov%2016%2C%202026-FF9900?logo=amazonwebservices&logoColor=white)
-![Languages](https://img.shields.io/badge/languages-English%20%7C%20Espa%C3%B1ol-1f4e79)
+![Languages](https://img.shields.io/badge/languages-English%20%7C%20Espa%C3%B1ol-0b6e86)
 
 A study repository for the entrance exam of **Blend360's All Star program (talent program) in Colombia**:
 
@@ -18,7 +18,7 @@ Every document exists in **English and Spanish**. The exercises and mock exams a
 
 > **Disclaimer:** community study material, **unofficial** and not affiliated with Blend360. All questions are original. What is known about the hiring process comes from public candidate reviews ([see the research](guides/que-evalua-blend360.en.md)).
 
-**Online, nothing to install (also on your phone):** 📖 [Study hub website](https://frank1808k.github.io/blend360/index.en.html) (all the material organised into *Study · Assess · Review*, search, white/black mode, **saved progress**) · 🎯 [Simulator + code lab](https://frank1808k.github.io/blend360/simulador/) · ☁️ [AIF-C01 simulator](https://frank1808k.github.io/blend360/simulador-aif/)
+**Online, nothing to install (also on your phone):** [Study hub website](https://frank1808k.github.io/blend360/index.en.html) (all the material organised into *Study · Assess · Review*, search, light/dark mode, **saved progress**) · [Simulator + code lab](https://frank1808k.github.io/blend360/simulador/) · [AIF-C01 simulator](https://frank1808k.github.io/blend360/simulador-aif/)
 
 ---
 
@@ -26,12 +26,12 @@ Every document exists in **English and Spanish**. The exercises and mock exams a
 
 | Your situation | Start here |
 |---|---|
-| 📅 **I want to know what to study each day** | [Study plan: Oct 26 → Dec 18](guides/plan-de-estudio.en.md) (includes the AWS AIF-C01 exam on Nov 16) |
-| 🔎 **I want to know how Blend360 evaluates candidates** | [What Blend360 evaluates](guides/que-evalua-blend360.en.md): process reported by candidates, the AWS partnership, questions for the recruiter |
-| 🧪 **I want to measure my level now** | [Interactive simulator](simulator/README.en.md) · [Technical mock exam](simulacros/simulacro-tecnico-01.en.md) · [Reasoning mock exam](simulacros/simulacro-razonamiento-01.en.md) |
-| ⌨️ **I want to practice writing code** | [The simulator's code lab](simulator/README.en.md#code-lab): write SQL or Python in the browser (also on your phone) and get it graded instantly |
-| 🇬🇧 **My English is basic and I'm worried** | [English plan](english/README.en.md) → [how to read exam questions in English](english/como-leer-preguntas.en.md) |
-| ⏰ **The exam is in 2 days** | [48-hour final review](cheatsheets/repaso-final-48h.en.md) + [cheat sheets](cheatsheets/README.en.md) |
+| **I want to know what to study each day** | [Study plan: Oct 26 → Dec 18](guides/plan-de-estudio.en.md) (includes the AWS AIF-C01 exam on Nov 16) |
+| **I want to know how Blend360 evaluates candidates** | [What Blend360 evaluates](guides/que-evalua-blend360.en.md): process reported by candidates, the AWS partnership, questions for the recruiter |
+| **I want to measure my level now** | [Interactive simulator](simulator/README.en.md) · [Technical mock exam](simulacros/simulacro-tecnico-01.en.md) · [Reasoning mock exam](simulacros/simulacro-razonamiento-01.en.md) |
+| **I want to practice writing code** | [The simulator's code lab](simulator/README.en.md#code-lab): write SQL or Python in the browser (also on your phone) and get it graded instantly |
+| **My English is basic and I'm worried** | [English plan](english/README.en.md) → [how to read exam questions in English](english/como-leer-preguntas.en.md) |
+| **The exam is in 2 days** | [48-hour final review](cheatsheets/repaso-final-48h.en.md) + [cheat sheets](cheatsheets/README.en.md) |
 
 ## How to use the two languages
 
@@ -77,11 +77,13 @@ The [study hub](https://frank1808k.github.io/blend360/index.en.html) brings the 
 
 | Section | What it contains |
 |---|---|
-| 📚 **Study** | Study map with priorities and hours, the theory of every module and technical English |
-| 🧪 **Assess** | Assessment path with goals, exercises by topic, mock exams and the simulator |
-| 🔁 **Review** | Cheat sheets (with a print button), the final 48-hour review and flashcards |
-| ☁️ **AIF-C01** | The 5 domains, questions per domain, 2 mock exams, cheat sheets, strategy, lab and resources |
-| 📈 **Progress** | Pages studied, mock exam log with a chart, mistake notebook with review dates, simulator attempts and a backup |
+| **Study** | Study map with priorities and hours, the theory of every module and technical English |
+| **Assess** | Assessment path with goals, exercises by topic, mock exams and the simulator |
+| **Review** | Cheat sheets (with a print button), the final 48-hour review and flashcards |
+| **AIF-C01** | The 5 domains, questions per domain, 2 mock exams, cheat sheets, strategy, lab and resources |
+| **Progress** | Pages studied, mock exam log with a chart, mistake notebook with review dates, simulator attempts and a backup |
+
+**Design:** Blend360's palette (navy `#043058`, cyan `#1DF3F4`, aqua `#A2F3F3` on a warm background), geometric type (Urbanist, Archivo headings), line icons with no emojis, light or dark mode, page-to-page transitions and smooth animations that turn off if your system asks for reduced motion. The simulator uses the same identity and an assessment-platform interface.
 
 Also: the home page shows **what to do this week** according to the plan and the countdown to both exams; the study plan's checkboxes can be ticked and are saved; every page has buttons to mark it as studied, show or hide all solutions and print it; and the AIF-C01 module's diagrams are drawn.
 
@@ -112,7 +114,7 @@ blend360/
 ├── 08-estadistica-y-ml/        Statistics, A/B tests and ML + 25 questions
 ├── english/                    Technical English for A2 speakers
 ├── simulacros/                 Mock exams: technical (90 min) + reasoning (30 min)
-├── simulator/                  Simulator + code lab (ES/EN, white/black mode)
+├── simulator/                  Simulator + code lab (ES/EN, light/dark mode)
 ├── quarto/                     Study website (Quarto): config, theme, home page, hubs and progress
 ├── scripts/                    Document checks and the lab and website builders
 ├── cheatsheets/                One-page reviews + 48-hour plan

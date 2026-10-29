@@ -1,27 +1,27 @@
 # 02 · SQL — 35 ejercicios con solución
 
-🌐 **Español** · [English](ejercicios.en.md)
+**Español** · [English](ejercicios.en.md)
 
 > **Cómo usar este archivo:**
 >
 > 1. Ejecuta `python3 setup_db.py --shell` (o abre `practice.db` en DB Browser).
 > 2. Lee el enunciado **en inglés** (así viene en la prueba). Si no lo entiendes, lee la traducción.
 > 3. Escribe tu consulta **antes** de abrir la solución. Compara tu resultado con el "Resultado esperado".
-> 4. Marca ✅ los que te salgan a la primera y repite los ❌ dos días después.
+> 4. Marca ✓ los que te salgan a la primera y repite los ✗ dos días después.
 >
 > Las soluciones están verificadas automáticamente con `python3 check_solutions.py`.
 > Modelo de datos: ver [README.md](README.md#1-el-modelo-de-datos-de-práctica).
 
 | Nivel | Ejercicios | Tiempo objetivo por ejercicio |
 |---|---|---|
-| 🟢 Básico | 1–10 | 2–3 min |
-| 🟡 JOINs y subconsultas | 11–21 | 4–5 min |
-| 🟠 CASE y ventanas | 22–32 | 5–7 min |
-| 🔴 Retos de entrevista | 33–35 | 8–10 min |
+| Básico | 1–10 | 2–3 min |
+| JOINs y subconsultas | 11–21 | 4–5 min |
+| CASE y ventanas | 22–32 | 5–7 min |
+| Retos de entrevista | 33–35 | 8–10 min |
 
 ---
 
-## 🟢 Nivel básico
+## Nivel básico
 
 ### 1. Filtrar y ordenar
 
@@ -110,7 +110,7 @@ customer_id | name
 (1 fila)
 ```
 
-> ❌ `WHERE city = NULL` devuelve 0 filas.
+> ✗ `WHERE city = NULL` devuelve 0 filas.
 
 </details>
 
@@ -320,7 +320,7 @@ Stationery  | 204.50
 
 ---
 
-## 🟡 JOINs y subconsultas
+## JOINs y subconsultas
 
 ### 11. INNER JOIN
 
@@ -684,13 +684,13 @@ orders | avg_order_value
 (1 fila)
 ```
 
-> ⚠️ `AVG(quantity * unit_price)` directamente sobre `order_items` da el promedio **por línea**, no por pedido. Primero se suma por pedido y después se promedia.
+> **Atención:** `AVG(quantity * unit_price)` directamente sobre `order_items` da el promedio **por línea**, no por pedido. Primero se suma por pedido y después se promedia.
 
 </details>
 
 ---
 
-## 🟠 CASE y funciones de ventana
+## CASE y funciones de ventana
 
 ### 22. Rangos de precio
 
@@ -1143,7 +1143,7 @@ Stationery  | Gel Pens (x10) | 7
 
 ---
 
-## 🔴 Retos tipo entrevista
+## Retos tipo entrevista
 
 ### 33. Duplicados
 
@@ -1208,7 +1208,7 @@ Sofía Torres
 (4 filas)
 ```
 
-> ❌ `WHERE category = 'Electronics' AND category = 'Furniture'` nunca es verdadero: una **fila** no puede tener dos categorías. La condición "ambas" se evalúa por **grupo** con `HAVING`. Alternativa: `INTERSECT`.
+> ✗ `WHERE category = 'Electronics' AND category = 'Furniture'` nunca es verdadero: una **fila** no puede tener dos categorías. La condición "ambas" se evalúa por **grupo** con `HAVING`. Alternativa: `INTERSECT`.
 
 </details>
 

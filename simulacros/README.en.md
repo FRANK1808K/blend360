@@ -1,6 +1,6 @@
 # Mock exams
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 | Mock exam | Duration | Content | When to take it |
 |---|---|---|---|

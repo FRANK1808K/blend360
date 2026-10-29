@@ -29,7 +29,9 @@ ORDER_WORDS = re.compile(r"sorted|sort by|alphabetical order|\bmost\b.*\bfirst\b
 # solution's columns that identifies the same rows is accepted.
 # Enunciados que no dicen qué columnas mostrar: se acepta cualquier subconjunto que identifique las mismas filas.
 FLEXIBLE_COLUMNS = {3, 5, 12, 13, 15, 17, 18, 20, 26, 34}
-LEVELS = {"🟢": "basic", "🟡": "joins", "🟠": "windows", "🔴": "challenge"}
+# Level headings of 02-sql/ejercicios(.en).md / Encabezados de nivel ("## Nivel básico", "## JOINs y subconsultas"…).
+LEVELS = [("basic", re.compile(r"básico|basic", re.I)), ("joins", re.compile(r"JOIN")),
+          ("windows", re.compile(r"ventana|window", re.I)), ("challenge", re.compile(r"reto|challenge", re.I))]
 
 
 # ---------------------------------------------------------------- SQL
@@ -40,7 +42,8 @@ def sql_exercises(path: Path) -> list:
     out, level = [], None
     for chunk in re.split(r"^(?=## |### )", text, flags=re.M):
         if chunk.startswith("## "):
-            level = LEVELS.get(chunk[3:4], level)
+            heading = chunk.split("\n", 1)[0]
+            level = next((name for name, pattern in LEVELS if pattern.search(heading)), level)
             continue
         if not chunk.startswith("### "):
             continue

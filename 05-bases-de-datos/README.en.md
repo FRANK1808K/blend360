@@ -1,6 +1,6 @@
 # 05 · Databases: the theory that gets asked
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 > SQL is the *language*; this module is the *theory*: modeling, keys, normalization, ACID, indexes, OLTP vs OLAP, NoSQL, data warehouse and data lake. These are typical multiple-choice and technical-interview questions.
 
@@ -66,7 +66,7 @@ The process of **removing redundancy** and **anomalies** (insert, update and del
 | **3NF** | 2NF + no **transitive** dependencies (a non-key column does not depend on another non-key column) | `customer_city` depends on `customer`, not on the order → a `customers` table |
 | **BCNF** | A stricter version of 3NF: every determinant is a candidate key | — |
 
-> 📌 Phrase to memorize: *"Every non-key attribute must depend on **the key** (1NF), **the whole key** (2NF), and **nothing but the key** (3NF)."*
+> Phrase to memorize: *"Every non-key attribute must depend on **the key** (1NF), **the whole key** (2NF), and **nothing but the key** (3NF)."*
 
 **Denormalization:** duplicating data **on purpose** to make reads faster (fewer JOINs). Common in data warehouses and reports.
 
@@ -96,7 +96,7 @@ COMMIT;      -- or ROLLBACK; if something failed
 
 An **index** is an auxiliary structure (usually a **B-tree**) that finds rows without scanning the whole table, like the index of a book.
 
-| ✅ Advantages | ❌ Disadvantages |
+| ✓ Advantages | ✗ Disadvantages |
 |---|---|
 | Much faster searches, `JOIN`s, `WHERE` and `ORDER BY` (O(log n) vs. the O(n) *full table scan*) | They take up space |
 | They guarantee uniqueness (`UNIQUE` index) | They make `INSERT`, `UPDATE` and `DELETE` **slower** (the index must be updated) |
@@ -196,7 +196,7 @@ dim_customer ── fact_sales ── dim_product
 |---|---|---|
 | CSV | Text, row-based | Simple, untyped, heavy |
 | JSON | Text, semi-structured | Flexible, heavy |
-| **Parquet** | Binary, **columnar**, compressed | ⭐ The standard for analytics (Athena, Redshift Spectrum, Spark) |
+| **Parquet** | Binary, **columnar**, compressed | ★ The standard for analytics (Athena, Redshift Spectrum, Spark) |
 | ORC | Binary, columnar | Similar to Parquet (Hive ecosystem) |
 | Avro | Binary, row-based, with a schema | Streaming / Kafka |
 

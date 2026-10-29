@@ -1,21 +1,21 @@
 # Exámenes y Preguntas de Práctica
 
-[⬅️ Centro de recursos](README.md)
+[← Centro de recursos](README.md)
 
 ## 1. Catálogo
 
 | Recurso | Preguntas | Costo | Fuente | Notas |
 |---|---|---|---|---|
-| ⭐ [Simulacro 01 (este repo)](../practice-questions/mock-exam-01.md) | 65 | 🆓 | Este repo | Distribución por pesos oficiales, incluye temas v1.1 🆕. |
-| ⭐ [Preguntas por dominio (este repo)](../practice-questions/README.md) | 30 | 🆓 | Este repo | Con justificación de cada opción. |
-| ⭐ [Official Practice Question Set AIF-C01](https://skillbuilder.aws/learn/4URFGY63KV/official-practice-question-set-aws-certified-ai-practitioner--aifc01--english/FVG43Y1PAX) | 20 | 🆓 | 🏛️ AWS | La referencia de estilo más fiable. |
-| ⭐ Official Pretest AIF-C01 (Skill Builder) | 65 (90 min) | 💲 suscripción | 🏛️ AWS | El mejor indicador de preparación antes de reservar. |
-| Official Practice Exam (Skill Builder) | Completo | 💲 | 🏛️ AWS | Con puntuación por dominio. |
-| [Tutorials Dojo — Free Sampler](https://portal.tutorialsdojo.com/courses/free-aws-certified-ai-practitioner-practice-exams-aif-c01-sampler/) | 20 | 🆓 | 👥 | Modos cronometrado y revisión, más flashcards. ⚠️ El sampler puede ser antiguo. |
-| ⭐ [Tutorials Dojo — AIF-C01 Practice Exams](https://portal.tutorialsdojo.com/product/aws-certified-ai-practitioner-aif-c01-practice-exams/) | Varios simulacros | 💲 | 👥 | Muy valorado por su estilo cercano al examen real. |
-| ⭐ [Practice Exams AIF-C01 — Stéphane Maarek y Abhishek Singh](https://www.udemy.com/course/practice-exams-aws-certified-ai-practitioner/) | 260 (4 × 65) | 💲 | 👥 | Explicaciones detalladas. |
-| [CloudCertPrep — AIF-C01](https://www.cloudcertprep.io/aws/aif-c01) | 400+ (según el sitio) | 🆓 | 👥 | Calidad no verificada. |
-| [Tutorials Dojo — Study Path AIF-C01](https://tutorialsdojo.com/aws-certified-ai-practitioner-aif-c01-exam-guide/) | — | 🆓 | 👥 | Guía de estudio y cheat sheets gratuitas. |
+| ★ [Simulacro 01 (este repo)](../practice-questions/mock-exam-01.md) | 65 | Gratis | Este repo | Distribución por pesos oficiales, incluye temas v1.1. |
+| ★ [Preguntas por dominio (este repo)](../practice-questions/README.md) | 30 | Gratis | Este repo | Con justificación de cada opción. |
+| ★ [Official Practice Question Set AIF-C01](https://skillbuilder.aws/learn/4URFGY63KV/official-practice-question-set-aws-certified-ai-practitioner--aifc01--english/FVG43Y1PAX) | 20 | Gratis | Oficial AWS | La referencia de estilo más fiable. |
+| ★ Official Pretest AIF-C01 (Skill Builder) | 65 (90 min) | Pago (suscripción) | Oficial AWS | El mejor indicador de preparación antes de reservar. |
+| Official Practice Exam (Skill Builder) | Completo | Pago | Oficial AWS | Con puntuación por dominio. |
+| [Tutorials Dojo — Free Sampler](https://portal.tutorialsdojo.com/courses/free-aws-certified-ai-practitioner-practice-exams-aif-c01-sampler/) | 20 | Gratis | Comunidad | Modos cronometrado y revisión, más flashcards. El sampler puede ser antiguo. |
+| ★ [Tutorials Dojo — AIF-C01 Practice Exams](https://portal.tutorialsdojo.com/product/aws-certified-ai-practitioner-aif-c01-practice-exams/) | Varios simulacros | Pago | Comunidad | Muy valorado por su estilo cercano al examen real. |
+| ★ [Practice Exams AIF-C01 — Stéphane Maarek y Abhishek Singh](https://www.udemy.com/course/practice-exams-aws-certified-ai-practitioner/) | 260 (4 × 65) | Pago | Comunidad | Explicaciones detalladas. |
+| [CloudCertPrep — AIF-C01](https://www.cloudcertprep.io/aws/aif-c01) | 400+ (según el sitio) | Gratis | Comunidad | Calidad no verificada. |
+| [Tutorials Dojo — Study Path AIF-C01](https://tutorialsdojo.com/aws-certified-ai-practitioner-aif-c01-exam-guide/) | — | Gratis | Comunidad | Guía de estudio y cheat sheets gratuitas. |
 
 > **Comprueba la fecha:** antes de comprar un banco de preguntas, confirma que se actualizó **después del 30-abr-2026** (guía v1.1). Si no, practica los temas nuevos con el [Simulacro 01](../practice-questions/mock-exam-01.md) y las [flashcards](../flashcards/README.md).
 

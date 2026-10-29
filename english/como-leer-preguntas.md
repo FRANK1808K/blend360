@@ -1,6 +1,6 @@
 # Cómo leer preguntas de examen en inglés (sin bloquearte)
 
-🌐 **Español** · [English](como-leer-preguntas.en.md)
+**Español** · [English](como-leer-preguntas.en.md)
 
 > En una prueba técnica, **una sola palabra** puede cambiar la respuesta: *NOT*, *EXCEPT*, *LEAST*, *at least*. Esta guía te enseña a encontrarlas y a no caer en los "falsos amigos".
 
@@ -13,7 +13,7 @@
 3. **Lee el escenario** buscando las **palabras clave técnicas** (*real-time*, *serverless*, *lowest cost*, *without code*). No necesitas entender cada palabra.
 4. **Elimina opciones** y elige. Si una palabra te bloquea, **sáltala** y deduce por contexto.
 
-> 🧠 **No traduzcas palabra por palabra.** Busca el *qué piden* + las *restricciones*.
+> **No traduzcas palabra por palabra.** Busca el *qué piden* + las *restricciones*.
 
 ## 2. Palabras que cambian TODO (memorízalas)
 
@@ -71,7 +71,7 @@
 
 ## 4. Falsos amigos (palabras que parecen español pero NO lo son)
 
-| Inglés | ❌ No significa | ✅ Significa |
+| Inglés | ✗ No significa | ✓ Significa |
 |---|---|---|
 | **actual / actually** | actual / actualmente | **real / en realidad** |
 | **eventually** | eventualmente (a veces) | **finalmente, con el tiempo** (*eventual consistency* = consistencia que se alcanza con el tiempo) |

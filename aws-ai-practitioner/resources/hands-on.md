@@ -1,6 +1,6 @@
 # Práctica en AWS (Laboratorios y Workshops)
 
-[⬅️ Centro de recursos](README.md)
+[← Centro de recursos](README.md)
 
 > El AIF-C01 es un examen **fundamental**: no exige construir soluciones, pero haber **usado** Bedrock, Knowledge Bases y Guardrails al menos una vez hace que las preguntas de escenario sean mucho más fáciles. Usa una cuenta de formación con **AWS Budgets** y alertas de costo.
 
@@ -8,17 +8,17 @@
 
 | Recurso | Qué practicas | Tiempo |
 |---|---|---|
-| ⭐ [PartyRock](https://partyrock.aws/) | Crear apps de GenAI con prompts, sin código y sin cuenta de AWS. Ideal para entender prompts, temperatura y encadenamiento. | 30 min |
+| ★ [PartyRock](https://partyrock.aws/) | Crear apps de GenAI con prompts, sin código y sin cuenta de AWS. Ideal para entender prompts, temperatura y encadenamiento. | 30 min |
 | Playground de Amazon Bedrock (consola) | Comparar modelos y ajustar temperatura, Top-P y longitud. Se paga por token, pero el costo es mínimo. | 30 min |
 
 ## 2. Laboratorios guiados
 
 | Recurso | Qué practicas | Costo aprox. |
 |---|---|---|
-| ⭐ [Lab 01 de este repo — RAG con Bedrock Knowledge Bases](../labs/lab-01-rag-bedrock-knowledge-bases/README.md) | Knowledge Base, S3, OpenSearch Serverless, IAM de mínimo privilegio, citas. | < USD 2 con limpieza |
-| ⭐ [aws-samples/amazon-bedrock-workshop](https://github.com/aws-samples/amazon-bedrock-workshop) | Notebooks oficiales: generación de texto, Knowledge Bases y RAG, personalización de modelos, imágenes, agentes. Se ejecuta en **tu** cuenta (pagas los tokens). | Bajo |
+| ★ [Lab 01 de este repo — RAG con Bedrock Knowledge Bases](../labs/lab-01-rag-bedrock-knowledge-bases/README.md) | Knowledge Base, S3, OpenSearch Serverless, IAM de mínimo privilegio, citas. | < USD 2 con limpieza |
+| ★ [aws-samples/amazon-bedrock-workshop](https://github.com/aws-samples/amazon-bedrock-workshop) | Notebooks oficiales: generación de texto, Knowledge Bases y RAG, personalización de modelos, imágenes, agentes. Se ejecuta en **tu** cuenta (pagas los tokens). | Bajo |
 | [Workshop "Building with Generative AI Apps on AWS"](https://catalog.workshops.aws/building-gen-ai-apps/en-US) | PartyRock (sin código) y Bedrock (low-code). | Bajo |
-| AWS Builder Labs y Escape Room (Skill Builder) | Laboratorios en entornos temporales de AWS, sin usar tu cuenta. | 💲 suscripción |
+| AWS Builder Labs y Escape Room (Skill Builder) | Laboratorios en entornos temporales de AWS, sin usar tu cuenta. | Pago (suscripción) |
 
 ## 3. Temas nuevos de la v1.1 (opcional, para entenderlos mejor)
 
@@ -37,4 +37,4 @@
 4. En Prompt Management, crea dos versiones de un prompt de resumen y compáralas.
 5. Revisa en CloudWatch las métricas `InputTokenCount` y `OutputTokenCount` de tus pruebas y calcula su costo.
 
-> ⚠️ Al terminar, **borra** Knowledge Bases, colecciones de OpenSearch Serverless y cualquier endpoint de SageMaker: generan cargos por hora.
+> **Atención:** Al terminar, **borra** Knowledge Bases, colecciones de OpenSearch Serverless y cualquier endpoint de SageMaker: generan cargos por hora.

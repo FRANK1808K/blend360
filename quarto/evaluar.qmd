@@ -4,7 +4,7 @@ subtitle: "Cómo medir tu nivel, qué meta cumplir y qué hacer con cada error"
 ---
 
 ::: {.lang-switch}
-🌐 **Español** · [English](evaluar.en.qmd)
+**Español** · [English](evaluar.en.qmd)
 :::
 
 Evaluarte no es el final del estudio: es la forma más rápida de aprender. Sube esta escalera en orden y registra cada resultado en [Mi progreso](progreso.qmd).
@@ -34,7 +34,7 @@ Evaluarte no es el final del estudio: es la forma más rápida de aprender. Sube
 | [Simulacro técnico #1](simulacros/simulacro-tecnico-01.qmd) | La parte 2 completa | 40 + 3 de código | 90 min | ≥ 34/40 |
 | [Simulador: razonamiento](simulador/index.html) | Figuras generadas al azar: nunca se repite | 30 | 30 min | ≥ 24 |
 | [Simulador: técnico](simulador/index.html) | Banco de 60 preguntas en inglés | 40 | 50 min | ≥ 34 |
-| [Simulador: reto SQL](simulador/index.html) | 5 consultas 🟡–🔴 sin ver soluciones | 5 | 60 min | 5/5 |
+| [Simulador: reto SQL](simulador/index.html) | 5 consultas de nivel intermedio a reto, sin ver soluciones | 5 | 60 min | 5/5 |
 
 ### AWS AI Practitioner (AIF-C01)
 

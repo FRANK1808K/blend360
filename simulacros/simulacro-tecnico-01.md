@@ -1,6 +1,6 @@
 # Simulacro técnico #1: 90 minutos
 
-🌐 **Español** · [English](simulacro-tecnico-01.en.md)
+**Español** · [English](simulacro-tecnico-01.en.md)
 
 > **Instrucciones (como en el examen real):**
 >
@@ -24,7 +24,7 @@
 - D) LIMIT
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué cláusula se usa para filtrar grupos DESPUÉS de una agregación?
 
@@ -38,7 +38,7 @@
 - D) 7, 10
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una tabla tiene 10 filas. La columna `email` tiene 3 valores NULL. ¿Qué devuelve `SELECT COUNT(*), COUNT(email) FROM t;`?
 
@@ -52,7 +52,7 @@ Una tabla tiene 10 filas. La columna `email` tiene 3 valores NULL. ¿Qué devuel
 - D) 12
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 La tabla A tiene 4 filas y la tabla B tiene 3. ¿Cuántas filas devuelve `SELECT * FROM A CROSS JOIN B;`?
 
@@ -66,7 +66,7 @@ La tabla A tiene 4 filas y la tabla B tiene 3. ¿Cuántas filas devuelve `SELECT
 - D) 1
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Los salarios son 500, 400, 400 y 300. ¿Cuál es el `DENSE_RANK()` (ordenado por salario descendente) del salario 300?
 
@@ -80,7 +80,7 @@ Los salarios son 500, 400, 400 y 300. ¿Cuál es el `DENSE_RANK()` (ordenado por
 - D) `SELECT * FROM orders WHERE customer_id IS NULL;`
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué consulta devuelve los clientes que NUNCA han hecho un pedido?
 
@@ -94,7 +94,7 @@ Los salarios son 500, 400, 400 y 300. ¿Cuál es el `DENSE_RANK()` (ordenado por
 - D) An error
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 En PostgreSQL y SQL Server, ¿cuál es el resultado de `SELECT 7 / 2;`?
 
@@ -113,7 +113,7 @@ En PostgreSQL y SQL Server, ¿cuál es el resultado de `SELECT 7 / 2;`?
 - D) EXCEPT
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué operador combina los resultados de dos consultas y CONSERVA las filas duplicadas?
 
@@ -127,7 +127,7 @@ En PostgreSQL y SQL Server, ¿cuál es el resultado de `SELECT 7 / 2;`?
 - D) WHERE → FROM → SELECT → HAVING
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál es el orden LÓGICO correcto de ejecución de una consulta SQL?
 
@@ -141,7 +141,7 @@ En PostgreSQL y SQL Server, ¿cuál es el resultado de `SELECT 7 / 2;`?
 - D) Andrea
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué nombre cumple la condición `WHERE name LIKE '_a%'`?
 
@@ -155,7 +155,7 @@ En PostgreSQL y SQL Server, ¿cuál es el resultado de `SELECT 7 / 2;`?
 - D) Nothing, it is correct in all databases
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué está mal en esta consulta? `SELECT department, COUNT(*) FROM employees;`
 
@@ -176,7 +176,7 @@ En PostgreSQL y SQL Server, ¿cuál es el resultado de `SELECT 7 / 2;`?
 - D) 7
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué imprime? `print(len("Blend 360"))`
 
@@ -195,7 +195,7 @@ print(x[-1] + x[0])
 - D) An error
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué imprime?
 
@@ -214,7 +214,7 @@ print(x[-1] + x[0])
 - D) 1 3
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué imprime? `print(10 // 3, 10 % 3)`
 
@@ -235,7 +235,7 @@ print(a)
 - D) An error
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué imprime?
 
@@ -254,7 +254,7 @@ print(a)
 - D) None
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué imprime? `print({1, 2, 2, 3} == {3, 2, 1})`
 
@@ -278,7 +278,7 @@ print(d.get("b", 0) + d["a"])
 - D) None
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué imprime?
 
@@ -292,7 +292,7 @@ print(d.get("b", 0) + d["a"])
 - D) [1, 4, 7]
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué imprime? `print([x for x in range(10) if x % 3 == 0])`
 
@@ -306,7 +306,7 @@ print(d.get("b", 0) + d["a"])
 - D) tuple
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál de estos tipos de Python es INMUTABLE?
 
@@ -326,7 +326,7 @@ print(f(4))
 - D) 16
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué imprime?
 
@@ -340,7 +340,7 @@ print(f(4))
 - D) ['B']
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué imprime? `print("a,b,c".split(",")[1].upper())`
 
@@ -356,7 +356,7 @@ print(f(4))
 - D) O(n log n)
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál es la complejidad temporal de la búsqueda binaria en un arreglo ordenado?
 
@@ -370,7 +370,7 @@ print(f(4))
 - D) Linked list
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué estructura de datos sigue el principio LIFO (el último en entrar es el primero en salir)?
 
@@ -389,7 +389,7 @@ print(f(4))
 - D) O(n²)
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál es la complejidad PROMEDIO de buscar una clave en un diccionario de Python (tabla hash)?
 
@@ -403,7 +403,7 @@ print(f(4))
 - D) O(log n)
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Un algoritmo tiene dos bucles anidados y cada uno recorre n elementos. ¿Cuál es su complejidad temporal?
 
@@ -417,7 +417,7 @@ Un algoritmo tiene dos bucles anidados y cada uno recorre n elementos. ¿Cuál e
 - D) Insertion sort
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué algoritmo de ordenamiento tiene complejidad O(n log n) en el PEOR caso?
 
@@ -431,7 +431,7 @@ Un algoritmo tiene dos bucles anidados y cada uno recorre n elementos. ¿Cuál e
 - D) Binary search tree
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué estructura de datos se usa para implementar la búsqueda en anchura (BFS)?
 
@@ -450,7 +450,7 @@ Un algoritmo tiene dos bucles anidados y cada uno recorre n elementos. ¿Cuál e
 - D) 1,000,000
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Aproximadamente cuántos pasos necesita la búsqueda binaria, en el peor caso, para encontrar un elemento en una lista ordenada de 1.000.000 de elementos?
 
@@ -471,7 +471,7 @@ for i from 1 to 5:
 - D) 5
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál es el valor de `s` al final?
 
@@ -487,7 +487,7 @@ for i from 1 to 5:
 - D) Durability
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué propiedad ACID garantiza que se completen TODAS las operaciones de una transacción, o NINGUNA?
 
@@ -506,7 +506,7 @@ for i from 1 to 5:
 - D) To allow NULL values in a primary key
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál es el propósito principal de una llave foránea?
 
@@ -525,7 +525,7 @@ for i from 1 to 5:
 - D) None
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué forma normal elimina las dependencias TRANSITIVAS?
 
@@ -544,7 +544,7 @@ for i from 1 to 5:
 - D) The data is deleted
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué desventaja tiene agregar muchos índices a una tabla?
 
@@ -563,7 +563,7 @@ for i from 1 to 5:
 - D) It is used to process credit card payments in real time
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Cuál de las siguientes es típica de un sistema OLAP?
 
@@ -582,7 +582,7 @@ for i from 1 to 5:
 - D) Staging table
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 En un esquema estrella, ¿qué tabla contiene las medidas numéricas (por ejemplo, ingresos y cantidad)?
 
@@ -603,7 +603,7 @@ En un esquema estrella, ¿qué tabla contiene las medidas numéricas (por ejempl
 - D) Amazon DynamoDB
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué servicio de AWS permite ejecutar consultas SQL directamente sobre datos guardados en Amazon S3 sin administrar servidores?
 
@@ -617,7 +617,7 @@ En un esquema estrella, ¿qué tabla contiene las medidas numéricas (por ejempl
 - D) The global network infrastructure
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Según el modelo de responsabilidad compartida de AWS, ¿cuál de las siguientes es responsabilidad del CLIENTE?
 
@@ -636,7 +636,7 @@ Según el modelo de responsabilidad compartida de AWS, ¿cuál de las siguientes
 - D) Amazon Aurora
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué servicio de AWS es un data warehouse columnar a escala de petabytes?
 
@@ -650,7 +650,7 @@ Según el modelo de responsabilidad compartida de AWS, ¿cuál de las siguientes
 - D) AWS Snowball
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Una empresa necesita ingerir eventos de clics en tiempo real y procesarlos con aplicaciones propias. ¿Qué servicio es el MÁS adecuado?
 
@@ -664,7 +664,7 @@ Una empresa necesita ingerir eventos de clics en tiempo real y procesarlos con a
 - D) It monitors EC2 instances
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué hace un crawler de AWS Glue?
 
@@ -683,7 +683,7 @@ Una empresa necesita ingerir eventos de clics en tiempo real y procesarlos con a
 - D) AWS IAM
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 ¿Qué servicio de AWS se usa para crear dashboards de BI interactivos?
 
@@ -702,7 +702,7 @@ Table `orders(order_id, customer_id, order_date, amount)`.
 **b)** For each month (`YYYY-MM`), return the customer with the **highest total amount** in that month. In case of ties, return all of them.
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Tabla `orders(order_id, customer_id, order_date, amount)`.
 
@@ -722,7 +722,7 @@ total_by_user(lines)  # {'ana': 15.0, 'luis': 21.0}
 ```
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Recibes una lista de textos con el formato `"usuario,monto"`. Algunas líneas son **inválidas** (campos faltantes, valores vacíos o un monto que no es número). Escribe una función `total_by_user(lines)` que devuelva un diccionario `{usuario: monto_total}` **ignorando las líneas inválidas**. Los nombres de usuario deben quedar en minúsculas y sin espacios alrededor.
 
@@ -738,7 +738,7 @@ longest_consecutive([])                       # 0
 ```
 
 <details>
-<summary>🇪🇸 Traducción</summary>
+<summary>Traducción al español</summary>
 
 Dada una lista desordenada de enteros, devuelve la longitud de la **secuencia más larga de enteros consecutivos**. Tu solución debe ejecutarse en tiempo **O(n)**.
 
@@ -767,7 +767,7 @@ Dada una lista desordenada de enteros, devuelve la longitud de la **secuencia m�
 - **4:** DENSE_RANK → 500 = 1, 400 = 2, 400 = 2, 300 = **3** (sin saltos; con `RANK` sería 4).
 - **5:** La C usa `= NULL`, que nunca es verdadero. Se usa `IS NULL`.
 - **6:** División **entera** entre enteros. Para obtener 3.5: `7.0 / 2` o `CAST(7 AS DECIMAL) / 2`.
-- **9:** `_` = exactamente un carácter cualquiera y después una "a". "M**a**ria" ✅; "Ana" tiene "n" en la 2.ª posición.
+- **9:** `_` = exactamente un carácter cualquiera y después una "a". "M**a**ria" ✓; "Ana" tiene "n" en la 2.ª posición.
 - **11:** "Blend 360" tiene 9 caracteres: el **espacio cuenta**.
 - **14:** `b = a` no copia: las dos variables apuntan a la misma lista.
 - **25:** Quick sort es O(n²) en el peor caso; merge sort siempre es O(n log n).

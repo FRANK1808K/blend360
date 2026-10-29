@@ -4,100 +4,104 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Simulador AWS Certified AI Practitioner (AIF-C01)</title>
-<meta name="description" content="Simulador cronometrado oficial del examen AWS Certified AI Practitioner (AIF-C01) con interfaz interactiva, modo oscuro, versión en inglés, cronómetro oficial y reporte detallado por dominio.">
+<meta name="description" content="Simulador cronometrado (no oficial) del examen AWS Certified AI Practitioner (AIF-C01) con interfaz interactiva, modo oscuro, versión en inglés, cronómetro y reporte detallado por dominio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,600..900&family=Urbanist:wght@400..800&family=JetBrains+Mono:wght@400;600;700&display=swap">
 <style>
 :root {
-  --paper: #f8fafc;
+  --paper: #f4f3f0;
   --card: #ffffff;
-  --surface: #f1f5f9;
-  --surface-hover: #e2e8f0;
-  --ink: #0f172a;
-  --muted: #64748b;
-  --rule: #e2e8f0;
-  --grid: #e2e8f0;
-  --accent: #FF9900;
-  --accent-hover: #ffad26;
-  --accent-ink: #000000;
-  --accent-soft: rgba(255, 153, 0, 0.12);
-  --brand: #232f3e;
-  --good: #10b981;
-  --good-soft: #ecfdf5;
-  --bad: #ef4444;
-  --bad-soft: #fef2f2;
-  --flag: #f59e0b;
-  --flag-soft: #fef3c7;
-  --en: #475569;
-  --en-soft: #f8fafc;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 12px 28px -6px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 0 25px rgba(255, 153, 0, 0.35);
-  --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --surface: #f2f4f7;
+  --surface-hover: #e7ecf1;
+  --ink: #0d1b2a;
+  --muted: #55657a;
+  --rule: #e1e4e8;
+  --grid: #e9ecf0;
+  --accent: #043058;
+  --accent-hover: #0a4275;
+  --accent-ink: #ffffff;
+  --accent-soft: #e3f9f9;
+  --cyan: #1df3f4;
+  --brand: #043058;
+  --good: #0f7b53;
+  --good-soft: #e2f4ec;
+  --bad: #c2333f;
+  --bad-soft: #fbe9eb;
+  --flag: #b86a00;
+  --flag-soft: #fdf0e1;
+  --en: #33475b;
+  --en-soft: #f2f4f7;
+  --shadow-sm: 0 1px 2px rgb(13 27 42 / .05);
+  --shadow: 0 1px 2px rgb(13 27 42 / .04), 0 12px 32px -20px rgb(4 48 88 / .3);
+  --shadow-lg: 0 2px 4px rgb(13 27 42 / .05), 0 24px 48px -24px rgb(4 48 88 / .45);
+  --shadow-glow: 0 0 25px rgba(29, 243, 244, 0.35);
+  --font-body: "Urbanist", "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-display: "Archivo", "Urbanist", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --ease: cubic-bezier(.16, 1, .3, 1);
-  --r: 16px;
+  --r: 20px;
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --paper: #09090b;
-  --card: #111116;
-  --surface: #181820;
-  --surface-hover: #22222e;
-  --ink: #f8fafc;
-  --muted: #94a3b8;
-  --rule: #272733;
-  --grid: #1a1a24;
-  --accent: #FF9900;
-  --accent-hover: #ffad26;
-  --accent-ink: #000000;
-  --accent-soft: rgba(255, 153, 0, 0.18);
-  --brand: #13131a;
-  --good: #34d399;
-  --good-soft: rgba(16, 185, 129, 0.15);
-  --bad: #f87171;
-  --bad-soft: rgba(239, 68, 68, 0.15);
-  --flag: #fbbf24;
-  --flag-soft: rgba(245, 158, 11, 0.15);
-  --en: #cbd5e1;
-  --en-soft: #14141d;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 12px 28px -6px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 35px rgba(255, 153, 0, 0.45);
+  --paper: #050a26;
+  --card: #0a1433;
+  --surface: #101c40;
+  --surface-hover: #16244d;
+  --ink: #e8eff7;
+  --muted: #9aabc4;
+  --rule: #1d2b52;
+  --grid: #14214a;
+  --accent: #1df3f4;
+  --accent-hover: #6ff8f8;
+  --accent-ink: #043058;
+  --accent-soft: rgba(29, 243, 244, 0.12);
+  --cyan: #1df3f4;
+  --brand: #043058;
+  --good: #3ddc97;
+  --good-soft: rgba(61, 220, 151, 0.14);
+  --bad: #ff7a86;
+  --bad-soft: rgba(255, 122, 134, 0.14);
+  --flag: #ffc266;
+  --flag-soft: rgba(255, 194, 102, 0.14);
+  --en: #c9d6e6;
+  --en-soft: #0d1838;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 0 0 1px rgb(255 255 255 / .02), 0 18px 40px -24px rgb(0 0 0 / .9);
+  --shadow-lg: 0 0 0 1px rgb(29 243 244 / .2), 0 24px 52px -24px rgb(0 0 0 / .9);
+  --shadow-glow: 0 0 35px rgba(29, 243, 244, 0.35);
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #09090b;
-    --card: #111116;
-    --surface: #181820;
-    --surface-hover: #22222e;
-    --ink: #f8fafc;
-    --muted: #94a3b8;
-    --rule: #272733;
-    --grid: #1a1a24;
-    --accent: #FF9900;
-    --accent-hover: #ffad26;
-    --accent-ink: #000000;
-    --accent-soft: rgba(255, 153, 0, 0.18);
-    --brand: #13131a;
-    --good: #34d399;
-    --good-soft: rgba(16, 185, 129, 0.15);
-    --bad: #f87171;
-    --bad-soft: rgba(239, 68, 68, 0.15);
-    --flag: #fbbf24;
-    --flag-soft: rgba(245, 158, 11, 0.15);
-    --en: #cbd5e1;
-    --en-soft: #14141d;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.45);
-    --shadow-lg: 0 12px 28px -6px rgba(0, 0, 0, 0.7);
-    --shadow-glow: 0 0 35px rgba(255, 153, 0, 0.45);
+    --paper: #050a26;
+    --card: #0a1433;
+    --surface: #101c40;
+    --surface-hover: #16244d;
+    --ink: #e8eff7;
+    --muted: #9aabc4;
+    --rule: #1d2b52;
+    --grid: #14214a;
+    --accent: #1df3f4;
+    --accent-hover: #6ff8f8;
+    --accent-ink: #043058;
+    --accent-soft: rgba(29, 243, 244, 0.12);
+    --cyan: #1df3f4;
+    --brand: #043058;
+    --good: #3ddc97;
+    --good-soft: rgba(61, 220, 151, 0.14);
+    --bad: #ff7a86;
+    --bad-soft: rgba(255, 122, 134, 0.14);
+    --flag: #ffc266;
+    --flag-soft: rgba(255, 194, 102, 0.14);
+    --en: #c9d6e6;
+    --en-soft: #0d1838;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow: 0 0 0 1px rgb(255 255 255 / .02), 0 18px 40px -24px rgb(0 0 0 / .9);
+    --shadow-lg: 0 0 0 1px rgb(29 243 244 / .2), 0 24px 52px -24px rgb(0 0 0 / .9);
+    --shadow-glow: 0 0 35px rgba(29, 243, 244, 0.35);
     color-scheme: dark;
   }
 }
@@ -111,8 +115,8 @@ body {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
-  background-image: radial-gradient(var(--grid) 1.2px, transparent 1.2px);
-  background-size: 22px 22px;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
   transition: background-color .35s var(--ease), color .35s var(--ease);
   min-height: 100vh;
 }
@@ -130,6 +134,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+h1 { font-family: var(--font-display); font-stretch: 118%; font-weight: 800; }
 h1, h2, h3 {
   line-height: 1.2;
   margin: 0;
@@ -202,17 +207,15 @@ button, select { font: inherit; }
 .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .spread { justify-content: space-between; }
 
-/* Barra superior */
+/* Barra superior (marino, como la de Blend) */
 .top-bar {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--card) 85%, transparent);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--rule);
+  background: linear-gradient(100deg, #043058 0%, #053a69 60%, #04406f 100%);
+  color: #fff;
+  box-shadow: 0 10px 30px -20px rgb(4 48 88 / .9);
   padding: 12px 20px;
-  transition: border-color .25s var(--ease);
 }
 .top-in {
   max-width: 980px;
@@ -235,15 +238,28 @@ button, select { font: inherit; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  background: var(--accent);
-  color: #000;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #1df3f4;
+  color: #043058;
   font-weight: 900;
-  font-size: 0.88rem;
-  box-shadow: 0 2px 8px rgba(255, 153, 0, 0.4);
+  font-size: 0.78rem;
+  letter-spacing: .02em;
 }
+.top-bar.exam-status {
+  top: 64px;
+  z-index: 40;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--rule);
+  box-shadow: none;
+}
+.top-bar .btn.ghost { background: transparent; color: #fff; border-color: rgb(255 255 255 / .35); }
+.top-bar .btn.ghost:hover { border-color: #1df3f4; color: #1df3f4; }
+.top-bar .iconbtn { background: rgb(255 255 255 / .07); border-color: rgb(255 255 255 / .18); color: #fff; }
 .iconbtn {
   width: 40px;
   height: 40px;
@@ -277,7 +293,7 @@ button, select { font: inherit; }
   width: min(380px, 65vw);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--accent) 40%, transparent), transparent 65%);
+  background: radial-gradient(circle at 35% 35%, rgb(29 243 244 / .32), transparent 65%);
   filter: blur(20px);
   opacity: .5;
 }
@@ -304,7 +320,7 @@ button, select { font: inherit; }
   box-shadow: 0 0 8px var(--accent);
 }
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent) 0%, #ffbe4d 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #1df3f4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -642,7 +658,7 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 60%, transpare
   gap: 16px;
   box-shadow: var(--shadow);
   position: sticky;
-  top: 86px;
+  top: 150px;
 }
 .navgrid {
   display: grid;
@@ -692,7 +708,7 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 60%, transpare
 .progress-bar span {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, var(--accent) 0%, #ffbe4d 100%);
+  background: linear-gradient(90deg, var(--accent) 0%, #1df3f4 100%);
   transition: width .3s var(--ease);
 }
 
@@ -766,6 +782,10 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 60%, transpare
   font-size: 0.92rem;
 }
 @media (max-width: 720px) {
+  /* En el celular la barra marino no se fija: deja todo el espacio a la pregunta */
+  .top-bar:not(.exam-status) { position: relative; }
+  .top-bar.exam-status { top: 0; }
+  .navpanel { position: static; }
   .drow { grid-template-columns: minmax(0, 1fr) 4rem; }
   .drow .track { grid-column: 1 / -1; }
   .drow .pill { justify-self: start; }
@@ -837,11 +857,11 @@ tbody tr:hover td { background: color-mix(in srgb, var(--surface) 60%, transpare
   <div class="top-in">
     <div class="row">
       <div class="brand">
-        <span class="brand-badge">AWS</span>
-        <span>AIF-C01 · Simulador Oficial</span>
+        <span class="brand-badge">AIF</span>
+        <span>AIF-C01 · Simulador de práctica</span>
       </div>
-      <a href="https://frank1808k.github.io/blend360/" class="btn ghost mini" style="margin-left:8px">← Volver a Blend360</a>
-      <a href="https://frank1808k.github.io/blend360/aws-ai-practitioner/" class="btn ghost mini">Guía de estudio ↗</a>
+      <a href="https://frank1808k.github.io/blend360/" class="btn ghost mini" style="margin-left:8px">Volver a Blend360 Prep</a>
+      <a href="https://frank1808k.github.io/blend360/aws-ai-practitioner/" class="btn ghost mini">Guía de estudio</a>
     </div>
     <div class="row">
       <button class="iconbtn" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema claro/oscuro">
@@ -917,7 +937,7 @@ function shuffle(list) {
 }
 
 const MODES = [
-  { id: "sim01", name: "Simulacro 01", tag: "Examen oficial", desc: "65 preguntas con ponderación oficial. Cubre todos los dominios y temas de la guía v1.1.", n: 65, min: 90,
+  { id: "sim01", name: "Simulacro 01", tag: "Pesos oficiales", desc: "65 preguntas con ponderación oficial. Cubre todos los dominios y temas de la guía v1.1.", n: 65, min: 90,
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
     pick: () => DATA.exams[0].questions.map(q => ({ ...q, exam: DATA.exams[0].name })) },
   { id: "sim02", name: "Simulacro 02", tag: "Escenarios reales", desc: "65 preguntas de escenario técnico. Mayor grado de dificultad con dos opciones plausibles.", n: 65, min: 90,
@@ -967,19 +987,19 @@ function renderStart() {
         <span class="dot"></span>
         <span>AWS Certified AI Practitioner · AIF-C01</span>
       </div>
-      <h1>Simulador Oficial de <span class="gradient-text">Examen AWS</span></h1>
-      <p class="muted" style="max-width:64ch;font-size:1.05rem">Practica bajo condiciones idénticas al examen de certificación: cronómetro oficial, interfaz con diseño dinámico, preguntas marcadas para revisión, alternador a inglés en un clic y diagnóstico por dominio «Cumple / Necesita mejora».</p>
+      <h1>Simulador del <span class="gradient-text">examen AWS</span></h1>
+      <p class="muted" style="max-width:64ch;font-size:1.05rem">Practica en condiciones parecidas a las del examen de certificación: cronómetro, preguntas marcadas para revisión, versión en inglés en un clic y diagnóstico por dominio «Cumple / Necesita mejora».</p>
       <div class="chips">
         <span class="chip"><strong>65</strong> preguntas</span>
-        <span class="chip">⏱️ <strong>90</strong> min (120 con ESL)</span>
-        <span class="chip">🎯 Aprobado: <strong>700</strong> / 1000</span>
-        <span class="chip">📈 Meta recomendada: <strong>≥ 80 %</strong></span>
+        <span class="chip"><strong>90</strong> min (120 con ESL)</span>
+        <span class="chip">Aprobado: <strong>700</strong> / 1000</span>
+        <span class="chip">Meta recomendada: <strong>≥ 80 %</strong></span>
       </div>
     </div>
 
     ${saved ? `
     <div class="confirm-box" style="margin-block:16px">
-      <span>⚠️ Tienes un intento sin terminar de <strong>${saved.modeName}</strong> (${saved.answeredCount} respondidas).</span>
+      <span>Tienes un intento sin terminar de <strong>${saved.modeName}</strong> (${saved.answeredCount} respondidas).</span>
       <div class="row">
         <button class="btn btn-primary" id="resume">Continuar intento</button>
         <button class="btn ghost" id="discard">Descartar</button>
@@ -1001,7 +1021,7 @@ function renderStart() {
           </div>
           <h3>${m.name}</h3>
           <p class="muted" style="font-size:0.92rem">${m.desc}</p>
-          <span class="meta">⏱️ ${m.n || v11count} preguntas · ${m.min ? m.min : Math.round(v11count * 1.4)} min</span>
+          <span class="meta">${m.n || v11count} preguntas · ${m.min ? m.min : Math.round(v11count * 1.4)} min</span>
         </label>`).join("")}
     </div>
 
@@ -1023,7 +1043,7 @@ function renderStart() {
           <span>Corrección inmediata (modo estudio)</span>
         </label>
       </div>
-      <button class="btn btn-primary" id="start" style="padding-inline:28px">Empezar examen →</button>
+      <button class="btn btn-primary" id="start" style="padding-inline:28px">Empezar examen</button>
     </div>
 
     <section class="history-section">
@@ -1061,6 +1081,7 @@ function renderStart() {
     const instant = document.getElementById("instant").checked;
     store.set("-prefs", { ...store.get("-prefs", {}), mode, time, instant });
     startExam(mode, time, instant);
+    window.scrollTo({ top: 0 });
   };
 
   if (saved) {
@@ -1114,7 +1135,7 @@ function renderExam() {
   const flagged = Object.keys(state.flags).filter(k => state.flags[k]).length;
 
   app.innerHTML = `
-  <div class="top-bar" style="top:59px;background:color-mix(in srgb, var(--paper) 90%, transparent)">
+  <div class="top-bar exam-status">
     <div class="top-in">
       <div class="row" style="gap:16px;flex:1 1 auto">
         <span class="eyebrow">${state.modeName}${state.instant ? " · Modo Estudio" : ""}</span>
@@ -1139,7 +1160,7 @@ function renderExam() {
           </div>
           <div class="row">
             ${multi ? `<span class="pill warn">Elige ${q.answer.length === 2 ? "DOS" : q.answer.length} opciones</span>` : ""}
-            <button class="btn ghost mini" id="en-toggle">${state.showEn ? "Ocultar inglés" : "🌐 Ver en inglés"}</button>
+            <button class="btn ghost mini" id="en-toggle">${state.showEn ? "Ocultar inglés" : "Ver en inglés"}</button>
           </div>
         </div>
 
@@ -1174,14 +1195,14 @@ function renderExam() {
 
         <div class="row spread" style="padding-top:14px;border-top:1px solid var(--rule)">
           <div class="row">
-            <button class="btn ghost" id="prev" ${state.idx === 0 ? "disabled" : ""}>← Anterior</button>
+            <button class="btn ghost" id="prev" ${state.idx === 0 ? "disabled" : ""}>Anterior</button>
             <button class="btn ${state.flags[q.id] ? "btn-primary" : "ghost"}" id="flag">
-              ${state.flags[q.id] ? "🚩 Marcada" : "🏳️ Marcar"}
+              ${state.flags[q.id] ? "Marcada" : "Marcar para revisar"}
             </button>
           </div>
           ${state.idx < total - 1 ?
-            `<button class="btn btn-primary" id="next">Siguiente →</button>` :
-            `<button class="btn btn-primary" id="finish">Terminar Examen ✓</button>`
+            `<button class="btn btn-primary" id="next">Siguiente</button>` :
+            `<button class="btn btn-primary" id="finish">Terminar examen</button>`
           }
         </div>
 
@@ -1203,8 +1224,8 @@ function renderExam() {
           `).join("")}
         </div>
         <div class="row spread" style="font-size:0.8rem;color:var(--muted);padding-block:6px;border-top:1px solid var(--rule)">
-          <span>🟧 Respondida</span>
-          <span>🚩 Marcada (${flagged})</span>
+          <span>Respondida</span>
+          <span>Marcada (${flagged})</span>
         </div>
         <div id="finish-zone">
           <button class="btn ghost" id="finish-side" style="width:100%">Finalizar intento</button>
@@ -1307,17 +1328,17 @@ function finish() {
 
 function renderReport(res, p) {
   const level = p >= 80 ?
-    ["ok", "¡Nivel de Aprobado con Margen! 🏆", "Estás listo para el examen real. Mantén el repaso ligero."] :
+    ["ok", "Nivel de aprobado con margen", "Estás listo para el examen real. Mantén el repaso ligero."] :
     p >= 70 ?
-    ["warn", "Zona de Riesgo (700-790) ⚠️", "Cerca del umbral. Refuerza los dominios en naranja antes de agendar."] :
-    ["ko", "Necesita Refuerzo (< 700) 📈", "Revisa los conceptos base y realiza el plan de reintento."];
+    ["warn", "Zona de riesgo (700-790)", "Cerca del umbral. Refuerza los dominios marcados «Necesita mejora» antes de agendar."] :
+    ["ko", "Necesita refuerzo (< 700)", "Revisa los conceptos base y realiza el plan de reintento."];
 
   const wrong = state.questions.filter(q => !isCorrect(q, state.answers[q.id]));
 
   app.innerHTML = `
   <div class="wrap report-grid">
     <div class="hero" style="padding-bottom:0">
-      <div class="hero-tag"><span class="dot"></span><span>Resultado Oficial · ${state.modeName}</span></div>
+      <div class="hero-tag"><span class="dot"></span><span>Resultado · ${state.modeName}</span></div>
       <h1>Tu Desglose <span class="gradient-text">Técnico</span></h1>
     </div>
 
@@ -1345,7 +1366,7 @@ function renderReport(res, p) {
             <i class="mark" title="Umbral de aprobación (70%)"></i>
           </div>
           <span class="mono" style="font-weight:700">${res.by[d].ok}/${res.by[d].n}</span>
-          <span class="pill ${ok ? 'ok' : 'warn'}">${ok ? '✓ Cumple' : '⚠️ Necesita mejora'}</span>
+          <span class="pill ${ok ? 'ok' : 'warn'}">${ok ? '✓ Cumple' : 'Necesita mejora'}</span>
         </div>`;
       }).join("")}
       <p class="muted" style="font-size:0.85rem;margin-top:6px">La línea vertical negra marca el 70 % orientativo. Si un dominio queda en «Necesita mejora», repasa sus cheatsheets antes de volver a intentar.</p>
@@ -1353,7 +1374,7 @@ function renderReport(res, p) {
 
     <div class="row spread" style="margin-top:10px">
       <div class="row">
-        <button class="btn btn-primary" id="again">← Repetir o Volver al Inicio</button>
+        <button class="btn btn-primary" id="again">Repetir o volver al inicio</button>
         <a href="https://frank1808k.github.io/blend360/" class="btn ghost">Ir al inicio de Blend360</a>
       </div>
       <label for="only-wrong" class="btn ghost" style="cursor:pointer">
@@ -1384,7 +1405,7 @@ function renderReport(res, p) {
         <div style="display:grid;gap:5px;font-size:0.92rem;background:var(--surface);padding:12px 16px;border-radius:10px">
           ${q.options.filter(o => q.answer.includes(o.id)).map(o => `<div><span class="mono" style="font-weight:700">${o.id}.</span> ${o.text}</div>`).join('')}
         </div>
-        <p class="muted" style="font-size:0.94rem">💡 ${q.why}</p>
+        <p class="muted" style="font-size:0.94rem">${q.why}</p>
         <details class="en-details" style="font-size:0.9rem;color:var(--accent);cursor:pointer"><summary>Ver versión en inglés</summary>${englishBlock(q)}</details>
       </article>`;
     }).join("") : `<p class="muted" style="padding:24px;text-align:center">¡Excelente! No tienes preguntas falladas en este intento.</p>`;

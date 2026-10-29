@@ -1,25 +1,26 @@
-# Interactive simulator: Simulacro 30·90
+# Entrance test simulator
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 A browser simulator for both parts of the test, with a **code lab for writing code**, available in **English and Spanish** (ES/EN switch at the top):
 
 | Mode | Questions | Time | Content |
 |---|---|---|---|
+| **Full assessment** | 30 + 40 + 3 queries | 30 + 50 + 40 min | The three sections back to back, like test day: an instructions screen, a timer per section, no going back to a submitted section and a final report with the score per section and per topic |
 | **Abstract reasoning** | 30 | 30:00 | **Randomly generated** figures: rotations, amounts, positions, sides, quadrants, two-rule figures, 3×3 matrices, D-48 dominoes, number and letter series. Difficulty increases |
 | **Technical (multiple choice)** | 40 | 50:00 | A bank of 60 questions **in English**: SQL (15), Python (15), algorithms (12), databases (8), AWS (10) |
 | **Practice by topic** | Unlimited | No timer | Immediate feedback with an explanation. Also includes **12 statistics and ML questions** (practice only) |
 | **SQL lab** | 36 | Target per level | Write real queries; they are graded instantly |
-| **SQL challenge** | 5 | 60:00 | 5 🟡–🔴 queries with no solutions (like the test reported on Glassdoor) |
+| **SQL challenge** | 5 | 60:00 | 5 intermediate-to-challenge queries with no solutions (like the test reported on Glassdoor) |
 | **Python lab** | 45 | Target per exercise | 25 Python exercises + 20 algorithm problems, with automated tests |
 
 **Made for learning English:** at the top you choose the **question language**. In **English** (like the real exam) every question has a **"Show Spanish translation"** button; in **Spanish** (to learn a topic) it has **"Show English"** with the original. The interface language (ES/EN) is chosen separately.
 
-**Design:** **white** or **black** mode with the ☀️/🌙 button (remembered in your browser), the **Century Gothic** font (if your device does not have it, *Didact Gothic*, a very similar font, is used) and smooth transitions between screens and when you answer. If your system asks for reduced motion, the animations are turned off.
+**Design:** an assessment-platform interface in Blend's colours (navy, cyan and aqua): a header with the timer, a question navigator, flags for review and a confirmation before submitting each section. **Light** or **dark** mode with the moon or sun button (remembered in your browser), the **Urbanist** font with **Archivo** headings and smooth transitions between screens and when you answer. If your system asks for reduced motion, the animations are turned off.
 
 When you finish a mock exam you see your score, the result **per topic** and a question-by-question review with explanations. Your last 8 attempts are saved in your browser.
 
-> 💡 **AWS AI Practitioner Simulator:** To practice the official AIF-C01 exam (65 questions, 90 minutes) with language switching and detailed rationales, visit the [AWS AI Practitioner Simulator](../aws-ai-practitioner/simulator/README.md).
+> **AWS AI Practitioner Simulator:** To practice the official AIF-C01 exam (65 questions, 90 minutes) with language switching and detailed rationales, visit the [AWS AI Practitioner Simulator](../aws-ai-practitioner/simulator/README.md).
 
 ## Code lab
 

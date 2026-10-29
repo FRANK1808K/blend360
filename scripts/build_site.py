@@ -50,27 +50,27 @@ APPS = {"simulator/index.html": "simulador/index.html",
 # A page is (source, label); a section is (title, [pages]). Pages that are .md are tracked in "My progress".
 # Una página es (fuente, etiqueta); una sección es (título, [páginas]). Las páginas .md se siguen en "Mi progreso".
 NAV = [
-    {"id": "estudiar", "lang": "es", "title": "📚 Estudiar", "contents": [
+    {"id": "estudiar", "lang": "es", "title": "Estudiar", "contents": [
         ("estudiar.qmd", "Mapa de estudio"),
-        ("🧭 Empieza aquí", [
+        ("Empieza aquí", [
             ("guides/plan-de-estudio.md", "Plan de estudio (26 oct → 18 dic)"),
             ("guides/que-evalua-blend360.md", "Qué evalúa Blend360"),
         ]),
-        ("🧩 Parte 1 · Razonamiento (30 min)", [
+        ("Parte 1 · Razonamiento (30 min)", [
             ("01-razonamiento-abstracto/README.md", "Razonamiento abstracto"),
         ]),
-        ("💻 Parte 2 · Prueba técnica (90 min)", [
+        ("Parte 2 · Prueba técnica (90 min)", [
             ("02-sql/README.md", "SQL"),
             ("03-python/README.md", "Python"),
             ("03-python/pandas.md", "pandas"),
             ("04-algoritmos-y-estructuras/README.md", "Algoritmos y estructuras de datos"),
             ("05-bases-de-datos/README.md", "Bases de datos"),
             ("06-aws/README.md", "AWS: fundamentos de nube"),
-            ("06-aws/analisis-de-datos.md", "AWS: análisis de datos ⭐"),
+            ("06-aws/analisis-de-datos.md", "AWS: análisis de datos"),
             ("07-resolucion-de-problemas/README.md", "Resolución de problemas"),
             ("08-estadistica-y-ml/README.md", "Estadística y machine learning"),
         ]),
-        ("🗣️ Inglés técnico", [
+        ("Inglés técnico", [
             ("english/README.md", "Plan de inglés (A2 → funcional)"),
             ("english/como-leer-preguntas.md", "Cómo leer preguntas"),
             ("english/vocabulario-tecnico.md", "Vocabulario técnico"),
@@ -78,50 +78,50 @@ NAV = [
             ("english/entrevista-y-frases.md", "Entrevista y frases"),
         ]),
     ]},
-    {"id": "evaluar", "lang": "es", "title": "🧪 Practicar y evaluar", "contents": [
+    {"id": "evaluar", "lang": "es", "title": "Practicar y evaluar", "contents": [
         ("evaluar.qmd", "Ruta de evaluación"),
         ("progreso.qmd", "Mi progreso"),
-        ("✍️ Ejercicios por tema", [
+        ("Ejercicios por tema", [
             ("01-razonamiento-abstracto/ejercicios.md", "Razonamiento · 50 ejercicios"),
             ("02-sql/ejercicios.md", "SQL · 35 ejercicios"),
             ("06-aws/preguntas.md", "AWS · 30 preguntas"),
             ("08-estadistica-y-ml/preguntas.md", "Estadística y ML · 25 preguntas"),
             ("english/ejercicios-ingles.md", "Inglés · ejercicios"),
         ]),
-        ("⏱️ Simulacros", [
+        ("Simulacros", [
             ("simulacros/README.md", "Cómo hacer un simulacro"),
             ("simulacros/simulacro-razonamiento-01.md", "Razonamiento #1 · 30 min"),
             ("simulacros/simulacro-tecnico-01.md", "Técnico #1 · 90 min"),
         ]),
-        ("🎯 Simulador", [
+        ("Simulador", [
             ("simulator/README.md", "Simulador y laboratorio de código"),
         ]),
     ]},
-    {"id": "repasar", "lang": "es", "title": "🔁 Repasar", "contents": [
+    {"id": "repasar", "lang": "es", "title": "Repasar", "contents": [
         ("cheatsheets/README.md", "Cheatsheets"),
-        ("📄 Hojas de una página", [
+        ("Hojas de una página", [
             ("cheatsheets/sql.md", "SQL"),
             ("cheatsheets/python.md", "Python + pandas"),
             ("cheatsheets/algoritmos.md", "Algoritmos y estructuras"),
             ("cheatsheets/aws-y-bases-de-datos.md", "AWS + bases de datos"),
             ("cheatsheets/estadistica-ml.md", "Estadística y ML"),
         ]),
-        ("🏁 Recta final", [
+        ("Recta final", [
             ("cheatsheets/repaso-final-48h.md", "Repaso final de 48 h"),
             ("flashcards/README.md", "Flashcards (209, Anki)"),
         ]),
     ]},
-    {"id": "aif", "lang": "es", "title": "☁️ AWS AI Practitioner", "contents": [
+    {"id": "aif", "lang": "es", "title": "AWS AI Practitioner", "contents": [
         ("aws-ai-practitioner/README.md", "Inicio AIF-C01"),
-        ("📚 Estudiar los 5 dominios", [
-            ("aws-ai-practitioner/domains/00-exam-guide-v1.1-changes.md", "Novedades de la guía v1.1 🆕"),
+        ("Estudiar los 5 dominios", [
+            ("aws-ai-practitioner/domains/00-exam-guide-v1.1-changes.md", "Novedades de la guía v1.1"),
             ("aws-ai-practitioner/domains/01-fundamentals-ai-ml/README.md", "D1 · Fundamentos de IA y ML (20 %)"),
             ("aws-ai-practitioner/domains/02-fundamentals-generative-ai/README.md", "D2 · IA generativa (24 %)"),
             ("aws-ai-practitioner/domains/03-applications-foundation-models/README.md", "D3 · Modelos fundacionales (28 %)"),
             ("aws-ai-practitioner/domains/04-responsible-ai/README.md", "D4 · IA responsable (14 %)"),
             ("aws-ai-practitioner/domains/05-security-compliance-governance/README.md", "D5 · Seguridad y gobernanza (14 %)"),
         ]),
-        ("🧪 Evaluar", [
+        ("Evaluar", [
             ("aws-ai-practitioner/practice-questions/README.md", "Banco de preguntas"),
             ("aws-ai-practitioner/practice-questions/domain-01-questions.md", "Preguntas D1"),
             ("aws-ai-practitioner/practice-questions/domain-02-questions.md", "Preguntas D2"),
@@ -132,7 +132,7 @@ NAV = [
             ("aws-ai-practitioner/practice-questions/mock-exam-02.md", "Simulacro 02 · 65 de escenario"),
             ("aws-ai-practitioner/simulator/README.md", "Simulador AIF-C01"),
         ]),
-        ("🔁 Repasar", [
+        ("Repasar", [
             ("aws-ai-practitioner/cheatsheets/README.md", "Cheatsheets AIF-C01"),
             ("aws-ai-practitioner/cheatsheets/confusable-pairs.md", "Pares que se confunden"),
             ("aws-ai-practitioner/cheatsheets/exam-decision-matrix.md", "Matriz de decisión"),
@@ -140,15 +140,15 @@ NAV = [
             ("aws-ai-practitioner/cheatsheets/final-review-48h.md", "Repaso final de 48 h"),
             ("aws-ai-practitioner/flashcards/README.md", "Flashcards (109)"),
         ]),
-        ("🧭 Estrategia de examen", [
+        ("Estrategia de examen", [
             ("aws-ai-practitioner/guides/exam-playbook.md", "Playbook del examen"),
             ("aws-ai-practitioner/guides/retake-plan.md", "Plan de reintento"),
         ]),
-        ("🛠️ Laboratorio", [
+        ("Laboratorio", [
             ("aws-ai-practitioner/labs/README.md", "Laboratorios"),
             ("aws-ai-practitioner/labs/lab-01-rag-bedrock-knowledge-bases/README.md", "Lab 01 · RAG con Bedrock"),
         ]),
-        ("🔗 Recursos", [
+        ("Recursos", [
             ("aws-ai-practitioner/resources/README.md", "Centro de recursos"),
             ("aws-ai-practitioner/resources/official-aws.md", "Oficiales de AWS"),
             ("aws-ai-practitioner/resources/videos-and-courses.md", "Videos y cursos"),
@@ -157,27 +157,27 @@ NAV = [
             ("aws-ai-practitioner/resources/books-flashcards-community.md", "Libros y comunidad"),
         ]),
     ]},
-    {"id": "study-en", "lang": "en", "title": "📚 Study", "contents": [
+    {"id": "study-en", "lang": "en", "title": "Study", "contents": [
         ("estudiar.en.qmd", "Study map"),
-        ("🧭 Start here", [
+        ("Start here", [
             ("guides/plan-de-estudio.en.md", "Study plan (Oct 26 → Dec 18)"),
             ("guides/que-evalua-blend360.en.md", "What Blend360 evaluates"),
         ]),
-        ("🧩 Part 1 · Reasoning (30 min)", [
+        ("Part 1 · Reasoning (30 min)", [
             ("01-razonamiento-abstracto/README.en.md", "Abstract reasoning"),
         ]),
-        ("💻 Part 2 · Technical test (90 min)", [
+        ("Part 2 · Technical test (90 min)", [
             ("02-sql/README.en.md", "SQL"),
             ("03-python/README.en.md", "Python"),
             ("03-python/pandas.en.md", "pandas"),
             ("04-algoritmos-y-estructuras/README.en.md", "Algorithms and data structures"),
             ("05-bases-de-datos/README.en.md", "Databases"),
             ("06-aws/README.en.md", "AWS: cloud fundamentals"),
-            ("06-aws/analisis-de-datos.en.md", "AWS: data analytics ⭐"),
+            ("06-aws/analisis-de-datos.en.md", "AWS: data analytics"),
             ("07-resolucion-de-problemas/README.en.md", "Problem solving"),
             ("08-estadistica-y-ml/README.en.md", "Statistics and machine learning"),
         ]),
-        ("🗣️ Technical English", [
+        ("Technical English", [
             ("english/README.en.md", "English plan (A2 → functional)"),
             ("english/como-leer-preguntas.en.md", "How to read questions"),
             ("english/vocabulario-tecnico.en.md", "Technical vocabulary"),
@@ -185,40 +185,40 @@ NAV = [
             ("english/entrevista-y-frases.en.md", "Interview and phrases"),
         ]),
     ]},
-    {"id": "practice-en", "lang": "en", "title": "🧪 Practice and assess", "contents": [
+    {"id": "practice-en", "lang": "en", "title": "Practice and assess", "contents": [
         ("evaluar.en.qmd", "Assessment path"),
         ("progreso.en.qmd", "My progress"),
-        ("✍️ Exercises by topic", [
+        ("Exercises by topic", [
             ("01-razonamiento-abstracto/ejercicios.en.md", "Reasoning · 50 exercises"),
             ("02-sql/ejercicios.en.md", "SQL · 35 exercises"),
             ("06-aws/preguntas.en.md", "AWS · 30 questions"),
             ("08-estadistica-y-ml/preguntas.en.md", "Statistics and ML · 25 questions"),
             ("english/ejercicios-ingles.en.md", "English · exercises"),
         ]),
-        ("⏱️ Mock exams", [
+        ("Mock exams", [
             ("simulacros/README.en.md", "How to take a mock exam"),
             ("simulacros/simulacro-razonamiento-01.en.md", "Reasoning #1 · 30 min"),
             ("simulacros/simulacro-tecnico-01.en.md", "Technical #1 · 90 min"),
         ]),
-        ("🎯 Simulator", [
+        ("Simulator", [
             ("simulator/README.en.md", "Simulator and code lab"),
         ]),
-        ("☁️ AWS AIF-C01 in English", [
+        ("AWS AIF-C01 in English", [
             ("aws-ai-practitioner/README.en.md", "AIF-C01 overview"),
             ("aws-ai-practitioner/practice-questions/en/mock-exam-01.md", "Mock exam 01 · 65 questions"),
             ("aws-ai-practitioner/practice-questions/en/mock-exam-02.md", "Mock exam 02 · 65 scenarios"),
         ]),
     ]},
-    {"id": "review-en", "lang": "en", "title": "🔁 Review", "contents": [
+    {"id": "review-en", "lang": "en", "title": "Review", "contents": [
         ("cheatsheets/README.en.md", "Cheat sheets"),
-        ("📄 One-page sheets", [
+        ("One-page sheets", [
             ("cheatsheets/sql.en.md", "SQL"),
             ("cheatsheets/python.en.md", "Python + pandas"),
             ("cheatsheets/algoritmos.en.md", "Algorithms and data structures"),
             ("cheatsheets/aws-y-bases-de-datos.en.md", "AWS + databases"),
             ("cheatsheets/estadistica-ml.en.md", "Statistics and ML"),
         ]),
-        ("🏁 Final stretch", [
+        ("Final stretch", [
             ("cheatsheets/repaso-final-48h.en.md", "Final 48-hour review"),
             ("flashcards/README.en.md", "Flashcards (209, Anki)"),
         ]),
@@ -226,12 +226,14 @@ NAV = [
 ]
 
 LINK = re.compile(r"(\]\()([^)\s]+)(\))")
+# "**Español** · [English](x.en.md)" / "[Español](x.md) · **English**": the language switch at the top of every document.
+LANG_SWITCH = re.compile(r"^(\*\*Español\*\*|\[Español\]\([^)]*\)) · (\[English\]\([^)]*\)|\*\*English\*\*)")
 FENCE = re.compile(r"^(```|~~~)")
 TITLED_QUOTE = re.compile(r"^\*\*(.+?)\*\*\s*(.*)$")
 CALLOUT_KINDS = [  # first match wins / gana la primera coincidencia
-    ("warning", r"aviso|notice|trampa|trap|cuidado|careful|no cambies|don't change|penaliz|importante|important"),
+    ("warning", r"atención|warning|aviso|notice|trampa|trap|cuidado|careful|no cambies|don't change|penaliz|importante|important"),
     ("important", r"regla|rule|principio|principle|objetivo|goal|meta\b|peso en el examen|exam weight"),
-    ("tip", r"pista|hint|tip|consejo|cómo usar|how to use|cómo practicar|how to practice|instrucciones|instructions"),
+    ("tip", r"pista|hint|tip|consejo|clave|\bkey\b|cómo usar|how to use|cómo practicar|how to practice|instrucciones|instructions"),
 ]
 
 
@@ -290,15 +292,9 @@ def callout(quote: list) -> list:
         title = m[1].rstrip(":.").strip()
         rest = m[2].lstrip(":. ").strip()
         body[first] = rest
-    elif body[first].startswith(("💡", "⚠️", "💻", "🇬🇧")):
-        title = ""
     else:
         return quote
     kind = "note"
-    if body[first].startswith("⚠️"):
-        kind = "warning"
-    elif body[first].startswith("💡"):
-        kind = "tip"
     for name, pattern in CALLOUT_KINDS:
         if title and re.search(pattern, title, re.I):
             kind = name
@@ -329,7 +325,7 @@ def adapt(source: str, text: str, pages: set) -> str:
         if quote:
             out.extend(callout(quote))
             quote = []
-        if line.startswith("🌐 "):
+        if LANG_SWITCH.match(line):
             out.extend(["::: {.lang-switch}", line, ":::"])
             continue
         out.append(line)

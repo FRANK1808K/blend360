@@ -1,6 +1,6 @@
 # 04 · Algoritmos básicos y estructuras de datos
 
-🌐 **Español** · [English](README.en.md)
+**Español** · [English](README.en.md)
 
 > El temario dice **"habilidades en algoritmo básico, estructura de datos y resolución de problemas"**. En pruebas de 90 minutos esto suele aparecer de dos formas:
 >
@@ -115,13 +115,13 @@ def binary_search(arr, target):
 
 | Algoritmo | Mejor | Promedio | Peor | Espacio | Estable | Idea |
 |---|---|---|---|---|---|---|
-| Bubble sort | O(n) | O(n²) | O(n²) | O(1) | ✅ | Intercambia vecinos desordenados; el mayor "burbujea" al final |
-| Selection sort | O(n²) | O(n²) | O(n²) | O(1) | ❌ | Busca el mínimo y lo pone al inicio |
-| Insertion sort | O(n) | O(n²) | O(n²) | O(1) | ✅ | Inserta cada elemento en su lugar (como las cartas en la mano). Muy bueno con datos casi ordenados |
-| Merge sort | O(n log n) | O(n log n) | O(n log n) | O(n) | ✅ | Divide a la mitad, ordena cada mitad y **mezcla** |
-| Quick sort | O(n log n) | O(n log n) | O(n²) | O(log n) | ❌ | Elige un pivote, pone menores a la izquierda y mayores a la derecha |
-| Heap sort | O(n log n) | O(n log n) | O(n log n) | O(1) | ❌ | Usa un heap |
-| Timsort (`sorted()` de Python) | O(n) | O(n log n) | O(n log n) | O(n) | ✅ | Híbrido de merge + insertion |
+| Bubble sort | O(n) | O(n²) | O(n²) | O(1) | ✓ | Intercambia vecinos desordenados; el mayor "burbujea" al final |
+| Selection sort | O(n²) | O(n²) | O(n²) | O(1) | ✗ | Busca el mínimo y lo pone al inicio |
+| Insertion sort | O(n) | O(n²) | O(n²) | O(1) | ✓ | Inserta cada elemento en su lugar (como las cartas en la mano). Muy bueno con datos casi ordenados |
+| Merge sort | O(n log n) | O(n log n) | O(n log n) | O(n) | ✓ | Divide a la mitad, ordena cada mitad y **mezcla** |
+| Quick sort | O(n log n) | O(n log n) | O(n²) | O(log n) | ✗ | Elige un pivote, pone menores a la izquierda y mayores a la derecha |
+| Heap sort | O(n log n) | O(n log n) | O(n log n) | O(1) | ✗ | Usa un heap |
+| Timsort (`sorted()` de Python) | O(n) | O(n log n) | O(n log n) | O(n) | ✓ | Híbrido de merge + insertion |
 
 - **Estable:** mantiene el orden relativo de los elementos iguales.
 - El límite inferior para ordenar **por comparaciones** es O(n log n).

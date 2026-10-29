@@ -1,6 +1,6 @@
 # 02 · SQL — from zero to technical-test level
 
-🌐 [Español](README.md) · **English**
+[Español](README.md) · **English**
 
 > SQL is probably **the heaviest topic** in a test from an analytics company like Blend360. This module covers everything that is usually asked, from `SELECT` to window functions.
 
@@ -91,10 +91,10 @@ But the engine **evaluates** it like this:
 
 Consequences that are asked a lot:
 
-- ❌ `WHERE SUM(x) > 10` → error. ✅ It goes in `HAVING`.
-- ❌ `WHERE alias > 10` (alias defined in the SELECT) → error in most engines. ✅ Use a subquery/CTE.
-- ❌ `WHERE ROW_NUMBER() OVER(...) = 1` → error. ✅ Compute the window in a CTE and filter outside.
-- ✅ `ORDER BY alias` works.
+- ✗ `WHERE SUM(x) > 10` → error. ✓ It goes in `HAVING`.
+- ✗ `WHERE alias > 10` (alias defined in the SELECT) → error in most engines. ✓ Use a subquery/CTE.
+- ✗ `WHERE ROW_NUMBER() OVER(...) = 1` → error. ✓ Compute the window in a CTE and filter outside.
+- ✓ `ORDER BY alias` works.
 
 ## 3. SELECT, WHERE, ORDER BY, LIMIT
 
@@ -130,7 +130,7 @@ Filter operators:
 | `COUNT(*)` | Counts **all** rows |
 | `COUNT(column)` | Counts rows where the column is **not** NULL |
 | `AVG(column)` | Ignores NULLs (divides only by the non-null values) |
-| `col NOT IN (1, 2, NULL)` | Never returns rows ⚠️ (if the `NOT IN` subquery can return NULL, use `NOT EXISTS`) |
+| `col NOT IN (1, 2, NULL)` | Never returns rows (if the `NOT IN` subquery can return NULL, use `NOT EXISTS`) |
 
 ```sql
 SELECT COUNT(*) AS total, COUNT(city) AS with_city FROM customers;  -- 10 and 9
@@ -187,7 +187,7 @@ FROM employees e
 LEFT JOIN employees m ON m.emp_id = e.manager_id;
 ```
 
-⚠️ **Classic trap:** if you put a condition on the right table in the `WHERE` of a `LEFT JOIN`, it turns into an `INNER JOIN`. Put it in the `ON`:
+**Classic trap:** if you put a condition on the right table in the `WHERE` of a `LEFT JOIN`, it turns into an `INNER JOIN`. Put it in the `ON`:
 
 ```sql
 -- WRONG: removes customers without delivered orders (and those without orders)
@@ -200,7 +200,7 @@ SELECT c.name, o.order_id FROM customers c
 LEFT JOIN orders o ON o.customer_id = c.customer_id AND o.status = 'delivered';
 ```
 
-⚠️ **Cardinality:** if you join A with B and each row of A has 3 matches in B, you get 3 rows per row of A. That is why a `SUM` after a JOIN can come out **inflated**. Always ask yourself: how many rows per key are there on each side?
+**Cardinality:** if you join A with B and each row of A has 3 matches in B, you get 3 rows per row of A. That is why a `SUM` after a JOIN can come out **inflated**. Always ask yourself: how many rows per key are there on each side?
 
 ## 7. Subqueries and CTEs
 
@@ -257,7 +257,7 @@ SELECT
 FROM orders;
 ```
 
-> 💡 `100.0 * x / y`: the `.0` avoids **integer division** (in SQLite, PostgreSQL and SQL Server `3/2 = 1`).
+> **Tip:** `100.0 * x / y`: the `.0` avoids **integer division** (in SQLite, PostgreSQL and SQL Server `3/2 = 1`).
 
 ## 9. Window functions
 
@@ -303,7 +303,7 @@ SELECT order_id, AVG(order_id) OVER (ORDER BY order_id ROWS BETWEEN 2 PRECEDING 
 FROM orders;
 ```
 
-> ⚠️ `LAST_VALUE` with `ORDER BY` uses the default frame `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, so it returns the **current** row. For the real last value use `ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`.
+> **Warning:** `LAST_VALUE` with `ORDER BY` uses the default frame `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, so it returns the **current** row. For the real last value use `ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`.
 
 ## 10. UNION, INTERSECT, EXCEPT
 
@@ -345,7 +345,7 @@ CREATE TABLE reviews (
     created_at DATE DEFAULT CURRENT_DATE
 );
 INSERT INTO reviews (review_id, product_id, rating) VALUES (1, 2, 5);
-UPDATE products SET price = price * 1.10 WHERE category = 'Stationery';   -- ⚠️ without WHERE it updates EVERYTHING
+UPDATE products SET price = price * 1.10 WHERE category = 'Stationery';   -- without WHERE it updates EVERYTHING
 DELETE FROM reviews WHERE rating < 2;
 CREATE INDEX idx_orders_customer ON orders(customer_id);
 CREATE VIEW v_delivered AS SELECT * FROM orders WHERE status = 'delivered';
@@ -387,7 +387,7 @@ If the test does not say which engine it uses, it is most likely **PostgreSQL, M
 | If null | `COALESCE(a,b)` | `IFNULL(a,b)` / `COALESCE` | `ISNULL(a,b)` / `COALESCE` |
 | Auto-increment | `SERIAL` / `GENERATED AS IDENTITY` | `AUTO_INCREMENT` | `IDENTITY(1,1)` |
 
-> 💡 `COALESCE` works **everywhere**. Use it and you cannot go wrong.
+> **Tip:** `COALESCE` works **everywhere**. Use it and you cannot go wrong.
 
 ---
 

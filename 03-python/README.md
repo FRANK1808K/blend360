@@ -1,6 +1,6 @@
 # 03 · Python — Lo que necesitas para la prueba técnica
 
-🌐 **Español** · [English](README.en.md)
+**Español** · [English](README.en.md)
 
 > Según los reportes de candidatos, la prueba online de Blend360 suele traer **problemas de programación en Python (o R) junto con SQL**, con tiempo limitado. Además, pueden aparecer preguntas de opción múltiple tipo "¿qué imprime este código?". Aquí cubres las dos cosas.
 
@@ -46,11 +46,11 @@ python3 test_ejercicios.py soluciones   # verifica las soluciones de referencia
 | `int` | `42` | — |
 | `float` | `3.14` | — |
 | `bool` | `True`, `False` (son subclase de `int`: `True + True == 2`) | — |
-| `str` | `"hola"` | ❌ No |
-| `list` | `[1, 2, 3]` | ✅ Sí |
-| `tuple` | `(1, 2, 3)` — una tupla de un solo elemento es `(1,)` | ❌ No |
-| `set` | `{1, 2, 3}` — sin orden, sin duplicados. **`{}` es un dict vacío**; set vacío = `set()` | ✅ Sí |
-| `dict` | `{"a": 1}` — mantiene el orden de inserción (Python 3.7+) | ✅ Sí |
+| `str` | `"hola"` | ✗ No |
+| `list` | `[1, 2, 3]` | ✓ Sí |
+| `tuple` | `(1, 2, 3)` — una tupla de un solo elemento es `(1,)` | ✗ No |
+| `set` | `{1, 2, 3}` — sin orden, sin duplicados. **`{}` es un dict vacío**; set vacío = `set()` | ✓ Sí |
+| `dict` | `{"a": 1}` — mantiene el orden de inserción (Python 3.7+) | ✓ Sí |
 | `None` | Ausencia de valor | — |
 
 | Operador | Resultado | Ojo |
@@ -154,7 +154,7 @@ sorted(palabras, key=len)            # lambda/función como criterio
 
 - Una función sin `return` devuelve `None`.
 - `*args` recibe posicionales extra como **tupla**; `**kwargs` recibe nombrados extra como **dict**.
-- ⚠️ **Argumento por defecto mutable:** `def f(x, lista=[])` comparte la **misma** lista entre llamadas. Usa `lista=None` y dentro `if lista is None: lista = []`.
+- **Argumento por defecto mutable:** `def f(x, lista=[])` comparte la **misma** lista entre llamadas. Usa `lista=None` y dentro `if lista is None: lista = []`.
 - **Alcance (scope) LEGB:** Local → Enclosing → Global → Built-in.
 
 ## 6. Comprensiones
@@ -254,9 +254,9 @@ c = a.copy()     # copia superficial (también a[:] o list(a))
 import copy
 d = copy.deepcopy(matriz)   # copia profunda (listas dentro de listas)
 
-m = [[0] * 3] * 3   # ⚠️ 3 referencias a la MISMA fila
+m = [[0] * 3] * 3   # 3 referencias a la MISMA fila
 m[0][0] = 1         # [[1,0,0],[1,0,0],[1,0,0]]
-m = [[0] * 3 for _ in range(3)]   # ✅ forma correcta
+m = [[0] * 3 for _ in range(3)]   # ✓ forma correcta
 ```
 
 ## 11. Quiz: ¿qué imprime?

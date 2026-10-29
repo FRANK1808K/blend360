@@ -1,6 +1,6 @@
 # Cheat sheet: statistics and ML (1 page)
 
-🌐 [Español](estadistica-ml.md) · **English**
+[Español](estadistica-ml.md) · **English**
 
 **Descriptive:** mean (sensitive to outliers) · **median** (robust; use it for income) · mode · sample variance Σ(x − x̄)²/(**n − 1**) · standard deviation = √var · IQR = Q3 − Q1 · outlier if < Q1 − 1.5·IQR or > Q3 + 1.5·IQR · z = (x − x̄)/s · right-skewed ⇒ mean > median.
 
@@ -19,7 +19,7 @@
 | Categorical | Chi-square |
 | Non-normal: independent / paired | Mann-Whitney U / Wilcoxon |
 
-**A/B:** hypothesis → baseline → minimum effect → **sample size** (α = 0.05, power = 0.8) → duration in full weeks → randomize users → **no peeking** → two-proportion z. Examples: 10 % vs. 12 % with 2,000 per group → p = 0.043 ✅ · with 200 per group → p = 0.52 ❌ · detecting 10 % → 10.5 % needs ≈ 57,763 per group.
+**A/B:** hypothesis → baseline → minimum effect → **sample size** (α = 0.05, power = 0.8) → duration in full weeks → randomize users → **no peeking** → two-proportion z. Examples: 10 % vs. 12 % with 2,000 per group → p = 0.043 ✓ · with 200 per group → p = 0.52 ✗ · detecting 10 % → 10.5 % needs ≈ 57,763 per group.
 
 **Correlation ≠ causation** · Pearson (linear) · Spearman (ranks) · **Linear regression:** β₁ = cov/var, β₀ = ȳ − β₁x̄; R² = explained variance; LINE assumptions · **Logistic** = classification (sigmoid).
 

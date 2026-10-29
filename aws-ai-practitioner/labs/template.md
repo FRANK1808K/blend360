@@ -93,7 +93,7 @@ export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output tex
 
 ## Limpieza
 
-> ⚠️ Ejecuta la limpieza en orden inverso a la creación para evitar dependencias huérfanas y cargos recurrentes.
+> **Atención:** Ejecuta la limpieza en orden inverso a la creación para evitar dependencias huérfanas y cargos recurrentes.
 
 ```bash
 # comandos de borrado

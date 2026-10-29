@@ -4,17 +4,17 @@ Preguntas **originales** de estilo AIF-C01, organizadas por dominio. No son preg
 
 | Archivo | Dominio | Preguntas |
 |---|---|---|
-| ⭐ [`mock-exam-01.md`](mock-exam-01.md) | **Simulacro completo** (todos los dominios, incluye temas v1.1 🆕) | 65 |
-| ⭐ [`mock-exam-02.md`](mock-exam-02.md) | **Simulacro de escenario**, más difícil (todos los dominios, incluye v1.1 🆕) | 65 |
+| ★ [`mock-exam-01.md`](mock-exam-01.md) | **Simulacro completo** (todos los dominios, incluye temas v1.1) | 65 |
+| ★ [`mock-exam-02.md`](mock-exam-02.md) | **Simulacro de escenario**, más difícil (todos los dominios, incluye v1.1) | 65 |
 | [`domain-01-questions.md`](domain-01-questions.md) | D1 — Fundamentos de IA y ML (20 %) | 6 |
 | [`domain-02-questions.md`](domain-02-questions.md) | D2 — Fundamentos de IA Generativa (24 %) | 6 |
 | [`domain-03-questions.md`](domain-03-questions.md) | D3 — Aplicaciones de FMs (28 %) | 6 |
 | [`domain-04-questions.md`](domain-04-questions.md) | D4 — IA Responsable (14 %) | 6 |
 | [`domain-05-questions.md`](domain-05-questions.md) | D5 — Seguridad, Cumplimiento y Gobernanza (14 %) | 6 |
 
-> 💻 Haz los simulacros en el [simulador interactivo](../simulator/README.md): interfaz en blanco como la del examen, cronómetro, marcadores, botón «Ver en inglés» e informe por dominio.
+> Haz los simulacros en el [simulador interactivo](../simulator/README.md): interfaz en blanco como la del examen, cronómetro, marcadores, botón «Ver en inglés» e informe por dominio.
 >
-> 🇬🇧 **Versiones en inglés:** [Mock Exam 01](en/mock-exam-01.md) · [Mock Exam 02](en/mock-exam-02.md), con la terminología del examen original y la misma numeración.
+> **Versiones en inglés:** [Mock Exam 01](en/mock-exam-01.md) · [Mock Exam 02](en/mock-exam-02.md), con la terminología del examen original y la misma numeración.
 
 ## Formato del examen real
 
@@ -46,13 +46,13 @@ Preguntas **originales** de estilo AIF-C01, organizadas por dominio. No son preg
 - D. <opción>
 
 <details>
-<summary>▶ Ver respuesta</summary>
+<summary>Ver respuesta</summary>
 
 **Respuesta correcta:** X
 
-- **X ✅** <por qué es correcta>
-- **Y ❌** <por qué no>
+- **X ✓** <por qué es correcta>
+- **Y ✗** <por qué no>
 
-📚 Referencia: [Dominio N — sección](../domains/...)
+Referencia: [Dominio N — sección](../domains/...)
 </details>
 ```

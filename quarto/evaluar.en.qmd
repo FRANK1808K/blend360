@@ -6,7 +6,7 @@ toc-title: "On this page"
 ---
 
 ::: {.lang-switch}
-🌐 [Español](evaluar.qmd) · **English**
+[Español](evaluar.qmd) · **English**
 :::
 
 Testing yourself is not the end of studying: it is the fastest way to learn. Climb this ladder in order and log every result in [My progress](progreso.en.qmd).
@@ -36,7 +36,7 @@ Testing yourself is not the end of studying: it is the fastest way to learn. Cli
 | [Technical mock #1](simulacros/simulacro-tecnico-01.en.qmd) | All of part 2 | 40 + 3 coding | 90 min | ≥ 34/40 |
 | [Simulator: reasoning](simulador/index.html) | Randomly generated figures: never the same | 30 | 30 min | ≥ 24 |
 | [Simulator: technical](simulador/index.html) | Bank of 60 questions in English | 40 | 50 min | ≥ 34 |
-| [Simulator: SQL challenge](simulador/index.html) | 5 🟡–🔴 queries without solutions | 5 | 60 min | 5/5 |
+| [Simulator: SQL challenge](simulador/index.html) | 5 intermediate-to-challenge queries without solutions | 5 | 60 min | 5/5 |
 
 ### AWS AI Practitioner (AIF-C01)
 

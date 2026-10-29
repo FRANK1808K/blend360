@@ -1,6 +1,6 @@
 # Cheatsheet: SQL (1 página)
 
-🌐 **Español** · [English](sql.en.md)
+**Español** · [English](sql.en.md)
 
 ```sql
 -- Orden de ESCRITURA                       -- Orden LÓGICO de ejecución
@@ -36,7 +36,7 @@ LIMIT 10 OFFSET 0;                          -- 8 LIMIT
 **Empates (9000, 9000, 7000):** `ROW_NUMBER` 1, 2, 3 · `RANK` 1, 1, 3 · `DENSE_RANK` 1, 1, 2.
 
 **JOINs:** `INNER` = solo coincidencias · `LEFT` = toda la izquierda + NULL · `FULL` = todo · `CROSS` = A × B · Self join = la tabla consigo misma.
-⚠️ Un filtro sobre la tabla derecha en el `WHERE` convierte el `LEFT` en `INNER` → ponlo en el `ON`.
+**Atención:** Un filtro sobre la tabla derecha en el `WHERE` convierte el `LEFT` en `INNER` → ponlo en el `ON`.
 
 **UNION** (sin duplicados) vs. **UNION ALL** (con duplicados, más rápido). **DELETE** (DML, filtra) vs. **TRUNCATE** (DDL, todo) vs. **DROP** (borra la tabla).
 

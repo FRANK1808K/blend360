@@ -1,6 +1,6 @@
 # Cheatsheet: algoritmos y estructuras (1 página)
 
-🌐 **Español** · [English](algoritmos.en.md)
+**Español** · [English](algoritmos.en.md)
 
 **Big O (de mejor a peor):** O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ) < O(n!)
 Bucles seguidos → se **suman**. Bucles anidados → se **multiplican**. Dividir a la mitad en cada paso → **log n**.
@@ -17,11 +17,11 @@ Bucles seguidos → se **suman**. Bucles anidados → se **multiplican**. Dividi
 
 | Ordenamiento | Promedio | Peor | Estable | Nota |
 |---|---|---|---|---|
-| Bubble / Insertion | O(n²) | O(n²) | ✅ | O(n) si ya está ordenado |
-| Selection | O(n²) | O(n²) | ❌ | |
-| **Merge** | O(n log n) | **O(n log n)** | ✅ | Espacio O(n) |
-| **Quick** | O(n log n) | **O(n²)** | ❌ | Pivote malo |
-| Heap | O(n log n) | O(n log n) | ❌ | Espacio O(1) |
+| Bubble / Insertion | O(n²) | O(n²) | ✓ | O(n) si ya está ordenado |
+| Selection | O(n²) | O(n²) | ✗ | |
+| **Merge** | O(n log n) | **O(n log n)** | ✓ | Espacio O(n) |
+| **Quick** | O(n log n) | **O(n²)** | ✗ | Pivote malo |
+| Heap | O(n log n) | O(n log n) | ✗ | Espacio O(1) |
 
 **Búsqueda binaria:** requiere datos **ordenados**, O(log n): ~10 pasos para 1.000 elementos y ~20 para 1.000.000.
 

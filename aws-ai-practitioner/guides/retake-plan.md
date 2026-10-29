@@ -4,11 +4,11 @@
 >
 > | Dominio | Peso | Resultado |
 > |---|---|---|
-> | D1 — Fundamentos de IA y ML | 20 % | 🟧 Necesita mejora |
-> | D2 — Fundamentos de IA generativa | 24 % | ✅ Cumple con las competencias |
-> | D3 — Aplicaciones de modelos fundacionales | 28 % | 🟧 Necesita mejora |
-> | D4 — IA responsable | 14 % | 🟧 Necesita mejora |
-> | D5 — Seguridad, cumplimiento y gobernanza | 14 % | 🟧 Necesita mejora |
+> | D1 — Fundamentos de IA y ML | 20 % | Necesita mejora |
+> | D2 — Fundamentos de IA generativa | 24 % | ✓ Cumple con las competencias |
+> | D3 — Aplicaciones de modelos fundacionales | 28 % | Necesita mejora |
+> | D4 — IA responsable | 14 % | Necesita mejora |
+> | D5 — Seguridad, cumplimiento y gobernanza | 14 % | Necesita mejora |
 >
 > **Reintento posible desde el 12-oct-2026** (14 días de espera tras un suspenso).
 
@@ -22,9 +22,9 @@
 
 | Prioridad | Dominio | Por qué |
 |---|---|---|
-| 🥇 1 | **D3 (28 %)** | El mayor peso. Selección de servicios: Bedrock (KB, Agents, Guardrails), JumpStart, servicios de IA, Amazon Q/Quick, servicios agénticos nuevos. |
-| 🥈 2 | **D1 (20 %)** | Métricas (precisión/recall/F1/RMSE), tipos de aprendizaje, ciclo de vida de ML y servicios de SageMaker. Son preguntas "memorizables": mucho retorno por hora de estudio. |
-| 🥉 3 | **D5 (14 %)** | Responsabilidad compartida, IAM, PrivateLink, CloudTrail frente a invocation logging, modelos de precios. Muy de "palabra clave → servicio". |
+| 1 | **D3 (28 %)** | El mayor peso. Selección de servicios: Bedrock (KB, Agents, Guardrails), JumpStart, servicios de IA, Amazon Q/Quick, servicios agénticos nuevos. |
+| 2 | **D1 (20 %)** | Métricas (precisión/recall/F1/RMSE), tipos de aprendizaje, ciclo de vida de ML y servicios de SageMaker. Son preguntas "memorizables": mucho retorno por hora de estudio. |
+| 3 | **D5 (14 %)** | Responsabilidad compartida, IAM, PrivateLink, CloudTrail frente a invocation logging, modelos de precios. Muy de "palabra clave → servicio". |
 | 4 | **D4 (14 %)** | Clarify, Model Cards, Model Monitor, A2I y Guardrails: pocas herramientas, fáciles de asociar. |
 | Mantener | D2 (24 %) | Repaso ligero para no perder el nivel. |
 
@@ -61,7 +61,7 @@ Marca lo que recuerdes que te costó en el examen. **No anotes preguntas del exa
 | Dom 11 | **Práctica:** mini-retos de consola o [Lab 01](../labs/lab-01-rag-bedrock-knowledge-bases/README.md) | [Práctica](../resources/hands-on.md) | [ ] |
 | Lun 12 | D3 §2: **Bedrock vs. JumpStart** + D3 §3: servicios de IA (tabla "cuándo NO usarlo") | D3 | [ ] |
 | Mar 13 | D3 §4–5: prompts, Prompt Management, **evaluación** (LLM-as-a-judge, métricas de negocio) | D3 + v1.1 §6–7 | [ ] |
-| Mié 14 | ✍️ [Preguntas D3](../practice-questions/domain-03-questions.md) + escenarios 1–9 y 21–29 de la [matriz](../cheatsheets/exam-decision-matrix.md) + [pares que se confunden §1](../cheatsheets/confusable-pairs.md#1-dominio-3--servicios-de-ia-y-fms-28-) + flashcards D3 | Repo | [ ] |
+| Mié 14 | [Preguntas D3](../practice-questions/domain-03-questions.md) + escenarios 1–9 y 21–29 de la [matriz](../cheatsheets/exam-decision-matrix.md) + [pares que se confunden §1](../cheatsheets/confusable-pairs.md#1-dominio-3--servicios-de-ia-y-fms-28-) + flashcards D3 | Repo | [ ] |
 
 ### Semana 2 (15–21 oct) — D1 y D5
 
@@ -70,34 +70,34 @@ Marca lo que recuerdes que te costó en el examen. **No anotes preguntas del exa
 | Jue 15 | D1 §1–3: jerarquía AI/ML/DL/GenAI/**agéntica**, tipos de aprendizaje, **ML tradicional vs. FMs** | [D1](../domains/01-fundamentals-ai-ml/README.md) + v1.1 §2 | [ ] |
 | Vie 16 | D1 §5: **ciclo de vida de ML** y servicios de SageMaker por fase | D1 | [ ] |
 | Sáb 17 | D1 §6: **métricas** (haz tú mismo la tabla FP/FN → métrica) | D1 | [ ] |
-| Dom 18 | ✍️ [Preguntas D1](../practice-questions/domain-01-questions.md) + [pares §2](../cheatsheets/confusable-pairs.md#2-dominio-1--fundamentos-de-ml-20-) + flashcards D1 | Repo | [ ] |
+| Dom 18 | [Preguntas D1](../practice-questions/domain-01-questions.md) + [pares §2](../cheatsheets/confusable-pairs.md#2-dominio-1--fundamentos-de-ml-20-) + flashcards D1 | Repo | [ ] |
 | Lun 19 | D5 §1–3: **responsabilidad compartida**, Scoping Matrix, IAM, **PrivateLink** | [D5](../domains/05-security-compliance-governance/README.md) | [ ] |
 | Mar 20 | D5 §4–6: **CloudTrail vs. invocation logging**, CloudWatch, **costos**, gobernanza + v1.1 §8 (alucinaciones) | D5 + v1.1 | [ ] |
-| Mié 21 | ✍️ [Preguntas D5](../practice-questions/domain-05-questions.md) + escenarios 10–16 y 30–35 de la matriz + [pares §4](../cheatsheets/confusable-pairs.md#4-dominio-5--seguridad-cumplimiento-y-gobernanza-14-) | Repo | [ ] |
+| Mié 21 | [Preguntas D5](../practice-questions/domain-05-questions.md) + escenarios 10–16 y 30–35 de la matriz + [pares §4](../cheatsheets/confusable-pairs.md#4-dominio-5--seguridad-cumplimiento-y-gobernanza-14-) | Repo | [ ] |
 
 ### Semana 3 (22–28 oct) — D4 y primeros simulacros
 
 | Día | Tarea | Material | Hecho |
 |---|---|---|---|
 | Jue 22 | D4 completo: pilares, **Clarify, Model Cards, Model Monitor, A2I**, privacidad | [D4](../domains/04-responsible-ai/README.md) | [ ] |
-| Vie 23 | ✍️ [Preguntas D4](../practice-questions/domain-04-questions.md) + escenarios 17–20 y 32–33 + [pares §3](../cheatsheets/confusable-pairs.md#3-dominio-4--ia-responsable-14-) | Repo | [ ] |
-| Sáb 24 | 🧪 **Official Practice Question Set** (20 preguntas, Skill Builder) | [Oficial](../resources/practice-exams.md) | [ ] |
-| Dom 25 | 🧪 **[Simulacro 01](../practice-questions/mock-exam-01.md)** cronometrado en el [simulador](../simulator/README.md) (90 min) | Repo | [ ] |
+| Vie 23 | [Preguntas D4](../practice-questions/domain-04-questions.md) + escenarios 17–20 y 32–33 + [pares §3](../cheatsheets/confusable-pairs.md#3-dominio-4--ia-responsable-14-) | Repo | [ ] |
+| Sáb 24 | **Official Practice Question Set** (20 preguntas, Skill Builder) | [Oficial](../resources/practice-exams.md) | [ ] |
+| Dom 25 | **[Simulacro 01](../practice-questions/mock-exam-01.md)** cronometrado en el [simulador](../simulator/README.md) (90 min) | Repo | [ ] |
 | Lun 26 | Revisar **todos** los errores del simulacro y anotarlos en tu registro | [Método](../resources/practice-exams.md#2-método-para-sacar-el-máximo-partido) | [ ] |
 | Mar 27 | Repasar los dominios donde fallaste | Repo | [ ] |
-| Mié 28 | 🧪 Simulacro de terceros n.º 1 (Tutorials Dojo o Maarek) → **¿cumples los criterios? Reserva** | [Exámenes](../resources/practice-exams.md) | [ ] |
+| Mié 28 | Simulacro de terceros n.º 1 (Tutorials Dojo o Maarek) → **¿cumples los criterios? Reserva** | [Exámenes](../resources/practice-exams.md) | [ ] |
 
 ### Semana 4 (29 oct – 4 nov) — Consolidación
 
 | Día | Tarea | Hecho |
 |---|---|---|
 | Jue 29 | Revisión de errores del simulacro n.º 1 | [ ] |
-| Vie 30 | 🧪 Simulacro de terceros n.º 2 | [ ] |
-| Sáb 31 | 🧪 **[Simulacro 02](../practice-questions/mock-exam-02.md)** en el [simulador](../simulator/README.md) + revisión de errores | [ ] |
-| Dom 1 | 🧪 Simulacro de terceros n.º 3 (o el Official Pretest si tienes suscripción) | [ ] |
+| Vie 30 | Simulacro de terceros n.º 2 | [ ] |
+| Sáb 31 | **[Simulacro 02](../practice-questions/mock-exam-02.md)** en el [simulador](../simulator/README.md) + revisión de errores | [ ] |
+| Dom 1 | Simulacro de terceros n.º 3 (o el Official Pretest si tienes suscripción) | [ ] |
 | Lun 2 | Revisión final de errores | [ ] |
 | Mar 3 – Mié 4 | [Repaso final 48 h](../cheatsheets/final-review-48h.md) + [matriz de decisión](../cheatsheets/exam-decision-matrix.md) completa | [ ] |
-| **5–9 nov** | 🎯 **Examen** | [ ] |
+| **5–9 nov** | **Examen** | [ ] |
 
 ---
 

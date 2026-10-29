@@ -1,6 +1,6 @@
 # 07 · Resolución de problemas (+ lógica, matemática y estadística básica)
 
-🌐 **Español** · [English](README.en.md)
+**Español** · [English](README.en.md)
 
 > "Resolución de problemas" en una prueba de una empresa de datos suele mezclar tres cosas:
 >
@@ -23,7 +23,7 @@
 | **R**eview | Recorre el código a mano con el ejemplo **y** con los casos borde | 3 min |
 | **E**valuate | Indica la complejidad y si se puede mejorar | 1 min |
 
-> 🔑 **Una solución correcta O(n²) vale más que una O(n) que no funciona.** Primero haz que funcione y después optimiza si te sobra tiempo.
+> **Una solución correcta O(n²) vale más que una O(n) que no funciona.** Primero haz que funcione y después optimiza si te sobra tiempo.
 
 ### Checklist de casos borde (edge cases)
 
@@ -63,7 +63,7 @@ def big_customers(transactions, threshold=1000):
     return [c for c, _ in selected]
 ```
 
-**R:** `[(1, 600), (2, 1500), (1, 500)]` → totales `{1: 1100, 2: 1500}` → `[2, 1]` ✅. Lista vacía → `[]` ✅. Exactamente 1000 → se incluye (≥) ✅.
+**R:** `[(1, 600), (2, 1500), (1, 500)]` → totales `{1: 1100, 2: 1500}` → `[2, 1]` ✓. Lista vacía → `[]` ✓. Exactamente 1000 → se incluye (≥) ✓.
 **E:** O(n + k log k), con k = número de clientes. Espacio O(k).
 
 **El mismo problema en SQL:**

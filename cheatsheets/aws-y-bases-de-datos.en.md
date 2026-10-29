@@ -1,6 +1,6 @@
 # Cheat sheet: AWS + databases (1 page)
 
-🌐 [Español](aws-y-bases-de-datos.md) · **English**
+[Español](aws-y-bases-de-datos.md) · **English**
 
 **Cloud:** pay-as-you-go, on demand. **6 advantages:** variable instead of fixed expense · economies of scale · stop guessing capacity · speed and agility · stop maintaining data centers · go global in minutes.
 **IaaS** (EC2) · **PaaS** (Elastic Beanstalk) · **SaaS** (QuickSight, Gmail). **Region** > **AZ** (1+ data centers) · **edge location** (CloudFront).
@@ -15,13 +15,13 @@
 | Data lake / objects | **S3** (11 nines; classes Standard → IA → Glacier → Deep Archive) |
 | Automatic schema + catalog | **Glue crawler + Data Catalog** |
 | Serverless ETL (Spark) | **Glue** · no code: **DataBrew** |
-| Spark/Hadoop with control, Spot | **EMR** ⭐ (Blend is a delivery partner) |
+| Spark/Hadoop with control, Spot | **EMR** (Blend is a delivery partner) |
 | Serverless SQL on S3 | **Athena** (pay per TB scanned → Parquet + partitions) |
 | Data warehouse | **Redshift** (columnar, MPP, `COPY` from S3, Spectrum) |
 | Real-time streaming | **Kinesis Data Streams** · delivery to S3/Redshift without code: **Data Firehose** · Kafka: **MSK** |
 | Replicate a DB (CDC) | **DMS** · SaaS → S3: **AppFlow** |
 | Column/row permissions in the lake | **Lake Formation** · PII in S3: **Macie** · encryption: **KMS** |
-| BI dashboards | **QuickSight** ⭐ (in-memory SPICE) |
+| BI dashboards | **QuickSight** (in-memory SPICE) |
 | Logs / text search | **OpenSearch** |
 | Orchestrate | **Step Functions** · Airflow: **MWAA** |
 | ML / generative AI | **SageMaker AI** / **Bedrock** |

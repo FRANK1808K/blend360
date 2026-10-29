@@ -1,6 +1,6 @@
 # Cheat sheet: algorithms and data structures (1 page)
 
-🌐 [Español](algoritmos.md) · **English**
+[Español](algoritmos.md) · **English**
 
 **Big O (best to worst):** O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ) < O(n!)
 Sequential loops → **add**. Nested loops → **multiply**. Halving at each step → **log n**.
@@ -17,11 +17,11 @@ Sequential loops → **add**. Nested loops → **multiply**. Halving at each ste
 
 | Sorting | Average | Worst | Stable | Note |
 |---|---|---|---|---|
-| Bubble / Insertion | O(n²) | O(n²) | ✅ | O(n) if already sorted |
-| Selection | O(n²) | O(n²) | ❌ | |
-| **Merge** | O(n log n) | **O(n log n)** | ✅ | O(n) space |
-| **Quick** | O(n log n) | **O(n²)** | ❌ | Bad pivot |
-| Heap | O(n log n) | O(n log n) | ❌ | O(1) space |
+| Bubble / Insertion | O(n²) | O(n²) | ✓ | O(n) if already sorted |
+| Selection | O(n²) | O(n²) | ✗ | |
+| **Merge** | O(n log n) | **O(n log n)** | ✓ | O(n) space |
+| **Quick** | O(n log n) | **O(n²)** | ✗ | Bad pivot |
+| Heap | O(n log n) | O(n log n) | ✗ | O(1) space |
 
 **Binary search:** requires **sorted** data, O(log n): ~10 steps for 1,000 elements and ~20 for 1,000,000.
 

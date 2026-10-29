@@ -1,5 +1,5 @@
 ---
-pagetitle: "Blend360 · Study hub"
+pagetitle: "Blend360 Prep · Study hub"
 lang: en
 title-block-style: none
 toc: false
@@ -7,25 +7,31 @@ page-layout: full
 sidebar: false
 ---
 
-::: {.b-hero}
-[Blend360 All Star · AWS AI Practitioner]{.b-kicker}
-
-<h1>Everything you need to pass both tests, in one place</h1>
-
-[Learn in Spanish, practise in English and track your level with timed mock exams. Your progress is saved in this browser.]{.b-lead}
-
-<a class="b-btn primary" href="estudiar.en.html">📚 Start studying</a>
-<a class="b-btn" href="evaluar.en.html">🧪 Check my level</a>
-<a class="b-btn" href="simulador/index.html">🎯 Open the simulator</a>
-<a class="b-btn" href="index.html">🌐 Español</a>
-
-<div class="b-countdowns">
-<div class="b-count aws" data-countdown="aws"><div class="b-count-num">Nov 16</div><div class="b-count-label">AWS AI Practitioner (AIF-C01)</div></div>
-<div class="b-count blend" data-countdown="blend"><div class="b-count-num">Dec 18</div><div class="b-count-label">Blend360 All Star test</div></div>
+```{=html}
+<section class="b-hero">
+<canvas class="b-hero-canvas" aria-hidden="true"></canvas>
+<div class="b-hero-banner">Unofficial preparation for the <span>Blend360 All Star program</span></div>
+<div class="b-hero-body">
+<div class="b-hero-copy">
+<p class="b-h1" role="heading" aria-level="1"><span class="b-hl">Get ready</span> for the Blend360 entrance test</p>
+<p class="b-lead">Abstract reasoning, the technical test in English and the AWS AI Practitioner certification: theory, exercises with solutions and timed mock exams like the real day. Your progress is saved in this browser.</p>
+<a class="b-btn primary" href="estudiar.en.html">Start studying <span class="b-ico b-ico-arrow"></span></a>
+<a class="b-btn light" href="simulador/index.html">Take the mock test <span class="b-ico b-ico-next"></span></a>
 </div>
-:::
+<div class="b-hero-side b-countdowns">
+<div class="b-count blend" data-countdown="blend"><div class="b-count-num">Dec 18</div><div class="b-count-label">Blend360 All Star test</div></div>
+<div class="b-count aws" data-countdown="aws"><div class="b-count-num">Nov 16</div><div class="b-count-label">AWS AI Practitioner (AIF-C01)</div></div>
+</div>
+</div>
+<div class="b-hero-strip">
+<div><strong>30 min</strong><span>Part 1 · Abstract reasoning</span></div>
+<div><strong>90 min</strong><span>Part 2 · Technical test in English</span></div>
+<div><strong>65 questions</strong><span>AWS AI Practitioner · 90 min</span></div>
+</div>
+</section>
+```
 
-## What to do today
+<div class="b-section-head"><div><span class="b-kicker">This week</span><h2>What to do today</h2></div><p>The study plan follows the calendar: the current phase is highlighted.</p></div>
 
 <div class="b-timeline">
 <div class="aws" data-phase="1">Phase 1 · Oct 26 – Nov 16<br>AWS AIF-C01 + Blend360 base</div>
@@ -36,21 +42,21 @@ sidebar: false
 
 <div id="b-today" class="b-today">Open the [study plan](guides/plan-de-estudio.en.qmd) to see this week's tasks.</div>
 
-## How it is organised
+<div class="b-section-head"><div><span class="b-kicker">Study hub</span><h2>How it is organised</h2></div><p>Five areas, in the order you use them: learn, test yourself, review and track your progress.</p></div>
 
-<div class="b-grid">
-<a class="b-card" href="estudiar.en.html"><span class="b-card-icon">📚</span><span class="b-card-title">Study</span><span class="b-card-text">The theory for every topic of the test: abstract reasoning, SQL, Python, algorithms, databases, AWS, problem solving, statistics and technical English.</span><span class="b-card-meta">10 topics + technical English · path and priorities</span></a>
-<a class="b-card" href="evaluar.en.html"><span class="b-card-icon">🧪</span><span class="b-card-title">Practice and assess</span><span class="b-card-text">Exercises with solutions, timed mock exams like the real one and the lab to write SQL and Python in the browser.</span><span class="b-card-meta">185 exercises · 2 mock exams · simulator</span></a>
-<a class="b-card" href="cheatsheets/index.en.html"><span class="b-card-icon">🔁</span><span class="b-card-title">Review</span><span class="b-card-text">One-page sheets to print, the plan for the last 48 hours and the Anki flashcards.</span><span class="b-card-meta">6 cheat sheets · 209 flashcards</span></a>
-<a class="b-card aws" href="aws-ai-practitioner/index.en.html"><span class="b-card-icon">☁️</span><span class="b-card-title">AWS AI Practitioner</span><span class="b-card-text">Overview of the certification and both 65-question mock exams in English. The five domains are in the Spanish section.</span><span class="b-card-meta">130 questions in English · simulator</span></a>
-<a class="b-card" href="progreso.en.html"><span class="b-card-icon">📈</span><span class="b-card-title">My progress</span><span class="b-card-text">Pages studied, mock exam log with a chart, mistake notebook with review dates and a backup.</span><span class="b-card-meta">Saved in your browser</span></a>
+<div class="b-grid five">
+<a class="b-card" href="estudiar.en.html"><span class="b-card-icon"><span class="b-ico b-ico-book"></span></span><span class="b-card-go b-ico b-ico-arrow"></span><span class="b-card-title">Study</span><span class="b-card-text">The theory for every topic of the test: abstract reasoning, SQL, Python, algorithms, databases, AWS, problem solving, statistics and technical English.</span><span class="b-card-meta">10 topics + technical English</span></a>
+<a class="b-card feature" href="evaluar.en.html"><span class="b-card-icon"><span class="b-ico b-ico-check"></span></span><span class="b-card-go b-ico b-ico-arrow"></span><span class="b-card-title">Practice and assess</span><span class="b-card-text">Exercises with solutions, timed mock exams like the real one and the lab to write SQL and Python in the browser.</span><span class="b-card-meta">185 exercises · 2 mock exams · simulator</span></a>
+<a class="b-card" href="cheatsheets/index.en.html"><span class="b-card-icon"><span class="b-ico b-ico-repeat"></span></span><span class="b-card-go b-ico b-ico-arrow"></span><span class="b-card-title">Review</span><span class="b-card-text">One-page sheets to print, the plan for the last 48 hours and the Anki flashcards.</span><span class="b-card-meta">6 cheat sheets · 209 flashcards</span></a>
+<a class="b-card aws" href="aws-ai-practitioner/index.en.html"><span class="b-card-icon"><span class="b-ico b-ico-cloud"></span></span><span class="b-card-go b-ico b-ico-arrow"></span><span class="b-card-title">AWS AI Practitioner</span><span class="b-card-text">Overview of the certification and both 65-question mock exams in English. The five domains are in the Spanish section.</span><span class="b-card-meta">130 questions in English · simulator</span></a>
+<a class="b-card navy" href="progreso.en.html"><span class="b-card-icon"><span class="b-ico b-ico-chart"></span></span><span class="b-card-go b-ico b-ico-arrow"></span><span class="b-card-title">My progress</span><span class="b-card-text">Pages studied, mock exam log with a chart, mistake notebook with review dates and a backup.</span><span class="b-card-meta">Saved in your browser</span></a>
 </div>
 
-## Your progress
+<div class="b-section-head"><div><span class="b-kicker">Tracking</span><h2>Your progress</h2></div><p>Mark each page as studied with the button under its title.</p></div>
 
 <div id="b-home-progress" class="b-grid">Mark each page as studied with the button under its title.</div>
 
-## The two tests
+<div class="b-section-head"><div><span class="b-kicker">Format</span><h2>The two tests</h2></div></div>
 
 | Test | Date | Format | What it evaluates |
 |---|---|---|---|
@@ -58,11 +64,11 @@ sidebar: false
 | **Blend360 All Star: abstract reasoning** | Dec 18, 2026 | 30 min | Figure series, matrices, dominoes, number and letter series |
 | **Blend360 All Star: technical test** (in English) | Dec 18, 2026 | 90 min | SQL · Python · AWS and data analytics · algorithms · databases · data structures · problem solving |
 
-## The method in four steps
+<div class="b-section-head"><div><span class="b-kicker">Method</span><h2>The method in four steps</h2></div></div>
 
 <ol class="b-steps">
 <li class="b-step"><strong>Learn in Spanish</strong><p>Read each module with a goal: when you finish it you must be able to answer its self-assessment without looking.</p></li>
-<li class="b-step"><strong>Re-read and practise in English</strong><p>Every page has an English twin (🌐 at the top). Exercises are in English, like the test, with the translation hidden.</p></li>
+<li class="b-step"><strong>Re-read and practise in English</strong><p>Every page has an English twin (language switch at the top). Exercises are in English, like the test, with the translation hidden.</p></li>
 <li class="b-step"><strong>Test yourself against the clock</strong><p>Do the exercises without opening the solution, then the timed mock exams. Log every score in <a href="progreso.en.html">My progress</a>.</p></li>
 <li class="b-step"><strong>Review your mistakes, not everything</strong><p>Every miss goes to the mistake notebook with the rule you learned and a review date. That is your best study material.</p></li>
 </ol>

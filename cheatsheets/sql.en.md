@@ -1,6 +1,6 @@
 # Cheat sheet: SQL (1 page)
 
-🌐 [Español](sql.md) · **English**
+[Español](sql.md) · **English**
 
 ```sql
 -- WRITING order                            -- LOGICAL order of execution
@@ -36,7 +36,7 @@ LIMIT 10 OFFSET 0;                          -- 8 LIMIT
 **Ties (9000, 9000, 7000):** `ROW_NUMBER` 1, 2, 3 · `RANK` 1, 1, 3 · `DENSE_RANK` 1, 1, 2.
 
 **JOINs:** `INNER` = matches only · `LEFT` = all of the left + NULL · `FULL` = everything · `CROSS` = A × B · Self join = a table with itself.
-⚠️ A filter on the right table in the `WHERE` turns a `LEFT` into an `INNER` → put it in the `ON`.
+**Warning:** A filter on the right table in the `WHERE` turns a `LEFT` into an `INNER` → put it in the `ON`.
 
 **UNION** (no duplicates) vs. **UNION ALL** (with duplicates, faster). **DELETE** (DML, filters) vs. **TRUNCATE** (DDL, everything) vs. **DROP** (removes the table).
 
