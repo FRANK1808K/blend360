@@ -88,24 +88,47 @@ UPDATE accounts SET balance = balance + 100 WHERE id = 2;
 COMMIT;      -- o ROLLBACK; si algo falló
 ```
 
-**Problemas de concurrencia:** *dirty read* (leer datos no confirmados), *non-repeatable read* (la misma lectura da otro valor), *phantom read* (aparecen filas nuevas). Los **niveles de aislamiento**, de menor a mayor, son: Read Uncommitted → Read Committed → Repeatable Read → Serializable. Más aislamiento implica menos anomalías, pero también menos concurrencia.
+### Concurrencia y niveles de aislamiento (pregunta fija de examen)
 
-**Deadlock (interbloqueo):** dos transacciones se esperan mutuamente. El motor detecta el ciclo y aborta una de ellas.
+Cuando múltiples transacciones se ejecutan en paralelo, pueden ocurrir tres anomalías clásicas de concurrencia:
+
+1. **Lectura sucia (Dirty Read):** La transacción A lee datos modificados por la transacción B que **aún no han sido confirmados** (`COMMIT`). Si B hace `ROLLBACK`, A leyó datos que nunca existieron formalmente.
+2. **Lectura no repetible (Non-Repeatable Read):** La transacción A lee una fila. La transacción B modifica o borra esa misma fila y hace `COMMIT`. Si A vuelve a leer la fila, obtiene valores distintos.
+3. **Lectura fantasma (Phantom Read):** La transacción A consulta un rango de filas (ej. `WHERE salario > 5000`). La transacción B inserta una fila nueva que cumple la condición y hace `COMMIT`. Si A repite la consulta, aparece una fila "fantasma" que antes no estaba.
+
+| Nivel de aislamiento | Lectura sucia (*Dirty*) | Lectura no repetible | Lectura fantasma (*Phantom*) | Nivel de concurrencia |
+|---|:---:|:---:|:---:|:---:|
+| **Read Uncommitted** | Sí ocurre | Sí ocurre | Sí ocurre | Máxima (sin bloqueos de lectura) |
+| **Read Committed** (por defecto en PostgreSQL/SQL Server) | **No** | Sí ocurre | Sí ocurre | Alta |
+| **Repeatable Read** (por defecto en MySQL InnoDB) | **No** | **No** | Sí ocurre (mitigado con MVCC) | Media |
+| **Serializable** | **No** | **No** | **No** | Baja (bloqueo estricto por rangos) |
+
+> A mayor aislamiento, mayor consistencia de datos, pero menor concurrencia y mayor riesgo de bloqueos.
+
+**Deadlock (interbloqueo):** Ocurre cuando la transacción 1 bloquea la fila A y espera la fila B, mientras la transacción 2 bloquea la fila B y espera la fila A. El motor detecta el ciclo automáticamente, cancela (*aborta*) una de las dos y lanza un error para que la aplicación reintente.
 
 ## 6. Índices
 
-Un **índice** es una estructura auxiliar (normalmente un **árbol B / B-tree**) que permite encontrar filas sin recorrer toda la tabla, como el índice de un libro.
+Un **índice** es una estructura auxiliar que permite encontrar filas sin recorrer toda la tabla, como el índice alfabético al final de un libro.
 
 | ✓ Ventajas | ✗ Desventajas |
 |---|---|
-| Búsquedas, `JOIN`, `WHERE` y `ORDER BY` mucho más rápidos (O(log n) vs. O(n) del *full table scan*) | Ocupan espacio |
-| Garantizan unicidad (índice `UNIQUE`) | Hacen **más lentos** los `INSERT`, `UPDATE` y `DELETE` (hay que actualizar el índice) |
+| Búsquedas, `JOIN`, `WHERE` y `ORDER BY` mucho más rápidos ($O(\log n)$ vs. $O(n)$ del *full table scan*) | Ocupan espacio adicional en disco y RAM |
+| Garantizan unicidad (índice `UNIQUE`) | Hacen **más lentos** los `INSERT`, `UPDATE` y `DELETE` (el motor debe mantener el árbol) |
 
-- **Clustered index:** define el orden **físico** de los datos; solo hay uno por tabla (normalmente la PK).
-- **Non-clustered index:** estructura separada que apunta a las filas; puede haber varios.
-- **Cuándo indexar:** columnas usadas a menudo en `WHERE`, `JOIN` u `ORDER BY` y con muchos valores distintos (alta cardinalidad).
-- **Cuándo no:** tablas pequeñas, columnas con pocos valores distintos (por ejemplo, un booleano) o tablas con muchísimas escrituras.
-- Usa `EXPLAIN` (o `EXPLAIN ANALYZE`) para ver el plan de ejecución.
+### B-Tree vs. Hash Index
+
+| Característica | Índice B-Tree (predeterminado) | Índice Hash |
+|---|---|---|
+| **Estructura** | Árbol autobalanceado de búsqueda multinivel | Tabla hash con función hash y cubetas (*buckets*) |
+| **Operaciones soportadas** | Igualdad (`=`), rangos (`<`, `>`, `BETWEEN`), ordenamiento (`ORDER BY`), prefijos (`LIKE 'abc%'`) | **Solo igualdad exacta (`=`)** |
+| **Complejidad búsqueda** | $O(\log n)$ garantizado | $O(1)$ promedio |
+| **Caso de uso** | Casi todas las tablas relacionales y analíticas | Búsquedas de clave-valor estricta en memoria |
+
+- **Clustered index (Índice agrupado):** Define el ordenamiento **físico** de las filas en disco. Solo puede existir **uno por tabla** (generalmente la Primary Key).
+- **Non-clustered index (Índice no agrupado):** Estructura separada cuyas hojas contienen punteros físicos (*RowID* o valor de PK) hacia los datos reales. Puede haber múltiples por tabla.
+- **Cuándo indexar:** Columnas con **alta cardinalidad** (muchos valores distintos, ej. IDs, correos, fechas) muy consultadas en `WHERE` o `JOIN`.
+- **Cuándo evitarlo:** Tablas con pocas filas, columnas con baja cardinalidad (ej. un booleano `activo` con 50/50), o tablas de ingesta masiva con miles de escrituras por segundo.
 
 ## 7. Vistas, procedimientos y triggers
 
@@ -148,7 +171,16 @@ dim_customer ── fact_sales ── dim_product
 
 - **Snowflake schema:** las dimensiones se normalizan en subtablas (por ejemplo, `dim_product → dim_category`). Ahorra espacio, pero requiere más JOINs.
 - **Granularidad (grain):** qué representa **una fila** de la tabla de hechos (por ejemplo, "una línea de pedido").
-- **Slowly Changing Dimensions (SCD):** cómo guardar cambios en las dimensiones. **Tipo 1** sobrescribe el valor (sin historia). **Tipo 2** agrega una fila nueva con fechas de vigencia (conserva la historia).
+
+### Dimensiones de cambio lento (Slowly Changing Dimensions - SCD)
+
+En analítica de datos es vital saber cómo evoluciona la información descriptiva en el tiempo (por ejemplo, si un cliente se muda de ciudad):
+
+| Tipo SCD | Estrategia | Ventaja | Desventaja | Ejemplo (Cliente cambia de Bogotá a Medellín) |
+|---|---|---|---|---|
+| **SCD Tipo 1** | **Sobrescribir** el valor actual | Fácil de implementar, no aumenta el tamaño de la tabla | Se pierde todo el historial previo (las ventas pasadas parecerán de Medellín) | `ciudad = 'Medellín'` sobre la fila existente |
+| **SCD Tipo 2** | **Nueva fila** con control de fechas | **Conserva el historial completo** de auditoría y análisis temporal | Aumenta el número de filas en la dimensión; requiere llaves subrogadas | Fila 1: `ciudad='Bogotá'`, `fin='2024-03-01'`, `is_current=False`.<br>Fila 2: `ciudad='Medellín'`, `inicio='2024-03-01'`, `is_current=True` |
+| **SCD Tipo 3** | **Nueva columna** (`previous_city`) | Permite comparar el valor anterior sin duplicar filas | Solo guarda el estado anterior inmediato; no sirve para múltiples cambios | Columnas: `ciudad_actual = 'Medellín'`, `ciudad_anterior = 'Bogotá'` |
 
 ## 10. Data warehouse vs. data lake vs. lakehouse
 

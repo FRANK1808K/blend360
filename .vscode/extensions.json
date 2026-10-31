@@ -1,0 +1,22 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.debugpy",
+    "charliermarsh.ruff",
+    "ms-toolsai.jupyter",
+    "quarto.quarto",
+    "davidanson.vscode-markdownlint",
+    "bierner.markdown-preview-github-styles",
+    "alexcvzz.vscode-sqlite",
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-sqlite",
+    "amazonwebservices.aws-toolkit-vscode",
+    "ritwickdey.liveserver",
+    "mechatroner.rainbow-csv",
+    "grapecity.gc-excelviewer",
+    "redhat.vscode-yaml",
+    "pkief.material-icon-theme"
+  ]
+}
+

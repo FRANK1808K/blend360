@@ -177,6 +177,90 @@ def fib(n):
 | Elegir lo mejor localmente funciona | **Greedy (voraz)** | Máximo beneficio de acciones, intervalos |
 | Suma de rangos repetida | **Prefix sum** (sumas acumuladas) | Suma de subarreglo i..j en O(1) |
 
+### Plantillas de código (Blueprints) para los patrones clave
+
+En las pruebas de 90 minutos no hay tiempo para reinventar la rueda. Estas son las plantillas mentales exactas que debes aplicar:
+
+#### 1. Dos Punteros (Two Pointers) — Arreglos ordenados o palíndromos
+
+```python
+def dos_punteros(arr, objetivo):
+    izq, der = 0, len(arr) - 1
+    while izq < der:
+        suma_actual = arr[izq] + arr[der]
+        if suma_actual == objetivo:
+            return [izq, der]
+        elif suma_actual < objetivo:
+            izq += 1       # La suma es muy pequeña → incrementamos el menor
+        else:
+            der -= 1       # La suma es muy grande → decrementamos el mayor
+    return []
+```
+
+#### 2. Ventana Deslizante Dinámica (Sliding Window) — Substrings/Subarrays contiguos
+
+```python
+def ventana_deslizante(s):
+    izq = 0
+    frecuencia = {}
+    longitud_maxima = 0
+
+    for der in range(len(s)):
+        # 1. Expandir: incluir el elemento s[der]
+        char = s[der]
+        frecuencia[char] = frecuencia.get(char, 0) + 1
+
+        # 2. Contraer: mientras la ventana viole la condición (ej. caracteres repetidos)
+        while frecuencia[char] > 1:
+            char_izq = s[izq]
+            frecuencia[char_izq] -= 1
+            izq += 1
+
+        # 3. Registrar mejor resultado con la ventana válida actual
+        longitud_maxima = max(longitud_maxima, der - izq + 1)
+
+    return longitud_maxima
+```
+
+#### 3. Punteros Rápido y Lento (Fast & Slow Pointers) — Detección de ciclos
+
+```python
+def tiene_ciclo(nodo_cabeza):
+    tortuga = liebre = nodo_cabeza
+    while liebre and liebre.next:
+        tortuga = tortuga.next         # Avanza 1 paso
+        liebre = liebre.next.next      # Avanza 2 pasos
+        if tortuga == liebre:
+            return True                # Si se encuentran, existe un ciclo
+    return False
+```
+
+#### 4. BFS (Anchura con Cola) vs DFS (Profundidad con Recursión/Pila)
+
+| Criterio | BFS (Breadth-First Search) | DFS (Depth-First Search) |
+|---|---|---|
+| **Estructura** | **Cola (Queue / `deque`)** | **Pila (Stack)** o llamada recursiva |
+| **Exploración** | Nivel por nivel (concéntrico) | Lo más profundo posible antes de retroceder (*backtracking*) |
+| **Garantía** | **Camino más corto** en grafos/matrices sin pesos | No garantiza camino más corto |
+| **Uso típico** | Distancia mínima, laberintos, conexiones por grado | Conteo de islas, encontrar todos los caminos, ciclos |
+
+```python
+from collections import deque
+
+def bfs_camino_corto(inicio, destino, obtener_vecinos):
+    visitados = {inicio}
+    cola = deque([(inicio, 0)])   # (nodo_actual, distancia)
+    while cola:
+        nodo, distancia = cola.popleft()
+        if nodo == destino:
+            return distancia
+        for vecino in obtener_vecinos(nodo):
+            if vecino not in visitados:
+                visitados.add(vecino)
+                cola.append((vecino, distancia + 1))
+    return -1
+```
+
 ## 7. Trazado de pseudocódigo (muy común en opción múltiple)
 
 Practica "ser la computadora": haz una tabla con cada variable y actualízala línea por línea.

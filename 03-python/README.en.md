@@ -246,7 +246,7 @@ The 4 pillars: **encapsulation**, **abstraction**, **inheritance** and **polymor
 
 ```python
 a = [1, 2, 3]
-b = a            # b points to the SAME list
+b = a            # b points to the SAME list in memory
 b.append(4)
 print(a)         # [1, 2, 3, 4]  ← a changed too!
 
@@ -257,6 +257,66 @@ d = copy.deepcopy(matrix)   # deep copy (lists inside lists)
 m = [[0] * 3] * 3   # 3 references to the SAME row
 m[0][0] = 1         # [[1,0,0],[1,0,0],[1,0,0]]
 m = [[0] * 3 for _ in range(3)]   # ✓ the right way
+```
+
+### Mutable default arguments (interview trap #1)
+
+In Python, default arguments are evaluated **once**, when the function is *defined*, not on each call:
+
+```python
+def add_item(elem, item_list=[]):    # ❌ DANGER: mutable default list shared across calls
+    item_list.append(elem)
+    return item_list
+
+print(add_item(1))  # [1]
+print(add_item(2))  # [1, 2]  ← Did not return [2]! The list persists in memory
+
+# The idiomatic and correct pattern:
+def add_item_correct(elem, item_list=None):
+    if item_list is None:
+        item_list = []
+    item_list.append(elem)
+    return item_list
+```
+
+### Generators vs List Comprehensions (Memory Efficiency)
+
+In coding tests handling large streams of data, materializing full lists can trigger *Memory Limit Exceeded*:
+
+```python
+# List comprehension: generates ALL elements in RAM immediately
+squares_list = [x ** 2 for x in range(10_000_000)]  # Uses ~400 MB RAM
+
+# Generator expression: generates values on demand (Lazy evaluation, O(1) memory)
+squares_gen = (x ** 2 for x in range(10_000_000))    # Uses ~120 Bytes RAM
+
+# Generator function with yield:
+def counter(limit):
+    n = 0
+    while n < limit:
+        yield n
+        n += 1
+```
+
+### Parsing Inputs in Coderbyte / HackerRank
+
+In assessment platforms, inputs often arrive via `sys.stdin` or as serialized strings that you must parse:
+
+```python
+import sys
+import ast
+
+# 1. Read all lines from standard input
+lines = sys.stdin.read().splitlines()
+
+# 2. Parse arrays that arrive as string representations, e.g. "[1, 2, 3, 4]"
+raw_input = "[1, 2, 3, 4]"
+numbers = ast.literal_eval(raw_input)  # [1, 2, 3, 4] as real Python list
+# or without external libraries:
+numbers = [int(x.strip()) for x in raw_input.strip("[]").split(",") if x.strip()]
+
+# 3. Read space-separated integers on a single line
+values = list(map(int, sys.stdin.readline().split()))
 ```
 
 ## 11. Quiz: what is the output?

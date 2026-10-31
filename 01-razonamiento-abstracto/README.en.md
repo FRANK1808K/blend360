@@ -75,6 +75,29 @@ Vertical-axis reflection (left-right mirror): ↗ ↔ ↖ ,  ◐ ↔ ◑
 - Analyze the **top half** and the **bottom half separately**.
 - Typical patterns: +1, −1, +2, alternation, the bottom half of one tile equals the top half of the next, a constant sum.
 
+### Spatial Reasoning: Cube Folding & Net Deployments
+
+Extremely common in technical consultancy cognitive tests (SHL, Aon/cut-e):
+
+```text
+Cross Pattern (2D Cube Net):
+          ┌───┐
+          │ 1 │  ← Top face
+      ┌───┼───┼───┬───┐
+      │ 2 │ 3 │ 4 │ 5 │  ← Lateral faces (continuous strip of 4)
+      └───┼───┼───┴───┘
+          │ 6 │  ← Bottom face
+          └───┘
+```
+
+#### Golden Rules for Instant 3D Cube Elimination
+
+- **The Opposite Faces Rule (Crucial):**
+  - In an unfolded cube net, faces separated by exactly one intermediate square in a straight line are **opposite faces**.
+  - In the diagram: **(1 and 6)** are opposite; **(2 and 4)** are opposite; **(3 and 5)** are opposite.
+  - **Rule:** Two opposite faces **CAN NEVER be visible at the same time** in an isometric 3D view and cannot share an edge. If a 3D answer option shows face 2 and face 4 adjacent → **eliminate it immediately**.
+- **Relative Symbol Orientation:** When two adjacent faces contain directional icons, check where they point when folding the shared crease (e.g. does the arrow point toward or away from the circle face?).
+
 ## 4. Strategy for the 30 minutes
 
 1. **Look at the answer options first:** they tell you **what changes**. If all the options are the same arrow at different angles, the rule is about **rotation**.
@@ -84,6 +107,14 @@ Vertical-axis reflection (left-right mirror): ↗ ↔ ↖ ,  ◐ ↔ ◑
 5. **Check your rule** against **all** the figures, not only the first two.
 6. **Talk to yourself** in simple words: "rotates 90 to the right, the dot alternates, one side is added".
 7. Keep the pace: at **15 minutes** you should be halfway.
+
+### The 15-Second Aggressive Elimination Technique
+
+With 30 minutes for 30–40 questions, you have ~45 to 60 seconds per question. Never try to reconstruct the entire figure from scratch:
+
+- **Step 1 (Isolate a single feature):** Pick the simplest component (e.g. the black corner dot or the arrow rotation).
+- **Step 2 (Apply its rule):** If the arrow rotates 90° clockwise, immediately discard all options where the arrow is misaligned. This usually **eliminates 3 out of 5 options within 15 seconds**.
+- **Step 3 (Break ties):** Between the final 2 choices, spot their single difference (e.g. circle shading) and verify only that specific rule.
 
 ## 5. Training plan
 

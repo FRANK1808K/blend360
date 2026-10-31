@@ -75,6 +75,29 @@ Reflexión vertical (espejo izquierda-derecha): ↗ ↔ ↖ ,  ◐ ↔ ◑
 - Analiza la **mitad superior** y la **mitad inferior por separado**.
 - Patrones típicos: +1, −1, +2, alternancia, la mitad inferior de una ficha igual a la superior de la siguiente, suma constante.
 
+### Razonamiento espacial: Despliegue y doblado de cubos (Cube Folding)
+
+Muy común en pruebas psicométricas de consultoras tecnológicas (SHL, Aon/cut-e):
+
+```text
+Patrón de la Cruz (Desarrollo 2D de un cubo):
+          ┌───┐
+          │ 1 │  ← Cara superior
+      ┌───┼───┼───┬───┐
+      │ 2 │ 3 │ 4 │ 5 │  ← Caras laterales (línea continua de 4)
+      └───┼───┼───┴───┘
+          │ 6 │  ← Cara inferior
+          └───┘
+```
+
+#### Reglas de oro para descartar cubos 3D al instante
+
+- **La regla de las caras opuestas (crucial):**
+  - En una cruz o tira desplegada, dos caras separadas por exactamente una cara intermedia son **caras opuestas**.
+  - En el diagrama: **(1 y 6)** son opuestas; **(2 y 4)** son opuestas; **(3 y 5)** son opuestas.
+  - **Regla:** Dos caras opuestas **NUNCA pueden ser visibles al mismo tiempo** en una vista 3D isométrica ni compartir una arista común. Si una opción 3D muestra la cara 2 y la cara 4 juntas → **descartada de inmediato**.
+- **Orientación de símbolos relativos:** Si dos caras adyacentes tienen flechas o líneas, comprueba hacia dónde apuntan al doblar la arista (ej. si la flecha apunta hacia la cara con un círculo).
+
 ## 4. Estrategia para los 30 minutos
 
 1. **Primero mira las opciones de respuesta:** te dicen **qué cambia**. Si todas las opciones son la misma flecha en distintos ángulos, la regla es de **rotación**.
@@ -84,6 +107,14 @@ Reflexión vertical (espejo izquierda-derecha): ↗ ↔ ↖ ,  ◐ ↔ ◑
 5. **Verifica tu regla** con **todas** las figuras, no solo con las dos primeras.
 6. **Habla contigo mismo** con palabras simples: "gira 90 a la derecha, el punto alterna, se suma un lado".
 7. Lleva el ritmo: a los **15 minutos** deberías ir por la mitad.
+
+### Técnica del descarte agresivo en 15 segundos
+
+En 30 minutos para 30–40 preguntas dispones de ~45 a 60 segundos por pregunta. No intentes deducir la figura entera desde cero:
+
+- **Paso 1 (Aislar un elemento):** Elige el detalle más simple (ej. el punto negro en la esquina o la dirección de la flecha).
+- **Paso 2 (Aplicar su regla):** Si la flecha gira 90° en sentido horario, elimina de inmediato todas las opciones donde la flecha no apunte en esa dirección. Usualmente **eliminas 3 de las 5 opciones en 15 segundos**.
+- **Paso 3 (Desempatar):** Entre las 2 opciones restantes, busca cuál es la única diferencia entre ellas (ej. el sombreado de un círculo) y verifica solo esa regla específica.
 
 ## 5. Plan de entrenamiento
 

@@ -1,0 +1,59 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUTF8": "1"
+      }
+    },
+    {
+      "name": "Test: Python Exercises (03-python)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/03-python/test_ejercicios.py",
+      "cwd": "${workspaceFolder}/03-python",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUTF8": "1"
+      }
+    },
+    {
+      "name": "Test: Algorithm Problems (04-algoritmos)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/04-algoritmos-y-estructuras/test_problemas.py",
+      "cwd": "${workspaceFolder}/04-algoritmos-y-estructuras",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUTF8": "1"
+      }
+    },
+    {
+      "name": "Check: SQL Solutions",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/02-sql/check_solutions.py",
+      "cwd": "${workspaceFolder}/02-sql",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUTF8": "1"
+      }
+    },
+    {
+      "name": "Build: Quarto Study Site",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/build_site.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUTF8": "1"
+      }
+    }
+  ]
+}
+

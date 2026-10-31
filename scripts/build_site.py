@@ -470,7 +470,10 @@ def main() -> int:
     # Empty the folder instead of deleting it: a local server may be serving it.
     # Vacía la carpeta en vez de borrarla: puede haber un servidor local usándola.
     for old in out.iterdir() if out.exists() else []:
-        shutil.rmtree(old) if old.is_dir() else old.unlink()
+        try:
+            shutil.rmtree(old) if old.is_dir() else old.unlink()
+        except OSError:
+            pass
     shutil.copytree(STAGE / "_site", out, dirs_exist_ok=True)
     for line in warnings:
         print(line)

@@ -232,8 +232,8 @@ Ejemplo verificado: inversión en publicidad 1, 2, 3, 4, 5 → ventas 3, 5, 7, 9
 | Regresión lineal | Regresión | Recta que minimiza el error cuadrático | Interpretable, rápida | Solo relaciones lineales |
 | Regresión logística | Clasificación | Probabilidad con la función sigmoide | Interpretable, probabilística | Fronteras lineales |
 | Árbol de decisión | Ambos | Preguntas sí/no que dividen los datos (Gini o entropía) | Muy interpretable, sin escalado | Se sobreajusta fácil |
-| **Random forest** | Ambos | Muchos árboles con datos y variables aleatorias (*bagging*) que votan | Robusto, buen punto de partida | Menos interpretable |
-| **Gradient boosting** (XGBoost, LightGBM) | Ambos | Árboles secuenciales que corrigen los errores del anterior | Suele ser el más preciso en datos tabulares | Más hiperparámetros |
+| **Random forest** | Ambos | Muchos árboles con datos y variables aleatorias (*bagging*) que votan | Robusto, reduce varianza | Menos interpretable |
+| **Gradient boosting** (XGBoost, LightGBM) | Ambos | Árboles secuenciales que corrigen los errores del anterior (*boosting*) | Máxima precisión en tablas, reduce sesgo | Más hiperparámetros |
 | k-NN | Ambos | La clase de los k vecinos más cercanos | Simple | Lento con muchos datos; requiere escalado |
 | Naive Bayes | Clasificación | Bayes asumiendo variables independientes | Rápido; bueno para texto | El supuesto rara vez se cumple |
 | SVM | Ambos | Hiperplano con el **margen** máximo | Bueno en alta dimensión | Lento con muchos datos |
@@ -271,6 +271,28 @@ accuracy = (TP + TN) / total = 8/10 = 0.80        F1 = 2·P·R / (P + R) = 0.75
 | **ROC-AUC** | Capacidad de ordenar positivos sobre negativos (0,5 = azar; 1 = perfecto) | Comparar modelos sin fijar un umbral |
 
 > **Paradoja de la exactitud:** con 5 % de fraude, un modelo que dice siempre "no fraude" tiene **95 % de accuracy** y **0 % de recall** (verificado en el script). Con clases desbalanceadas, mira precision, recall, F1 o AUC.
+
+### ROC-AUC vs. PR-AUC (Pregunta típica en ciencia de datos)
+
+| Curva / Métrica | Ejes | Cuándo usarla | Trampa en entrevistas |
+|---|---|---|---|
+| **ROC-AUC** | True Positive Rate (Recall) vs. False Positive Rate | Clases **balanceadas** o moderadamente equilibradas (ej. 40/60) | En fraudes raros (< 1%), un gran número de Negativos Reales (TN) infla el denominador de FPR ($FP / (FP + TN)$), haciendo que ROC-AUC luzca engañosamente cercana a 0.98 |
+| **PR-AUC** (Precision-Recall) | Precision vs. Recall | Clases **altamente desbalanceadas** (ej. fraude al 1%, clics en anuncios al 0.1%) | Mide exclusivamente el rendimiento sobre la clase minoritaria de interés sin verse afectada por los negativos verdaderos abundantes |
+
+### Regularización: L1 (Lasso) vs. L2 (Ridge)
+
+La regularización añade un término de penalización a la función de pérdida para evitar el sobreajuste (*overfitting*):
+
+$$\text{Pérdida} = \text{Error Cuadrático (MSE)} + \lambda \cdot \text{Penalización}$$
+
+| Característica | L1 Regularization (Lasso) | L2 Regularization (Ridge) |
+|---|---|---|
+| **Término de penalización** | $\lambda \sum \lvert w_i \rvert$ (suma de valores absolutos) | $\lambda \sum w_i^2$ (suma de cuadrados) |
+| **Comportamiento geométrico** | La restricción tiene esquinas puntiagudas sobre los ejes de coordenadas | La restricción es una hiperesfera suave sin esquinas |
+| **Efecto sobre los pesos ($w$)** | Fuerza coeficientes a **exactamente cero** (selección automática de variables) | Encoge los pesos cerca de cero de forma proporcional, pero **nunca los hace exactamente cero** |
+| **Cuándo usarla** | Cuando sospechas que muchas variables son irrelevantes o ruido | Cuando hay **multicolinealidad** (variables muy correlacionadas entre sí) |
+
+> **ElasticNet:** Combina L1 y L2 ponderados para conservar lo mejor de ambos mundos.
 
 ## 10. Optimización e hiperparámetros
 

@@ -1,0 +1,31 @@
+{
+  "terminal.integrated.env.windows": {
+    "PYTHONUTF8": "1",
+    "PYTHONIOENCODING": "utf-8"
+  },
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
+    }
+  },
+  "markdownlint.config": "${workspaceFolder}/.markdownlint-cli2.jsonc",
+  "sqltools.connections": [
+    {
+      "name": "Blend360 SQLite (practice.db)",
+      "dialect": "SQLite",
+      "database": "${workspaceFolder}/02-sql/practice.db"
+    }
+  ],
+  "files.associations": {
+    "*.qmd": "quarto",
+    "*.sql": "sql"
+  },
+  "quarto.render.openPreview": true
+}
+

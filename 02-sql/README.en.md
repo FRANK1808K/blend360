@@ -305,6 +305,38 @@ FROM orders;
 
 > **Warning:** `LAST_VALUE` with `ORDER BY` uses the default frame `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, so it returns the **current** row. For the real last value use `ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`.
 
+### The window frame: `ROWS` vs `RANGE`
+
+The frame defines **which exact rows** inside the partition are included in the calculation at each step:
+
+```sql
+{ROWS | RANGE} BETWEEN <start> AND <end>
+```
+
+Possible values for `<start>` and `<end>`:
+
+- `UNBOUNDED PRECEDING`: From the start of the partition.
+- `n PRECEDING`: `n` rows before the current row.
+- `CURRENT ROW`: The current row.
+- `n FOLLOWING`: `n` rows after the current row.
+- `UNBOUNDED FOLLOWING`: To the end of the partition.
+
+#### The classic trap of `RANGE` vs `ROWS`
+
+If you use `ORDER BY` without specifying a frame (e.g. `SUM(total) OVER (ORDER BY order_date)`), SQL defaults to:
+`RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`.
+
+| Aspect | `ROWS` (physical) | `RANGE` (logical) |
+|---|---|---|
+| **Behavior** | Evaluates row by row individually | Treats rows with the **same ordering value** as a single block (*peers*) |
+| **With duplicates** | Accumulates row by row continuously | Adds **all rows with the same value at once** |
+| **Recommendation** | **Use `ROWS`** for strict running totals and moving averages | Use it only if rows with the same date/value should share the total |
+
+**Example of the difference:** if there are two sales on `2024-03-01` of 100 and 150:
+
+- With `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`: row 1 = 100, row 2 = 250.
+- With `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`: both rows show 250 immediately.
+
 ## 10. UNION, INTERSECT, EXCEPT
 
 | Operator | Result |
@@ -368,13 +400,59 @@ CREATE VIEW v_delivered AS SELECT * FROM orders WHERE status = 'delivered';
 | "Top N per category" | `ROW_NUMBER()/DENSE_RANK() OVER (PARTITION BY ...)` + filter in a CTE |
 | "Duplicate records" | `GROUP BY cols HAVING COUNT(*) > 1` |
 | "Customers without purchases" | `LEFT JOIN ... WHERE right.id IS NULL` or `NOT EXISTS` |
-| "Running total" | `SUM() OVER (ORDER BY date)` |
-| "Month-over-month (MoM) growth" | Aggregate by month + `LAG()` + `(current - previous) / previous` |
+| "Running total" | `SUM() OVER (ORDER BY date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)` |
+| "Month-over-month growth (MoM)" | Aggregate by month + `LAG()` + `(current - previous) / previous` |
 | "% of total" | `x / SUM(x) OVER ()` |
-| "Employees who earn more than their manager" | Self join |
+| "Employees earning more than their manager" | `Self-JOIN` comparing `e.salary > m.salary` |
 | "First purchase of each customer" | `MIN(date)` per customer, or `ROW_NUMBER() = 1` |
-| "Pivot / counts per status" | `SUM(CASE WHEN ... THEN 1 ELSE 0 END)` |
-| "Consecutive days" | `date - ROW_NUMBER()` (gaps and islands) |
+| "Pivot / conditional counts" | `SUM(CASE WHEN ... THEN 1 ELSE 0 END)` |
+| "Consecutive days / Activity streaks" | `date - ROW_NUMBER()` (*Gaps and Islands*) |
+
+### 1. Self-JOIN: Organizational hierarchies
+
+A favorite question in technical interviews for analytics and BI:
+
+```sql
+-- Employees who earn more than their direct manager
+SELECT e.name AS employee,
+       e.salary AS employee_salary,
+       m.name AS manager,
+       m.salary AS manager_salary
+FROM employees e
+JOIN employees m ON e.manager_id = m.emp_id
+WHERE e.salary > m.salary;
+```
+
+### 2. Gaps and Islands: Detecting streaks
+
+Detecting users with activity on consecutive days. If you subtract `ROW_NUMBER()` from each consecutive date, the resulting date is **identical for the entire streak**:
+
+```sql
+WITH streaks AS (
+    SELECT customer_id, order_date,
+           -- Subtracting the row number from date creates a unique identifier per streak
+           date(order_date, '-' || ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date) || ' days') AS streak_group
+    FROM orders
+)
+SELECT customer_id,
+       MIN(order_date) AS streak_start,
+       MAX(order_date) AS streak_end,
+       COUNT(*) AS consecutive_days
+FROM streaks
+GROUP BY customer_id, streak_group
+HAVING COUNT(*) >= 2;
+```
+
+### 3. SARGable Queries and Index Optimization
+
+In performance tests and senior interviews, you are often asked why a query is slow despite having indexes. A query is **SARGable** (*Search Argument Able*) when the database engine can leverage a B-Tree index directly via an *Index Seek/Range Scan*, instead of scanning the full table (*Full Table Scan*).
+
+| Non-SARGable Antipattern (Slow ❌) | SARGable Alternative (Optimal ✔️) | Why |
+|---|---|---|
+| `WHERE strftime('%Y', order_date) = '2024'` | `WHERE order_date >= '2024-01-01' AND order_date < '2025-01-01'` | Applying functions to the column forces the engine to calculate the function on every row |
+| `WHERE salary * 1.10 > 10000` | `WHERE salary > 10000 / 1.10` | Evaluates the operation on the constant, keeping the indexed column clean |
+| `WHERE name LIKE '%pro%'` | `WHERE name LIKE 'pro%'` | B-Tree indexes search from left to right. Leading `%` invalidates the index seek |
+| `WHERE COALESCE(city, 'N/A') = 'Bogotá'` | `WHERE city = 'Bogotá'` | A wrapper function hides values from the index |
 
 ## 14. Differences between engines
 

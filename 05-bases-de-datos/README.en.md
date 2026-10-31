@@ -88,24 +88,47 @@ UPDATE accounts SET balance = balance + 100 WHERE id = 2;
 COMMIT;      -- or ROLLBACK; if something failed
 ```
 
-**Concurrency problems:** *dirty read* (reading uncommitted data), *non-repeatable read* (the same read returns a different value), *phantom read* (new rows appear). **Isolation levels**, from lowest to highest: Read Uncommitted → Read Committed → Repeatable Read → Serializable. More isolation means fewer anomalies, but also less concurrency.
+### Concurrency and isolation levels (frequent exam question)
 
-**Deadlock:** two transactions wait for each other. The engine detects the cycle and aborts one of them.
+When multiple transactions execute concurrently, three classic concurrency anomalies can occur:
+
+1. **Dirty Read:** Transaction A reads data modified by Transaction B that has **not yet been committed** (`COMMIT`). If B rolls back (`ROLLBACK`), A read data that never formally existed.
+2. **Non-Repeatable Read:** Transaction A reads a row. Transaction B modifies or deletes that row and commits. If A rereads the row, it sees different values.
+3. **Phantom Read:** Transaction A queries a range of rows (e.g. `WHERE salary > 5000`). Transaction B inserts a new row satisfying the condition and commits. If A repeats the query, a "phantom" row appears.
+
+| Isolation level | Dirty read | Non-repeatable read | Phantom read | Concurrency level |
+|---|:---:|:---:|:---:|:---:|
+| **Read Uncommitted** | Occurs | Occurs | Occurs | Maximum (no read locks) |
+| **Read Committed** (default in PostgreSQL/SQL Server) | **No** | Occurs | Occurs | High |
+| **Repeatable Read** (default in MySQL InnoDB) | **No** | **No** | Occurs (mitigated by MVCC) | Medium |
+| **Serializable** | **No** | **No** | **No** | Lowest (strict range locking) |
+
+> Higher isolation yields greater consistency, but lower concurrency and higher lock contention.
+
+**Deadlock:** Occurs when Transaction 1 holds a lock on row A and requests row B, while Transaction 2 holds a lock on row B and requests row A. The database engine detects the cycle automatically, aborts one transaction, and raises an error so the application can retry.
 
 ## 6. Indexes
 
-An **index** is an auxiliary structure (usually a **B-tree**) that finds rows without scanning the whole table, like the index of a book.
+An **index** is an auxiliary data structure that finds rows without scanning the whole table, like an index at the back of a book.
 
 | ✓ Advantages | ✗ Disadvantages |
 |---|---|
-| Much faster searches, `JOIN`s, `WHERE` and `ORDER BY` (O(log n) vs. the O(n) *full table scan*) | They take up space |
-| They guarantee uniqueness (`UNIQUE` index) | They make `INSERT`, `UPDATE` and `DELETE` **slower** (the index must be updated) |
+| Searches, `JOIN`s, `WHERE` and `ORDER BY` are much faster ($O(\log n)$ vs. $O(n)$ *full table scan*) | Consumes additional disk space and buffer memory |
+| Guarantees uniqueness (`UNIQUE` index) | Makes `INSERT`, `UPDATE` and `DELETE` **slower** (the engine must update the index tree) |
 
-- **Clustered index:** defines the **physical** order of the data; only one per table (usually the PK).
-- **Non-clustered index:** a separate structure that points to the rows; there can be several.
-- **When to index:** columns often used in `WHERE`, `JOIN` or `ORDER BY` with many distinct values (high cardinality).
-- **When not to:** small tables, columns with few distinct values (e.g., a boolean), or tables with a huge number of writes.
-- Use `EXPLAIN` (or `EXPLAIN ANALYZE`) to see the execution plan.
+### B-Tree vs. Hash Index
+
+| Feature | B-Tree Index (default) | Hash Index |
+|---|---|---|
+| **Structure** | Multi-level self-balancing search tree | Hash table with hash function and buckets |
+| **Supported operators** | Equality (`=`), ranges (`<`, `>`, `BETWEEN`), ordering (`ORDER BY`), prefix search (`LIKE 'abc%'`) | **Strict equality only (`=`)** |
+| **Lookup complexity** | Guaranteed $O(\log n)$ | Average $O(1)$ |
+| **Typical use** | Relational and analytical tables | In-memory key-value lookups |
+
+- **Clustered index:** Defines the **physical** storage order of rows on disk. Only **one per table** can exist (typically the Primary Key).
+- **Non-clustered index:** A separate structure whose leaf nodes point (*RowID* or PK value) to data rows. Multiple non-clustered indexes can exist per table.
+- **When to index:** Columns with **high cardinality** (many unique values, e.g. IDs, emails, dates) frequently filtered in `WHERE` or joined in `JOIN`.
+- **When to avoid:** Small lookup tables, low-cardinality flags (e.g. boolean `active` with 50/50 distribution), or write-heavy ingestion staging tables.
 
 ## 7. Views, procedures and triggers
 
@@ -148,7 +171,16 @@ dim_customer ── fact_sales ── dim_product
 
 - **Snowflake schema:** the dimensions are normalized into sub-tables (e.g., `dim_product → dim_category`). Saves space but requires more JOINs.
 - **Grain:** what **one row** of the fact table represents (e.g., "one order line").
-- **Slowly Changing Dimensions (SCD):** how to store changes in dimensions. **Type 1** overwrites the value (no history). **Type 2** adds a new row with validity dates (keeps history).
+
+### Slowly Changing Dimensions (SCD)
+
+In data analytics, tracking how descriptive attributes change over time is essential (e.g., when a customer moves cities):
+
+| SCD Type | Strategy | Advantage | Disadvantage | Example (Customer moves from Bogotá to Medellín) |
+|---|---|---|---|---|
+| **SCD Type 1** | **Overwrite** the existing value | Simple, does not increase table size | Loses all historical context (past sales appear attributed to Medellín) | `city = 'Medellín'` updated on existing row |
+| **SCD Type 2** | **New row** with versioning dates | **Preserves complete audit history** for point-in-time reporting | Table row count grows; requires surrogate keys | Row 1: `city='Bogotá'`, `end='2024-03-01'`, `is_current=False`.<br>Row 2: `city='Medellín'`, `start='2024-03-01'`, `is_current=True` |
+| **SCD Type 3** | **New column** (`previous_city`) | Compares old vs current without duplicating rows | Only stores one previous state; cannot handle multi-step transitions | Columns: `current_city = 'Medellín'`, `previous_city = 'Bogotá'` |
 
 ## 10. Data warehouse vs. data lake vs. lakehouse
 

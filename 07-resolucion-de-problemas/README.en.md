@@ -154,6 +154,38 @@ A structure to answer (you can say it in English in the interview, see [phrases]
 > **Example:** *"Weekly sales dropped 20%. How would you investigate?"*
 > → I confirm that the number is real (did the pipeline fail?) → I compare with the same week last year (seasonality) → I segment by channel, region and product to locate the drop → I check the funnel (visits → cart → purchase) to see at which step it drops → I check recent changes (prices, campaigns, website deployments) → I recommend an action and define a KPI to monitor it.
 
+### The Metric Tree Framework (Root Cause Analysis - RCA)
+
+In an analytics consultancy like Blend360, demonstrating structured analytical reasoning means **decomposing high-level metrics into their irreducible mathematical drivers** (MECE principle: Mutually Exclusive, Collectively Exhaustive):
+
+```text
+                                          TOTAL REVENUE
+                                                │
+                 ┌──────────────────────────────┴──────────────────────────────┐
+                 ▼                                                             ▼
+          TOTAL ORDERS                                                AVG ORDER VALUE (AOV)
+                 │                                                             │
+        ┌────────┴────────┐                                           ┌────────┴────────┐
+        ▼                 ▼                                           ▼                 ▼
+     TRAFFIC       CONVERSION (CVR)                            UNITS PER ORDER      AVG UNIT PRICE
+  • Organic        • Home → Product Page                       • Cross-selling      • Discounts
+  • Paid Ads       • Product Page → Cart                       • Bundles            • Product Mix
+  • Email / CRM    • Cart → Checkout
+  • Direct         • Checkout → Payment
+```
+
+#### 4-Step Protocol for Root Cause Investigations
+
+1. **Isolate the mathematical driver:** Did traffic drop, did conversion drop, or did customers purchase lower-ticket items (AOV)?
+2. **Segment across key dimensions:** Is the drop widespread or isolated?
+   - *By Geography:* Is it nationwide or limited to a single market?
+   - *By Platform:* Mobile App (iOS vs. Android) vs. Desktop web? (If isolated to iOS, suspect a bug from a recent release).
+   - *By Acquisition Channel:* Organic search, Paid Search, Social, or Direct?
+3. **Internal vs. External Root Causes:**
+   - *Internal:* Broken checkout build, payment gateway timeout, tracking tag failure, price changes.
+   - *External:* Post-holiday lull (e.g. week after Black Friday), new competitor promotion, macro seasonality.
+4. **Actionable Remediation & Monitoring:** Formulate a prioritized action plan paired with an operational guardrail metric.
+
 ## 6. Exercises
 
 **Logic and math:**

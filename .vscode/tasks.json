@@ -1,0 +1,160 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Run All Checks (Full CI Verification)",
+      "type": "shell",
+      "command": "python scripts/check_docs.py; python scripts/build_lab.py --check; python 02-sql/check_solutions.py; python 03-python/test_ejercicios.py soluciones; python 04-algoritmos-y-estructuras/test_problemas.py soluciones; python 03-python/pandas_practica.py; python 08-estadistica-y-ml/estadistica_ml_practica.py; markdownlint-cli2",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "options": {
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "2. Test Python Exercises (03-python)",
+      "type": "shell",
+      "command": "python test_ejercicios.py",
+      "options": {
+        "cwd": "${workspaceFolder}/03-python",
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "3. Test Algorithm Problems (04-algoritmos)",
+      "type": "shell",
+      "command": "python test_problemas.py",
+      "options": {
+        "cwd": "${workspaceFolder}/04-algoritmos-y-estructuras",
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "4. Check SQL Solutions (02-sql)",
+      "type": "shell",
+      "command": "python check_solutions.py",
+      "options": {
+        "cwd": "${workspaceFolder}/02-sql",
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "5. Run Pandas Practice (03-python)",
+      "type": "shell",
+      "command": "python pandas_practica.py",
+      "options": {
+        "cwd": "${workspaceFolder}/03-python",
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "6. Run Statistics & ML Practice (08-estadistica-y-ml)",
+      "type": "shell",
+      "command": "python estadistica_ml_practica.py",
+      "options": {
+        "cwd": "${workspaceFolder}/08-estadistica-y-ml",
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "7. Rebuild Practice SQLite Database",
+      "type": "shell",
+      "command": "python setup_db.py",
+      "options": {
+        "cwd": "${workspaceFolder}/02-sql",
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "8. Check Bilingual Twins and Internal Links",
+      "type": "shell",
+      "command": "python scripts/check_docs.py",
+      "options": {
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "9. Check Simulator Lab Sync",
+      "type": "shell",
+      "command": "python scripts/build_lab.py --check",
+      "options": {
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "10. Run Markdownlint",
+      "type": "shell",
+      "command": "markdownlint-cli2",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "11. Build Quarto Study Website",
+      "type": "shell",
+      "command": "python scripts/build_site.py",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "options": {
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "12. Preview Quarto Study Website (Live)",
+      "type": "shell",
+      "command": "python scripts/build_site.py --preview",
+      "options": {
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}
+

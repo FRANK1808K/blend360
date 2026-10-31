@@ -59,6 +59,16 @@ Fill in the template with your details, learn it by heart and record yourself sa
 - *I don't remember the exact syntax, but the idea is…*
 - *I would check the documentation, but my approach would be…*
 
+### Thinking Out Loud During Coding Tests (Live Coding / Think-Aloud)
+
+In Coderbyte tests or screen-shared technical interviews, interviewers evaluate **how you reason**. Use these connective templates:
+
+- *Let me start by clarifying the input constraints and edge cases: can the input list be empty or contain duplicates?*
+- *A naive brute-force approach would take $O(n^2)$ by checking every pair, but we can optimize it to $O(n)$ using a hash map.*
+- *I'm going to use two pointers converging from both ends because the array is already sorted.*
+- *Let's dry-run this code step-by-step with the sample input to verify there are no off-by-one errors.*
+- *The time complexity is $O(n)$ since we iterate through the list once, and the auxiliary space is $O(1)$ because we only use two integer variables.*
+
 ## 3. Typical questions with model answers
 
 ### "Tell me about yourself."

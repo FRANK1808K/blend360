@@ -78,21 +78,33 @@
 | **Redshift Spectrum** | Consultar desde Redshift datos que están en S3 sin cargarlos | Por datos escaneados | Unir el warehouse con el lake |
 | **Amazon OpenSearch Service** | Búsqueda y análisis de **logs** (Elasticsearch/OpenSearch + dashboards) | Por instancia / serverless | Búsqueda de texto, observabilidad, análisis de logs |
 
-**Cómo bajar costos y acelerar Athena (pregunta clásica):**
+**Cómo optimizar costos y velocidad en Amazon Athena (pregunta fija):**
 
-1. Convertir los datos a formato **columnar** (**Parquet** u ORC).
-2. **Comprimir** (Snappy, GZIP).
-3. **Particionar** por las columnas que más se filtran (por ejemplo, fecha) y filtrar por partición en el `WHERE`.
-4. Seleccionar solo las columnas necesarias (evita `SELECT *`).
-5. Evitar muchos archivos pequeños (mejor archivos de 128 MB a 1 GB).
+Athena cobra **$5 por cada TB de datos escaneado** en S3. La optimización consiste en escanear el mínimo de bytes posible:
 
-**Conceptos de Redshift que conviene reconocer:**
+| Estrategia | Efecto técnico | Reducción de datos escaneados |
+|---|---|:---:|
+| **Formato Columnar (Parquet/ORC)** | Lee solo las columnas requeridas por el `SELECT`, ignorando las demás columnas | 60% – 80% |
+| **Compresión (Snappy / GZIP)** | Los datos columnares similares se comprimen con alta tasa | 70% – 85% |
+| **Particionamiento (`year=2024/month=03/`)** | Omite por completo carpetas no coincidentes en el `WHERE` | 90% – 99% |
+| **Tamaño óptimo de archivos (128 MB – 512 MB)** | Evita la sobrecarga de metadatos de millones de archivos pequeños | Mayor throughput |
 
-- Arquitectura: **leader node** (planifica las consultas) + **compute nodes** (ejecutan en paralelo).
-- **Distribution style** (cómo se reparten las filas entre nodos): `AUTO`, `EVEN`, `KEY` (las filas con la misma clave van al mismo nodo, lo que acelera JOINs), `ALL` (copia completa en cada nodo; para dimensiones pequeñas).
-- **Sort key:** orden físico que acelera los filtros por rango (por ejemplo, por fecha).
-- **`COPY`:** la forma eficiente de cargar datos masivos desde S3 (en paralelo). Evita los `INSERT` fila por fila.
-- **Zero-ETL integrations:** replican datos de Aurora/RDS/DynamoDB a Redshift sin construir pipelines.
+> **Impacto real:** Una consulta sobre 1 TB de CSV sin particionar cuesta **$5.00**. La misma consulta sobre datos particionados en Parquet comprimido con Snappy escanea ~2 GB y cuesta **$0.01** (ahorro del 99.8%).
+
+**Arquitectura profunda de Amazon Redshift (MPP):**
+
+- **Nodo Líder (Leader Node):** Punto de enlace SQL. Recibe la consulta del cliente, la parsea, compila código C++ optimizado y coordina la ejecución en paralelo. No almacena datos de usuario.
+- **Nodos de Cómputo (Compute Nodes):** Ejecutan las porciones de código en paralelo. Cada nodo se divide en **slices** (porciones de memoria y disco) que procesan su segmento de datos.
+- **Estilos de Distribución (`DISTSTYLE`):**
+  - **`KEY`:** Reparte las filas según el valor hash de una columna. Si dos tablas grandes hacen `JOIN` por esa misma columna, las filas correspondientes quedan en el **mismo slice físico**, evitando el costosísimo movimiento de datos por la red (*data redistribution/broadcast*).
+  - **`EVEN`:** Distribución Round-Robin uniforme. Se usa cuando la tabla no tiene un `JOIN` claro o para tablas de hechos intermedias.
+  - **`ALL`:** Almacena una copia idéntica de la tabla en el primer slice de cada nodo. **Ideal para tablas dimensionales pequeñas** (< 2–3 millones de filas) como `dim_date` o `dim_category`, garantizando JOINs locales instantáneos.
+  - **`AUTO`:** Redshift decide automáticamente (asigna `ALL` mientras sea pequeña y migra a `EVEN` al crecer).
+- **Claves de Ordenamiento (`SORTKEY`):**
+  - **`COMPOUND`:** Ordenamiento jerárquico clásico (columna A, luego B). Óptimo para filtros de prefijo estricto.
+  - **`INTERLEAVED`:** Asigna el mismo peso a varias columnas. Ideal cuando las consultas filtran distintas combinaciones de columnas de forma impredecible.
+- **Comando `COPY` masivo:** Carga datos en paralelo directamente desde múltiples archivos de S3 a los slices de cómputo. Es entre 100x y 1000x más rápido que ejecutar sentencias `INSERT` individuales.
+- **Integraciones Zero-ETL:** Replicación gestionada y continua de bases transaccionales (Aurora PostgreSQL/MySQL, DynamoDB) hacia Redshift en segundos sin pipelines de Glue.
 
 ### Gobierno y seguridad de datos
 

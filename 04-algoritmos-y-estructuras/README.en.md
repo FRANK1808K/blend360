@@ -177,6 +177,90 @@ def fib(n):
 | Choosing the locally best option works | **Greedy** | Max stock profit, intervals |
 | Repeated range sums | **Prefix sum** | Sum of subarray i..j in O(1) |
 
+### Code Blueprints for Key Patterns
+
+In a timed 90-minute test, there is no time to reinvent the wheel. These are the exact mental templates to apply:
+
+#### 1. Two Pointers — Sorted arrays or palindromes
+
+```python
+def two_pointers(arr, target):
+    left, right = 0, len(arr) - 1
+    while left < right:
+        current_sum = arr[left] + arr[right]
+        if current_sum == target:
+            return [left, right]
+        elif current_sum < target:
+            left += 1       # Sum too small → increment left
+        else:
+            right -= 1      # Sum too large → decrement right
+    return []
+```
+
+#### 2. Dynamic Sliding Window — Contiguous substrings/subarrays
+
+```python
+def sliding_window(s):
+    left = 0
+    freq = {}
+    max_len = 0
+
+    for right in range(len(s)):
+        # 1. Expand: include s[right]
+        char = s[right]
+        freq[char] = freq.get(char, 0) + 1
+
+        # 2. Contract: while window violates condition (e.g. repeated characters)
+        while freq[char] > 1:
+            left_char = s[left]
+            freq[left_char] -= 1
+            left += 1
+
+        # 3. Record best result for current valid window
+        max_len = max(max_len, right - left + 1)
+
+    return max_len
+```
+
+#### 3. Fast & Slow Pointers (Tortoise & Hare) — Cycle detection
+
+```python
+def has_cycle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next         # Moves 1 step
+        fast = fast.next.next    # Moves 2 steps
+        if slow == fast:
+            return True          # Pointers met → cycle detected
+    return False
+```
+
+#### 4. BFS (Queue) vs DFS (Recursion/Stack)
+
+| Criterion | BFS (Breadth-First Search) | DFS (Depth-First Search) |
+|---|---|---|
+| **Data structure** | **Queue (`collections.deque`)** | **Stack** or call stack (recursion) |
+| **Exploration** | Level by level (expanding ring) | As deep as possible before backtracking |
+| **Guarantee** | **Shortest path** in unweighted graphs/grids | Does not guarantee shortest path |
+| **Typical use** | Shortest distance, mazes, minimum moves | Counting islands, finding all paths, permutations |
+
+```python
+from collections import deque
+
+def bfs_shortest_path(start, target, get_neighbors):
+    visited = {start}
+    queue = deque([(start, 0)])   # (current_node, distance)
+    while queue:
+        node, dist = queue.popleft()
+        if node == target:
+            return dist
+        for neighbor in get_neighbors(node):
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append((neighbor, dist + 1))
+    return -1
+```
+
 ## 7. Pseudocode tracing (very common in multiple choice)
 
 Practice "being the computer": make a table with each variable and update it line by line.

@@ -76,6 +76,31 @@ df.at[0, "col"], df.iat[0, 0]         # un solo valor (rápido)
 ```
 
 > **`SettingWithCopyWarning`:** evita `df[df.x > 5]["y"] = 0`. Usa `df.loc[df.x > 5, "y"] = 0`.
+>
+> **¿Por qué ocurre?** La indexación encadenada (`df[...] [...]`) crea ambigüedad interna en pandas: no sabe si el primer corchete devolvió una **vista** (*view*) de la memoria o una **copia** (*copy*). Si intentas modificar una copia, los cambios se pierden silenciosamente. La solución es siempre usar `.loc[filtro, columna] = valor` o crear una copia explícita con `.copy()`.
+
+### Jerarquía de Rendimiento en pandas (imprescindible en entrevistas)
+
+En analítica a gran escala, la forma en que iteras sobre los datos define la velocidad de tu pipeline:
+
+| Método | Velocidad relativa | Cuándo usarlo |
+|---|:---:|---|
+| **Vectorización (NumPy / pandas)** | **1x (la más rápida)** | Siempre que sea posible: `df["c"] = df["a"] + df["b"]` |
+| **`.itertuples()`** | ~50x más lento | Si requieres iterar fila por fila; devuelve tuplas con nombre |
+| **`.apply(lambda ...)`** | ~100x más lento | Solo para transformaciones complejas que no tienen equivalente vectorizado |
+| **`.iterrows()`** | ~500x más lento | Desaconsejado: convierte cada fila en una Serie de pandas |
+| **Bucle `for` con índice** | **~1000x más lento** | ❌ **Antipatrón absoluto** en código de producción y pruebas |
+
+### Ventanas móviles (Rolling) y Transformaciones
+
+```python
+# Promedio móvil de 7 períodos (equivalente a AVG() OVER (ORDER BY fecha ROWS BETWEEN 6 PRECEDING AND CURRENT ROW))
+df["promedio_movil_7d"] = df["ventas"].rolling(window=7, min_periods=1).mean()
+
+# Agregación manteniendo el tamaño original del DataFrame (SUM() OVER (PARTITION BY categoria))
+df["total_categoria"] = df.groupby("categoria")["ventas"].transform("sum")
+df["pct_sobre_categoria"] = df["ventas"] / df["total_categoria"]
+```
 
 ## 4. Limpieza de datos (siempre preguntan)
 

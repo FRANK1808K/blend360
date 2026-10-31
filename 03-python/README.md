@@ -246,7 +246,7 @@ Los 4 pilares: **encapsulamiento**, **abstracción**, **herencia** y **polimorfi
 
 ```python
 a = [1, 2, 3]
-b = a            # b apunta a la MISMA lista
+b = a            # b apunta a la MISMA lista en memoria
 b.append(4)
 print(a)         # [1, 2, 3, 4]  ← ¡a también cambió!
 
@@ -257,6 +257,66 @@ d = copy.deepcopy(matriz)   # copia profunda (listas dentro de listas)
 m = [[0] * 3] * 3   # 3 referencias a la MISMA fila
 m[0][0] = 1         # [[1,0,0],[1,0,0],[1,0,0]]
 m = [[0] * 3 for _ in range(3)]   # ✓ forma correcta
+```
+
+### Argumentos mutables por defecto (la trampa de entrevista #1)
+
+En Python, los argumentos por defecto se evalúan **una sola vez**, al momento de *definir* la función, no en cada llamada:
+
+```python
+def agregar_elemento(elem, lista=[]):    # ❌ PELIGRO: lista mutable compartida
+    lista.append(elem)
+    return lista
+
+print(agregar_elemento(1))  # [1]
+print(agregar_elemento(2))  # [1, 2]  ← ¡No devolvió [2]! La lista persiste en memoria
+
+# Forma idiomática y correcta:
+def agregar_elemento_correcto(elem, lista=None):
+    if lista is None:
+        lista = []
+    lista.append(elem)
+    return lista
+```
+
+### Generadores vs Comprensiones de listas (eficiencia de memoria)
+
+En pruebas con grandes volúmenes de datos, crear listas completas puede agotar la memoria (*Memory Limit Exceeded*):
+
+```python
+# List comprehension: genera TODOS los elementos en RAM de inmediato
+cuadrados_lista = [x ** 2 for x in range(10_000_000)]  # Ocupa ~400 MB de RAM
+
+# Generator expression: genera valores bajo demanda (Lazy evaluation, O(1) memoria)
+cuadrados_gen = (x ** 2 for x in range(10_000_000))    # Ocupa ~120 Bytes de RAM
+
+# Función generadora con yield:
+def contador(limite):
+    n = 0
+    while n < limite:
+        yield n
+        n += 1
+```
+
+### Lectura de entradas en Coderbyte / HackerRank
+
+En plataformas de código, a menudo los datos no llegan como parámetros directos, sino por `sys.stdin` o como strings que debes parsear:
+
+```python
+import sys
+import ast
+
+# 1. Leer todas las líneas de la consola / prueba
+lineas = sys.stdin.read().splitlines()
+
+# 2. Parsear arrays que vienen como strings, ej. "[1, 2, 3, 4]"
+entrada_cruda = "[1, 2, 3, 4]"
+numeros = ast.literal_eval(entrada_cruda)  # [1, 2, 3, 4] como lista real
+# o sin bibliotecas:
+numeros = [int(x.strip()) for x in entrada_cruda.strip("[]").split(",") if x.strip()]
+
+# 3. Leer números separados por espacio en una sola línea
+valores = list(map(int, sys.stdin.readline().split()))
 ```
 
 ## 11. Quiz: ¿qué imprime?

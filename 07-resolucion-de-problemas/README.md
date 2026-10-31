@@ -154,6 +154,38 @@ Estructura para responder (puedes decirla en inglés en la entrevista, ver [fras
 > **Ejemplo:** *"Weekly sales dropped 20%. How would you investigate?"*
 > → Confirmo que el dato es real (¿se cayó el pipeline?) → comparo con la misma semana del año anterior (estacionalidad) → segmento por canal, región y producto para ubicar la caída → reviso el embudo (visitas → carrito → compra) para ver en qué paso cae → reviso cambios recientes (precios, campañas, despliegues en la web) → recomiendo una acción y defino un KPI para monitorearla.
 
+### El marco del Árbol de Métricas (Metric Tree / Root Cause Analysis)
+
+En consultoría de analítica como Blend360, la mejor forma de demostrar pensamiento analítico es **descomponer la métrica principal en sus componentes matemáticos irreducibles** (principio MECE: Mutuamente Excluyentes, Colectivamente Exhaustivos):
+
+```text
+                                         INGRESOS TOTALES (Revenue)
+                                                 │
+                  ┌──────────────────────────────┴──────────────────────────────┐
+                  ▼                                                             ▼
+         NÚMERO DE PEDIDOS (Orders)                                    TICKET PROMEDIO (AOV)
+                  │                                                             │
+        ┌─────────┴─────────┐                                         ┌─────────┴─────────┐
+        ▼                   ▼                                         ▼                   ▼
+  TRÁFICO (Visitas)  CONVERSIÓN (CVR)                        ITEMS POR PEDIDO     PRECIO PROMEDIO
+  • Orgánico         • Home → PDP                            • Cross-selling      • Descuentos
+  • Pauta (Ads)      • PDP → Carrito                         • Bundles            • Inflación / Mix
+  • Email / CRM      • Carrito → Checkout
+  • Directo          • Checkout → Pago
+```
+
+#### Protocolo de 4 pasos para resolver la caída de cualquier métrica
+
+1. **Aislar la palanca matemática:** ¿Cayó el tráfico, cayó la tasa de conversión, o los clientes compraron productos más baratos (AOV)?
+2. **Segmentar dimensionalmente:** ¿Afecta a todos o está concentrado?
+   - *Por geografía:* ¿Solo en Colombia o global?
+   - *Por plataforma:* ¿Solo en la app móvil (Android/iOS) o también en escritorio web? (Si es solo iOS, sospecha un bug tras un despliegue).
+   - *Por canal:* ¿Se cayó el tráfico de Google Ads o el orgánico?
+3. **Causa interna vs. externa:**
+   - *Interna:* Despliegue de código con errores en el checkout, pasarela de pagos rechazada, aumento de precios, campañas pausadas, tracking de analítica roto.
+   - *Externa:* Días festivos, estacionalidad (*Black Friday* la semana anterior), agresiva campaña de la competencia, caída general del mercado.
+4. **Acción correctiva y monitoreo:** Proponer la solución con una métrica de impacto directo y un grupo de control.
+
 ## 6. Ejercicios
 
 **Lógica y matemática:**

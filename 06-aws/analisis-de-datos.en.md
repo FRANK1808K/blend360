@@ -78,21 +78,33 @@
 | **Redshift Spectrum** | Query data in S3 from Redshift without loading it | Per data scanned | Join the warehouse with the lake |
 | **Amazon OpenSearch Service** | Search and **log** analytics (Elasticsearch/OpenSearch + dashboards) | Per instance / serverless | Text search, observability, log analysis |
 
-**How to cut costs and speed up Athena (classic question):**
+**How to optimize cost and performance in Amazon Athena (classic exam topic):**
 
-1. Convert the data to a **columnar** format (**Parquet** or ORC).
-2. **Compress** it (Snappy, GZIP).
-3. **Partition** by the most filtered columns (e.g., date) and filter by partition in the `WHERE`.
-4. Select only the columns you need (avoid `SELECT *`).
-5. Avoid many small files (128 MB to 1 GB files are better).
+Athena charges **$5 per TB of data scanned** from S3. Optimization centers on reading the fewest possible bytes:
 
-**Redshift concepts worth recognizing:**
+| Strategy | Technical mechanism | Reduction in scanned data |
+|---|---|:---:|
+| **Columnar format (Parquet/ORC)** | Reads only the columns referenced in `SELECT`, skipping all others | 60% – 80% |
+| **Compression (Snappy / GZIP)** | Similar column values achieve very high compression ratios | 70% – 85% |
+| **Partitioning (`year=2024/month=03/`)** | Prunes non-matching folders completely based on the `WHERE` clause | 90% – 99% |
+| **Optimal file sizing (128 MB – 512 MB)** | Eliminates metadata overhead caused by millions of tiny files | Higher throughput |
 
-- Architecture: **leader node** (plans the queries) + **compute nodes** (execute in parallel).
-- **Distribution style** (how rows are spread across nodes): `AUTO`, `EVEN`, `KEY` (rows with the same key go to the same node, which speeds up JOINs), `ALL` (a full copy on each node; for small dimensions).
-- **Sort key:** a physical order that speeds up range filters (e.g., by date).
-- **`COPY`:** the efficient way to load bulk data from S3 (in parallel). Avoid row-by-row `INSERT`s.
-- **Zero-ETL integrations:** replicate data from Aurora/RDS/DynamoDB into Redshift without building pipelines.
+> **Real impact:** A query across 1 TB of unpartitioned CSV costs **$5.00**. The identical query executed on partitioned, Snappy-compressed Parquet scans ~2 GB and costs **$0.01** (99.8% savings).
+
+**Deep Architecture of Amazon Redshift (MPP):**
+
+- **Leader Node:** The SQL endpoint. Receives queries, parses them, compiles optimized C++ execution plans, and coordinates worker nodes. Stores no user data.
+- **Compute Nodes:** Execute compiled execution plans in parallel. Each node is partitioned into **slices** (units of memory and disk) that process their assigned slice of data.
+- **Distribution Styles (`DISTSTYLE`):**
+  - **`KEY`:** Rows are distributed based on the hash of a specific column. If two large tables join on that column, matching rows reside on the **same physical slice**, eliminating expensive network shuffles.
+  - **`EVEN`:** Uniform Round-Robin distribution. Used when no dominant join key exists.
+  - **`ALL`:** A full copy of the table is stored on the first slice of each compute node. **Ideal for small dimension tables** (< 2–3 million rows) such as `dim_date` or `dim_category`, guaranteeing instant local joins.
+  - **`AUTO`:** Redshift manages distribution automatically (starts as `ALL` while small, transitions to `EVEN` as it grows).
+- **Sort Keys (`SORTKEY`):**
+  - **`COMPOUND`:** Hierarchical sorting (column A, then B). Optimal for queries filtering on prefix columns.
+  - **`INTERLEAVED`:** Gives equal weight to each column in the sort key. Ideal when queries filter across arbitrary combinations of columns.
+- **Bulk `COPY` Command:** Loads data in parallel from multiple S3 objects directly into compute slices. It is 100x to 1000x faster than running individual `INSERT` statements.
+- **Zero-ETL Integrations:** Continuous managed replication from operational databases (Aurora PostgreSQL/MySQL, DynamoDB) to Redshift within seconds without Glue pipelines.
 
 ### Data governance and security
 

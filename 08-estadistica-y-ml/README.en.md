@@ -232,8 +232,8 @@ Verified example: ad spend 1, 2, 3, 4, 5 → sales 3, 5, 7, 9, 11 ⇒ **sales = 
 | Linear regression | Regression | A line that minimizes squared error | Interpretable, fast | Linear relationships only |
 | Logistic regression | Classification | Probability with the sigmoid function | Interpretable, probabilistic | Linear boundaries |
 | Decision tree | Both | Yes/no questions that split the data (Gini or entropy) | Very interpretable, no scaling | Overfits easily |
-| **Random forest** | Both | Many trees on random rows and features (*bagging*) that vote | Robust, a good baseline | Less interpretable |
-| **Gradient boosting** (XGBoost, LightGBM) | Both | Sequential trees that fix the previous one's errors | Often the most accurate on tabular data | More hyperparameters |
+| **Random forest** | Both | Many trees on random rows and features (*bagging*) that vote | Robust, reduces variance | Less interpretable |
+| **Gradient boosting** (XGBoost, LightGBM) | Both | Sequential trees that fix the previous one's errors (*boosting*) | State-of-the-art accuracy on tables, reduces bias | More hyperparameters |
 | k-NN | Both | The class of the k nearest neighbors | Simple | Slow on large data; needs scaling |
 | Naive Bayes | Classification | Bayes assuming independent features | Fast; good for text | The assumption rarely holds |
 | SVM | Both | The hyperplane with the maximum **margin** | Good in high dimensions | Slow on large data |
@@ -271,6 +271,28 @@ accuracy = (TP + TN) / total = 8/10 = 0.80        F1 = 2·P·R / (P + R) = 0.75
 | **ROC-AUC** | Ability to rank positives above negatives (0.5 = chance; 1 = perfect) | Comparing models without fixing a threshold |
 
 > **Accuracy paradox:** with 5 % fraud, a model that always says "no fraud" has **95 % accuracy** and **0 % recall** (verified in the script). With imbalanced classes, look at precision, recall, F1 or AUC.
+
+### ROC-AUC vs. PR-AUC (Classic Data Science Interview Topic)
+
+| Curve / Metric | Axes | When to use | Interview trap |
+|---|---|---|---|
+| **ROC-AUC** | True Positive Rate (Recall) vs. False Positive Rate | **Balanced** or moderately balanced classes (e.g. 40/60) | In rare positive events (< 1% fraud), the massive number of True Negatives (TN) suppresses the FPR ($FP / (FP + TN)$), yielding a misleadingly optimistic AUC of 0.98+ |
+| **PR-AUC** (Precision-Recall) | Precision vs. Recall | **Highly imbalanced** target classes (e.g. 1% fraud, 0.1% ad CTR) | Evaluates performance solely against the minority positive class without distortion from abundant true negatives |
+
+### Regularization: L1 (Lasso) vs. L2 (Ridge)
+
+Regularization appends a penalty term to the empirical loss function to penalize complexity and mitigate overfitting:
+
+$$\text{Loss} = \text{MSE} + \lambda \cdot \text{Penalty}$$
+
+| Property | L1 Regularization (Lasso) | L2 Regularization (Ridge) |
+|---|---|---|
+| **Penalty Term** | $\lambda \sum \lvert w_i \rvert$ (sum of absolute weights) | $\lambda \sum w_i^2$ (sum of squared weights) |
+| **Geometric Geometry** | Diamond/rhomboid constraint with sharp vertices touching axes | Smooth spherical/hyperspherical contour |
+| **Impact on Weights ($w$)** | Drives non-essential coefficients to **strictly zero** (automatic feature selection) | Uniformly shrinks weights asymptotically toward zero, but **never to exact zero** |
+| **When to use** | Sparse datasets with many redundant/noisy features | When features exhibit **multicollinearity** (strong correlation among inputs) |
+
+> **ElasticNet:** Linearly combines L1 and L2 penalties to retain the feature-selection benefits of Lasso while handling collinear feature groupings via Ridge.
 
 ## 10. Optimization and hyperparameters
 

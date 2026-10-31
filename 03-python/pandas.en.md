@@ -76,6 +76,31 @@ df.at[0, "col"], df.iat[0, 0]         # a single value (fast)
 ```
 
 > **`SettingWithCopyWarning`:** avoid `df[df.x > 5]["y"] = 0`. Use `df.loc[df.x > 5, "y"] = 0`.
+>
+> **Why does it happen?** Chained indexing (`df[...] [...]`) creates internal ambiguity in pandas: it doesn't know whether the first indexer returned a **view** into memory or an isolated **copy**. If you modify a copy, your assignment is silently lost. The fix is to always use `.loc[condition, column] = value` or create an explicit copy with `.copy()`.
+
+### Performance Hierarchy in pandas (essential for interviews)
+
+In large-scale data analytics, how you iterate over rows determines whether your pipeline takes seconds or hours:
+
+| Method | Relative speed | When to use |
+|---|:---:|---|
+| **Vectorization (NumPy / pandas)** | **1x (Fastest)** | Always if possible: `df["c"] = df["a"] + df["b"]` |
+| **`.itertuples()`** | ~50x slower | When you must loop over rows; yields named tuples |
+| **`.apply(lambda ...)`** | ~100x slower | Only for complex logic lacking a vectorized implementation |
+| **`.iterrows()`** | ~500x slower | Discouraged: converts each row into a pandas Series |
+| **Standard `for` loop with index** | **~1000x slower** | ❌ **Absolute antipattern** in interviews and production code |
+
+### Rolling Windows and Window Transforms
+
+```python
+# 7-period moving average (equivalent to AVG() OVER (ORDER BY date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW))
+df["rolling_avg_7d"] = df["sales"].rolling(window=7, min_periods=1).mean()
+
+# Window aggregation retaining original DataFrame dimensions (SUM() OVER (PARTITION BY category))
+df["category_total"] = df.groupby("category")["sales"].transform("sum")
+df["pct_of_category"] = df["sales"] / df["category_total"]
+```
 
 ## 4. Data cleaning (always asked)
 

@@ -305,6 +305,38 @@ FROM orders;
 
 > **Atención:** `LAST_VALUE` con `ORDER BY` usa por defecto el marco `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, así que devuelve la fila **actual**. Para el último de verdad, usa `ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING`.
 
+### El marco de la ventana (Window Framing): `ROWS` vs `RANGE`
+
+El marco define **qué filas exactas** dentro de la partición se incluyen en el cálculo en cada paso:
+
+```sql
+{ROWS | RANGE} BETWEEN <inicio> AND <fin>
+```
+
+Valores posibles para `<inicio>` y `<fin>`:
+
+- `UNBOUNDED PRECEDING`: Desde el inicio de la partición.
+- `n PRECEDING`: `n` filas antes de la actual.
+- `CURRENT ROW`: La fila actual.
+- `n FOLLOWING`: `n` filas después de la actual.
+- `UNBOUNDED FOLLOWING`: Hasta el final de la partición.
+
+#### La trampa clásica de `RANGE` frente a `ROWS`
+
+Si usas `ORDER BY` sin especificar el marco (ej. `SUM(total) OVER (ORDER BY order_date)`), el estándar SQL asume por defecto:
+`RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`.
+
+| Aspecto | `ROWS` (físico) | `RANGE` (lógico) |
+|---|---|---|
+| **Comportamiento** | Evalúa fila por fila individualmente | Evalúa filas con el **mismo valor de orden** como un solo bloque (*peers*) |
+| **Con duplicados** | Acumula fila a fila de forma continua | Suma **todas las filas con el mismo valor a la vez** |
+| **Recomendación** | **Usa `ROWS`** para acumulados y promedios móviles estrictos | Úsalo si filas con la misma fecha deben compartir el acumulado |
+
+**Ejemplo de la diferencia:** si hay dos ventas el día `2024-03-01` de 100 y 150:
+
+- Con `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`: fila 1 = 100, fila 2 = 250.
+- Con `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`: ambas filas mostrarán 250 de inmediato.
+
 ## 10. UNION, INTERSECT, EXCEPT
 
 | Operador | Resultado |
@@ -368,13 +400,59 @@ CREATE VIEW v_delivered AS SELECT * FROM orders WHERE status = 'delivered';
 | "Top N por categoría" | `ROW_NUMBER()/DENSE_RANK() OVER (PARTITION BY ...)` + filtrar en CTE |
 | "Registros duplicados" | `GROUP BY cols HAVING COUNT(*) > 1` |
 | "Clientes sin compras" | `LEFT JOIN ... WHERE derecha.id IS NULL` o `NOT EXISTS` |
-| "Acumulado / running total" | `SUM() OVER (ORDER BY fecha)` |
+| "Acumulado / running total" | `SUM() OVER (ORDER BY fecha ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)` |
 | "Crecimiento mes a mes (MoM)" | Agregar por mes + `LAG()` + `(actual - anterior) / anterior` |
 | "% del total" | `x / SUM(x) OVER ()` |
-| "Empleados que ganan más que su jefe" | Self join |
+| "Empleados que ganan más que su jefe" | `Self-JOIN` comparando `e.salary > m.salary` |
 | "Primera compra de cada cliente" | `MIN(fecha)` por cliente, o `ROW_NUMBER() = 1` |
 | "Pivot / conteos por estado" | `SUM(CASE WHEN ... THEN 1 ELSE 0 END)` |
-| "Días consecutivos" | `fecha - ROW_NUMBER()` (gaps and islands) |
+| "Días consecutivos / Rachas de actividad" | `fecha - ROW_NUMBER()` (*Gaps and Islands*) |
+
+### 1. Self-JOIN: Jerarquías organizacionales
+
+Una de las preguntas favoritas en pruebas técnicas de analítica y BI:
+
+```sql
+-- Empleados que ganan más que su jefe directo
+SELECT e.name AS empleado,
+       e.salary AS salario_empleado,
+       m.name AS gerente,
+       m.salary AS salario_gerente
+FROM employees e
+JOIN employees m ON e.manager_id = m.emp_id
+WHERE e.salary > m.salary;
+```
+
+### 2. Lagunas e Islas (Gaps and Islands): Detección de rachas
+
+Detectar usuarios con actividad en días consecutivos. Si a cada fecha consecutiva le restas su `ROW_NUMBER()`, la fecha resultante es **idéntica para toda la racha**:
+
+```sql
+WITH secuencias AS (
+    SELECT customer_id, order_date,
+           -- Restar el número de fila a la fecha crea un identificador único por racha
+           date(order_date, '-' || ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date) || ' days') AS grupo_racha
+    FROM orders
+)
+SELECT customer_id,
+       MIN(order_date) AS inicio_racha,
+       MAX(order_date) AS fin_racha,
+       COUNT(*) AS dias_consecutivos
+FROM secuencias
+GROUP BY customer_id, grupo_racha
+HAVING COUNT(*) >= 2;
+```
+
+### 3. Consultas SARGables y Optimización de Índices
+
+En pruebas de rendimiento y entrevistas senior preguntan por qué una consulta es lenta a pesar de tener índices creados. Una consulta es **SARGable** (*Search Argument Able*) cuando el motor de la base de datos puede aprovechar un índice B-Tree directamente mediante un *Index Seek/Range Scan*, en lugar de escanear toda la tabla (*Full Table Scan*).
+
+| Antipatrón NO SARGable (Lento ❌) | Alternativa SARGable (Óptima ✔️) | Por qué |
+|---|---|---|
+| `WHERE strftime('%Y', order_date) = '2024'` | `WHERE order_date >= '2024-01-01' AND order_date < '2025-01-01'` | Aplicar funciones a la columna obliga al motor a calcular la función en cada fila |
+| `WHERE salary * 1.10 > 10000` | `WHERE salary > 10000 / 1.10` | Realiza la operación sobre la constante, dejando la columna indexada limpia |
+| `WHERE name LIKE '%pro%'` | `WHERE name LIKE 'pro%'` | Los índices B-Tree buscan de izquierda a derecha. El `%` al inicio anula el índice |
+| `WHERE COALESCE(city, 'N/A') = 'Bogotá'` | `WHERE city = 'Bogotá'` | Una función envolvente oculta los valores al índice |
 
 ## 14. Diferencias entre motores
 
