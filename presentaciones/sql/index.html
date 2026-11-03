@@ -1,0 +1,1621 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SQL desde Quibdó</title>
+<meta name="description" content="Presentación interactiva de SQL para la prueba técnica de Blend360, con la base de práctica «Mercado del Pacífico» (Quibdó, Chocó) y 35 ejercicios que se ejecutan en el navegador.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M45.2 21.6A16.5 16.5 0 1 0 48.5 32' fill='none' stroke='%231df3f4' stroke-width='6.5' stroke-linecap='round'/%3E%3Ccircle cx='48.5' cy='19.5' r='4.6' fill='%23a2f3f3'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,600..900&family=Urbanist:ital,wght@0,400..800;1,400..600&family=JetBrains+Mono:wght@400;600&display=swap">
+<!-- REVEAL-CSS --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"><!-- /REVEAL-CSS -->
+<style>
+/* Concepto: una sala de clase nocturna sobre el río Atrato. Fondo azul profundo de Blend, el cian como luz de código
+   y el oro del Chocó como acento para lo que hay que recordar. Una sola apariencia (oscura) por decisión. */
+:root {
+  color-scheme: dark;
+  --night: #021a33;        /* fondo */
+  --navy: #043058;         /* superficies */
+  --navy-2: #06406f;
+  --ink: #eaf6ff;          /* texto */
+  --muted: #9db6cc;
+  --line: rgb(162 243 243 / .16);
+  --cyan: #1df3f4;         /* acento principal */
+  --aqua: #a2f3f3;
+  --gold: #ffc857;         /* acento cálido: oro del Chocó */
+  --ok: #3ee6a0;
+  --bad: #ff7a90;
+  --card: rgb(6 64 111 / .55);
+  --display: "Archivo", "Urbanist", system-ui, sans-serif;
+  --body: "Urbanist", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+html, body { height: 100%; background: var(--night); color: var(--ink); margin: 0; }
+.reveal-viewport {
+  background:
+    radial-gradient(1200px 700px at 85% -10%, rgb(29 243 244 / .10), transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, rgb(255 200 87 / .07), transparent 60%),
+    linear-gradient(180deg, #021a33 0%, #03213f 100%);
+}
+.reveal-viewport::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .5;
+  background-image: linear-gradient(rgb(162 243 243 / .045) 1px, transparent 1px), linear-gradient(90deg, rgb(162 243 243 / .045) 1px, transparent 1px);
+  background-size: 48px 48px; mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+}
+.reveal { font-family: var(--body); font-size: 26px; font-weight: 500; color: var(--ink); }
+.reveal .slides { text-align: left; }
+.reveal .slides section { padding: 64px 56px 40px; box-sizing: border-box; height: 100%; }
+.reveal .slides section.stack { padding: 0; }
+.reveal h1, .reveal h2, .reveal h3 { font-family: var(--display); font-stretch: 112%; color: var(--ink); text-transform: none; letter-spacing: -.01em; text-wrap: balance; margin: 0 0 .45em; line-height: 1.08; }
+.reveal h1 { font-size: 78px; font-weight: 900; }
+.reveal h2 { font-size: 46px; font-weight: 800; }
+.reveal h3 { font-size: 32px; font-weight: 800; }
+.reveal p { margin: 0 0 .6em; line-height: 1.45; }
+.reveal em { font-style: normal; color: var(--cyan); }
+.reveal strong { color: #fff; font-weight: 800; }
+.reveal a { color: var(--cyan); }
+.reveal code { font-family: var(--mono); font-size: .86em; color: var(--aqua); background: rgb(162 243 243 / .08); padding: .05em .35em; border-radius: 6px; }
+.reveal pre code { background: none; padding: 0; }
+.reveal ul { margin: 0; padding-left: 1.1em; }
+.reveal li { margin: .3em 0; line-height: 1.4; }
+.reveal li::marker { color: var(--cyan); }
+.lead { font-size: 30px; color: var(--muted); max-width: 30em; }
+.small { font-size: 19px; color: var(--muted); }
+.kicker { font-family: var(--mono); font-size: 16px; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); }
+.gold { color: var(--gold) !important; }
+.ok { color: var(--ok) !important; }
+.bad { color: var(--bad) !important; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
+.cols.c-46 { grid-template-columns: 4fr 6fr; }
+.cols.c-55 { grid-template-columns: 5fr 5fr; }
+.cols.c3 { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.cols > * { min-width: 0; }
+.mod-tag { position: absolute; top: 22px; left: 56px; font-family: var(--mono); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.mod-tag::before { content: ""; width: 22px; height: 2px; background: var(--cyan); }
+
+/* tarjetas, chips, tablas */
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; }
+.card h4 { font-family: var(--display); font-size: 22px; margin: 0 0 6px; color: #fff; font-weight: 800; }
+.card p { font-size: 20px; color: var(--muted); margin: 0; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 15px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--aqua); background: rgb(29 243 244 / .06); }
+.tbl-wrap { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.reveal table.t { border-collapse: collapse; width: 100%; font-size: 19px; }
+.reveal table.t th, .reveal table.t td { border: 0; border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.reveal table.t th { font-family: var(--mono); font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); background: rgb(29 243 244 / .06); font-weight: 600; }
+.reveal table.t tr:last-child td { border-bottom: 0; }
+.reveal table.t td.num, .reveal table.t th.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); }
+
+/* código */
+.reveal pre { width: 100%; margin: 0; box-shadow: none; font-size: 19px; line-height: 1.5; }
+.reveal pre code { font-family: var(--mono); max-height: 520px; padding: 18px 20px; border-radius: 14px; background: rgb(1 14 28 / .75) !important; border: 1px solid var(--line); color: #dbeafe; }
+.hljs-keyword, .hljs-built_in { color: var(--cyan); font-weight: 600; }
+.hljs-string { color: var(--gold); }
+.hljs-number { color: #ffa3b4; }
+.hljs-comment { color: #6f8aa6; font-style: italic; }
+.hljs-literal { color: #ff9fb2; font-weight: 600; }
+.hljs-type, .hljs-title, .hljs-operator, .hljs-symbol { color: var(--aqua); }
+.reveal .hljs.has-highlights tr:not(.highlight-line) { opacity: .28; }
+.reveal .hljs-ln-numbers { color: #4d6a87; padding-right: 14px; }
+
+/* fragmentos propios */
+.reveal .fragment.rise { opacity: 0; transform: translateY(26px); transition: all .6s var(--ease); }
+.reveal .fragment.rise.visible { opacity: 1; transform: none; }
+.reveal .fragment.pop { opacity: 0; transform: scale(.85); transition: all .5s var(--ease); }
+.reveal .fragment.pop.visible { opacity: 1; transform: none; }
+.reveal .fragment.trigger { display: none; }
+
+/* portada */
+.title-slide { display: flex !important; flex-direction: column; justify-content: center; }
+.logo-ring { width: 92px; height: 92px; margin-bottom: 26px; }
+.logo-ring path { stroke-dasharray: 120; stroke-dashoffset: 120; animation: draw 1.6s var(--ease) .3s forwards; }
+.logo-ring circle { opacity: 0; animation: fadein .6s ease 1.4s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadein { to { opacity: 1; } }
+.title-slide h1 .line { display: block; opacity: 0; transform: translateY(40px); animation: rise .9s var(--ease) forwards; }
+.title-slide h1 .line:nth-child(2) { animation-delay: .18s; }
+.title-slide .after { opacity: 0; animation: rise .9s var(--ease) .55s forwards; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+.outline { -webkit-text-stroke: 2px var(--cyan); color: transparent !important; }
+.river { position: absolute; right: -40px; bottom: -20px; width: 640px; opacity: .55; pointer-events: none; }
+.river path { stroke-dasharray: 8 14; animation: flow 6s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -220; } }
+
+/* divisores de módulo */
+.divider { display: flex !important; flex-direction: column; justify-content: center; }
+.divider .num { font-family: var(--display); font-size: 220px; font-weight: 900; font-stretch: 125%; line-height: .8; -webkit-text-stroke: 2px rgb(29 243 244 / .55); color: transparent; margin-bottom: 18px; }
+.divider h2 { font-size: 64px; }
+.divider .learn { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+
+/* agenda */
+.agenda { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.agenda button { all: unset; cursor: pointer; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; min-height: 120px; display: flex; flex-direction: column; gap: 8px; transition: transform .3s var(--ease), border-color .3s; }
+.agenda button:hover, .agenda button:focus-visible { transform: translateY(-4px); border-color: var(--cyan); }
+.agenda .n { font-family: var(--mono); color: var(--cyan); font-size: 15px; }
+.agenda .t { font-family: var(--display); font-weight: 800; font-size: 21px; line-height: 1.15; }
+.agenda .x { font-size: 15px; color: var(--muted); margin-top: auto; }
+
+/* números grandes */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 18px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+.stat .v { font-family: var(--display); font-weight: 900; font-size: 74px; line-height: 1; color: var(--cyan); font-variant-numeric: tabular-nums; }
+.stat .v small { font-size: 30px; color: var(--aqua); margin-left: 4px; }
+.stat .l { font-size: 19px; color: var(--muted); margin-top: 10px; }
+
+/* método de 12 minutos */
+.timeline { display: flex; gap: 6px; margin: 26px 0 18px; }
+.timeline .seg { border-radius: 10px; padding: 14px 14px 12px; background: var(--card); border: 1px solid var(--line); min-width: 0; }
+.timeline .seg b { display: block; font-family: var(--mono); font-size: 14px; color: var(--cyan); margin-bottom: 4px; }
+.timeline .seg span { font-family: var(--display); font-weight: 800; font-size: 20px; }
+.timeline .seg p { font-size: 16px; color: var(--muted); margin: 6px 0 0; line-height: 1.35; }
+
+/* modelo de datos */
+.er { position: relative; height: 520px; }
+.er .ent { position: absolute; width: 238px; background: rgb(4 48 88 / .9); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; font-size: 15px; transition: border-color .4s, box-shadow .4s; }
+.er .ent h5 { margin: 0; font-family: var(--mono); font-size: 16px; padding: 8px 12px; background: rgb(29 243 244 / .12); color: var(--cyan); }
+.er .ent div { font-family: var(--mono); padding: 3px 12px; display: flex; justify-content: space-between; color: #cfe3f5; }
+.er .ent div i { font-style: normal; font-size: 11px; color: var(--gold); }
+.er .ent.hl { border-color: var(--gold); box-shadow: 0 0 0 4px rgb(255 200 87 / .15); }
+.er svg.links { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.er svg.links path { fill: none; stroke: var(--aqua); stroke-width: 2; opacity: .7; }
+.er svg.links text { fill: var(--gold); font-family: var(--mono); font-size: 14px; }
+.traps { position: absolute; left: 290px; top: 250px; right: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.traps .card { padding: 12px 14px; }
+.traps .card h4 { font-size: 17px; }
+.traps .card p { font-size: 15px; }
+
+/* orden de ejecución */
+.clauses { display: flex; gap: 12px; }
+.clauses.row { flex-wrap: wrap; margin: 40px 0; }
+.clause { font-family: var(--mono); font-weight: 600; font-size: 24px; padding: 12px 18px; border-radius: 12px; background: rgb(29 243 244 / .1); border: 1px solid rgb(29 243 244 / .4); color: var(--cyan); white-space: nowrap; }
+.clause.sel { background: rgb(255 200 87 / .14); border-color: rgb(255 200 87 / .55); color: var(--gold); }
+.exec { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; margin-top: 34px; }
+.exec .step { display: grid; grid-template-columns: 34px 210px 1fr; align-items: center; gap: 12px; }
+.exec .step .k { font-family: var(--mono); color: var(--muted); font-size: 18px; text-align: right; }
+.exec .step .clause { font-size: 19px; padding: 8px 12px; text-align: center; }
+.exec .step .d { font-size: 18px; color: var(--muted); line-height: 1.3; }
+
+/* GROUP BY animado */
+.pile { position: relative; height: 330px; }
+.pile .r { position: absolute; left: 0; width: 360px; display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 9px 14px; border-radius: 10px; font-size: 18px; border: 1px solid var(--line); transition: transform .9s var(--ease), opacity .6s, box-shadow .6s; transform: translateY(calc(var(--i) * 52px)); }
+.pile .r.g0 { background: rgb(29 243 244 / .14); }
+.pile .r.g1 { background: rgb(255 200 87 / .14); }
+.pile .r span:last-child { font-family: var(--mono); }
+.pile.collapsed .r { transform: translate(calc(var(--k) * 8px), calc(var(--g) * 150px + var(--k) * 8px)); box-shadow: 0 8px 24px -10px #000; }
+.pile.collapsed .r:not(.top) span { opacity: .0; }
+.pile .r span { transition: opacity .5s; }
+
+/* Venn de JOIN */
+.joins { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.joins .j { text-align: center; }
+.joins .j svg { width: 100%; height: auto; }
+.joins .j b { display: block; font-family: var(--mono); font-size: 17px; color: var(--cyan); margin-top: 4px; }
+.joins .j p { font-size: 15px; color: var(--muted); margin: 4px 0 0; }
+
+/* ROWS vs RANGE, islas */
+.mini td.hl0 { background: rgb(29 243 244 / .12); }
+.mini td.hl1 { background: rgb(255 200 87 / .14); }
+.mini td.hl2 { background: rgb(255 122 144 / .14); }
+
+/* tarjetas que giran (autoevaluación) */
+.flips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.flip { perspective: 1000px; height: 200px; cursor: pointer; }
+.flip .in { position: relative; width: 100%; height: 100%; transition: transform .7s var(--ease); transform-style: preserve-3d; }
+.flip.on .in { transform: rotateY(180deg); }
+.flip .f, .flip .b { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 16px; padding: 18px; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+.flip .f { background: var(--card); }
+.flip .f span { font-family: var(--mono); color: var(--cyan); font-size: 14px; }
+.flip .f p { font-size: 20px; font-weight: 700; }
+.flip .b { background: rgb(62 230 160 / .1); border-color: rgb(62 230 160 / .4); transform: rotateY(180deg); font-size: 18px; line-height: 1.4; }
+
+/* banco de trabajo (ejercicios y laboratorio) */
+.ex-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.lvl { font-family: var(--mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.lvl-basico { color: var(--ok); border-color: rgb(62 230 160 / .4); }
+.lvl-joins { color: var(--cyan); border-color: rgb(29 243 244 / .4); }
+.lvl-ventanas { color: var(--gold); border-color: rgb(255 200 87 / .45); }
+.lvl-reto { color: var(--bad); border-color: rgb(255 122 144 / .45); }
+.done-badge { font-family: var(--mono); font-size: 13px; color: var(--ok); display: none; }
+.solved .done-badge { display: inline; }
+.timer { all: unset; cursor: pointer; margin-left: auto; font-family: var(--mono); font-size: 16px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); display: inline-flex; gap: 8px; align-items: center; font-variant-numeric: tabular-nums; }
+.timer:hover, .timer:focus-visible { border-color: var(--cyan); }
+.timer.run { border-color: var(--cyan); color: var(--cyan); }
+.timer.warn { border-color: var(--gold); color: var(--gold); }
+.timer.over { border-color: var(--bad); color: var(--bad); animation: pulse 1s infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 6px rgb(255 122 144 / .2); } }
+.ex-title { font-size: 34px !important; margin-bottom: 14px !important; }
+.ex-grid { display: grid; grid-template-columns: 4fr 6fr; gap: 28px; align-items: start; }
+.ex-grid > * { min-width: 0; }
+.q-en { font-size: 19px; font-weight: 700; color: #fff; margin-bottom: .4em !important; }
+.q-es { font-size: 16px; color: var(--muted); margin-bottom: .4em !important; }
+.think .kicker { font-size: 13px; }
+.think ol { margin: 6px 0 0; padding-left: 1.3em; }
+.think li { font-size: 16px; line-height: 1.35; margin: .25em 0; }
+.think li::marker { color: var(--gold); font-family: var(--mono); font-weight: 600; }
+.tables { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 10px; }
+.tables .chip { font-size: 13px; padding: 2px 10px; }
+.note { margin-top: 10px; font-size: 15px; line-height: 1.4; padding: 12px 14px; border-radius: 12px; background: rgb(255 200 87 / .08); border: 1px solid rgb(255 200 87 / .3); color: #ffe7b0; animation: rise .5s var(--ease); }
+.note b { color: var(--gold); }
+.editor { position: relative; height: 220px; border-radius: 14px; border: 1px solid var(--line); background: rgb(1 14 28 / .8); overflow: hidden; transition: border-color .2s; }
+.editor:focus-within { border-color: var(--cyan); }
+.editor pre, .editor textarea { position: absolute; inset: 0; margin: 0; padding: 14px 16px; box-sizing: border-box; font-family: var(--mono) !important; font-size: 16px !important; line-height: 1.5 !important; white-space: pre; tab-size: 4; letter-spacing: 0; border: 0; }
+.editor pre { pointer-events: none; overflow: hidden; color: #dbeafe; }
+.editor pre code { all: unset; font: inherit; white-space: pre; }
+.editor textarea { resize: none; background: transparent; color: transparent; caret-color: var(--cyan); outline: none; overflow: auto; }
+.editor textarea::selection { background: rgb(29 243 244 / .25); color: transparent; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+.btn { all: unset; cursor: pointer; font-weight: 700; font-size: 16px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--line); background: rgb(162 243 243 / .06); color: var(--ink); display: inline-flex; gap: 8px; align-items: center; transition: background .2s, border-color .2s, transform .15s; }
+.btn:hover, .btn:focus-visible { border-color: var(--cyan); background: rgb(29 243 244 / .12); }
+.btn:active { transform: scale(.97); }
+.btn.primary { background: var(--cyan); color: #032645; border-color: var(--cyan); }
+.btn.primary:hover { background: var(--aqua); }
+.btn svg { width: 14px; height: 14px; }
+kbd { font-family: var(--mono); font-size: 12px; padding: 1px 6px; border-radius: 5px; border: 1px solid currentColor; opacity: .7; }
+.out { border-radius: 14px; border: 1px solid var(--line); background: rgb(1 14 28 / .5); }
+.status { font-size: 15px; padding: 9px 14px; color: var(--muted); border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: center; }
+.status.okk { color: var(--ok); }
+.status.err { color: var(--bad); }
+.status.warn { color: var(--gold); }
+.grid { max-height: 190px; overflow: auto; }
+.grid table { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 14px; }
+.grid th { position: sticky; top: 0; background: #052846; color: var(--cyan); text-align: left; padding: 6px 10px; font-weight: 600; }
+.grid td { padding: 5px 10px; border-top: 1px solid rgb(162 243 243 / .08); white-space: nowrap; }
+.grid td.n { text-align: right; font-variant-numeric: tabular-nums; }
+.grid td.null { color: var(--bad); font-style: italic; }
+.grid tr { animation: rowin .35s var(--ease) both; }
+@keyframes rowin { from { opacity: 0; transform: translateY(6px); } }
+.live-bar { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+.live-out { margin-top: 8px; }
+.live-out:empty { display: none; }
+.live-out .grid { max-height: 170px; }
+
+/* laboratorio libre */
+.lab { display: grid; grid-template-columns: 260px 1fr; gap: 24px; }
+.lab > * { min-width: 0; }
+.schema-list { display: flex; flex-direction: column; gap: 8px; }
+.schema-list button { all: unset; cursor: pointer; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); }
+.schema-list button:hover, .schema-list button:focus-visible { border-color: var(--cyan); }
+.schema-list b { font-family: var(--mono); color: var(--cyan); font-size: 16px; display: block; }
+.schema-list span { font-family: var(--mono); color: var(--muted); font-size: 12px; line-height: 1.35; display: block; }
+.lab .editor { height: 190px; }
+
+/* progreso */
+.dots { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; margin: 18px 0; }
+.dots button { all: unset; cursor: pointer; aspect-ratio: 1; border-radius: 12px; display: grid; place-items: center; font-family: var(--mono); font-weight: 600; font-size: 17px; border: 1px solid var(--line); background: var(--card); transition: transform .2s, background .3s; }
+.dots button:hover, .dots button:focus-visible { transform: scale(1.08); border-color: var(--cyan); }
+.dots button.ok { background: rgb(62 230 160 / .22); border-color: var(--ok); color: var(--ok); }
+.dots button.seen { background: rgb(255 200 87 / .14); border-color: rgb(255 200 87 / .5); color: var(--gold); }
+.bar { height: 14px; border-radius: 999px; background: rgb(162 243 243 / .1); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cyan), var(--ok)); transition: width 1s var(--ease); }
+
+/* pie, panel de notas */
+.deck-foot { position: fixed; left: max(18px, env(safe-area-inset-left, 0px)); bottom: 12px; z-index: 30; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .06em; pointer-events: none; }
+.deck-foot svg { width: 18px; height: 18px; }
+.notes-panel { position: fixed; left: 50%; bottom: 46px; transform: translate(-50%, 20px); width: min(920px, calc(100% - 32px)); max-height: 34vh; overflow: auto; z-index: 40; background: rgb(2 26 51 / .96); border: 1px solid var(--gold); border-radius: 16px; padding: 16px 20px; font-family: var(--body); font-size: 17px; line-height: 1.5; color: var(--ink); opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s var(--ease); box-shadow: 0 20px 60px -20px #000; }
+.notes-panel.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.notes-panel h6 { margin: 0 0 6px; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.notes-panel p { margin: 0 0 .5em; }
+.tool-btns { position: fixed; right: 200px; bottom: 10px; z-index: 40; display: flex; gap: 6px; }
+.tool-btns button { all: unset; cursor: pointer; font-family: var(--mono); font-size: 12px; color: var(--muted); padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgb(2 26 51 / .7); }
+.tool-btns button:hover, .tool-btns button:focus-visible, .tool-btns button.on { color: var(--gold); border-color: var(--gold); }
+.reveal .progress { height: 4px; color: var(--cyan); }
+.reveal .controls { color: var(--cyan); }
+.reveal .slide-number { background: transparent; font-family: var(--mono); font-size: 13px; color: var(--muted); right: 120px; bottom: 14px; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================ PORTADA -->
+<section class="title-slide" data-transition="zoom" data-mod="">
+  <svg class="logo-ring" viewBox="0 0 64 64" aria-hidden="true"><path d="M45.2 21.6A16.5 16.5 0 1 0 48.5 32" fill="none" stroke="#1df3f4" stroke-width="6.5" stroke-linecap="round"/><circle cx="48.5" cy="19.5" r="4.6" fill="#a2f3f3"/><circle cx="32" cy="32" r="5" fill="#fff"/></svg>
+  <p class="kicker after" style="animation-delay:.1s">Prueba técnica Blend360 · All Star Program</p>
+  <h1><span class="line">SQL desde</span><span class="line"><span class="outline">Quibdó</span> <em>a la prueba</em></span></h1>
+  <p class="lead after">35 ejercicios resueltos en vivo sobre «Mercado del Pacífico», una base de práctica en español con productos, municipios y gente del Chocó.</p>
+  <div class="after" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+    <span class="chip">SQLite en tu navegador</span><span class="chip">10 módulos</span><span class="chip">Notas del presentador: tecla N</span>
+  </div>
+  <p class="small after" style="margin-top:30px">Material comunitario no oficial, sin relación con Blend360. Navega con las flechas · <b>Esc</b> vista general · <b>F</b> pantalla completa.</p>
+  <svg class="river" viewBox="0 0 640 260" aria-hidden="true"><path d="M0 200 C 120 120, 220 260, 340 170 S 540 90, 640 140" stroke="#1df3f4" stroke-width="3" fill="none"/><path d="M0 230 C 140 160, 240 280, 360 200 S 560 120, 640 170" stroke="#a2f3f3" stroke-width="2" fill="none" opacity=".6"/><path d="M0 250 C 160 200, 260 290, 380 230 S 560 160, 640 200" stroke="#ffc857" stroke-width="2" fill="none" opacity=".5"/></svg>
+  <aside class="notes">
+    <p>Bienvenida. Presento el objetivo: llegar a la prueba técnica de Blend360 dominando el SQL que más se pregunta (JOINs, agregaciones, CTEs y funciones de ventana) y practicando contra el reloj.</p>
+    <p>Aclaro que todo corre en el navegador: cada quien puede abrir el enlace y ejecutar las consultas sin instalar nada. La base es nuestra: un mercado en línea de Quibdó que vende borojó, bocachico, canastos de werregue y tamboras de chirimía.</p>
+    <p>Atajos: flechas para avanzar, Esc para la vista general, N para estas notas, S para la vista de presentador.</p>
+  </aside>
+</section>
+
+<!-- ============================================================ AGENDA -->
+<section data-mod="Ruta de la sesión">
+  <h2>La ruta de hoy</h2>
+  <div class="agenda" id="agenda"></div>
+  <p class="small" style="margin-top:18px">Haz clic en un módulo para ir directo. Cada módulo termina con ejercicios que puedes ejecutar y comprobar.</p>
+  <aside class="notes">
+    <p>Diez módulos, de lo básico a los patrones de entrevista. El orden importa: cada módulo usa lo anterior. Los ejercicios están mezclados con la teoría para practicar en cuanto se aprende.</p>
+    <p>Si el grupo ya domina lo básico, salta al módulo 05 (JOINs) o al 08 (ventanas), que es lo que más se pregunta.</p>
+  </aside>
+</section>
+
+<!-- ============================================================ LA PRUEBA -->
+<section data-mod="La prueba">
+  <h2>Lo que reportan los candidatos</h2>
+  <div class="stats">
+    <div class="stat fragment rise"><div class="v" data-count="2">0<small>h</small></div><div class="l">de evaluación técnica en línea (perfil de ciencia de datos)</div></div>
+    <div class="stat fragment rise"><div class="v" data-count="12">0<small>min</small></div><div class="l">por problema de SQL, sin margen de error</div></div>
+    <div class="stat fragment rise"><div class="v" data-count="5">0</div><div class="l">preguntas de SQL en un reto de BI Analyst</div></div>
+    <div class="stat fragment rise"><div class="v" data-count="2">0<small>+2</small></div><div class="l">problemas de SQL más dos de Python o R</div></div>
+  </div>
+  <div class="cols fragment rise" style="margin-top:26px">
+    <div class="card"><h4>Qué se evalúa</h4><p>JOINs, funciones de ventana, CTEs, agregaciones y lectura de enunciados en inglés.</p></div>
+    <div class="card"><h4>Plataformas mencionadas</h4><p>Coderbyte o HackerRank. Pregunta al reclutador qué motor usan: PostgreSQL, MySQL o SQL Server.</p></div>
+  </div>
+  <p class="small" style="margin-top:14px">Fuentes: reseñas en Glassdoor e Interview Query recopiladas en la guía «Qué evalúa Blend360». No es información oficial; el formato puede cambiar.</p>
+  <aside class="notes">
+    <p>Estos números vienen de reseñas públicas de candidatos, no de Blend360. Lo importante: el SQL es lo que más pesa y se hace contra el reloj, unos 12 minutos por problema.</p>
+    <p>Consejo práctico: antes de la prueba, preguntar al reclutador la plataforma y el motor de SQL. Y practicar en esa plataforma para conocer el editor.</p>
+  </aside>
+</section>
+
+<section data-mod="La prueba">
+  <h2>El método de los <em>12 minutos</em></h2>
+  <div class="timeline">
+    <div class="seg fragment rise" style="flex:2"><b>0–2 min</b><span>Leer</span><p>Subraya qué columnas pide, el filtro y el orden. Traduce las palabras clave.</p></div>
+    <div class="seg fragment rise" style="flex:2"><b>2–4 min</b><span>Granularidad</span><p>¿Una fila por qué? ¿Cliente, pedido, mes? Eso decide el GROUP BY.</p></div>
+    <div class="seg fragment rise" style="flex:5"><b>4–9 min</b><span>Construir por pasos</span><p>Una CTE por idea: primero agrega, luego une, al final filtra o rankea. Ejecuta cada paso.</p></div>
+    <div class="seg fragment rise" style="flex:2"><b>9–11 min</b><span>Validar</span><p>Cuenta filas. ¿Cuadra el total? ¿Salieron duplicados por el JOIN?</p></div>
+    <div class="seg fragment rise" style="flex:1.4"><b>11–12</b><span>Bordes</span><p>NULL, empates, cancelados.</p></div>
+  </div>
+  <div class="card fragment rise"><h4>Las 6 preguntas antes de enviar</h4><p>¿INNER o LEFT? · ¿Excluí los cancelados? · ¿Hay NULL que cambien un conteo? · ¿Empates (RANK vs ROW_NUMBER)? · ¿División entera (usa 100.0)? · ¿Pidieron un orden?</p></div>
+  <aside class="notes">
+    <p>Este es el método que vamos a repetir en cada ejercicio. Lo más común es perder tiempo escribiendo la consulta de una vez y luego no saber dónde está el error.</p>
+    <p>La granularidad es la pregunta clave: "una fila por cliente" o "una fila por mes". Si la tienes clara, el GROUP BY sale solo.</p>
+    <p>En cada ejercicio hay un cronómetro arriba a la derecha. Úsenlo.</p>
+  </aside>
+</section>
+
+<!-- ============================================================ EXPLICACIÓN: INGLÉS → SQL -->
+<section data-mod="La prueba">
+  <h2>Del enunciado en inglés al <em>SQL</em></h2>
+  <p class="small" style="margin-top:-8px">La prueba viene en inglés. Estas frases se traducen casi directo a una cláusula.</p>
+  <div class="cols c-55">
+    <div class="tbl-wrap"><table class="t" style="font-size:17px">
+      <tr><th>Si lees…</th><th>Piensa en…</th></tr>
+      <tr class="fragment rise"><td>for each · per · by</td><td><code>GROUP BY</code></td></tr>
+      <tr class="fragment rise"><td>at least · or more · on or after</td><td><code>&gt;=</code></td></tr>
+      <tr class="fragment rise"><td>missing · unknown · not provided</td><td><code>IS NULL</code></td></tr>
+      <tr class="fragment rise"><td>never · without · have not</td><td><code>LEFT JOIN … IS NULL</code> · <code>NOT EXISTS</code></td></tr>
+      <tr class="fragment rise"><td>unique · distinct</td><td><code>DISTINCT</code> · <code>COUNT(DISTINCT …)</code></td></tr>
+      <tr class="fragment rise"><td>rounded to 2 decimals</td><td><code>ROUND(x, 2)</code></td></tr>
+    </table></div>
+    <div class="tbl-wrap"><table class="t" style="font-size:17px">
+      <tr><th>Si lees…</th><th>Piensa en…</th></tr>
+      <tr class="fragment rise"><td>top N per · highest in each</td><td><code>ROW_NUMBER() OVER (PARTITION BY …)</code></td></tr>
+      <tr class="fragment rise"><td>running · cumulative</td><td><code>SUM(…) OVER (ORDER BY …)</code></td></tr>
+      <tr class="fragment rise"><td>previous · prior · last time</td><td><code>LAG(…)</code></td></tr>
+      <tr class="fragment rise"><td>share · percentage of total</td><td><code>x / SUM(x) OVER ()</code></td></tr>
+      <tr class="fragment rise"><td>both A and B</td><td><code>HAVING COUNT(DISTINCT …) = 2</code></td></tr>
+      <tr class="fragment rise"><td>month over month · growth</td><td><code>LAG</code> + <code>(actual − anterior) / anterior</code></td></tr>
+    </table></div>
+  </div>
+  <aside class="notes">
+    <p>Esta diapositiva conecta el inglés con el SQL. Para quien tiene un inglés básico, reconocer estas frases ahorra la mitad del tiempo de lectura.</p>
+    <p>Ejemplo: "For each department, show the highest paid employee" → "for each" es PARTITION BY o GROUP BY, "highest paid" es un ranking por salario descendente. En cada ejercicio de la presentación aparece el enunciado en inglés y su traducción.</p>
+  </aside>
+</section>
+
+<!-- ============================================================ EXPLICACIÓN: SQL EN 1 MINUTO -->
+<section data-mod="Antes de empezar">
+  <h2>SQL en un minuto</h2>
+  <div class="cols c-55">
+    <div>
+      <p>Una base de datos guarda <strong>tablas</strong>. Cada <strong>fila</strong> es un registro (un producto) y cada <strong>columna</strong> un dato de ese registro (su precio).</p>
+      <div class="tbl-wrap"><table class="t">
+        <tr><th class="gold">producto_id · PK</th><th>nombre</th><th>categoria</th><th class="num">precio</th></tr>
+        <tr><td class="gold">1</td><td>Canasto de werregue</td><td>Artesanías</td><td class="num">420.000</td></tr>
+        <tr><td class="gold">4</td><td>Bocachico (kg)</td><td>Pescados</td><td class="num">18.000</td></tr>
+        <tr><td class="gold">6</td><td>Borojó (unidad)</td><td>Cosechas</td><td class="num">6.000</td></tr>
+      </table></div>
+      <p class="small" style="margin-top:10px">SQL es el idioma para pedirle datos a esas tablas: dices <em>qué</em> quieres y el motor decide <em>cómo</em> buscarlo.</p>
+    </div>
+    <div>
+      <div class="card fragment rise"><h4>Clave primaria (PK)</h4><p>Identifica cada fila sin repetirse: <code>producto_id</code>. No puede ser NULL.</p></div>
+      <div class="card fragment rise" style="margin-top:12px"><h4>Clave foránea (FK)</h4><p>Una columna que apunta a la PK de otra tabla: <code>detalle_pedido.producto_id → productos.producto_id</code>. Así se conectan las tablas con JOIN.</p></div>
+      <div class="card fragment rise" style="margin-top:12px"><h4>Granularidad</h4><p>Qué representa una fila. En <code>pedidos</code>, un pedido; en <code>detalle_pedido</code>, un producto dentro de un pedido. Confundirlas infla los totales.</p></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Repaso rápido para quien viene de cero. Tres ideas: fila y columna, clave primaria que identifica, y clave foránea que conecta.</p>
+    <p>Insistir en la granularidad: es la pregunta que más se repite en toda la presentación. "¿Qué es una fila en esta tabla?"</p>
+  </aside>
+</section>
+
+<!-- ============================================================ MODELO DE DATOS -->
+<section data-mod="La base de datos">
+  <h2>Mercado del Pacífico <span class="small">· Quibdó, Chocó</span></h2>
+  <div class="er">
+    <svg class="links" viewBox="0 0 1168 520" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M238 70 H 310"/><text x="244" y="62">1</text><text x="296" y="62">N</text>
+      <path d="M548 70 H 620"/><text x="554" y="62">1</text><text x="606" y="62">N</text>
+      <path d="M930 70 H 858"/><text x="916" y="62">1</text><text x="864" y="62">N</text>
+      <path d="M238 360 C 280 360, 280 440, 238 440"/><text x="252" y="406">jefe</text>
+    </svg>
+    <div class="ent" id="e-cli" style="left:0;top:0"><h5>clientes</h5><div>cliente_id<i>PK</i></div><div>nombre</div><div>correo</div><div>municipio</div><div>departamento</div><div>segmento</div><div>fecha_registro</div></div>
+    <div class="ent" id="e-ped" style="left:310px;top:0"><h5>pedidos</h5><div>pedido_id<i>PK</i></div><div>cliente_id<i>FK</i></div><div>fecha_pedido</div><div>estado</div></div>
+    <div class="ent" id="e-det" style="left:620px;top:0"><h5>detalle_pedido</h5><div>pedido_id<i>FK</i></div><div>producto_id<i>FK</i></div><div>cantidad</div><div>precio_unitario</div></div>
+    <div class="ent" id="e-pro" style="left:930px;top:0"><h5>productos</h5><div>producto_id<i>PK</i></div><div>nombre</div><div>categoria</div><div>precio</div></div>
+    <div class="ent" id="e-emp" style="left:0;top:280px"><h5>empleados</h5><div>empleado_id<i>PK</i></div><div>nombre</div><div>area</div><div>salario</div><div>jefe_id<i>FK</i></div><div>fecha_ingreso</div></div>
+    <div class="traps">
+      <div class="card fragment rise" data-hl="e-cli"><h4>Wilmer nunca compró</h4><p>Cliente 6 → anti-join con LEFT JOIN o NOT EXISTS.</p></div>
+      <div class="card fragment rise" data-hl="e-pro"><h4>Camarón de río sin ventas</h4><p>Producto 9 → nunca aparece en detalle_pedido.</p></div>
+      <div class="card fragment rise" data-hl="e-cli"><h4>Datos faltantes</h4><p>Wilmer sin municipio y Jhon Freddy sin correo: NULL.</p></div>
+      <div class="card fragment rise" data-hl="e-ped"><h4>Pedidos cancelados</h4><p>2 de 15. Casi nunca cuentan como venta.</p></div>
+      <div class="card fragment rise" data-hl="e-det"><h4>Descuentos</h4><p>precio_unitario ≠ precio de lista en 2 líneas.</p></div>
+      <div class="card fragment rise" data-hl="e-emp"><h4>Empates y jerarquía</h4><p>Camila y Julián ganan igual; Daniel gana más que su jefa.</p></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>La base imita una tienda en línea de Quibdó: 10 clientes (7 del Chocó), 9 productos en pesos colombianos, 15 pedidos y 11 empleados. Es pequeña a propósito: así se puede verificar cada resultado a mano.</p>
+    <p>Las trampas están puestas a propósito porque son las mismas de las pruebas reales: clientes sin compras, NULL, cancelados, descuentos y empates. Al pasar por cada una, se ilumina la tabla donde vive.</p>
+  </aside>
+</section>
+
+<!-- ============================================================ 01 ORDEN LÓGICO -->
+<section class="divider" id="m1" data-transition="zoom" data-mod="Módulo 01" data-background-gradient="radial-gradient(circle at 80% 20%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">01</div><h2>Orden lógico de ejecución</h2>
+  <p class="lead">Escribes en un orden; el motor ejecuta en otro. Entender esto explica la mitad de los errores.</p>
+  <aside class="notes"><p>Este es el concepto que más errores evita. Si lo entienden, saben por qué un alias no funciona en el WHERE y por qué SUM va en HAVING.</p></aside>
+</section>
+
+<section data-auto-animate data-mod="01 · Orden lógico">
+  <h2 data-id="oe-h">Así lo <em>escribes</em></h2>
+  <div class="clauses row">
+    <div class="clause sel" data-id="c-sel">SELECT</div><div class="clause" data-id="c-from">FROM</div><div class="clause" data-id="c-where">WHERE</div><div class="clause" data-id="c-gb">GROUP BY</div><div class="clause" data-id="c-hav">HAVING</div><div class="clause" data-id="c-ob">ORDER BY</div><div class="clause" data-id="c-lim">LIMIT</div>
+  </div>
+  <p class="lead">El SELECT va primero en el texto… pero es casi lo último que el motor calcula.</p>
+  <aside class="notes"><p>Muestro el orden en que escribimos. Al avanzar, las mismas piezas se reordenan solas al orden real de ejecución.</p></aside>
+</section>
+
+<section data-auto-animate data-mod="01 · Orden lógico">
+  <h2 data-id="oe-h">Así lo <em>ejecuta</em> el motor</h2>
+  <div class="exec">
+    <div class="step"><span class="k">1</span><div class="clause" data-id="c-from">FROM / JOIN</div><span class="d">Arma la tabla base uniendo tablas</span></div>
+    <div class="step"><span class="k">5</span><div class="clause sel" data-id="c-sel">SELECT</div><span class="d">Calcula columnas, alias y ventanas</span></div>
+    <div class="step"><span class="k">2</span><div class="clause" data-id="c-where">WHERE</div><span class="d">Filtra <strong>filas</strong>: sin agregados</span></div>
+    <div class="step"><span class="k">6</span><div class="clause" data-id="c-dis">DISTINCT</div><span class="d">Quita duplicados</span></div>
+    <div class="step"><span class="k">3</span><div class="clause" data-id="c-gb">GROUP BY</div><span class="d">Agrupa las filas</span></div>
+    <div class="step"><span class="k">7</span><div class="clause" data-id="c-ob">ORDER BY</div><span class="d">Ordena: aquí sí sirve el alias</span></div>
+    <div class="step"><span class="k">4</span><div class="clause" data-id="c-hav">HAVING</div><span class="d">Filtra <strong>grupos</strong>: con agregados</span></div>
+    <div class="step"><span class="k">8</span><div class="clause" data-id="c-lim">LIMIT</div><span class="d">Recorta el resultado</span></div>
+  </div>
+  <aside class="notes"><p>Leer en columnas: 1 a 4 a la izquierda, 5 a 8 a la derecha. FROM, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDER BY, LIMIT.</p><p>Truco para memorizarlo: "primero consigo los datos, luego los filtro, los agrupo, filtro grupos, y al final decido qué muestro y cómo".</p></aside>
+</section>
+
+<section data-mod="01 · Orden lógico">
+  <h2>Consecuencias que preguntan</h2>
+  <div class="tbl-wrap"><table class="t">
+    <tr><th>Escribes</th><th>Qué pasa</th><th>Correcto</th></tr>
+    <tr class="fragment rise"><td><code>WHERE SUM(x) &gt; 10</code></td><td class="bad">Error: WHERE va antes de agrupar</td><td><code>HAVING SUM(x) &gt; 10</code></td></tr>
+    <tr class="fragment rise"><td><code>WHERE total &gt; 10</code> <span class="small">(alias del SELECT)</span></td><td class="bad">Error en casi todos los motores</td><td>Subconsulta o CTE</td></tr>
+    <tr class="fragment rise"><td><code>WHERE ROW_NUMBER() OVER (…) = 1</code></td><td class="bad">Error: la ventana se calcula en el SELECT</td><td>CTE y filtrar afuera</td></tr>
+    <tr class="fragment rise"><td><code>ORDER BY total</code></td><td class="ok">Funciona: ORDER BY va después del SELECT</td><td>—</td></tr>
+  </table></div>
+  <aside class="notes"><p>Cada fila es una pregunta típica de opción múltiple. La regla general: una cláusula solo puede usar lo que ya se calculó en los pasos anteriores.</p><p>SQLite es permisivo con alias en WHERE, pero PostgreSQL y SQL Server no: en la prueba, no lo hagan.</p></aside>
+</section>
+
+<!-- ============================================================ 02 FILTRAR -->
+<section class="divider" id="m2" data-transition="zoom" data-mod="Módulo 02" data-background-gradient="radial-gradient(circle at 20% 20%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">02</div><h2>SELECT, WHERE, ORDER BY</h2>
+  <p class="lead">Elegir columnas, filtrar filas, ordenar y recortar.</p>
+  <div class="learn"><span class="chip">IN · BETWEEN · LIKE</span><span class="chip">DISTINCT</span><span class="chip">LIMIT</span></div>
+  <aside class="notes"><p>Lo básico, pero con los detalles que hacen perder puntos: BETWEEN es inclusivo, AND va antes que OR, y LIKE distingue % de _.</p></aside>
+</section>
+
+<section data-mod="02 · Filtrar">
+  <div class="cols c-55">
+    <div>
+      <h3>Anatomía de una consulta</h3>
+<pre class="live"><code class="language-sql" data-trim data-line-numbers="1|2|3-4|5|6">
+SELECT nombre, precio, precio * 1.19 AS precio_con_iva
+FROM productos
+WHERE categoria IN ('Artesanías', 'Pescados')
+  AND precio BETWEEN 20000 AND 300000
+ORDER BY precio DESC
+LIMIT 3;
+</code></pre>
+    </div>
+    <div>
+      <h3>Operadores de filtro</h3>
+      <div class="tbl-wrap"><table class="t">
+        <tr><th>Operador</th><th>Nota</th></tr>
+        <tr><td><code>AND</code> · <code>OR</code></td><td>AND va primero. <strong>Usa paréntesis.</strong></td></tr>
+        <tr><td><code>IN (…)</code></td><td>Varios OR en uno</td></tr>
+        <tr><td><code>BETWEEN a AND b</code></td><td>Incluye ambos extremos</td></tr>
+        <tr><td><code>LIKE 'Bo%'</code></td><td><code>%</code> varios caracteres, <code>_</code> uno</td></tr>
+        <tr><td><code>IS NULL</code></td><td>Nunca <code>= NULL</code></td></tr>
+        <tr><td><code>LIMIT 3</code></td><td>SQL Server: <code>TOP 3</code></td></tr>
+      </table></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Recorro la consulta línea por línea (las líneas se iluminan al avanzar) y luego la ejecuto con el botón para ver el resultado real.</p><p>Preguntar al grupo: ¿por qué el canasto de werregue no sale? Porque cuesta 420.000 y el BETWEEN llega hasta 300.000.</p></aside>
+</section>
+
+<section data-ex="1"></section>
+<section data-ex="2"></section>
+<section data-ex="5"></section>
+<section data-ex="6"></section>
+
+<!-- ============================================================ 03 NULL -->
+<section class="divider" id="m3" data-transition="zoom" data-mod="Módulo 03" data-background-gradient="radial-gradient(circle at 70% 80%, #5a3d0a 0%, #021a33 55%)">
+  <div class="num">03</div><h2>NULL: la trampa favorita</h2>
+  <p class="lead">NULL significa «desconocido». No es igual a nada, ni siquiera a otro NULL.</p>
+  <aside class="notes"><p>Casi todas las pruebas tienen una pregunta de NULL. Es el tema con más trampas por línea de código.</p></aside>
+</section>
+
+<section data-mod="03 · NULL">
+  <div class="cols">
+    <div>
+      <h3>Lógica de tres valores</h3>
+      <div class="tbl-wrap"><table class="t">
+        <tr><th>Expresión</th><th>Resultado</th></tr>
+        <tr class="fragment rise"><td><code>NULL = NULL</code></td><td><span class="bad">NULL</span>, no TRUE: la fila no pasa el WHERE</td></tr>
+        <tr class="fragment rise"><td><code>NULL + 5</code></td><td><span class="bad">NULL</span></td></tr>
+        <tr class="fragment rise"><td><code>COUNT(*)</code></td><td>cuenta todas las filas</td></tr>
+        <tr class="fragment rise"><td><code>COUNT(columna)</code></td><td>ignora los NULL</td></tr>
+        <tr class="fragment rise"><td><code>AVG(columna)</code></td><td>divide solo entre los no nulos</td></tr>
+        <tr class="fragment rise"><td><code>x NOT IN (1, NULL)</code></td><td><span class="bad">nunca</span> devuelve filas</td></tr>
+      </table></div>
+    </div>
+    <div>
+      <h3>Compruébalo</h3>
+<pre class="live"><code class="language-sql" data-trim>
+SELECT COUNT(*)          AS total,
+       COUNT(municipio)  AS con_municipio,
+       COUNT(correo)     AS con_correo,
+       COALESCE(NULL, 'Sin dato') AS coalesce_demo
+FROM clientes;
+</code></pre>
+      <p class="small fragment rise" style="margin-top:12px"><code>COALESCE(a, b)</code> devuelve el primer valor no nulo y funciona en todos los motores. <code>NULLIF(x, 0)</code> evita dividir entre cero.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Ejecutar la consulta: total 10, con municipio 9 (Wilmer no tiene), con correo 9 (Jhon Freddy no tiene).</p><p>El caso NOT IN con NULL es de entrevista: si la subconsulta del NOT IN puede traer un NULL, el resultado es vacío. Por eso se prefiere NOT EXISTS.</p></aside>
+</section>
+
+<section data-ex="3"></section>
+
+<!-- ============================================================ 04 AGREGACIONES -->
+<section class="divider" id="m4" data-transition="zoom" data-mod="Módulo 04" data-background-gradient="radial-gradient(circle at 30% 70%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">04</div><h2>GROUP BY y HAVING</h2>
+  <p class="lead">Muchas filas entran, una fila por grupo sale.</p>
+  <div class="learn"><span class="chip">COUNT · SUM · AVG · MIN · MAX</span><span class="chip">WHERE vs HAVING</span></div>
+  <aside class="notes"><p>Las agregaciones son el corazón del análisis de datos. Regla de oro: toda columna del SELECT que no está dentro de un agregado debe ir en el GROUP BY.</p></aside>
+</section>
+
+<section data-mod="04 · Agregaciones">
+  <h2>Qué hace <em>GROUP BY</em></h2>
+  <div class="cols c-46">
+    <div>
+      <div class="pile" id="pile">
+        <div class="r g0 top" style="--i:0;--g:0;--k:0"><span>Andrés · Datos</span><span>7.000.000</span></div>
+        <div class="r g0" style="--i:1;--g:0;--k:1"><span>Camila · Datos</span><span>4.500.000</span></div>
+        <div class="r g0" style="--i:2;--g:0;--k:2"><span>Julián · Datos</span><span>4.500.000</span></div>
+        <div class="r g0" style="--i:3;--g:0;--k:3"><span>Paula · Datos</span><span>3.500.000</span></div>
+        <div class="r g1 top" style="--i:4;--g:1;--k:0"><span>Isabel · Mercadeo</span><span>4.750.000</span></div>
+        <div class="r g1" style="--i:5;--g:1;--k:1"><span>Mateo · Mercadeo</span><span>3.000.000</span></div>
+      </div>
+      <span class="fragment trigger" data-target="pile" data-add="collapsed"></span>
+    </div>
+    <div>
+<pre><code class="language-sql" data-trim>
+SELECT area,
+       COUNT(*)     AS personas,
+       AVG(salario) AS promedio
+FROM empleados
+WHERE area IN ('Datos', 'Mercadeo')
+GROUP BY area;
+</code></pre>
+      <div class="tbl-wrap fragment rise" style="margin-top:16px"><table class="t">
+        <tr><th>area</th><th class="num">personas</th><th class="num">promedio</th></tr>
+        <tr><td>Datos</td><td class="num">4</td><td class="num">4.875.000</td></tr>
+        <tr><td>Mercadeo</td><td class="num">2</td><td class="num">3.875.000</td></tr>
+      </table></div>
+      <p class="small fragment rise" style="margin-top:12px">Las 6 filas se apilan en 2 grupos. Del grupo solo sobreviven la clave (area) y los agregados.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Avanzo una vez: las filas se apilan por área. Eso es GROUP BY: colapsa filas. Avanzo otra vez y aparece el resultado.</p><p>Por eso no se puede pedir "nombre" en el SELECT: ¿cuál de los cuatro nombres de Datos mostraría el motor?</p></aside>
+</section>
+
+<section data-mod="04 · Agregaciones">
+  <h2><em>WHERE</em> filtra filas · <em class="gold">HAVING</em> filtra grupos</h2>
+<pre class="live"><code class="language-sql" data-trim data-line-numbers="1-3|4-5|6|7|8|9">
+SELECT pr.categoria,
+       COUNT(DISTINCT d.pedido_id)          AS pedidos,
+       SUM(d.cantidad * d.precio_unitario)  AS ingreso
+FROM detalle_pedido d
+JOIN productos pr ON pr.producto_id = d.producto_id
+JOIN pedidos p    ON p.pedido_id    = d.pedido_id
+WHERE p.estado &lt;&gt; 'cancelado'                     -- filas, antes de agrupar
+GROUP BY pr.categoria
+HAVING SUM(d.cantidad * d.precio_unitario) &gt; 500000;  -- grupos, después
+</code></pre>
+  <aside class="notes"><p>Ingreso por categoría, sin cancelados, solo categorías con más de 500.000. Al ejecutar quedan Artesanías y Pescados; Cosechas (303.000) se elimina en el HAVING.</p><p>COUNT(DISTINCT pedido_id) porque un pedido puede tener varias líneas de la misma categoría.</p></aside>
+</section>
+
+<section data-ex="4"></section>
+<section data-ex="7"></section>
+<section data-ex="8"></section>
+<section data-ex="9"></section>
+<section data-ex="10"></section>
+
+<!-- ============================================================ 05 JOINS -->
+<section class="divider" id="m5" data-transition="zoom" data-mod="Módulo 05" data-background-gradient="radial-gradient(circle at 80% 70%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">05</div><h2>JOINs</h2>
+  <p class="lead">Unir tablas sin perder filas por accidente y sin inflar los totales.</p>
+  <div class="learn"><span class="chip">INNER · LEFT · FULL</span><span class="chip">anti-join</span><span class="chip">self join</span><span class="chip">cardinalidad</span></div>
+  <aside class="notes"><p>El tema más preguntado junto con ventanas. Tres errores típicos: usar INNER cuando se necesitaba LEFT, filtrar la tabla derecha en el WHERE, y no darse cuenta de que el JOIN multiplicó filas.</p></aside>
+</section>
+
+<section data-mod="05 · JOINs">
+  <h2>Un <em>LEFT JOIN</em>, paso a paso</h2>
+  <div class="cols c3" style="grid-template-columns: 1fr 1fr 1.4fr; align-items:start">
+    <div><p class="kicker">clientes (A)</p><div class="tbl-wrap"><table class="t mini">
+      <tr><th>id</th><th>nombre</th></tr>
+      <tr><td class="hl0">1</td><td>Yeison</td></tr>
+      <tr><td class="hl1">2</td><td>Leidy</td></tr>
+      <tr><td class="hl2">6</td><td>Wilmer</td></tr></table></div></div>
+    <div><p class="kicker">pedidos (B)</p><div class="tbl-wrap"><table class="t mini">
+      <tr><th>pedido</th><th>cliente_id</th></tr>
+      <tr><td>101</td><td class="hl0">1</td></tr>
+      <tr><td>103</td><td class="hl0">1</td></tr>
+      <tr><td>102</td><td class="hl1">2</td></tr></table></div></div>
+    <div><p class="kicker">A LEFT JOIN B ON a.id = b.cliente_id</p><div class="tbl-wrap"><table class="t mini">
+      <tr><th>nombre</th><th>pedido</th><th>por qué</th></tr>
+      <tr class="fragment rise"><td class="hl0">Yeison</td><td>101</td><td class="small">1.ª pareja</td></tr>
+      <tr class="fragment rise"><td class="hl0">Yeison</td><td>103</td><td class="small">2.ª pareja: otra fila</td></tr>
+      <tr class="fragment rise"><td class="hl1">Leidy</td><td>102</td><td class="small">una pareja</td></tr>
+      <tr class="fragment rise"><td class="hl2">Wilmer</td><td class="null bad">NULL</td><td class="small">sin pareja: se conserva</td></tr></table></div></div>
+  </div>
+  <div class="cols fragment rise" style="margin-top:22px">
+    <div class="card"><h4>El motor recorre A</h4><p>Por cada fila de A busca todas las filas de B que cumplen el ON. Cada pareja produce una fila del resultado.</p></div>
+    <div class="card"><h4>INNER vs LEFT</h4><p>Con INNER JOIN, Wilmer desaparece. Con LEFT JOIN se queda y las columnas de B salen en NULL.</p></div>
+  </div>
+  <aside class="notes">
+    <p>Explicación mecánica del JOIN. Avanzar fila por fila: Yeison tiene dos pedidos, entonces aparece dos veces (esto es la cardinalidad que veremos luego). Leidy una vez. Wilmer no tiene pedidos: el LEFT JOIN lo conserva con NULL.</p>
+    <p>Pregunta al grupo: ¿cuántas filas daría un INNER JOIN? Respuesta: 3.</p>
+  </aside>
+</section>
+
+<section data-mod="05 · JOINs">
+  <h2>Cinco formas de unir A con B</h2>
+  <div class="joins">
+    <div class="j fragment rise"><div class="venn" data-type="inner"></div><b>INNER JOIN</b><p>Solo filas con pareja en ambas</p></div>
+    <div class="j fragment rise"><div class="venn" data-type="left"></div><b>LEFT JOIN</b><p>Todo A; lo que falte de B es NULL</p></div>
+    <div class="j fragment rise"><div class="venn" data-type="right"></div><b>RIGHT JOIN</b><p>Todo B; casi nadie lo usa</p></div>
+    <div class="j fragment rise"><div class="venn" data-type="full"></div><b>FULL OUTER</b><p>Todo A y todo B</p></div>
+    <div class="j fragment rise"><div class="venn" data-type="anti"></div><b>ANTI-JOIN</b><p>A sin pareja: <code>LEFT … IS NULL</code></p></div>
+  </div>
+  <div class="cols fragment rise" style="margin-top:22px">
+    <div class="card"><h4>CROSS JOIN</h4><p>Todas las combinaciones: filas(A) × filas(B). 10 clientes × 9 productos = 90 filas.</p></div>
+    <div class="card"><h4>Self join</h4><p>Una tabla consigo misma con dos alias: empleado ↔ jefe en <code>empleados</code>.</p></div>
+  </div>
+  <aside class="notes"><p>Los diagramas son una aproximación útil. Lo que de verdad hay que recordar: qué pasa con las filas que no tienen pareja.</p><p>El anti-join es un patrón de entrevista: "clientes que nunca compraron", "productos nunca vendidos".</p></aside>
+</section>
+
+<section data-auto-animate data-mod="05 · JOINs">
+  <h2 data-id="trap-h">La trampa del <em class="bad">LEFT JOIN</em></h2>
+<pre data-id="trap" class="live"><code class="language-sql" data-trim data-line-numbers="4">
+SELECT c.nombre, p.pedido_id
+FROM clientes c
+LEFT JOIN pedidos p ON p.cliente_id = c.cliente_id
+WHERE p.estado = 'entregado';
+</code></pre>
+  <p class="lead" style="margin-top:16px">Resultado: <strong class="bad">11 filas</strong>. Darwin, Wilmer, Ana Lucía y Jhon Freddy desaparecieron: sus filas tienen <code>estado</code> NULL o distinto, y el WHERE las borra. El LEFT se volvió INNER.</p>
+  <aside class="notes"><p>Ejecutar y contar: 11 filas. Preguntar: ¿dónde está Wilmer? El LEFT JOIN lo trajo con NULL, pero el WHERE lo eliminó porque NULL = 'entregado' no es verdadero.</p></aside>
+</section>
+
+<section data-auto-animate data-mod="05 · JOINs">
+  <h2 data-id="trap-h">La condición va en el <em class="ok">ON</em></h2>
+<pre data-id="trap" class="live"><code class="language-sql" data-trim data-line-numbers="3-4">
+SELECT c.nombre, p.pedido_id
+FROM clientes c
+LEFT JOIN pedidos p ON p.cliente_id = c.cliente_id
+                   AND p.estado = 'entregado';
+</code></pre>
+  <p class="lead" style="margin-top:16px">Resultado: <strong class="ok">15 filas</strong>. Están los 10 clientes; los que no tienen pedidos entregados aparecen con <code>pedido_id</code> NULL.</p>
+  <aside class="notes"><p>La línea del WHERE se desplaza al ON. Ejecutar: 15 filas, 11 con pedido y 4 clientes con NULL. Regla: los filtros sobre la tabla de la derecha de un LEFT JOIN van en el ON.</p></aside>
+</section>
+
+<section data-mod="05 · JOINs">
+  <h2>Cardinalidad: el total <em class="gold">inflado</em></h2>
+  <div class="cols">
+    <div>
+      <p>Si cada fila de A tiene 3 parejas en B, el JOIN devuelve 3 filas por cada fila de A. Un <code>SUM</code> sobre columnas de A sale multiplicado.</p>
+<pre class="live"><code class="language-sql" data-trim>
+-- ¿Cuántos pedidos tiene Yeison? (son 3)
+SELECT COUNT(*)                  AS filas_tras_join,
+       COUNT(DISTINCT p.pedido_id) AS pedidos_reales
+FROM pedidos p
+JOIN detalle_pedido d ON d.pedido_id = p.pedido_id
+WHERE p.cliente_id = 1;
+</code></pre>
+    </div>
+    <div class="card fragment rise">
+      <h4>Antes de cada JOIN, pregúntate</h4>
+      <p>¿Cuántas filas por clave hay en cada lado? Si es 1 a N, agrega primero (en una CTE) y une después. O cuenta con <code>COUNT(DISTINCT …)</code>.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Ejecutar: 4 filas tras el JOIN, pero 3 pedidos reales, porque el pedido 101 tiene dos productos. Este error es silencioso: la consulta corre y da un número equivocado.</p></aside>
+</section>
+
+<section data-ex="11"></section>
+<section data-ex="12"></section>
+<section data-ex="13"></section>
+<section data-ex="14"></section>
+<section data-ex="15"></section>
+<section data-ex="16"></section>
+
+<!-- ============================================================ 06 SUBCONSULTAS Y CTE -->
+<section class="divider" id="m6" data-transition="zoom" data-mod="Módulo 06" data-background-gradient="radial-gradient(circle at 20% 80%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">06</div><h2>Subconsultas y CTEs</h2>
+  <p class="lead">Partir un problema difícil en pasos con nombre.</p>
+  <div class="learn"><span class="chip">escalar</span><span class="chip">IN · EXISTS</span><span class="chip">correlacionada</span><span class="chip">WITH</span></div>
+  <aside class="notes"><p>En la prueba, las CTE son la mejor herramienta: se leen de arriba abajo y se pueden probar paso a paso.</p></aside>
+</section>
+
+<section data-mod="06 · Subconsultas">
+  <div class="cols">
+    <div>
+      <h3>Cuatro tipos de subconsulta</h3>
+      <div class="tbl-wrap"><table class="t">
+        <tr><th>Tipo</th><th>Ejemplo</th></tr>
+        <tr class="fragment rise"><td>Escalar</td><td><code>precio &gt; (SELECT AVG(precio) …)</code></td></tr>
+        <tr class="fragment rise"><td>Con IN</td><td><code>cliente_id IN (SELECT …)</code></td></tr>
+        <tr class="fragment rise"><td>EXISTS</td><td><code>NOT EXISTS (SELECT 1 …)</code>, segura con NULL</td></tr>
+        <tr class="fragment rise"><td>Correlacionada</td><td>usa columnas de la consulta externa; se evalúa por fila</td></tr>
+      </table></div>
+    </div>
+    <div>
+      <h3>La CTE como receta</h3>
+<pre class="live"><code class="language-sql" data-trim data-line-numbers="1-6|7-11">
+WITH totales AS (               -- paso 1: un total por pedido
+    SELECT pedido_id, SUM(cantidad * precio_unitario) AS total
+    FROM detalle_pedido
+    GROUP BY pedido_id
+)
+-- paso 2: promedio por cliente
+SELECT p.cliente_id, ROUND(AVG(t.total)) AS ticket
+FROM pedidos p
+JOIN totales t ON t.pedido_id = p.pedido_id
+WHERE p.estado &lt;&gt; 'cancelado'
+GROUP BY p.cliente_id;
+</code></pre>
+    </div>
+  </div>
+  <aside class="notes"><p>La CTE resuelve la cardinalidad que vimos antes: primero un total por pedido y después el promedio por cliente.</p><p>Consejo para la prueba: ejecutar solo la CTE primero (SELECT * FROM totales) para comprobar que el paso 1 está bien.</p></aside>
+</section>
+
+<section data-ex="17"></section>
+<section data-ex="18"></section>
+<section data-ex="19"></section>
+<section data-ex="20"></section>
+<section data-ex="21"></section>
+
+<!-- ============================================================ 07 CASE -->
+<section class="divider" id="m7" data-transition="zoom" data-mod="Módulo 07" data-background-gradient="radial-gradient(circle at 75% 25%, #5a3d0a 0%, #021a33 55%)">
+  <div class="num">07</div><h2>CASE WHEN</h2>
+  <p class="lead">El «si… entonces» de SQL: clasificar, etiquetar y pivotear.</p>
+  <aside class="notes"><p>CASE aparece en casi todas las pruebas, sobre todo como agregación condicional: contar por estado en una sola fila.</p></aside>
+</section>
+
+<section data-mod="07 · CASE">
+  <div class="cols">
+    <div>
+      <h3>Clasificar</h3>
+<pre class="live"><code class="language-sql" data-trim>
+SELECT nombre, precio,
+       CASE
+           WHEN precio &gt;= 100000 THEN 'Alto'
+           WHEN precio &gt;= 20000  THEN 'Medio'
+           ELSE 'Bajo'
+       END AS rango
+FROM productos;
+</code></pre>
+    </div>
+    <div>
+      <h3>Pivot manual</h3>
+<pre class="live"><code class="language-sql" data-trim>
+SELECT
+  SUM(CASE WHEN departamento = 'Chocó'
+           THEN 1 ELSE 0 END) AS chocoanos,
+  SUM(CASE WHEN departamento &lt;&gt; 'Chocó'
+           THEN 1 ELSE 0 END) AS otros,
+  ROUND(100.0 * SUM(CASE WHEN departamento = 'Chocó'
+           THEN 1 ELSE 0 END) / COUNT(*), 1) AS pct_choco
+FROM clientes;
+</code></pre>
+      <p class="small fragment rise" style="margin-top:10px"><code>100.0 *</code> evita la división entera: en PostgreSQL y SQL Server <code>7 / 10 = 0</code>.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>El CASE se detiene en el primer WHEN verdadero: por eso el orden de las condiciones importa.</p><p>El pivot da 7 chocoanos, 3 de otros departamentos, 70%. Si quitan el .0, en otros motores el porcentaje sale 0.</p></aside>
+</section>
+
+<section data-ex="22"></section>
+<section data-ex="23"></section>
+<section data-ex="24"></section>
+
+<!-- ============================================================ 08 VENTANAS -->
+<section class="divider" id="m8" data-transition="zoom" data-mod="Módulo 08" data-background-gradient="radial-gradient(circle at 50% 30%, #0b5d86 0%, #021a33 60%)">
+  <div class="num">08</div><h2>Funciones de ventana</h2>
+  <p class="lead">Calcular sobre un grupo de filas <strong>sin colapsarlas</strong>.</p>
+  <div class="learn"><span class="chip">ROW_NUMBER · RANK · DENSE_RANK</span><span class="chip">LAG · LEAD</span><span class="chip">acumulados</span><span class="chip">ROWS vs RANGE</span></div>
+  <aside class="notes"><p>Este es el módulo que separa a quien pasa de quien no. Las pruebas de Blend mencionan funciones de ventana explícitamente.</p></aside>
+</section>
+
+<section data-mod="08 · Ventanas">
+  <h2>GROUP BY colapsa · <em>OVER</em> conserva</h2>
+  <div class="cols">
+    <div>
+<pre><code class="language-sql" data-trim>
+SELECT area, AVG(salario)
+FROM empleados
+GROUP BY area;      -- 1 fila por área
+</code></pre>
+      <div class="tbl-wrap" style="margin-top:12px"><table class="t mini">
+        <tr><th>area</th><th class="num">avg</th></tr>
+        <tr><td class="hl0">Datos</td><td class="num">4.875.000</td></tr>
+        <tr><td class="hl1">Mercadeo</td><td class="num">3.875.000</td></tr>
+      </table></div>
+    </div>
+    <div class="fragment rise">
+<pre><code class="language-sql" data-trim>
+SELECT nombre, area, salario,
+  AVG(salario) OVER (PARTITION BY area)
+FROM empleados;     -- todas las filas
+</code></pre>
+      <div class="tbl-wrap" style="margin-top:12px"><table class="t mini">
+        <tr><th>nombre</th><th class="num">salario</th><th class="num">avg área</th></tr>
+        <tr><td class="hl0">Andrés</td><td class="num">7.000.000</td><td class="num">4.875.000</td></tr>
+        <tr><td class="hl0">Camila</td><td class="num">4.500.000</td><td class="num">4.875.000</td></tr>
+        <tr><td class="hl0">Julián</td><td class="num">4.500.000</td><td class="num">4.875.000</td></tr>
+        <tr><td class="hl0">Paula</td><td class="num">3.500.000</td><td class="num">4.875.000</td></tr>
+        <tr><td class="hl1">Isabel</td><td class="num">4.750.000</td><td class="num">3.875.000</td></tr>
+        <tr><td class="hl1">Mateo</td><td class="num">3.000.000</td><td class="num">3.875.000</td></tr>
+      </table></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Misma información, distinta forma. Con OVER cada empleado conserva su fila y además ve el promedio de su área: se puede comparar salario contra promedio sin subconsulta.</p></aside>
+</section>
+
+<section data-mod="08 · Ventanas">
+  <h2>Anatomía de <em>OVER</em></h2>
+<pre><code class="language-sql" data-trim data-line-numbers="1|2|3|4">
+SUM(total) OVER (
+    PARTITION BY cliente_id          -- ¿en qué grupos? (opcional)
+    ORDER BY fecha_pedido            -- ¿en qué orden?   (ranking, LAG, acumulados)
+    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW   -- ¿qué filas entran?
+)
+</code></pre>
+  <div class="cols c3" style="margin-top:22px">
+    <div class="card fragment rise"><h4>Ranking</h4><p><code>ROW_NUMBER</code>, <code>RANK</code>, <code>DENSE_RANK</code>, <code>NTILE(n)</code></p></div>
+    <div class="card fragment rise"><h4>Desplazamiento</h4><p><code>LAG(col)</code> fila anterior · <code>LEAD(col)</code> siguiente · <code>FIRST_VALUE</code></p></div>
+    <div class="card fragment rise"><h4>Agregados</h4><p><code>SUM · AVG · COUNT … OVER</code>: acumulados, móviles, % del total</p></div>
+  </div>
+  <aside class="notes"><p>Tres preguntas: en qué grupos (PARTITION BY), en qué orden (ORDER BY) y qué filas entran al cálculo (el marco). OVER () vacío significa "todo el resultado".</p></aside>
+</section>
+
+<section data-mod="08 · Ventanas">
+  <h2>Empates: los tres rankings</h2>
+  <div class="cols c-55">
+    <div class="tbl-wrap"><table class="t">
+      <tr><th>nombre</th><th class="num">salario</th><th class="num fragment rise" data-fragment-index="1">ROW_NUMBER</th><th class="num fragment rise" data-fragment-index="2">RANK</th><th class="num fragment rise" data-fragment-index="3">DENSE_RANK</th></tr>
+      <tr><td>Andrés</td><td class="num">7.000.000</td><td class="num fragment rise" data-fragment-index="1">1</td><td class="num fragment rise" data-fragment-index="2">1</td><td class="num fragment rise" data-fragment-index="3">1</td></tr>
+      <tr><td>Camila</td><td class="num gold">4.500.000</td><td class="num fragment rise" data-fragment-index="1">2</td><td class="num fragment rise" data-fragment-index="2">2</td><td class="num fragment rise" data-fragment-index="3">2</td></tr>
+      <tr><td>Julián</td><td class="num gold">4.500.000</td><td class="num fragment rise" data-fragment-index="1">3</td><td class="num fragment rise" data-fragment-index="2">2</td><td class="num fragment rise" data-fragment-index="3">2</td></tr>
+      <tr><td>Paula</td><td class="num">3.500.000</td><td class="num fragment rise" data-fragment-index="1">4</td><td class="num fragment rise bad" data-fragment-index="2">4</td><td class="num fragment rise ok" data-fragment-index="3">3</td></tr>
+    </table></div>
+    <div>
+      <p class="fragment rise" data-fragment-index="1"><strong>ROW_NUMBER</strong>: nunca repite. Útil para «uno por grupo».</p>
+      <p class="fragment rise" data-fragment-index="2"><strong>RANK</strong>: empates comparten puesto y luego <span class="bad">salta</span> (1, 2, 2, 4).</p>
+      <p class="fragment rise" data-fragment-index="3"><strong>DENSE_RANK</strong>: empates comparten y <span class="ok">no salta</span> (1, 2, 2, 3). Úsalo para «el N-ésimo salario».</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Área de Datos. Camila y Julián ganan lo mismo. Pregunta clásica: "segundo salario más alto" → DENSE_RANK = 2. Con ROW_NUMBER saldría solo uno de los dos empatados, y cuál depende del motor.</p></aside>
+</section>
+
+<section data-mod="08 · Ventanas">
+  <h2>El marco: <em>ROWS</em> vs <em class="gold">RANGE</em></h2>
+  <div class="cols c-55">
+    <div>
+<pre class="live"><code class="language-sql" data-trim>
+WITH v(fecha, valor) AS (VALUES
+  ('2024-03-01', 100), ('2024-03-01', 150),
+  ('2024-03-02',  80))
+SELECT fecha, valor,
+  SUM(valor) OVER (ORDER BY fecha, valor ROWS
+    BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS con_rows,
+  SUM(valor) OVER (ORDER BY fecha) AS con_range
+FROM v;
+</code></pre>
+    </div>
+    <div>
+      <div class="card fragment rise"><h4>ROWS: físico</h4><p>Acumula fila por fila: 100, 250, 330. Úsalo para acumulados y promedios móviles.</p></div>
+      <div class="card fragment rise" style="margin-top:12px"><h4>RANGE: lógico (por defecto)</h4><p>Filas con la misma fecha se suman juntas: 250, 250, 330. Es lo que pasa si no escribes el marco.</p></div>
+      <p class="small fragment rise" style="margin-top:12px">Promedio móvil de 3: <code>ROWS BETWEEN 2 PRECEDING AND CURRENT ROW</code>.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Ejecutar y comparar las dos columnas: en la primera fecha hay dos ventas. Con RANGE ambas filas muestran 250 de una vez.</p><p>Trampa extra: LAST_VALUE con ORDER BY devuelve la fila actual por el marco por defecto; hay que ampliar el marco hasta UNBOUNDED FOLLOWING.</p></aside>
+</section>
+
+<section data-mod="08 · Ventanas">
+  <h2><em>LAG</em> y <em>LEAD</em>: mirar la fila vecina</h2>
+  <div class="cols c-55">
+    <div>
+      <div class="tbl-wrap"><table class="t mini">
+        <tr><th>pedido</th><th>fecha</th><th class="fragment rise" data-fragment-index="1">LAG(fecha)</th><th class="fragment rise" data-fragment-index="2">LEAD(fecha)</th><th class="num fragment rise" data-fragment-index="3">días</th></tr>
+        <tr><td>101</td><td class="hl0">2024-02-01</td><td class="fragment rise bad" data-fragment-index="1">NULL</td><td class="fragment rise hl1" data-fragment-index="2">2024-03-05</td><td class="num fragment rise" data-fragment-index="3">NULL</td></tr>
+        <tr><td>103</td><td class="hl1">2024-03-05</td><td class="fragment rise hl0" data-fragment-index="1">2024-02-01</td><td class="fragment rise hl2" data-fragment-index="2">2024-05-15</td><td class="num fragment rise" data-fragment-index="3">33</td></tr>
+        <tr><td>109</td><td class="hl2">2024-05-15</td><td class="fragment rise hl1" data-fragment-index="1">2024-03-05</td><td class="fragment rise bad" data-fragment-index="2">NULL</td><td class="num fragment rise" data-fragment-index="3">71</td></tr>
+      </table></div>
+      <p class="small" style="margin-top:10px">Pedidos de Yeison Mosquera, ordenados por fecha. El color muestra de qué fila viene cada valor.</p>
+    </div>
+    <div>
+      <p class="fragment rise" data-fragment-index="1"><strong>LAG</strong> trae el valor de la fila <strong>anterior</strong>. La primera no tiene anterior: NULL.</p>
+      <p class="fragment rise" data-fragment-index="2"><strong>LEAD</strong> trae el de la fila <strong>siguiente</strong>. La última da NULL.</p>
+<pre class="live fragment rise" data-fragment-index="3"><code class="language-sql" data-trim>
+SELECT pedido_id, fecha_pedido,
+       LAG(fecha_pedido)  OVER w AS anterior,
+       LEAD(fecha_pedido) OVER w AS siguiente
+FROM pedidos
+WHERE cliente_id = 1
+WINDOW w AS (ORDER BY fecha_pedido);
+</code></pre>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>LAG y LEAD sirven para comparar una fila con su vecina sin hacer un self join: días entre compras, crecimiento mes a mes, cambio de precio.</p>
+    <p>Con PARTITION BY cliente_id, el LAG nunca mezcla pedidos de clientes distintos: es lo que usa el ejercicio 30.</p>
+  </aside>
+</section>
+
+<section data-ex="25"></section>
+<section data-ex="26"></section>
+<section data-ex="27"></section>
+<section data-ex="28"></section>
+<section data-ex="29"></section>
+<section data-ex="30"></section>
+<section data-ex="31"></section>
+<section data-ex="32"></section>
+
+<!-- ============================================================ 09 CONJUNTOS, FECHAS, DDL -->
+<section class="divider" id="m9" data-transition="zoom" data-mod="Módulo 09" data-background-gradient="radial-gradient(circle at 30% 30%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">09</div><h2>Conjuntos, fechas y DDL</h2>
+  <p class="lead">Lo que sale en las preguntas de opción múltiple.</p>
+  <aside class="notes"><p>Módulo rápido: más teoría que ejercicios. Son puntos fáciles en la parte de opción múltiple.</p></aside>
+</section>
+
+<section data-mod="09 · Conjuntos y fechas">
+  <div class="cols">
+    <div>
+      <h3>UNION, INTERSECT, EXCEPT</h3>
+      <div class="tbl-wrap"><table class="t">
+        <tr><th>Operador</th><th>Resultado</th></tr>
+        <tr><td><code>UNION</code></td><td>Ambas, <strong>sin</strong> duplicados (más lento)</td></tr>
+        <tr><td><code>UNION ALL</code></td><td>Ambas, con duplicados (más rápido)</td></tr>
+        <tr><td><code>INTERSECT</code></td><td>Filas en las dos</td></tr>
+        <tr><td><code>EXCEPT</code></td><td>De la primera que no están en la segunda (Oracle: MINUS)</td></tr>
+      </table></div>
+<pre class="live" style="margin-top:12px"><code class="language-sql" data-trim>
+SELECT municipio FROM clientes WHERE departamento = 'Chocó'
+EXCEPT
+SELECT 'Quibdó';
+</code></pre>
+    </div>
+    <div>
+      <h3>Fechas según el motor</h3>
+      <div class="tbl-wrap"><table class="t" style="font-size:15px">
+        <tr><th>Necesidad</th><th>SQLite</th><th>PostgreSQL</th><th>SQL Server</th></tr>
+        <tr><td>Mes «2024-03»</td><td><code>strftime('%Y-%m', d)</code></td><td><code>TO_CHAR(d,'YYYY-MM')</code></td><td><code>FORMAT(d,'yyyy-MM')</code></td></tr>
+        <tr><td>Truncar a mes</td><td><code>date(d,'start of month')</code></td><td><code>DATE_TRUNC('month', d)</code></td><td><code>DATETRUNC(month, d)</code></td></tr>
+        <tr><td>Días entre</td><td><code>julianday(b)-julianday(a)</code></td><td><code>b - a</code></td><td><code>DATEDIFF(day,a,b)</code></td></tr>
+        <tr><td>Hoy</td><td><code>date('now')</code></td><td><code>CURRENT_DATE</code></td><td><code>GETDATE()</code></td></tr>
+        <tr><td>Primeras 5</td><td><code>LIMIT 5</code></td><td><code>LIMIT 5</code></td><td><code>TOP 5</code></td></tr>
+        <tr><td>Si es nulo</td><td colspan="3"><code>COALESCE(a, b)</code> funciona en todos</td></tr>
+      </table></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Los conjuntos exigen el mismo número de columnas con tipos compatibles. El ejemplo devuelve los municipios del Chocó menos Quibdó (y el NULL de Wilmer, porque EXCEPT trata los NULL como iguales).</p><p>De la tabla de fechas: memoricen la columna del motor que use la prueba.</p></aside>
+</section>
+
+<section data-mod="09 · DDL y DML">
+  <div class="cols">
+    <div>
+      <h3>Las cuatro familias</h3>
+      <div class="tbl-wrap"><table class="t">
+        <tr><th>Tipo</th><th>Comandos</th></tr>
+        <tr class="fragment rise"><td><strong>DDL</strong> definición</td><td><code>CREATE · ALTER · DROP · TRUNCATE</code></td></tr>
+        <tr class="fragment rise"><td><strong>DML</strong> manipulación</td><td><code>SELECT · INSERT · UPDATE · DELETE</code></td></tr>
+        <tr class="fragment rise"><td><strong>DCL</strong> control</td><td><code>GRANT · REVOKE</code></td></tr>
+        <tr class="fragment rise"><td><strong>TCL</strong> transacciones</td><td><code>BEGIN · COMMIT · ROLLBACK</code></td></tr>
+      </table></div>
+      <h3 style="margin-top:20px">DELETE · TRUNCATE · DROP</h3>
+      <div class="tbl-wrap"><table class="t" style="font-size:16px">
+        <tr><th></th><th>DELETE</th><th>TRUNCATE</th><th>DROP</th></tr>
+        <tr><td>Borra</td><td>filas (con WHERE)</td><td>todas las filas</td><td>tabla completa</td></tr>
+        <tr><td>Tipo</td><td>DML</td><td>DDL</td><td>DDL</td></tr>
+      </table></div>
+    </div>
+    <div>
+      <h3>Pruébalo sin miedo</h3>
+<pre class="live"><code class="language-sql" data-trim>
+CREATE TABLE resenas (
+  resena_id   INTEGER PRIMARY KEY,
+  producto_id INTEGER NOT NULL REFERENCES productos(producto_id),
+  estrellas   INTEGER CHECK (estrellas BETWEEN 1 AND 5)
+);
+INSERT INTO resenas VALUES (1, 6, 5), (2, 1, 4), (3, 6, 2);
+UPDATE productos SET precio = precio * 1.10
+WHERE categoria = 'Cosechas';    -- sin WHERE actualiza TODO
+SELECT p.nombre, p.precio, AVG(r.estrellas) AS estrellas
+FROM resenas r JOIN productos p USING (producto_id)
+GROUP BY p.nombre, p.precio;
+</code></pre>
+      <p class="small" style="margin-top:8px">Cada ejecución parte de una base limpia: nada de lo que cambies se queda guardado.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Ejecutar: se crea la tabla de reseñas, se suben 10% las cosechas y se consulta. Pregunta típica: ¿qué diferencia hay entre DELETE y TRUNCATE? DELETE es DML, se puede filtrar y va fila por fila; TRUNCATE es DDL y vacía todo.</p></aside>
+</section>
+
+<!-- ============================================================ 10 PATRONES -->
+<section class="divider" id="m10" data-transition="zoom" data-mod="Módulo 10" data-background-gradient="radial-gradient(circle at 70% 70%, #5a0a2a 0%, #021a33 55%)">
+  <div class="num">10</div><h2>Patrones de entrevista</h2>
+  <p class="lead">Las preguntas cambian de datos, pero se repiten de forma.</p>
+  <aside class="notes"><p>Si reconocen el patrón, la consulta sale en la mitad del tiempo. Este módulo es el resumen de todo lo anterior.</p></aside>
+</section>
+
+<section data-mod="10 · Patrones">
+  <h2>Pregunta → patrón</h2>
+  <div class="tbl-wrap"><table class="t" style="font-size:18px">
+    <tr><th>Si te piden…</th><th>Usa</th><th>Ejercicio</th></tr>
+    <tr class="fragment rise"><td>Segundo salario más alto / N-ésimo</td><td><code>DENSE_RANK() = N</code> o <code>MAX(...) WHERE &lt; MAX</code></td><td>19</td></tr>
+    <tr class="fragment rise"><td>Top N por categoría</td><td><code>ROW_NUMBER() OVER (PARTITION BY …)</code> + CTE</td><td>26, 32</td></tr>
+    <tr class="fragment rise"><td>Registros duplicados</td><td><code>GROUP BY … HAVING COUNT(*) &gt; 1</code></td><td>33</td></tr>
+    <tr class="fragment rise"><td>Clientes sin compras</td><td><code>LEFT JOIN … IS NULL</code> o <code>NOT EXISTS</code></td><td>12, 13</td></tr>
+    <tr class="fragment rise"><td>Acumulado / crecimiento mes a mes</td><td><code>SUM() OVER (ORDER BY …)</code> · <code>LAG()</code></td><td>27, 28</td></tr>
+    <tr class="fragment rise"><td>% del total</td><td><code>x / SUM(x) OVER ()</code></td><td>29</td></tr>
+    <tr class="fragment rise"><td>Gana más que su jefe</td><td>Self join</td><td>15</td></tr>
+    <tr class="fragment rise"><td>Compró de A y de B</td><td><code>HAVING COUNT(DISTINCT cat) = 2</code></td><td>34</td></tr>
+    <tr class="fragment rise"><td>Días consecutivos (rachas)</td><td><code>fecha − ROW_NUMBER()</code></td><td>siguiente</td></tr>
+  </table></div>
+  <aside class="notes"><p>Esta tabla es para imprimir o tener en la cabeza. Cada fila remite al ejercicio de esta presentación donde se practica.</p></aside>
+</section>
+
+<section data-mod="10 · Patrones">
+  <h2>Islas y huecos: <em>rachas</em></h2>
+  <div class="cols c-55">
+    <div class="tbl-wrap"><table class="t mini" style="font-size:17px">
+      <tr><th>venta en Istmina</th><th class="num">ROW_NUMBER</th><th class="fragment rise" data-fragment-index="1">fecha − rn</th></tr>
+      <tr><td>2024-01-01</td><td class="num">1</td><td class="fragment rise hl0" data-fragment-index="1">2023-12-31</td></tr>
+      <tr><td>2024-01-02</td><td class="num">2</td><td class="fragment rise hl0" data-fragment-index="1">2023-12-31</td></tr>
+      <tr><td>2024-01-03</td><td class="num">3</td><td class="fragment rise hl0" data-fragment-index="1">2023-12-31</td></tr>
+      <tr><td>2024-01-05</td><td class="num">4</td><td class="fragment rise hl1" data-fragment-index="1">2024-01-01</td></tr>
+      <tr><td>2024-01-06</td><td class="num">5</td><td class="fragment rise hl1" data-fragment-index="1">2024-01-01</td></tr>
+      <tr><td>2024-01-09</td><td class="num">6</td><td class="fragment rise hl2" data-fragment-index="1">2024-01-03</td></tr>
+    </table></div>
+    <div>
+      <p class="fragment rise" data-fragment-index="1">Si las fechas son consecutivas, restarles su número de fila da <strong>la misma fecha</strong> para toda la racha.</p>
+<pre class="live fragment rise" data-fragment-index="2"><code class="language-sql" data-trim>
+WITH v(d) AS (VALUES ('2024-01-01'),('2024-01-02'),
+  ('2024-01-03'),('2024-01-05'),('2024-01-06'),('2024-01-09')),
+g AS (SELECT d, date(d, '-' || ROW_NUMBER()
+        OVER (ORDER BY d) || ' days') AS grupo FROM v)
+SELECT MIN(d) AS inicio, MAX(d) AS fin, COUNT(*) AS dias
+FROM g GROUP BY grupo;
+</code></pre>
+    </div>
+  </div>
+  <aside class="notes"><p>Patrón avanzado, sale en entrevistas de nivel medio. Tres rachas: de 3 días, de 2 y de 1. La columna "fecha − rn" funciona como identificador de la racha y luego se agrupa por ella.</p></aside>
+</section>
+
+<section data-mod="10 · Rendimiento">
+  <h2>Consultas <em>SARGables</em>: que usen el índice</h2>
+  <div class="tbl-wrap"><table class="t">
+    <tr><th>Lento: no usa el índice</th><th>Rápido: usa el índice</th></tr>
+    <tr class="fragment rise"><td><code>WHERE strftime('%Y', fecha_pedido) = '2024'</code></td><td><code>WHERE fecha_pedido &gt;= '2024-01-01' AND fecha_pedido &lt; '2025-01-01'</code></td></tr>
+    <tr class="fragment rise"><td><code>WHERE salario * 1.10 &gt; 5000000</code></td><td><code>WHERE salario &gt; 5000000 / 1.10</code></td></tr>
+    <tr class="fragment rise"><td><code>WHERE nombre LIKE '%rojo%'</code></td><td><code>WHERE nombre LIKE 'Pargo%'</code></td></tr>
+    <tr class="fragment rise"><td><code>WHERE COALESCE(municipio, '') = 'Quibdó'</code></td><td><code>WHERE municipio = 'Quibdó'</code></td></tr>
+  </table></div>
+  <p class="lead fragment rise" style="margin-top:18px">Regla: deja la columna «limpia» en un lado de la comparación. Una función sobre la columna obliga a recorrer toda la tabla.</p>
+  <aside class="notes"><p>Pregunta de entrevista: "¿por qué esta consulta es lenta si la columna tiene índice?". La respuesta casi siempre es una función aplicada a la columna o un LIKE que empieza con %.</p></aside>
+</section>
+
+<section data-ex="33"></section>
+<section data-ex="34"></section>
+<section data-ex="35"></section>
+
+<!-- ============================================================ AUTOEVALUACIÓN -->
+<section data-mod="Autoevaluación" data-transition="convex">
+  <h2>Responde sin mirar <span class="small">· toca cada tarjeta</span></h2>
+  <div class="flips">
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>01</span><p>¿Qué diferencia hay entre WHERE y HAVING?</p></div><div class="b">WHERE filtra filas antes de agrupar; HAVING filtra grupos después y puede usar agregados.</div></div></div>
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>02</span><p>¿Qué devuelve COUNT(correo) en clientes?</p></div><div class="b">9. COUNT(columna) ignora los NULL, y Jhon Freddy no tiene correo.</div></div></div>
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>03</span><p>¿Por qué WHERE municipio = NULL no devuelve filas?</p></div><div class="b">Porque x = NULL da NULL (desconocido), no TRUE. Se usa IS NULL.</div></div></div>
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>04</span><p>Salarios 7M, 4.5M, 4.5M, 3.5M: ¿RANK y DENSE_RANK?</p></div><div class="b">RANK: 1, 2, 2, 4. DENSE_RANK: 1, 2, 2, 3.</div></div></div>
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>05</span><p>¿Cuándo un LEFT JOIN se vuelve INNER sin que lo notes?</p></div><div class="b">Cuando filtras una columna de la tabla derecha en el WHERE: las filas sin pareja traen NULL y se eliminan.</div></div></div>
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>06</span><p>En SQL Server, ¿cuánto es SELECT 7 / 2?</p></div><div class="b">3: división entera. Para 3.5 escribe 7.0 / 2 o multiplica por 100.0.</div></div></div>
+  </div>
+  <aside class="notes"><p>Dinámica: pedir que respondan en voz alta o en el chat antes de girar la tarjeta. Cada pregunta corresponde a un módulo.</p></aside>
+</section>
+
+<!-- ============================================================ PROGRESO -->
+<section data-mod="Tu avance" id="progreso">
+  <h2>Tu avance</h2>
+  <p class="lead">Verde: comprobado. Dorado: miraste la solución. Toca un número para ir al ejercicio.</p>
+  <div class="bar"><i id="pbar"></i></div>
+  <p class="small" id="ptext" style="margin-top:8px"></p>
+  <div class="dots" id="dots"></div>
+  <div class="actions"><button class="btn" id="reset-progress" type="button">Reiniciar avance</button></div>
+  <aside class="notes"><p>El avance se guarda en el navegador de cada persona. Sirve para retomar después: los ejercicios en verde ya se dominan; los dorados hay que repetirlos en dos días sin mirar la solución.</p></aside>
+</section>
+
+<!-- ============================================================ LABORATORIO LIBRE -->
+<section data-mod="Laboratorio libre" id="lab">
+  <h2>Laboratorio libre</h2>
+  <div class="lab workbench" data-free="1">
+    <div>
+      <p class="small">Toca una tabla para ver sus primeras filas.</p>
+      <div class="schema-list" id="schema-list"></div>
+      <div class="actions"><button class="btn" id="copy-schema" type="button">Copiar script de la base</button></div>
+      <p class="small" id="copy-msg"></p>
+    </div>
+    <div>
+      <div class="editor"><pre aria-hidden="true"><code></code></pre><textarea id="lab-editor" spellcheck="false" wrap="off" aria-label="Editor SQL del laboratorio">-- Escribe cualquier consulta sobre Mercado del Pacífico
+SELECT municipio, COUNT(*) AS clientes
+FROM clientes
+GROUP BY municipio
+ORDER BY clientes DESC;</textarea></div>
+      <div class="actions"><button class="btn primary run" type="button">Ejecutar <kbd>Ctrl</kbd>+<kbd>Enter</kbd></button></div>
+      <div class="out"><div class="status">La base corre completa en tu navegador. Cada ejecución parte de los datos originales.</div><div class="grid"></div></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Espacio para preguntas del público: se puede escribir cualquier consulta. Para practicar fuera de la presentación, el botón copia el script de la base; se carga en sqlite3, DB Browser o sqliteonline.com.</p></aside>
+</section>
+
+<!-- ============================================================ CIERRE -->
+<section data-mod="Cierre" data-transition="zoom">
+  <h2>El día de la prueba</h2>
+  <div class="cols">
+    <ul>
+      <li class="fragment rise">Pregunta antes: plataforma, motor de SQL, si hay opción múltiple.</li>
+      <li class="fragment rise">Lee el enunciado en inglés dos veces: columnas, filtro, orden.</li>
+      <li class="fragment rise">Decide la granularidad antes de escribir.</li>
+      <li class="fragment rise">Construye con CTEs y ejecuta cada paso.</li>
+      <li class="fragment rise">Revisa NULL, cancelados, empates y división entera.</li>
+      <li class="fragment rise">Si te trabas a los 12 minutos, entrega lo que tengas y sigue.</li>
+    </ul>
+    <div class="card fragment rise">
+      <h4>Para seguir practicando</h4>
+      <p>Repite sin mirar los ejercicios 16, 21, 26, 28, 32 y 34: son los patrones que más se repiten.</p>
+      <p style="margin-top:12px">Guía completa: <a href="https://frank1808k.github.io/blend360/02-sql/" target="_blank" rel="noopener">frank1808k.github.io/blend360</a> · LeetCode SQL 50 · HackerRank SQL.</p>
+    </div>
+  </div>
+  <p class="kicker" style="margin-top:34px">Desde Quibdó para la prueba. Éxitos.</p>
+  <aside class="notes"><p>Cierre con la lista del día de la prueba. Recordar que el enlace queda disponible para practicar y que el avance se guarda en el navegador.</p><p>Invitar a repetir los seis ejercicios clave dentro de dos días, con cronómetro.</p></aside>
+</section>
+
+</div>
+</div>
+
+<div class="deck-foot" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M45.2 21.6A16.5 16.5 0 1 0 48.5 32" fill="none" stroke="#1df3f4" stroke-width="6.5" stroke-linecap="round"/><circle cx="48.5" cy="19.5" r="4.6" fill="#a2f3f3"/><circle cx="32" cy="32" r="5" fill="#fff"/></svg>SQL desde Quibdó · Mercado del Pacífico</div>
+<div class="tool-btns"><button type="button" id="notes-toggle" title="Notas del presentador (N)">Notas · N</button><button type="button" id="go-lab" title="Ir al laboratorio libre">Laboratorio</button></div>
+<div class="notes-panel" id="notes-panel" role="region" aria-live="polite" aria-label="Notas del presentador"><h6>Notas del presentador</h6><div id="notes-body"></div></div>
+
+<script type="application/json" id="deck-data">{"schema":"-- Base de práctica «Mercado del Pacífico» (Quibdó, Chocó).\n-- Una tienda en línea que vende cosechas, pescado y artesanías del Chocó a clientes de la región y del resto del país.\n-- SQLite 3.25+ (funciones de ventana). La usa la presentación presentaciones/sql/index.html (corre en el navegador).\n-- En tu computador: sqlite3 mercado.db < mercado_pacifico.sql\n--\n-- Trampas puestas a propósito para practicar:\n--   * Wilmer Murillo (cliente 6) nunca ha comprado            → LEFT JOIN ... IS NULL / NOT EXISTS\n--   * El camarón de río (producto 9) nunca se ha vendido\n--   * Wilmer no tiene municipio (NULL) y Jhon Freddy no tiene correo (NULL)\n--   * Hay pedidos «cancelado»: casi nunca se cuentan como venta\n--   * precio_unitario (lo que se cobró) a veces es distinto de productos.precio (precio de lista): hubo descuentos\n--   * Camila Mena y Julián Lloreda ganan lo mismo             → empates con RANK y DENSE_RANK\n--   * Daniel Rentería gana más que su jefa directa            → self join\n\nDROP TABLE IF EXISTS detalle_pedido;\nDROP TABLE IF EXISTS pedidos;\nDROP TABLE IF EXISTS productos;\nDROP TABLE IF EXISTS clientes;\nDROP TABLE IF EXISTS empleados;\n\nCREATE TABLE clientes (\n    cliente_id      INTEGER PRIMARY KEY,\n    nombre          TEXT    NOT NULL,\n    correo          TEXT    UNIQUE,\n    municipio       TEXT,                  -- puede ser NULL a propósito\n    departamento    TEXT    NOT NULL,\n    segmento        TEXT    NOT NULL,      -- 'Hogar', 'Restaurante', 'Tienda'\n    fecha_registro  DATE    NOT NULL\n);\n\nCREATE TABLE productos (\n    producto_id     INTEGER PRIMARY KEY,\n    nombre          TEXT    NOT NULL,\n    categoria       TEXT    NOT NULL,      -- 'Artesanías', 'Pescados', 'Cosechas'\n    precio          INTEGER NOT NULL CHECK (precio > 0)   -- pesos colombianos (COP)\n);\n\nCREATE TABLE pedidos (\n    pedido_id       INTEGER PRIMARY KEY,\n    cliente_id      INTEGER NOT NULL REFERENCES clientes(cliente_id),\n    fecha_pedido    DATE    NOT NULL,\n    estado          TEXT    NOT NULL       -- 'entregado', 'enviado', 'cancelado'\n);\n\nCREATE TABLE detalle_pedido (\n    pedido_id       INTEGER NOT NULL REFERENCES pedidos(pedido_id),\n    producto_id     INTEGER NOT NULL REFERENCES productos(producto_id),\n    cantidad        INTEGER NOT NULL CHECK (cantidad > 0),\n    precio_unitario INTEGER NOT NULL,      -- precio realmente cobrado (COP)\n    PRIMARY KEY (pedido_id, producto_id)\n);\n\nCREATE TABLE empleados (\n    empleado_id     INTEGER PRIMARY KEY,\n    nombre          TEXT    NOT NULL,\n    area            TEXT    NOT NULL,\n    salario         INTEGER NOT NULL,      -- salario mensual (COP)\n    jefe_id         INTEGER REFERENCES empleados(empleado_id),  -- NULL = no tiene jefe (gerente)\n    fecha_ingreso   DATE    NOT NULL\n);\n\nINSERT INTO clientes VALUES\n (1,  'Yeison Mosquera',      'yeison@correo.co',    'Quibdó',       'Chocó',        'Hogar',       '2024-01-15'),\n (2,  'Leidy Palacios',       'leidy@correo.co',     'Istmina',      'Chocó',        'Restaurante', '2024-02-03'),\n (3,  'Darwin Córdoba',       'darwin@correo.co',    'Tadó',         'Chocó',        'Hogar',       '2024-02-20'),\n (4,  'Yuranis Rentería',     'yuranis@correo.co',   'Medellín',     'Antioquia',    'Tienda',      '2024-03-11'),\n (5,  'Neyla Valencia',       'neyla@correo.co',     'Quibdó',       'Chocó',        'Restaurante', '2024-03-25'),\n (6,  'Wilmer Murillo',       'wilmer@correo.co',    NULL,           'Chocó',        'Hogar',       '2024-04-02'),\n (7,  'Katherine Perea',      'katherine@correo.co', 'Turbo',        'Antioquia',    'Hogar',       '2024-04-18'),\n (8,  'Edwin Cuesta',         'edwin@correo.co',     'Bahía Solano', 'Chocó',        'Tienda',      '2024-05-07'),\n (9,  'Ana Lucía Moreno',     'analucia@correo.co',  'Bogotá',       'Cundinamarca', 'Hogar',       '2024-05-30'),\n (10, 'Jhon Freddy Asprilla', NULL,                  'Condoto',      'Chocó',        'Hogar',       '2024-06-12');\n\nINSERT INTO productos VALUES\n (1, 'Canasto de werregue',  'Artesanías', 420000),\n (2, 'Aretes de chaquira',   'Artesanías',  25000),\n (3, 'Mochila de damagua',   'Artesanías',  60000),\n (4, 'Bocachico (kg)',       'Pescados',    18000),\n (5, 'Pargo rojo (kg)',      'Pescados',    35000),\n (6, 'Borojó (unidad)',      'Cosechas',     6000),\n (7, 'Chontaduro (racimo)',  'Cosechas',    15000),\n (8, 'Tambora de chirimía',  'Artesanías', 280000),\n (9, 'Camarón de río (kg)',  'Pescados',    40000);   -- nunca vendido\n\nINSERT INTO pedidos VALUES\n (101, 1,  '2024-02-01', 'entregado'),\n (102, 2,  '2024-02-14', 'entregado'),\n (103, 1,  '2024-03-05', 'entregado'),\n (104, 3,  '2024-03-18', 'cancelado'),\n (105, 4,  '2024-04-02', 'entregado'),\n (106, 5,  '2024-04-10', 'entregado'),\n (107, 2,  '2024-04-22', 'enviado'),\n (108, 7,  '2024-05-01', 'entregado'),\n (109, 1,  '2024-05-15', 'entregado'),\n (110, 8,  '2024-05-20', 'entregado'),\n (111, 5,  '2024-06-03', 'entregado'),\n (112, 9,  '2024-06-15', 'cancelado'),\n (113, 4,  '2024-06-28', 'entregado'),\n (114, 2,  '2024-07-04', 'entregado'),\n (115, 10, '2024-07-19', 'enviado');\n-- El cliente 6 (Wilmer) nunca ha comprado.\n\nINSERT INTO detalle_pedido VALUES\n (101, 1,  1, 420000),\n (101, 2,  2,  25000),\n (102, 4, 12,  18000),\n (102, 6, 10,   6000),\n (103, 3,  1,  60000),\n (104, 5,  4,  35000),\n (105, 8,  1, 280000),\n (105, 2,  2,  25000),\n (106, 1,  2, 400000),   -- precio con descuento\n (106, 5,  6,  35000),\n (107, 7,  5,  15000),\n (108, 6,  3,   6000),\n (108, 7,  2,  15000),\n (109, 8,  1, 280000),\n (110, 4,  5,  18000),\n (110, 3,  2,  60000),\n (111, 2,  4,  25000),\n (112, 1,  1, 420000),\n (113, 5,  8,  35000),\n (114, 1,  1, 420000),\n (114, 8,  2, 270000),   -- precio con descuento\n (115, 6, 20,   6000);\n\nINSERT INTO empleados VALUES\n (1,  'Rosa Elvira Hinestroza', 'Gerencia',   18000000, NULL, '2019-01-10'),\n (2,  'Andrés Copete',          'Datos',       7000000, 1,    '2020-03-01'),\n (3,  'Camila Mena',            'Datos',       4500000, 2,    '2021-06-15'),\n (4,  'Julián Lloreda',         'Datos',       4500000, 2,    '2022-01-20'),\n (5,  'Paula Rivas',            'Datos',       3500000, 2,    '2023-08-01'),\n (6,  'Felipe Ibargüen',        'Ingeniería',  6500000, 1,    '2020-05-12'),\n (7,  'Natalia Moreno',         'Ingeniería',  5000000, 6,    '2021-09-30'),\n (8,  'Santiago Chaverra',      'Ingeniería',  4000000, 6,    '2023-02-14'),\n (9,  'Isabel Bejarano',        'Mercadeo',    4750000, 1,    '2021-11-08'),\n (10, 'Mateo Palacios',         'Mercadeo',    3000000, 9,    '2024-04-01'),\n (11, 'Daniel Rentería',        'Ingeniería',  5500000, 7,    '2022-07-01');  -- gana más que su jefa (Natalia)\n","items":[{"id":"1","nivel":"basico","titulo":"Filtrar y ordenar","en":"Return the name and price of all products in the `Artesanías` category, sorted from the most expensive to the cheapest.","es":"Devuelve el nombre y el precio de todos los productos de la categoría `Artesanías`, del más caro al más barato.","sql":"SELECT nombre, precio\nFROM productos\nWHERE categoria = 'Artesanías'\nORDER BY precio DESC;","nota":"`ORDER BY ... DESC` ordena de mayor a menor; sin `DESC` el orden es ascendente.","ordenado":true,"pasos":["Una sola tabla: `productos`.","Filtro de filas: `categoria = 'Artesanías'` en el WHERE.","«Most expensive first» → `ORDER BY precio DESC`."]},{"id":"2","nivel":"basico","titulo":"Varias condiciones","en":"List the name, municipality and signup date of customers from `Chocó` who signed up on or after March 1st, 2024. Sort by signup date.","es":"Lista el nombre, el municipio y la fecha de registro de los clientes del Chocó que se registraron el 1 de marzo de 2024 o después. Ordena por fecha de registro.","sql":"SELECT nombre, municipio, fecha_registro\nFROM clientes\nWHERE departamento = 'Chocó'\n  AND fecha_registro >= '2024-03-01'\nORDER BY fecha_registro;","nota":"Las fechas ISO (`AAAA-MM-DD`) se comparan bien como texto. Wilmer aparece aunque su municipio sea NULL: el filtro es por departamento.","ordenado":true,"pasos":["Dos condiciones que se cumplen a la vez → `AND`.","«On or after» significa `>=`, no `>`.","«Sort by signup date» → `ORDER BY fecha_registro`."]},{"id":"3","nivel":"basico","titulo":"Valores faltantes","en":"Find the customers whose municipality is unknown (missing).","es":"Encuentra los clientes cuyo municipio es desconocido (falta el dato).","sql":"SELECT cliente_id, nombre\nFROM clientes\nWHERE municipio IS NULL;","nota":"`WHERE municipio = NULL` devuelve 0 filas: nada es igual a NULL. Siempre `IS NULL`.","flex":true,"pasos":["«Unknown / missing» en un enunciado casi siempre es NULL.","NULL no se compara con `=`: se pregunta con `IS NULL`."]},{"id":"4","nivel":"basico","titulo":"Contar por grupo","en":"How many customers are there in each department? Show the department with the most customers first.","es":"¿Cuántos clientes hay en cada departamento? Muestra primero el que tiene más clientes.","sql":"SELECT departamento, COUNT(*) AS clientes\nFROM clientes\nGROUP BY departamento\nORDER BY clientes DESC;","nota":"`ORDER BY` sí puede usar el alias del `SELECT`, porque se evalúa después.","ordenado":true,"pasos":["«In each department» → una fila por departamento: `GROUP BY departamento`.","Contar filas del grupo → `COUNT(*)`.","«Most first» → ordena por el conteo, de mayor a menor."]},{"id":"5","nivel":"basico","titulo":"Búsqueda por patrón","en":"Find all the products that are sold by the kilogram (their name contains `(kg)`).","es":"Encuentra todos los productos que se venden por kilo (su nombre contiene `(kg)`).","sql":"SELECT producto_id, nombre\nFROM productos\nWHERE nombre LIKE '%(kg)%';","nota":"`%` = cualquier cantidad de caracteres; `_` = exactamente uno.","flex":true,"pasos":["«Contains» → `LIKE` con `%` a ambos lados.","El texto buscado es `(kg)`; los paréntesis no son especiales en LIKE."]},{"id":"6","nivel":"basico","titulo":"Valores únicos","en":"Return the list of distinct order statuses, in alphabetical order.","es":"Devuelve la lista de estados de pedido distintos, en orden alfabético.","sql":"SELECT DISTINCT estado\nFROM pedidos\nORDER BY estado;","nota":"`DISTINCT` elimina filas repetidas del resultado.","ordenado":true,"pasos":["«Distinct» → `SELECT DISTINCT`, que quita repetidos.","«Alphabetical» → `ORDER BY estado` (ascendente por defecto)."]},{"id":"7","nivel":"basico","titulo":"Ingreso total","en":"Calculate the total revenue (quantity × unit price) of all orders that were NOT cancelled.","es":"Calcula el ingreso total (cantidad × precio unitario) de todos los pedidos que NO fueron cancelados.","sql":"SELECT SUM(d.cantidad * d.precio_unitario) AS ingreso_total\nFROM detalle_pedido d\nJOIN pedidos p ON p.pedido_id = d.pedido_id\nWHERE p.estado <> 'cancelado';","nota":"El ingreso se calcula con `precio_unitario` (lo que realmente se cobró), no con el precio de lista.","pasos":["El ingreso de una línea es `cantidad * precio_unitario`; el total es su `SUM`.","El estado vive en `pedidos`, así que hay que unir `detalle_pedido` con `pedidos`.","Excluye los cancelados en el WHERE, antes de sumar."]},{"id":"8","nivel":"basico","titulo":"Conteo por estado","en":"Count how many orders there are for each status, most frequent first.","es":"Cuenta cuántos pedidos hay en cada estado, el más frecuente primero.","sql":"SELECT estado, COUNT(*) AS pedidos\nFROM pedidos\nGROUP BY estado\nORDER BY pedidos DESC;","nota":"Toda columna del `SELECT` que no esté dentro de un agregado debe ir en el `GROUP BY`.","pasos":["«For each status» → `GROUP BY estado`.","Cuenta con `COUNT(*)` y ordena por ese conteo descendente."]},{"id":"9","nivel":"basico","titulo":"HAVING","en":"Show the average salary of each area, but only for areas whose average salary is greater than 4,500,000. Highest first.","es":"Muestra el salario promedio de cada área, pero solo de las áreas cuyo promedio supera 4.500.000. El más alto primero.","sql":"SELECT area, ROUND(AVG(salario), 0) AS salario_promedio\nFROM empleados\nGROUP BY area\nHAVING AVG(salario) > 4500000\nORDER BY salario_promedio DESC;","nota":"`WHERE` filtra filas antes de agrupar; `HAVING` filtra grupos después y sí puede usar agregados.","ordenado":true,"pasos":["Promedio por área → `GROUP BY area` con `AVG(salario)`.","La condición es sobre el promedio (un agregado): va en `HAVING`, no en WHERE.","Ordena por el promedio, de mayor a menor."]},{"id":"10","nivel":"basico","titulo":"Ingreso por categoría","en":"Calculate the revenue of each product category (excluding cancelled orders), from highest to lowest.","es":"Calcula el ingreso de cada categoría de producto (sin los pedidos cancelados), de mayor a menor.","sql":"SELECT pr.categoria, SUM(d.cantidad * d.precio_unitario) AS ingreso\nFROM detalle_pedido d\nJOIN productos pr ON pr.producto_id = d.producto_id\nJOIN pedidos   p  ON p.pedido_id    = d.pedido_id\nWHERE p.estado <> 'cancelado'\nGROUP BY pr.categoria\nORDER BY ingreso DESC;","nota":"Dos JOIN: uno para saber la categoría y otro para saber el estado del pedido.","ordenado":true,"pasos":["Necesitas tres tablas: la línea (`detalle_pedido`), su categoría (`productos`) y su estado (`pedidos`).","Filtra los cancelados, agrupa por categoría y suma `cantidad * precio_unitario`."]},{"id":"11","nivel":"joins","titulo":"INNER JOIN","en":"List every order with its id, date, status and the name of the customer who placed it. Sort by date.","es":"Lista cada pedido con su id, fecha, estado y el nombre del cliente que lo hizo. Ordena por fecha.","sql":"SELECT p.pedido_id, p.fecha_pedido, p.estado, c.nombre\nFROM pedidos p\nJOIN clientes c ON c.cliente_id = p.cliente_id\nORDER BY p.fecha_pedido;","nota":"`JOIN` a secas es `INNER JOIN`: solo quedan las filas con pareja en ambas tablas.","ordenado":true,"pasos":["Cada pedido tiene un cliente: une `pedidos` con `clientes` por `cliente_id`.","Todos los pedidos tienen cliente, así que `INNER JOIN` basta.","Usa alias cortos (`p`, `c`) y ordena por fecha."]},{"id":"12","nivel":"joins","titulo":"Clientes sin pedidos","en":"Find the customers who have never placed an order.","es":"Encuentra los clientes que nunca han hecho un pedido.","sql":"SELECT c.cliente_id, c.nombre\nFROM clientes c\nLEFT JOIN pedidos p ON p.cliente_id = c.cliente_id\nWHERE p.pedido_id IS NULL;","nota":"Patrón anti-join. Alternativa: `WHERE NOT EXISTS (SELECT 1 FROM pedidos p WHERE p.cliente_id = c.cliente_id)`.","flex":true,"pasos":["«Never placed an order» = cliente sin pareja en `pedidos`.","LEFT JOIN conserva a todos los clientes; los que no tienen pedido traen NULL.","Quédate solo con esos: `WHERE p.pedido_id IS NULL` (anti-join)."]},{"id":"13","nivel":"joins","titulo":"Productos nunca vendidos","en":"Which products have never been sold? Use `NOT EXISTS`.","es":"¿Qué productos nunca se han vendido? Usa `NOT EXISTS`.","sql":"SELECT pr.producto_id, pr.nombre\nFROM productos pr\nWHERE NOT EXISTS (\n    SELECT 1 FROM detalle_pedido d WHERE d.producto_id = pr.producto_id\n);","nota":"`NOT EXISTS` es seguro frente a NULL; `NOT IN` con una subconsulta que trae NULL no devuelve nada.","flex":true,"pasos":["Un producto vendido aparece en `detalle_pedido`.","`NOT EXISTS (SELECT 1 ...)` pregunta «¿no hay ninguna línea con este producto?»."]},{"id":"14","nivel":"joins","titulo":"Self join","en":"Show each employee's name together with their manager's name. Employees without a manager must also appear. Sort by employee id.","es":"Muestra el nombre de cada empleado junto con el nombre de su jefe. Los empleados sin jefe también deben aparecer. Ordena por id de empleado.","sql":"SELECT e.nombre AS empleado, j.nombre AS jefe\nFROM empleados e\nLEFT JOIN empleados j ON j.empleado_id = e.jefe_id\nORDER BY e.empleado_id;","nota":"Con `INNER JOIN` desaparecería la gerente: su `jefe_id` es NULL.","ordenado":true,"pasos":["El jefe también es un empleado: une `empleados` consigo misma con dos alias.","`e.jefe_id = j.empleado_id` conecta a cada empleado con su jefe.","La gerente no tiene jefe: usa LEFT JOIN para no perderla."]},{"id":"15","nivel":"joins","titulo":"Ganar más que el jefe","en":"Find the employees who earn more than their direct manager.","es":"Encuentra los empleados que ganan más que su jefe directo.","sql":"SELECT e.nombre AS empleado, e.salario, j.nombre AS jefe, j.salario AS salario_jefe\nFROM empleados e\nJOIN empleados j ON j.empleado_id = e.jefe_id\nWHERE e.salario > j.salario;","nota":"La misma tabla aparece dos veces con alias distintos: `e` (empleado) y `j` (jefe).","flex":true,"pasos":["Self join como en el anterior, pero ahora INNER: sin jefe no hay comparación.","Compara las dos columnas de salario en el WHERE: `e.salario > j.salario`."]},{"id":"16","nivel":"joins","titulo":"Gasto por cliente (incluido el cero)","en":"For every customer, show the total amount spent on non-cancelled orders. Customers with no purchases must appear with 0. Highest first, then by name.","es":"Para cada cliente, muestra el total gastado en pedidos no cancelados. Los clientes sin compras deben aparecer con 0. El mayor primero y luego por nombre.","sql":"SELECT c.nombre,\n       COALESCE(SUM(d.cantidad * d.precio_unitario), 0) AS total_gastado\nFROM clientes c\nLEFT JOIN pedidos p\n       ON p.cliente_id = c.cliente_id\n      AND p.estado <> 'cancelado'      -- el filtro va en el ON para no perder clientes\nLEFT JOIN detalle_pedido d ON d.pedido_id = p.pedido_id\nGROUP BY c.cliente_id, c.nombre\nORDER BY total_gastado DESC, c.nombre;","nota":"Darwin y Ana Lucía solo tienen pedidos cancelados: salen con 0, igual que Wilmer. Si el filtro de estado fuera en el `WHERE`, los tres desaparecerían.","ordenado":true,"pasos":["«Every customer … with 0» → la tabla base es `clientes` con LEFT JOIN.","El filtro de cancelados va en el ON del JOIN con `pedidos`, para no borrar clientes.","`SUM` de nada da NULL: `COALESCE(..., 0)` lo convierte en 0."]},{"id":"17","nivel":"joins","titulo":"Mayor que el promedio","en":"List the products whose price is greater than the average price of all products. Most expensive first.","es":"Lista los productos cuyo precio es mayor que el precio promedio de todos los productos. El más caro primero.","sql":"SELECT nombre, precio\nFROM productos\nWHERE precio > (SELECT AVG(precio) FROM productos)\nORDER BY precio DESC;","nota":"Subconsulta escalar: devuelve un único valor que se compara con cada fila.","ordenado":true,"flex":true,"pasos":["Primero calcula el promedio: `SELECT AVG(precio) FROM productos`.","Úsalo como valor dentro del WHERE: es una subconsulta escalar."]},{"id":"18","nivel":"joins","titulo":"Subconsulta correlacionada","en":"Find the employees who earn more than the average salary of their own area.","es":"Encuentra los empleados que ganan más que el salario promedio de su propia área.","sql":"SELECT e.nombre, e.area, e.salario\nFROM empleados e\nWHERE e.salario > (\n    SELECT AVG(x.salario) FROM empleados x WHERE x.area = e.area\n)\nORDER BY e.area, e.salario DESC;","nota":"La subconsulta usa `e.area`, de la consulta externa: se evalúa una vez por cada empleado.","flex":true,"pasos":["El promedio cambia según el área de cada empleado.","La subconsulta usa `e.area` de la consulta de afuera: es correlacionada y se evalúa por fila."]},{"id":"19","nivel":"joins","titulo":"Segundo salario más alto","en":"Return the second highest distinct salary in the company.","es":"Devuelve el segundo salario distinto más alto de la empresa.","sql":"SELECT MAX(salario) AS segundo_mas_alto\nFROM empleados\nWHERE salario < (SELECT MAX(salario) FROM empleados);","nota":"Alternativas: `ORDER BY salario DESC LIMIT 1 OFFSET 1` (con `DISTINCT`) o `DENSE_RANK() = 2`, que sirve para el N-ésimo.","pasos":["El más alto es `MAX(salario)`.","El segundo es el máximo entre los que son menores que ese: `MAX(...) WHERE salario < (SELECT MAX ...)`."]},{"id":"20","nivel":"joins","titulo":"Mejor cliente (CTE)","en":"Using a CTE, find the customer who spent the most on non-cancelled orders.","es":"Usando una CTE, encuentra el cliente que más gastó en pedidos no cancelados.","sql":"WITH gasto AS (\n    SELECT p.cliente_id, SUM(d.cantidad * d.precio_unitario) AS total\n    FROM pedidos p\n    JOIN detalle_pedido d ON d.pedido_id = p.pedido_id\n    WHERE p.estado <> 'cancelado'\n    GROUP BY p.cliente_id\n)\nSELECT c.nombre, g.total\nFROM gasto g\nJOIN clientes c ON c.cliente_id = g.cliente_id\nWHERE g.total = (SELECT MAX(total) FROM gasto);","nota":"Con `WHERE total = MAX(...)` (y no con `ORDER BY ... LIMIT 1`) devuelves a todos los empatados.","flex":true,"pasos":["Paso 1 (CTE): total gastado por cliente, sin cancelados.","Paso 2: une con `clientes` para tener el nombre.","Paso 3: quédate con quien tiene el total igual al máximo (así salen los empates)."]},{"id":"21","nivel":"joins","titulo":"Ticket promedio","en":"What is the average order value (AOV) of non-cancelled orders? Show the number of orders and the AOV rounded to the nearest peso.","es":"¿Cuál es el valor promedio por pedido (ticket promedio) de los pedidos no cancelados? Muestra el número de pedidos y el ticket redondeado al peso.","sql":"WITH totales AS (\n    SELECT p.pedido_id, SUM(d.cantidad * d.precio_unitario) AS total\n    FROM pedidos p\n    JOIN detalle_pedido d ON d.pedido_id = p.pedido_id\n    WHERE p.estado <> 'cancelado'\n    GROUP BY p.pedido_id\n)\nSELECT COUNT(*) AS pedidos, ROUND(AVG(total), 0) AS ticket_promedio\nFROM totales;","nota":"`AVG(cantidad * precio_unitario)` sobre `detalle_pedido` da el promedio por línea, no por pedido. Primero se suma por pedido y después se promedia.","pasos":["Ticket promedio = promedio de los totales por pedido, no de las líneas.","Paso 1 (CTE): un total por pedido. Paso 2: `COUNT(*)` y `AVG(total)` sobre esa CTE."]},{"id":"22","nivel":"ventanas","titulo":"Rangos de precio","en":"Classify each product as `Alto` (price ≥ 100,000), `Medio` (20,000 ≤ price < 100,000) or `Bajo` (price < 20,000). Most expensive first.","es":"Clasifica cada producto como `Alto` (precio ≥ 100.000), `Medio` (20.000 ≤ precio < 100.000) o `Bajo` (precio < 20.000). El más caro primero.","sql":"SELECT nombre, precio,\n       CASE\n           WHEN precio >= 100000 THEN 'Alto'\n           WHEN precio >= 20000  THEN 'Medio'\n           ELSE 'Bajo'\n       END AS rango\nFROM productos\nORDER BY precio DESC;","nota":"El `CASE` se evalúa en orden y se detiene en el primer `WHEN` verdadero.","ordenado":true,"pasos":["Una etiqueta por fila → `CASE WHEN` en el SELECT.","Escribe las condiciones de la más alta a la más baja: el CASE se detiene en la primera verdadera."]},{"id":"23","nivel":"ventanas","titulo":"Agregación condicional","en":"In a single row, show the number of delivered, shipped and cancelled orders, and the cancellation rate as a percentage (1 decimal).","es":"En una sola fila, muestra cuántos pedidos están entregados, enviados y cancelados, y la tasa de cancelación en porcentaje (1 decimal).","sql":"SELECT\n    SUM(CASE WHEN estado = 'entregado' THEN 1 ELSE 0 END) AS entregados,\n    SUM(CASE WHEN estado = 'enviado'   THEN 1 ELSE 0 END) AS enviados,\n    SUM(CASE WHEN estado = 'cancelado' THEN 1 ELSE 0 END) AS cancelados,\n    ROUND(100.0 * SUM(CASE WHEN estado = 'cancelado' THEN 1 ELSE 0 END) / COUNT(*), 1) AS pct_cancelados\nFROM pedidos;","nota":"`100.0 *` evita la división entera: en SQLite, PostgreSQL y SQL Server `2 / 15 = 0`.","pasos":["Una sola fila → agregados sin GROUP BY.","Cada columna cuenta un estado: `SUM(CASE WHEN estado = '...' THEN 1 ELSE 0 END)`.","El porcentaje multiplica por `100.0` para evitar la división entera."]},{"id":"24","nivel":"ventanas","titulo":"Segmentación de clientes","en":"Label each customer according to their number of orders (any status): 0 → `Sin pedidos`, 1 → `Nuevo`, 2 or more → `Recurrente`. Most orders first, then by name.","es":"Etiqueta a cada cliente según su número de pedidos (en cualquier estado): 0 → `Sin pedidos`, 1 → `Nuevo`, 2 o más → `Recurrente`. Más pedidos primero y luego por nombre.","sql":"SELECT c.nombre,\n       COUNT(p.pedido_id) AS pedidos,\n       CASE\n           WHEN COUNT(p.pedido_id) = 0 THEN 'Sin pedidos'\n           WHEN COUNT(p.pedido_id) = 1 THEN 'Nuevo'\n           ELSE 'Recurrente'\n       END AS etiqueta\nFROM clientes c\nLEFT JOIN pedidos p ON p.cliente_id = c.cliente_id\nGROUP BY c.cliente_id, c.nombre\nORDER BY pedidos DESC, c.nombre;","nota":"`COUNT(p.pedido_id)` y no `COUNT(*)`: así el cliente sin pedidos cuenta 0 y no 1.","ordenado":true,"pasos":["Contar pedidos por cliente incluyendo a quien no tiene → LEFT JOIN y `COUNT(p.pedido_id)`.","El CASE puede usar el agregado: `CASE WHEN COUNT(...) = 0 THEN ...`."]},{"id":"25","nivel":"ventanas","titulo":"Funciones de ranking","en":"Rank employees by salary (highest first) within each area using `ROW_NUMBER`, `RANK` and `DENSE_RANK`.","es":"Ordena a los empleados por salario (el más alto primero) dentro de cada área usando `ROW_NUMBER`, `RANK` y `DENSE_RANK`.","sql":"SELECT area, nombre, salario,\n       ROW_NUMBER() OVER (PARTITION BY area ORDER BY salario DESC, nombre) AS fila,\n       RANK()       OVER (PARTITION BY area ORDER BY salario DESC)         AS rnk,\n       DENSE_RANK() OVER (PARTITION BY area ORDER BY salario DESC)         AS rnk_denso\nFROM empleados\nORDER BY area, salario DESC, nombre;","nota":"En Datos, Camila y Julián empatan con 4.500.000: `RANK` salta al 4 y `DENSE_RANK` sigue con el 3.","pasos":["«Within each area» → `PARTITION BY area`.","«Highest first» → `ORDER BY salario DESC` dentro del OVER.","Escribe las tres funciones con la misma ventana y compara los empates."]},{"id":"26","nivel":"ventanas","titulo":"Mejor pagado por área","en":"Return the highest-paid employee(s) of each area.","es":"Devuelve el empleado (o los empleados) mejor pagado(s) de cada área.","sql":"WITH ranking AS (\n    SELECT area, nombre, salario,\n           DENSE_RANK() OVER (PARTITION BY area ORDER BY salario DESC) AS rk\n    FROM empleados\n)\nSELECT area, nombre, salario\nFROM ranking\nWHERE rk = 1\nORDER BY area;","nota":"La ventana no se puede filtrar en el `WHERE` de la misma consulta: se calcula en una CTE y se filtra afuera.","flex":true,"pasos":["Rankea dentro de cada área con `DENSE_RANK` (así los empatados en el primer lugar salen todos).","No se puede filtrar una ventana en su propio WHERE: CTE y luego `WHERE rk = 1`."]},{"id":"27","nivel":"ventanas","titulo":"Total acumulado","en":"For each non-cancelled order, show its date, its total and the running (cumulative) revenue ordered by date.","es":"Para cada pedido no cancelado, muestra su fecha, su total y el ingreso acumulado ordenado por fecha.","sql":"WITH totales AS (\n    SELECT p.pedido_id, p.fecha_pedido, SUM(d.cantidad * d.precio_unitario) AS total\n    FROM pedidos p\n    JOIN detalle_pedido d ON d.pedido_id = p.pedido_id\n    WHERE p.estado <> 'cancelado'\n    GROUP BY p.pedido_id, p.fecha_pedido\n)\nSELECT pedido_id, fecha_pedido, total,\n       SUM(total) OVER (ORDER BY fecha_pedido, pedido_id\n                        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS acumulado\nFROM totales\nORDER BY fecha_pedido, pedido_id;","nota":"`ROWS` acumula fila por fila. Sin marco explícito el estándar usa `RANGE`, que suma de una vez las filas con la misma fecha.","ordenado":true,"pasos":["Paso 1 (CTE): un total por pedido no cancelado.","Paso 2: `SUM(total) OVER (ORDER BY fecha_pedido ...)` va sumando lo anterior.","Agrega `pedido_id` al orden para desempatar y usa `ROWS` para acumular fila a fila."]},{"id":"28","nivel":"ventanas","titulo":"Crecimiento mes a mes","en":"Calculate the revenue of each month (non-cancelled orders), the previous month's revenue and the month-over-month growth percentage (1 decimal).","es":"Calcula el ingreso de cada mes (pedidos no cancelados), el del mes anterior y el porcentaje de crecimiento mes a mes (1 decimal).","sql":"WITH mensual AS (\n    SELECT strftime('%Y-%m', p.fecha_pedido) AS mes,\n           SUM(d.cantidad * d.precio_unitario) AS ingreso\n    FROM pedidos p\n    JOIN detalle_pedido d ON d.pedido_id = p.pedido_id\n    WHERE p.estado <> 'cancelado'\n    GROUP BY mes\n)\nSELECT mes, ingreso,\n       LAG(ingreso) OVER (ORDER BY mes) AS ingreso_anterior,\n       ROUND(100.0 * (ingreso - LAG(ingreso) OVER (ORDER BY mes))\n             / LAG(ingreso) OVER (ORDER BY mes), 1) AS crecimiento_pct\nFROM mensual\nORDER BY mes;","nota":"En PostgreSQL: `DATE_TRUNC('month', fecha_pedido)`. El primer mes da NULL porque no hay mes anterior.","ordenado":true,"pasos":["Paso 1 (CTE): ingreso por mes con `strftime('%Y-%m', ...)`.","`LAG(ingreso) OVER (ORDER BY mes)` trae el mes anterior a la misma fila.","Crecimiento = (actual − anterior) / anterior × 100."]},{"id":"29","nivel":"ventanas","titulo":"Participación sobre el total","en":"For each category, show its revenue (non-cancelled orders) and its percentage of the total revenue (1 decimal). Highest first.","es":"Para cada categoría, muestra su ingreso (pedidos no cancelados) y su porcentaje del ingreso total (1 decimal). La mayor primero.","sql":"WITH cat AS (\n    SELECT pr.categoria, SUM(d.cantidad * d.precio_unitario) AS ingreso\n    FROM detalle_pedido d\n    JOIN productos pr ON pr.producto_id = d.producto_id\n    JOIN pedidos   p  ON p.pedido_id    = d.pedido_id\n    WHERE p.estado <> 'cancelado'\n    GROUP BY pr.categoria\n)\nSELECT categoria, ingreso,\n       ROUND(100.0 * ingreso / SUM(ingreso) OVER (), 1) AS pct_del_total\nFROM cat\nORDER BY ingreso DESC;","nota":"`OVER ()` vacío: la ventana es todo el resultado.","ordenado":true,"pasos":["Paso 1 (CTE): ingreso por categoría.","El total general sale con `SUM(ingreso) OVER ()`, sin colapsar filas.","Porcentaje = ingreso / total × 100.0."]},{"id":"30","nivel":"ventanas","titulo":"Días entre pedidos","en":"For each order, show the customer, the order date, the date of that customer's previous order and the number of days between them.","es":"Para cada pedido, muestra el cliente, la fecha, la fecha del pedido anterior de ese mismo cliente y los días entre los dos.","sql":"SELECT cliente_id, pedido_id, fecha_pedido,\n       LAG(fecha_pedido) OVER w AS pedido_anterior,\n       CAST(julianday(fecha_pedido) - julianday(LAG(fecha_pedido) OVER w) AS INTEGER) AS dias\nFROM pedidos\nWINDOW w AS (PARTITION BY cliente_id ORDER BY fecha_pedido)\nORDER BY cliente_id, fecha_pedido;","nota":"`WINDOW w AS (...)` define la ventana una sola vez (SQLite, PostgreSQL y MySQL 8).","pasos":["«Previous order of that customer» → `LAG(fecha_pedido)` con `PARTITION BY cliente_id`.","Días entre fechas en SQLite: `julianday(b) - julianday(a)`."]},{"id":"31","nivel":"ventanas","titulo":"Primer pedido de cada cliente","en":"Return the first order (id and date) of every customer who has ordered.","es":"Devuelve el primer pedido (id y fecha) de cada cliente que ha hecho pedidos.","sql":"WITH numerados AS (\n    SELECT cliente_id, pedido_id, fecha_pedido,\n           ROW_NUMBER() OVER (PARTITION BY cliente_id ORDER BY fecha_pedido) AS rn\n    FROM pedidos\n)\nSELECT cliente_id, pedido_id, fecha_pedido\nFROM numerados\nWHERE rn = 1\nORDER BY cliente_id;","nota":"Patrón «top 1 por grupo». Con `MIN(fecha_pedido)` obtienes la fecha, pero no el id del pedido.","pasos":["Numera los pedidos de cada cliente por fecha con `ROW_NUMBER()`.","El primero es el que tiene `rn = 1`: filtra afuera, en otra consulta sobre la CTE."]},{"id":"32","nivel":"ventanas","titulo":"Top 2 productos por categoría","en":"For each category, return the 2 products with the most units sold (non-cancelled orders).","es":"Para cada categoría, devuelve los 2 productos con más unidades vendidas (pedidos no cancelados).","sql":"WITH unidades AS (\n    SELECT pr.categoria, pr.nombre, SUM(d.cantidad) AS unidades\n    FROM detalle_pedido d\n    JOIN productos pr ON pr.producto_id = d.producto_id\n    JOIN pedidos   p  ON p.pedido_id    = d.pedido_id\n    WHERE p.estado <> 'cancelado'\n    GROUP BY pr.categoria, pr.nombre\n),\nranking AS (\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY categoria ORDER BY unidades DESC, nombre) AS rn\n    FROM unidades\n)\nSELECT categoria, nombre, unidades\nFROM ranking\nWHERE rn <= 2\nORDER BY categoria, rn;","nota":"Dos CTE encadenadas: primero se agrega y luego se rankea. La CTE se lee como una receta paso a paso.","pasos":["Paso 1: unidades vendidas por producto (con su categoría).","Paso 2: `ROW_NUMBER()` por categoría, de más a menos unidades.","Paso 3: quédate con `rn <= 2`."]},{"id":"33","nivel":"reto","titulo":"Duplicados","en":"Find the salary values that are shared by more than one employee, and how many employees have each one.","es":"Encuentra los salarios que comparten varios empleados y cuántos empleados tienen cada uno.","sql":"SELECT salario, COUNT(*) AS empleados\nFROM empleados\nGROUP BY salario\nHAVING COUNT(*) > 1;","nota":"El mismo patrón encuentra correos o registros duplicados: `GROUP BY <columnas> HAVING COUNT(*) > 1`.","pasos":["Duplicados = valores que aparecen más de una vez.","Agrupa por el valor y filtra el grupo con `HAVING COUNT(*) > 1`."]},{"id":"34","nivel":"reto","titulo":"Compradores de dos categorías","en":"Find the customers who bought products from BOTH the `Artesanías` and the `Pescados` categories (non-cancelled orders). Sort by name.","es":"Encuentra los clientes que compraron productos de AMBAS categorías, `Artesanías` y `Pescados` (pedidos no cancelados). Ordena por nombre.","sql":"SELECT c.nombre\nFROM clientes c\nJOIN pedidos p         ON p.cliente_id  = c.cliente_id\nJOIN detalle_pedido d  ON d.pedido_id   = p.pedido_id\nJOIN productos pr      ON pr.producto_id = d.producto_id\nWHERE p.estado <> 'cancelado'\n  AND pr.categoria IN ('Artesanías', 'Pescados')\nGROUP BY c.cliente_id, c.nombre\nHAVING COUNT(DISTINCT pr.categoria) = 2\nORDER BY c.nombre;","nota":"`WHERE categoria = 'Artesanías' AND categoria = 'Pescados'` nunca es verdadero: una fila no tiene dos categorías. «Ambas» se evalúa por grupo, con `HAVING`.","ordenado":true,"pasos":["Une cliente → pedido → línea → producto y quédate con las dos categorías.","Una fila no puede tener dos categorías: la condición «ambas» se mide por cliente.","`HAVING COUNT(DISTINCT categoria) = 2`."]},{"id":"35","nivel":"reto","titulo":"Conversión de registro a compra","en":"Calculate what percentage of ALL customers placed their first order (any status) within 30 days of signing up. Show the number of customers, how many converted and the percentage (1 decimal).","es":"Calcula qué porcentaje de TODOS los clientes hizo su primer pedido (en cualquier estado) dentro de los 30 días siguientes a su registro. Muestra el número de clientes, cuántos convirtieron y el porcentaje (1 decimal).","sql":"WITH primer_pedido AS (\n    SELECT cliente_id, MIN(fecha_pedido) AS fecha_primer_pedido\n    FROM pedidos\n    GROUP BY cliente_id\n)\nSELECT COUNT(*) AS clientes,\n       SUM(CASE WHEN julianday(f.fecha_primer_pedido) - julianday(c.fecha_registro) <= 30\n                THEN 1 ELSE 0 END) AS convirtieron_30d,\n       ROUND(100.0 * SUM(CASE WHEN julianday(f.fecha_primer_pedido) - julianday(c.fecha_registro) <= 30\n                              THEN 1 ELSE 0 END) / COUNT(*), 1) AS conversion_pct\nFROM clientes c\nLEFT JOIN primer_pedido f ON f.cliente_id = c.cliente_id;","nota":"El denominador es TODOS los clientes (por eso `LEFT JOIN`). Wilmer tiene NULL: la comparación con NULL no es verdadera y cae en el `ELSE 0`.","pasos":["Paso 1 (CTE): fecha del primer pedido de cada cliente con `MIN`.","Paso 2: LEFT JOIN desde `clientes` para que el denominador sean todos.","Cuenta los que tardaron ≤ 30 días con `SUM(CASE ...)` y divide entre `COUNT(*)`."]}]}</script><!-- DECK-DATA-END -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+(() => {
+"use strict";
+const DATA = JSON.parse(document.getElementById("deck-data").textContent);
+const EX = Object.fromEntries(DATA.items.map(i => [i.id, i]));
+const LEVEL = {
+  basico: { label: "Nivel básico", min: 3 },
+  joins: { label: "JOINs y subconsultas", min: 5 },
+  ventanas: { label: "CASE y ventanas", min: 6 },
+  reto: { label: "Reto de entrevista", min: 10 },
+};
+const TABLES = ["clientes", "pedidos", "detalle_pedido", "productos", "empleados"];
+const CDN_SQL = "https://cdn.jsdelivr.net/npm/sql.js@1.10.3/dist/";
+const STORE = "mercado-pacifico-sql-v1";
+const INFRAME = window.self !== window.top;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const md = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const ICON_PLAY = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>';
+const ICON_CLOCK = '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 6v3l2 1.5M6 1.5h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+
+// ---------------------------------------------------------------- avance guardado en el navegador
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(STORE) || "{}") || {}; } catch { progress = {}; }
+function save() { try { localStorage.setItem(STORE, JSON.stringify(progress)); } catch { /* sin almacenamiento */ } }
+function mark(id, state) {
+  const prev = progress[id];
+  if (prev === "ok" || prev === state) return;
+  progress[id] = state; save(); paintProgress();
+}
+
+// ---------------------------------------------------------------- diapositivas generadas
+const agenda = [["m1", "Orden lógico", "Por qué falla el alias"], ["m2", "SELECT y WHERE", "Ej. 1, 2, 5, 6"], ["m3", "NULL", "Ej. 3"],
+  ["m4", "GROUP BY y HAVING", "Ej. 4, 7–10"], ["m5", "JOINs", "Ej. 11–16"], ["m6", "Subconsultas y CTEs", "Ej. 17–21"], ["m7", "CASE WHEN", "Ej. 22–24"],
+  ["m8", "Funciones de ventana", "Ej. 25–32"], ["m9", "Conjuntos, fechas y DDL", "Opción múltiple"], ["m10", "Patrones de entrevista", "Ej. 33–35"]];
+document.getElementById("agenda").innerHTML = agenda.map(([id, t, x], i) =>
+  `<button type="button" class="fragment rise" data-goto="${id}"><span class="n">${String(i + 1).padStart(2, "0")}</span><span class="t">${t}</span><span class="x">${x}</span></button>`).join("");
+
+function editorHTML(id, value) {
+  return `<div class="editor"><pre aria-hidden="true"><code></code></pre><textarea id="ed-${id}" spellcheck="false" wrap="off" aria-label="Tu consulta para el ejercicio ${id}">${esc(value)}</textarea></div>`;
+}
+document.querySelectorAll("section[data-ex]").forEach(sec => {
+  const it = EX[sec.dataset.ex], lv = LEVEL[it.nivel];
+  const used = TABLES.filter(t => new RegExp(`\\b${t}\\b`).test(it.sql));
+  let draft = `-- Ejercicio ${it.id}: escribe tu consulta aquí\n`;
+  try { draft = localStorage.getItem(`${STORE}:draft:${it.id}`) || draft; } catch { /* sin almacenamiento */ }
+  sec.classList.add("ex");
+  let prev = sec.previousElementSibling;
+  while (prev && !prev.classList.contains("divider")) prev = prev.previousElementSibling;
+  const modName = prev ? `${prev.querySelector(".num").textContent} · ${prev.querySelector("h2").textContent}` : "";
+  sec.dataset.mod = `${modName} · ejercicio ${it.id} de ${DATA.items.length}`;
+  sec.dataset.transition = "slide-in fade-out";
+  sec.innerHTML = `
+    <div class="ex-head"><span class="lvl lvl-${it.nivel}">${lv.label}</span><span class="done-badge">✓ resuelto</span>
+      <button type="button" class="timer" data-min="${lv.min}" title="Iniciar o pausar el cronómetro">${ICON_CLOCK}<span>${lv.min}:00</span></button></div>
+    <h3 class="ex-title">${esc(it.titulo)}</h3>
+    <div class="ex-grid workbench" data-id="${it.id}">
+      <div>
+        <p class="q-en">${md(it.en)}</p>
+        <p class="q-es">${md(it.es)}</p>
+        <div class="tables">${used.map(t => `<span class="chip">${t}</span>`).join("")}</div>
+        <div class="think"><span class="kicker">Cómo pensarlo</span><ol>${it.pasos.map(x => `<li class="fragment rise">${md(x)}</li>`).join("")}</ol></div>
+        <div class="note" hidden><b>Clave:</b> ${md(it.nota)}</div>
+      </div>
+      <div>
+        ${editorHTML(it.id, draft)}
+        <div class="actions">
+          <button type="button" class="btn primary run">${ICON_PLAY} Ejecutar <kbd>Ctrl</kbd>+<kbd>Enter</kbd></button>
+          <button type="button" class="btn check">Comprobar</button>
+          <button type="button" class="btn sol">Ver solución</button>
+          <button type="button" class="btn clear">Limpiar</button>
+        </div>
+        <div class="out"><div class="status">Escribe tu consulta y ejecútala. «Comprobar» compara tu resultado con el esperado.</div><div class="grid"></div></div>
+      </div>
+    </div>
+    <aside class="notes">
+      <p><strong>Ejercicio ${it.id} · ${esc(it.titulo)}</strong> (${lv.label}, ${lv.min} min). Leer el enunciado en inglés en voz alta y pedir que identifiquen columnas, filtro y orden.</p>
+      <p>Explicación paso a paso (cada paso aparece al avanzar): ${it.pasos.map((x, i) => `${i + 1}) ${md(x)}`).join(" ")}</p>
+      <p>Pista corta si se traban: ${md(hint(it))}</p>
+      <p>Idea clave: ${md(it.nota)}</p>
+      <p>Solución:</p><pre style="font-size:12px;white-space:pre-wrap">${esc(it.sql)}</pre>
+    </aside>`;
+  if (progress[it.id] === "ok") sec.classList.add("solved");
+});
+function hint(it) {
+  const s = it.sql.toUpperCase(), h = [];
+  if (s.includes("WITH ")) h.push("resuélvelo en pasos con una CTE");
+  if (s.includes("LEFT JOIN")) h.push("necesitas conservar filas sin pareja: LEFT JOIN");
+  else if (s.includes("JOIN")) h.push(`une ${TABLES.filter(t => it.sql.includes(t)).join(", ")}`);
+  if (s.includes("OVER")) h.push("usa una función de ventana");
+  if (s.includes("HAVING")) h.push("la condición es sobre grupos: HAVING");
+  if (s.includes("CASE")) h.push("clasifica con CASE WHEN");
+  if (s.includes("NOT EXISTS")) h.push("comprueba la ausencia con NOT EXISTS");
+  if (s.includes("CANCELADO")) h.push("excluye los pedidos cancelados");
+  return h.length ? h.join("; ") + "." : "empieza por el FROM: ¿de qué tabla salen los datos?";
+}
+
+// Diagramas de Venn
+let vennN = 0;
+document.querySelectorAll(".venn").forEach(el => {
+  const t = el.dataset.type, n = vennN++;
+  const A = ["left", "full", "anti"].includes(t), B = ["right", "full"].includes(t), I = ["inner", "left", "right", "full"].includes(t);
+  const fill = "rgba(29,243,244,.55)", bg = "#052846";
+  el.innerHTML = `<svg viewBox="0 0 200 124" role="img" aria-label="${t}">
+    <defs><clipPath id="vA${n}"><circle cx="78" cy="62" r="50"/></clipPath></defs>
+    <circle cx="78" cy="62" r="50" fill="${A ? fill : bg}"/>
+    <circle cx="122" cy="62" r="50" fill="${B ? fill : bg}"/>
+    <circle cx="122" cy="62" r="50" fill="${I ? fill : bg}" clip-path="url(#vA${n})"/>
+    <circle cx="78" cy="62" r="50" fill="none" stroke="#a2f3f3" stroke-width="2"/>
+    <circle cx="122" cy="62" r="50" fill="none" stroke="#a2f3f3" stroke-width="2"/>
+    <text x="52" y="68" fill="#eaf6ff" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">A</text>
+    <text x="136" y="68" fill="#eaf6ff" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">B</text></svg>`;
+});
+
+// Lista de tablas del laboratorio
+const COLS = {
+  clientes: "cliente_id, nombre, correo, municipio, departamento, segmento, fecha_registro",
+  pedidos: "pedido_id, cliente_id, fecha_pedido, estado",
+  detalle_pedido: "pedido_id, producto_id, cantidad, precio_unitario",
+  productos: "producto_id, nombre, categoria, precio",
+  empleados: "empleado_id, nombre, area, salario, jefe_id, fecha_ingreso",
+};
+document.getElementById("schema-list").innerHTML = TABLES.map(t => `<button type="button" data-table="${t}"><b>${t}</b><span>${COLS[t]}</span></button>`).join("");
+
+// Botones «Ejecutar» bajo los bloques de código en vivo
+document.querySelectorAll("pre.live").forEach(pre => {
+  const bar = document.createElement("div");
+  bar.className = "live-bar";
+  bar.innerHTML = `<button type="button" class="btn primary live-run">${ICON_PLAY} Ejecutar en la base</button><span class="small">Corre en tu navegador</span>`;
+  const out = document.createElement("div");
+  out.className = "live-out";
+  // El SQL original se guarda antes de que el resaltado parta el código en filas de tabla.
+  const raw = pre.querySelector("code").textContent.replace(/^\n+|\s+$/g, "");
+  const indent = Math.min(...raw.split("\n").filter(l => l.trim()).map(l => l.match(/^ */)[0].length));
+  pre.dataset.sql = raw.split("\n").map(l => l.slice(indent)).join("\n");
+  pre.after(bar); bar.after(out);
+  if (pre.classList.contains("fragment")) { bar.classList.add("fragment", "rise"); bar.dataset.fragmentIndex = pre.dataset.fragmentIndex; }
+});
+
+// ---------------------------------------------------------------- motor SQL (SQLite en WebAssembly)
+let enginePromise = null;
+function loadScript(src) {
+  return new Promise((ok, fail) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = fail; document.head.appendChild(s); });
+}
+function engine() {
+  if (!enginePromise) {
+    enginePromise = (async () => {
+      try {
+        await loadScript(CDN_SQL + "sql-wasm.js");
+        return await window.initSqlJs({ locateFile: f => CDN_SQL + f });
+      } catch {
+        // Sin WebAssembly (o si el .wasm no se puede descargar): versión asm.js, más lenta pero autónoma.
+        window.initSqlJs = undefined;
+        await loadScript(CDN_SQL + "sql-asm.js");
+        return await window.initSqlJs();
+      }
+    })().catch(e => { enginePromise = null; throw e; });
+  }
+  return enginePromise;
+}
+async function execSQL(sql) {
+  const SQL = await engine();
+  const db = new SQL.Database();
+  try {
+    db.exec(DATA.schema);
+    const res = db.exec(sql);
+    const last = res.length ? res[res.length - 1] : null;
+    return { columns: last ? last.columns : [], values: last ? last.values : [], changed: db.getRowsModified() };
+  } finally { db.close(); }
+}
+const nf = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 2 });
+function cell(v, col) {
+  if (v === null) return '<td class="null">NULL</td>';
+  if (typeof v === "number") return `<td class="n">${/_id$|^id$/.test(col) ? v : nf.format(v)}</td>`;
+  return `<td>${esc(v)}</td>`;
+}
+function renderGrid(target, r) {
+  if (!r.columns.length) { target.innerHTML = ""; return; }
+  const rows = r.values.slice(0, 200);
+  target.innerHTML = `<table><thead><tr>${r.columns.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${
+    rows.map((row, i) => `<tr style="animation-delay:${Math.min(i, 20) * 25}ms">${row.map((v, j) => cell(v, r.columns[j])).join("")}</tr>`).join("")}</tbody></table>`;
+}
+function setStatus(el, cls, html) { el.className = "status" + (cls ? " " + cls : ""); el.innerHTML = html; }
+
+// ---------------------------------------------------------------- comparar resultados
+const norm = v => v === null ? "NULL" : typeof v === "number" ? String(Math.round(v * 100) / 100) : String(v).trim();
+function compare(user, exp, item) {
+  let expCols = exp.columns.map(c => c.toLowerCase()), expRows = exp.values;
+  const userCols = user.columns.map(c => c.toLowerCase());
+  if (item.flex && userCols.length < expCols.length && userCols.every(c => expCols.includes(c))) {
+    const idx = userCols.map(c => expCols.indexOf(c));
+    expRows = expRows.map(r => idx.map(i => r[i])); expCols = userCols;
+  }
+  if (userCols.length !== expCols.length) return { ok: false, msg: `Se esperaban ${expCols.length} columnas (${exp.columns.join(", ")}) y tu consulta devuelve ${userCols.length}.` };
+  if (user.values.length !== expRows.length) return { ok: false, msg: `Se esperaban ${expRows.length} filas y tu consulta devuelve ${user.values.length}.` };
+  const a = user.values.map(r => r.map(norm).join("¦")), b = expRows.map(r => r.map(norm).join("¦"));
+  if (item.ordenado) {
+    if (a.every((x, i) => x === b[i])) return { ok: true };
+    if ([...a].sort().join("\n") === [...b].sort().join("\n")) return { ok: false, msg: "Las filas son correctas, pero el orden no: revisa el ORDER BY." };
+  } else if ([...a].sort().join("\n") === [...b].sort().join("\n")) return { ok: true };
+  return { ok: false, msg: "Mismo número de filas y columnas, pero algunos valores no coinciden. Revisa filtros, JOIN y cálculos." };
+}
+
+// ---------------------------------------------------------------- editor con resaltado
+let hljs = null;
+function paint(ta) {
+  const code = ta.previousElementSibling.firstElementChild;
+  const text = ta.value + (ta.value.endsWith("\n") ? " " : "");
+  code.innerHTML = hljs ? hljs.highlight(text, { language: "sql", ignoreIllegals: true }).value : esc(text);
+  ta.previousElementSibling.scrollTop = ta.scrollTop; ta.previousElementSibling.scrollLeft = ta.scrollLeft;
+}
+document.addEventListener("input", e => {
+  if (e.target.matches(".editor textarea")) {
+    paint(e.target);
+    const wb = e.target.closest(".workbench");
+    if (wb && wb.dataset.id) { try { localStorage.setItem(`${STORE}:draft:${wb.dataset.id}`, e.target.value); } catch { /* sin almacenamiento */ } }
+  }
+});
+document.addEventListener("scroll", e => { if (e.target.matches && e.target.matches(".editor textarea")) paint(e.target); }, true);
+document.addEventListener("keydown", e => {
+  const ta = e.target;
+  if (!ta.matches || !ta.matches(".editor textarea")) return;
+  if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); runBench(ta.closest(".workbench")); }
+  else if (e.key === "Tab") {
+    e.preventDefault();
+    const s = ta.selectionStart; ta.setRangeText("    ", s, ta.selectionEnd, "end"); paint(ta);
+  }
+  e.stopPropagation();
+}, true);
+
+async function runBench(wb, sqlOverride) {
+  const ta = wb.querySelector("textarea"), status = wb.querySelector(".status"), grid = wb.querySelector(".grid");
+  const sql = sqlOverride ?? ta.value;
+  if (!sql.replace(/--[^\n]*/g, "").trim()) { setStatus(status, "warn", "El editor está vacío: escribe una consulta."); return null; }
+  setStatus(status, "", "Ejecutando…");
+  const t0 = performance.now();
+  try {
+    const r = await execSQL(sql);
+    const ms = Math.round(performance.now() - t0);
+    renderGrid(grid, r);
+    setStatus(status, "", r.columns.length ? `${r.values.length} fila${r.values.length === 1 ? "" : "s"} · ${ms} ms` : `Listo · ${r.changed} fila(s) modificadas`);
+    return r;
+  } catch (err) {
+    grid.innerHTML = "";
+    setStatus(status, "err", `Error de SQL: ${esc(err.message || err)}`);
+    return null;
+  }
+}
+const expected = {};
+async function checkBench(wb) {
+  const item = EX[wb.dataset.id], status = wb.querySelector(".status");
+  const r = await runBench(wb);
+  if (!r) return;
+  if (!r.columns.length) { setStatus(status, "warn", "Tu consulta no devolvió un resultado para comparar."); return; }
+  expected[item.id] ??= await execSQL(item.sql);
+  const c = compare(r, expected[item.id], item);
+  if (c.ok) {
+    setStatus(status, "okk", `✓ Correcto: ${r.values.length} fila${r.values.length === 1 ? "" : "s"} coinciden con el resultado esperado.`);
+    wb.querySelector(".note").hidden = false;
+    wb.closest("section").classList.add("solved");
+    mark(item.id, "ok");
+  } else setStatus(status, "err", `✗ ${esc(c.msg)}`);
+}
+async function showSolution(wb) {
+  const item = EX[wb.dataset.id], ta = wb.querySelector("textarea");
+  const text = item.sql;
+  const step = Math.max(2, Math.ceil(text.length / 70));
+  for (let i = 0; i <= text.length; i += step) { ta.value = text.slice(0, i); paint(ta); await sleep(14); }
+  ta.value = text; paint(ta);
+  wb.querySelector(".note").hidden = false;
+  await runBench(wb);
+  mark(item.id, "seen");
+}
+
+// ---------------------------------------------------------------- cronómetros
+function startTimer(btn) {
+  if (btn._t) { clearInterval(btn._t); btn._t = null; btn.classList.remove("run"); return; }
+  btn._left ??= Number(btn.dataset.min) * 60;
+  btn.classList.add("run");
+  const label = btn.querySelector("span");
+  const tick = () => {
+    btn._left--;
+    const s = Math.abs(btn._left);
+    label.textContent = `${btn._left < 0 ? "+" : ""}${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+    btn.classList.toggle("warn", btn._left <= 60 && btn._left > 0);
+    btn.classList.toggle("over", btn._left <= 0);
+  };
+  btn._t = setInterval(tick, 1000);
+}
+
+// ---------------------------------------------------------------- clics
+document.addEventListener("click", async e => {
+  const t = e.target.closest("button, .flip");
+  if (!t) return;
+  const wb = t.closest(".workbench");
+  if (t.matches(".run") && wb) runBench(wb);
+  else if (t.matches(".check") && wb) checkBench(wb);
+  else if (t.matches(".sol") && wb) showSolution(wb);
+  else if (t.matches(".clear") && wb) { const ta = wb.querySelector("textarea"); ta.value = ""; paint(ta); ta.focus(); }
+  else if (t.matches(".timer")) startTimer(t);
+  else if (t.matches(".flip")) t.classList.toggle("on");
+  else if (t.matches(".live-run")) {
+    const pre = t.closest(".live-bar").previousElementSibling, out = t.closest(".live-bar").nextElementSibling;
+    out.innerHTML = '<div class="out"><div class="status">Ejecutando…</div><div class="grid"></div></div>';
+    const st = out.querySelector(".status");
+    try {
+      const r = await execSQL(pre.dataset.sql);
+      renderGrid(out.querySelector(".grid"), r);
+      setStatus(st, "okk", r.columns.length ? `${r.values.length} fila${r.values.length === 1 ? "" : "s"}` : "Listo");
+    } catch (err) { setStatus(st, "err", `Error de SQL: ${esc(err.message || err)}`); }
+  }
+  else if (t.dataset.goto) goTo(document.getElementById(t.dataset.goto));
+  else if (t.dataset.ex) goTo(document.querySelector(`section[data-ex="${t.dataset.ex}"]`));
+  else if (t.dataset.table) {
+    const ta = document.getElementById("lab-editor");
+    ta.value = `SELECT *\nFROM ${t.dataset.table}\nLIMIT 10;`; paint(ta);
+    runBench(ta.closest(".workbench"));
+  }
+  else if (t.id === "copy-schema") {
+    const msg = document.getElementById("copy-msg");
+    try { await navigator.clipboard.writeText(DATA.schema); msg.textContent = "Script copiado. Pégalo en sqlite3, DB Browser o sqliteonline.com."; }
+    catch { const ta = document.getElementById("lab-editor"); ta.value = DATA.schema; paint(ta); ta.select(); msg.textContent = "No se pudo copiar automáticamente: el script quedó seleccionado en el editor."; }
+  }
+  else if (t.id === "reset-progress") { progress = {}; save(); document.querySelectorAll("section.solved").forEach(s => s.classList.remove("solved")); paintProgress(); }
+  else if (t.id === "notes-toggle") toggleNotes();
+  else if (t.id === "go-lab") goTo(document.getElementById("lab"));
+});
+document.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.matches && e.target.matches(".flip")) e.target.classList.toggle("on"); });
+function goTo(sec) { if (sec) { const i = Reveal.getIndices(sec); Reveal.slide(i.h, i.v); } }
+
+// ---------------------------------------------------------------- progreso
+function paintProgress() {
+  const ids = DATA.items.map(i => i.id);
+  const ok = ids.filter(id => progress[id] === "ok").length, seen = ids.filter(id => progress[id] === "seen").length;
+  document.getElementById("dots").innerHTML = ids.map(id => `<button type="button" data-ex="${id}" class="${progress[id] || ""}" title="Ejercicio ${id}: ${esc(EX[id].titulo)}">${id}</button>`).join("");
+  document.getElementById("pbar").style.width = `${(ok / ids.length) * 100}%`;
+  document.getElementById("ptext").textContent = `${ok} de ${ids.length} comprobados · ${seen} con solución vista`;
+}
+paintProgress();
+
+// ---------------------------------------------------------------- notas en pantalla
+const panel = document.getElementById("notes-panel"), notesBody = document.getElementById("notes-body"), notesBtn = document.getElementById("notes-toggle");
+function updateNotes() {
+  const n = Reveal.getCurrentSlide().querySelector("aside.notes");
+  notesBody.innerHTML = n ? n.innerHTML : "<p>Esta diapositiva no tiene notas.</p>";
+}
+function toggleNotes() { panel.classList.toggle("on"); notesBtn.classList.toggle("on", panel.classList.contains("on")); updateNotes(); }
+
+// ---------------------------------------------------------------- reveal
+function onSlide(slide) {
+  slide.querySelectorAll(".editor textarea").forEach(paint);
+  slide.querySelectorAll("[data-count]").forEach(el => { if (!el.closest(".fragment")) countUp(el); });
+  if (panel.classList.contains("on")) updateNotes();
+}
+function countUp(el) {
+  {
+    const end = Number(el.dataset.count), t0 = performance.now();
+    const step = now => {
+      const p = Math.min(1, (now - t0) / 900);
+      el.firstChild.nodeValue = String(Math.round(end * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+}
+Reveal.on("fragmentshown", e => {
+  e.fragments.forEach(f => {
+    if (f.dataset.target) document.getElementById(f.dataset.target).classList.add(f.dataset.add);
+    if (f.dataset.hl) document.getElementById(f.dataset.hl).classList.add("hl");
+    f.querySelectorAll("[data-count]").forEach(countUp);
+  });
+});
+Reveal.on("fragmenthidden", e => {
+  e.fragments.forEach(f => {
+    if (f.dataset.target) document.getElementById(f.dataset.target).classList.remove(f.dataset.add);
+    if (f.dataset.hl) document.getElementById(f.dataset.hl).classList.remove("hl");
+  });
+});
+Reveal.on("ready", e => {
+  hljs = Reveal.getPlugin("highlight").hljs;
+  document.querySelectorAll("section[data-mod]").forEach(s => {
+    if (!s.dataset.mod) return;
+    const tag = document.createElement("div"); tag.className = "mod-tag"; tag.textContent = s.dataset.mod; s.prepend(tag);
+  });
+  onSlide(e.currentSlide);
+  engine().catch(() => { /* se reintenta al ejecutar */ });
+});
+Reveal.on("slidechanged", e => onSlide(e.currentSlide));
+
+Reveal.initialize({
+  width: 1280, height: 720, margin: 0.04, center: false,
+  hash: !INFRAME, controls: true, progress: true, slideNumber: "c/t",
+  transition: "slide", transitionSpeed: "default", backgroundTransition: "fade",
+  autoAnimateDuration: 0.9, autoAnimateEasing: "cubic-bezier(.2,.8,.2,1)",
+  pdfSeparateFragments: false, showNotes: false,
+  keyboard: { 78: () => toggleNotes() },   // N: notas en pantalla (S abre la vista de presentador)
+  plugins: [RevealHighlight, RevealNotes],
+});
+})();
+</script>
+</body>
+</html>

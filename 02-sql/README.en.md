@@ -7,6 +7,7 @@
 **How to practice:**
 
 - **Nothing to install (recommended):** the [simulator's SQL lab](../simulator/README.en.md#code-lab) has these same 35 exercises. You write the query, run it, and it tells you whether the result is right; it works on your phone. It includes a **challenge of 5 queries in 60 minutes**.
+- **Guided deck:** the [«SQL desde Quibdó» slide deck](../presentaciones/sql/index.html) (in Spanish) explains each topic with animations and includes 35 exercises of its own (a Spanish «Mercado del Pacífico» database) that run and are checked in the browser, with speaker notes.
 - **On your computer:**
 
 ```bash

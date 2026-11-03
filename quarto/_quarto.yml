@@ -8,6 +8,7 @@ project:
   resources:
     - simulador/
     - simulador-aif/
+    - presentacion-sql/
     - assets/
     - guia/
 
@@ -55,6 +56,8 @@ website:
             href: simulador/index.html
           - text: "Simulador AWS AIF-C01 (65 preguntas · 90 min)"
             href: simulador-aif/index.html
+          - text: "Presentación SQL desde Quibdó (35 ejercicios en vivo)"
+            href: presentacion-sql/index.html
       - text: "English"
         menu:
           - text: "Home"

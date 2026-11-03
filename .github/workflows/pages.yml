@@ -8,6 +8,8 @@ on:
       - "simulator/**"
       - "quarto/**"
       - "aws-ai-practitioner/**"
+      - "presentaciones/**"
+      - "scripts/build_slides.py"
       - "**.md"
       - "scripts/build_site.py"
       - ".github/workflows/pages.yml"

@@ -44,7 +44,8 @@ NOT_PAGES_DIRS = ("aws-ai-practitioner/labs/lab-01-rag-bedrock-knowledge-bases/s
 HOME = {"README.md": "index.qmd", "README.en.md": "index.en.qmd"}
 # The simulators are standalone apps published next to the guide / Los simuladores se publican junto a la guía.
 APPS = {"simulator/index.html": "simulador/index.html",
-        "aws-ai-practitioner/simulator/index.html": "simulador-aif/index.html"}
+        "aws-ai-practitioner/simulator/index.html": "simulador-aif/index.html",
+        "presentaciones/sql/index.html": "presentacion-sql/index.html"}
 
 # ------------------------------------------------------------------ navigation / navegación
 # A page is (source, label); a section is (title, [pages]). Pages that are .md are tracked in "My progress".

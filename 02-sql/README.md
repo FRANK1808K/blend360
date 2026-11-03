@@ -7,6 +7,7 @@
 **Cómo practicar:**
 
 - **Sin instalar nada (recomendado):** el [laboratorio SQL del simulador](../simulator/README.md#laboratorio-de-código) tiene estos mismos 35 ejercicios. Escribes la consulta, la ejecutas y te dice si el resultado es correcto; funciona en el celular. Incluye un **reto de 5 consultas en 60 minutos**.
+- **Con presentación guiada:** la [presentación «SQL desde Quibdó»](../presentaciones/sql/index.html) explica cada tema con animaciones y trae 35 ejercicios propios (base «Mercado del Pacífico», en español) que se ejecutan y se comprueban en el navegador, con notas para el presentador.
 - **En tu computador:**
 
 ```bash
