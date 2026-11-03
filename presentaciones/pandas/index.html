@@ -1,0 +1,1520 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>pandas desde Quibdó</title>
+<meta name="description" content="Presentación interactiva de pandas para la prueba técnica de Blend360, con un año de ventas del Mercado del Pacífico (Quibdó, Chocó) y 35 ejercicios que se ejecutan en el navegador.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M45.2 21.6A16.5 16.5 0 1 0 48.5 32' fill='none' stroke='%231df3f4' stroke-width='6.5' stroke-linecap='round'/%3E%3Ccircle cx='48.5' cy='19.5' r='4.6' fill='%23a2f3f3'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,600..900&family=Urbanist:ital,wght@0,400..800;1,400..600&family=JetBrains+Mono:wght@400;600&display=swap">
+<!-- REVEAL-CSS --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"><!-- /REVEAL-CSS -->
+<style>
+/* Concepto: una sala de clase nocturna sobre el río Atrato. Fondo azul profundo de Blend, el cian como luz de código
+   y el oro del Chocó como acento para lo que hay que recordar. Una sola apariencia (oscura) por decisión. */
+:root {
+  color-scheme: dark;
+  --night: #021a33;        /* fondo */
+  --navy: #043058;         /* superficies */
+  --navy-2: #06406f;
+  --ink: #eaf6ff;          /* texto */
+  --muted: #9db6cc;
+  --line: rgb(162 243 243 / .16);
+  --cyan: #1df3f4;         /* acento principal */
+  --aqua: #a2f3f3;
+  --gold: #ffc857;         /* acento cálido: oro del Chocó */
+  --ok: #3ee6a0;
+  --bad: #ff7a90;
+  --card: rgb(6 64 111 / .55);
+  --display: "Archivo", "Urbanist", system-ui, sans-serif;
+  --body: "Urbanist", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+html, body { height: 100%; background: var(--night); color: var(--ink); margin: 0; font-family: var(--body); }
+.reveal-viewport {
+  background:
+    radial-gradient(1200px 700px at 85% -10%, rgb(29 243 244 / .10), transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, rgb(255 200 87 / .07), transparent 60%),
+    linear-gradient(180deg, #021a33 0%, #03213f 100%);
+}
+.reveal-viewport::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .5;
+  background-image: linear-gradient(rgb(162 243 243 / .045) 1px, transparent 1px), linear-gradient(90deg, rgb(162 243 243 / .045) 1px, transparent 1px);
+  background-size: 48px 48px; mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+}
+.reveal { font-family: var(--body); font-size: 26px; font-weight: 500; color: var(--ink); }
+.reveal .slides { text-align: left; }
+.reveal .slides section { padding: 64px 56px 40px; box-sizing: border-box; height: 100%; }
+.reveal .slides section.stack { padding: 0; }
+.reveal h1, .reveal h2, .reveal h3 { font-family: var(--display); font-stretch: 112%; color: var(--ink); text-transform: none; letter-spacing: -.01em; text-wrap: balance; margin: 0 0 .45em; line-height: 1.08; }
+.reveal h1 { font-size: 78px; font-weight: 900; }
+.reveal h2 { font-size: 46px; font-weight: 800; }
+.reveal h3 { font-size: 32px; font-weight: 800; }
+.reveal p { margin: 0 0 .6em; line-height: 1.45; }
+.reveal em { font-style: normal; color: var(--cyan); }
+.reveal strong { color: #fff; font-weight: 800; }
+.reveal a { color: var(--cyan); }
+.reveal code { font-family: var(--mono); font-size: .86em; color: var(--aqua); background: rgb(162 243 243 / .08); padding: .05em .35em; border-radius: 6px; }
+.reveal pre code { background: none; padding: 0; }
+.reveal ul { margin: 0; padding-left: 1.1em; }
+.reveal li { margin: .3em 0; line-height: 1.4; }
+.reveal li::marker { color: var(--cyan); }
+.lead { font-size: 30px; color: var(--muted); max-width: 30em; }
+.small { font-size: 19px; color: var(--muted); }
+.kicker { font-family: var(--mono); font-size: 16px; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); }
+.gold { color: var(--gold) !important; }
+.ok { color: var(--ok) !important; }
+.bad { color: var(--bad) !important; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
+.cols.c-46 { grid-template-columns: 4fr 6fr; }
+.cols.c-55 { grid-template-columns: 5fr 5fr; }
+.cols.c3 { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.cols > * { min-width: 0; }
+.mod-tag { position: absolute; top: 22px; left: 56px; font-family: var(--mono); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.mod-tag::before { content: ""; width: 22px; height: 2px; background: var(--cyan); }
+
+/* tarjetas, chips, tablas */
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; }
+.card h4 { font-family: var(--display); font-size: 22px; margin: 0 0 6px; color: #fff; font-weight: 800; }
+.card p { font-size: 20px; color: var(--muted); margin: 0; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 15px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--aqua); background: rgb(29 243 244 / .06); }
+.tbl-wrap { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.reveal table.t { border-collapse: collapse; width: 100%; font-size: 19px; }
+.reveal table.t th, .reveal table.t td { border: 0; border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.reveal table.t th { font-family: var(--mono); font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); background: rgb(29 243 244 / .06); font-weight: 600; }
+.reveal table.t tr:last-child td { border-bottom: 0; }
+.reveal table.t td.num, .reveal table.t th.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); }
+
+/* código */
+.reveal pre { position: relative; width: 100%; margin: 0; box-shadow: none; font-size: 19px; line-height: 1.5; }
+.reveal pre code { font-family: var(--mono); max-height: 520px; padding: 18px 20px; border-radius: 14px; background: #020f1e !important; border: 1px solid var(--line); color: #dbeafe; }
+.hljs-keyword, .hljs-built_in { color: var(--cyan); font-weight: 600; }
+.hljs-string { color: var(--gold); }
+.hljs-number { color: #ffa3b4; }
+.hljs-comment { color: #6f8aa6; font-style: italic; }
+.hljs-literal { color: #ff9fb2; font-weight: 600; }
+.hljs-type, .hljs-title, .hljs-operator, .hljs-symbol { color: var(--aqua); }
+.reveal .hljs.has-highlights tr:not(.highlight-line) { opacity: .28; }
+.reveal .hljs-ln-numbers { color: #4d6a87; padding-right: 14px; }
+
+/* fragmentos propios */
+.reveal .fragment.rise { opacity: 0; transform: translateY(26px); transition: all .6s var(--ease); }
+.reveal .fragment.rise.visible { opacity: 1; transform: none; }
+.reveal .fragment.pop { opacity: 0; transform: scale(.85); transition: all .5s var(--ease); }
+.reveal .fragment.pop.visible { opacity: 1; transform: none; }
+.reveal .fragment.trigger { display: none; }
+
+/* portada */
+.title-slide { display: flex !important; flex-direction: column; justify-content: center; }
+.logo-ring { width: 92px; height: 92px; margin-bottom: 26px; }
+.logo-ring path { stroke-dasharray: 120; stroke-dashoffset: 120; animation: draw 1.6s var(--ease) .3s forwards; }
+.logo-ring circle { opacity: 0; animation: fadein .6s ease 1.4s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadein { to { opacity: 1; } }
+.title-slide h1 .line { display: block; opacity: 0; transform: translateY(40px); animation: rise .9s var(--ease) forwards; }
+.title-slide h1 .line:nth-child(2) { animation-delay: .18s; }
+.title-slide .after { opacity: 0; animation: rise .9s var(--ease) .55s forwards; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+.outline { -webkit-text-stroke: 2px var(--cyan); color: transparent !important; }
+.river { position: absolute; right: -40px; bottom: -20px; width: 640px; opacity: .55; pointer-events: none; }
+.river path { stroke-dasharray: 8 14; animation: flow 6s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -220; } }
+
+/* divisores de módulo */
+.divider { display: flex !important; flex-direction: column; justify-content: center; }
+.divider .num { font-family: var(--display); font-size: 220px; font-weight: 900; font-stretch: 125%; line-height: .8; -webkit-text-stroke: 2px rgb(29 243 244 / .55); color: transparent; margin-bottom: 18px; }
+.divider h2 { font-size: 64px; }
+.divider .learn { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+
+/* agenda */
+.agenda { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.agenda button { all: unset; cursor: pointer; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; min-height: 120px; display: flex; flex-direction: column; gap: 8px; transition: transform .3s var(--ease), border-color .3s; }
+.agenda button:hover, .agenda button:focus-visible { transform: translateY(-4px); border-color: var(--cyan); }
+.agenda .n { font-family: var(--mono); color: var(--cyan); font-size: 15px; }
+.agenda .t { font-family: var(--display); font-weight: 800; font-size: 21px; line-height: 1.15; }
+.agenda .x { font-size: 15px; color: var(--muted); margin-top: auto; }
+
+/* números grandes */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 18px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+.stat .v { font-family: var(--display); font-weight: 900; font-size: 74px; line-height: 1; color: var(--cyan); font-variant-numeric: tabular-nums; }
+.stat .v small { font-size: 30px; color: var(--aqua); margin-left: 4px; }
+.stat .l { font-size: 19px; color: var(--muted); margin-top: 10px; }
+
+/* método de 12 minutos */
+.timeline { display: flex; gap: 6px; margin: 26px 0 18px; }
+.timeline .seg { border-radius: 10px; padding: 14px 14px 12px; background: var(--card); border: 1px solid var(--line); min-width: 0; }
+.timeline .seg b { display: block; font-family: var(--mono); font-size: 14px; color: var(--cyan); margin-bottom: 4px; }
+.timeline .seg span { font-family: var(--display); font-weight: 800; font-size: 20px; }
+.timeline .seg p { font-size: 16px; color: var(--muted); margin: 6px 0 0; line-height: 1.35; }
+
+/* modelo de datos */
+.er { position: relative; height: 520px; }
+.er .ent { position: absolute; width: 238px; background: rgb(4 48 88 / .9); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; font-size: 15px; transition: border-color .4s, box-shadow .4s; }
+.er .ent h5 { margin: 0; font-family: var(--mono); font-size: 16px; padding: 8px 12px; background: rgb(29 243 244 / .12); color: var(--cyan); }
+.er .ent div { font-family: var(--mono); padding: 3px 12px; display: flex; justify-content: space-between; color: #cfe3f5; }
+.er .ent div i { font-style: normal; font-size: 11px; color: var(--gold); }
+.er .ent.hl { border-color: var(--gold); box-shadow: 0 0 0 4px rgb(255 200 87 / .15); }
+.er svg.links { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.er svg.links path { fill: none; stroke: var(--aqua); stroke-width: 2; opacity: .7; }
+.er svg.links text { fill: var(--gold); font-family: var(--mono); font-size: 14px; }
+.traps { position: absolute; left: 290px; top: 250px; right: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.traps .card { padding: 12px 14px; }
+.traps .card h4 { font-size: 17px; }
+.traps .card p { font-size: 15px; }
+
+/* orden de ejecución */
+.clauses { display: flex; gap: 12px; }
+.clauses.row { flex-wrap: wrap; margin: 40px 0; }
+.clause { font-family: var(--mono); font-weight: 600; font-size: 24px; padding: 12px 18px; border-radius: 12px; background: rgb(29 243 244 / .1); border: 1px solid rgb(29 243 244 / .4); color: var(--cyan); white-space: nowrap; }
+.clause.sel { background: rgb(255 200 87 / .14); border-color: rgb(255 200 87 / .55); color: var(--gold); }
+.exec { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; margin-top: 34px; }
+.exec .step { display: grid; grid-template-columns: 34px 210px 1fr; align-items: center; gap: 12px; }
+.exec .step .k { font-family: var(--mono); color: var(--muted); font-size: 18px; text-align: right; }
+.exec .step .clause { font-size: 19px; padding: 8px 12px; text-align: center; }
+.exec .step .d { font-size: 18px; color: var(--muted); line-height: 1.3; }
+
+/* GROUP BY animado */
+.pile { position: relative; height: 330px; }
+.pile .r { position: absolute; left: 0; width: 360px; display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 9px 14px; border-radius: 10px; font-size: 18px; border: 1px solid var(--line); transition: transform .9s var(--ease), opacity .6s, box-shadow .6s; transform: translateY(calc(var(--i) * 52px)); }
+.pile .r.g0 { background: rgb(29 243 244 / .14); }
+.pile .r.g1 { background: rgb(255 200 87 / .14); }
+.pile .r span:last-child { font-family: var(--mono); }
+.pile.collapsed .r { transform: translate(calc(var(--k) * 8px), calc(var(--g) * 150px + var(--k) * 8px)); box-shadow: 0 8px 24px -10px #000; }
+.pile.collapsed .r:not(.top) span { opacity: .0; }
+.pile .r span { transition: opacity .5s; }
+
+/* Venn de JOIN */
+.joins { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.joins .j { text-align: center; }
+.joins .j svg { width: 100%; height: auto; }
+.joins .j b { display: block; font-family: var(--mono); font-size: 17px; color: var(--cyan); margin-top: 4px; }
+.joins .j p { font-size: 15px; color: var(--muted); margin: 4px 0 0; }
+
+/* ROWS vs RANGE, islas */
+.mini td.hl0 { background: rgb(29 243 244 / .12); }
+.mini td.hl1 { background: rgb(255 200 87 / .14); }
+.mini td.hl2 { background: rgb(255 122 144 / .14); }
+
+/* tarjetas que giran (autoevaluación) */
+.flips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.flip { perspective: 1000px; height: 200px; cursor: pointer; }
+.flip .in { position: relative; width: 100%; height: 100%; transition: transform .7s var(--ease); transform-style: preserve-3d; }
+.flip.on .in { transform: rotateY(180deg); }
+.flip .f, .flip .b { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 16px; padding: 18px; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+.flip .f { background: var(--card); }
+.flip .f span { font-family: var(--mono); color: var(--cyan); font-size: 14px; }
+.flip .f p { font-size: 20px; font-weight: 700; }
+.flip .b { background: rgb(62 230 160 / .1); border-color: rgb(62 230 160 / .4); transform: rotateY(180deg); font-size: 18px; line-height: 1.4; }
+
+/* banco de trabajo (ejercicios y laboratorio) */
+.ex-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.lvl { font-family: var(--mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.lvl-basico { color: var(--ok); border-color: rgb(62 230 160 / .4); }
+.lvl-joins { color: var(--cyan); border-color: rgb(29 243 244 / .4); }
+.lvl-ventanas { color: var(--gold); border-color: rgb(255 200 87 / .45); }
+.lvl-reto { color: var(--bad); border-color: rgb(255 122 144 / .45); }
+.done-badge { font-family: var(--mono); font-size: 13px; color: var(--ok); display: none; }
+.solved .done-badge { display: inline; }
+.timer { all: unset; cursor: pointer; margin-left: auto; font-family: var(--mono); font-size: 16px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); display: inline-flex; gap: 8px; align-items: center; font-variant-numeric: tabular-nums; }
+.timer:hover, .timer:focus-visible { border-color: var(--cyan); }
+.timer.run { border-color: var(--cyan); color: var(--cyan); }
+.timer.warn { border-color: var(--gold); color: var(--gold); }
+.timer.over { border-color: var(--bad); color: var(--bad); animation: pulse 1s infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 6px rgb(255 122 144 / .2); } }
+.ex-title { font-size: 34px !important; margin-bottom: 14px !important; }
+.ex-grid { display: grid; grid-template-columns: 4fr 6fr; gap: 28px; align-items: start; }
+.ex-grid > * { min-width: 0; }
+.q-en { font-size: 19px; font-weight: 700; color: #fff; margin-bottom: .4em !important; }
+.q-es { font-size: 16px; color: var(--muted); margin-bottom: .4em !important; }
+.think .kicker { font-size: 13px; }
+.think ol { margin: 6px 0 0; padding-left: 1.3em; }
+.think li { font-size: 16px; line-height: 1.35; margin: .25em 0; }
+.think li::marker { color: var(--gold); font-family: var(--mono); font-weight: 600; }
+.tables { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 10px; }
+.tables .chip { font-size: 13px; padding: 2px 10px; }
+.note { margin-top: 10px; font-size: 15px; line-height: 1.4; padding: 12px 14px; border-radius: 12px; background: rgb(255 200 87 / .08); border: 1px solid rgb(255 200 87 / .3); color: #ffe7b0; animation: rise .5s var(--ease); }
+.note b { color: var(--gold); }
+.editor { position: relative; height: 220px; border-radius: 14px; border: 1px solid var(--line); background: rgb(1 14 28 / .8); overflow: hidden; transition: border-color .2s; }
+.editor:focus-within { border-color: var(--cyan); }
+.editor pre, .editor textarea { position: absolute; inset: 0; margin: 0; padding: 14px 16px; box-sizing: border-box; font-family: var(--mono) !important; font-size: 16px !important; line-height: 1.5 !important; white-space: pre; tab-size: 4; letter-spacing: 0; border: 0; }
+.editor pre { pointer-events: none; overflow: hidden; color: #dbeafe; }
+.editor pre code { all: unset; font: inherit; white-space: pre; }
+.editor textarea { resize: none; background: transparent; color: transparent; caret-color: var(--cyan); outline: none; overflow: auto; }
+.editor textarea::selection { background: rgb(29 243 244 / .25); color: transparent; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+.btn { all: unset; cursor: pointer; font-weight: 700; font-size: 16px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--line); background: rgb(162 243 243 / .06); color: var(--ink); display: inline-flex; gap: 8px; align-items: center; transition: background .2s, border-color .2s, transform .15s; }
+.btn:hover, .btn:focus-visible { border-color: var(--cyan); background: rgb(29 243 244 / .12); }
+.btn:active { transform: scale(.97); }
+.btn.primary { background: var(--cyan); color: #032645; border-color: var(--cyan); }
+.btn.primary:hover { background: var(--aqua); }
+.btn svg { width: 14px; height: 14px; }
+kbd { font-family: var(--mono); font-size: 12px; padding: 1px 6px; border-radius: 5px; border: 1px solid currentColor; opacity: .7; }
+.out { border-radius: 14px; border: 1px solid var(--line); background: rgb(1 14 28 / .5); }
+.status { font-size: 15px; padding: 9px 14px; color: var(--muted); border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: center; }
+.status.okk { color: var(--ok); }
+.status.err { color: var(--bad); }
+.status.warn { color: var(--gold); }
+.grid { max-height: 190px; overflow: auto; }
+.grid table { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 14px; }
+.grid th { position: sticky; top: 0; background: #052846; color: var(--cyan); text-align: left; padding: 6px 10px; font-weight: 600; }
+.grid td { padding: 5px 10px; border-top: 1px solid rgb(162 243 243 / .08); white-space: nowrap; }
+.grid td.n { text-align: right; font-variant-numeric: tabular-nums; }
+.grid td.null { color: var(--bad); font-style: italic; }
+.grid tr { animation: rowin .35s var(--ease) both; }
+@keyframes rowin { from { opacity: 0; transform: translateY(6px); } }
+.live-bar { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+.live-out { margin-top: 8px; }
+.live-out:empty { display: none; }
+.live-out .grid { max-height: 170px; }
+
+/* laboratorio libre */
+.lab { display: grid; grid-template-columns: 260px 1fr; gap: 24px; }
+.lab > * { min-width: 0; }
+.schema-list { display: flex; flex-direction: column; gap: 8px; }
+.schema-list button { all: unset; cursor: pointer; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); }
+.schema-list button:hover, .schema-list button:focus-visible { border-color: var(--cyan); }
+.schema-list b { font-family: var(--mono); color: var(--cyan); font-size: 16px; display: block; }
+.schema-list span { font-family: var(--mono); color: var(--muted); font-size: 12px; line-height: 1.35; display: block; }
+.lab .editor { height: 190px; }
+
+/* progreso */
+.dots { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; margin: 18px 0; }
+.dots button { all: unset; cursor: pointer; aspect-ratio: 1; border-radius: 12px; display: grid; place-items: center; font-family: var(--mono); font-weight: 600; font-size: 17px; border: 1px solid var(--line); background: var(--card); transition: transform .2s, background .3s; }
+.dots button:hover, .dots button:focus-visible { transform: scale(1.08); border-color: var(--cyan); }
+.dots button.ok { background: rgb(62 230 160 / .22); border-color: var(--ok); color: var(--ok); }
+.dots button.seen { background: rgb(255 200 87 / .14); border-color: rgb(255 200 87 / .5); color: var(--gold); }
+.bar { height: 14px; border-radius: 999px; background: rgb(162 243 243 / .1); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cyan), var(--ok)); transition: width 1s var(--ease); }
+
+/* pie, panel de notas */
+.deck-foot { position: fixed; left: max(18px, env(safe-area-inset-left, 0px)); bottom: 12px; z-index: 30; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .06em; pointer-events: none; }
+.deck-foot svg { width: 18px; height: 18px; }
+.notes-panel { position: fixed; left: 50%; bottom: 46px; transform: translate(-50%, 20px); width: min(920px, calc(100% - 32px)); max-height: 34vh; overflow: auto; z-index: 40; background: rgb(2 26 51 / .96); border: 1px solid var(--gold); border-radius: 16px; padding: 16px 20px; font-family: var(--body); font-size: 17px; line-height: 1.5; color: var(--ink); opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s var(--ease); box-shadow: 0 20px 60px -20px #000; }
+.notes-panel.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.notes-panel h6 { margin: 0 0 6px; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.notes-panel p { margin: 0 0 .5em; }
+/* pandas */
+.colgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 12px; }
+.colgrid span { font-family: var(--mono); font-size: 14px; color: var(--aqua); background: rgb(29 243 244 / .07); border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; }
+.anat td, .anat th { transition: background .5s, color .5s, box-shadow .5s; }
+.anat.s1 .ix { background: rgb(255 200 87 / .2); color: var(--gold); }
+.anat.s2 .sc { background: rgb(29 243 244 / .16); color: #fff; }
+.anat .dt td { font-family: var(--mono); font-size: 14px; color: var(--muted); opacity: .35; }
+.anat.s3 .dt td { opacity: 1; color: var(--gold); }
+.mask .mk { opacity: 0; transition: opacity .5s; font-family: var(--mono); }
+.mask.s1 .mk { opacity: 1; }
+.mask tr { transition: opacity .6s, filter .6s; }
+.mask.s2 tr.m0 { opacity: .15; filter: blur(1px); }
+.speed { display: flex; flex-direction: column; gap: 12px; }
+.speed > div { display: grid; grid-template-columns: 250px 1fr; gap: 12px; align-items: center; font-size: 17px; }
+.speed i { display: block; height: 14px; border-radius: 999px; background: linear-gradient(90deg, var(--cyan), var(--ok)); width: 0; transition: width 1.1s var(--ease); }
+.speed > div.visible i { width: var(--w); }
+.clean .cl { opacity: 0; transform: translateX(-12px); transition: all .6s var(--ease); color: var(--ok); font-weight: 700; }
+.clean.s1 .cl { opacity: 1; transform: none; }
+.sac { display: grid; grid-template-columns: 1.2fr 1fr .9fr 1.2fr; gap: 22px; align-items: start; }
+.sac .r { font-family: var(--mono); font-size: 15px; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--line); margin-bottom: 6px; }
+.sac .grp { padding: 6px; border-radius: 12px; border: 1px dashed var(--line); margin-bottom: 10px; }
+.sac .grp .r { margin-bottom: 4px; }
+.r.g0, .hl0 { background: rgb(29 243 244 / .14); }
+.r.g1, .hl1 { background: rgb(255 200 87 / .14); }
+.r.g2, .hl2 { background: rgb(255 122 144 / .14); }
+.bars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; align-items: end; height: 300px; padding: 10px 4px 0; border-bottom: 1px solid var(--line); }
+.bars .b { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 6px; }
+.bars .b i { width: 100%; border-radius: 8px 8px 2px 2px; background: linear-gradient(180deg, var(--cyan), rgb(29 243 244 / .35)); height: 0; transition: height 1s var(--ease); }
+.bars .b.fest i { background: linear-gradient(180deg, var(--gold), rgb(255 200 87 / .35)); }
+.bars .b b { font-family: var(--mono); font-size: 14px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.bars .b span { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.arrows { display: flex; flex-direction: column; gap: 14px; font-family: var(--mono); color: var(--cyan); font-size: 18px; text-align: center; }
+.steps { padding-left: 1.3em; }
+.steps li { margin: .45em 0; font-size: 22px; }
+.steps li::marker { color: var(--gold); font-family: var(--mono); font-weight: 600; }
+.tree { display: flex; flex-direction: column; font-family: var(--mono); font-size: 15px; color: var(--aqua); gap: 4px; margin-top: 8px; }
+.py-status { font-family: var(--mono); font-size: 12px; color: var(--muted); padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgb(2 26 51 / .7); }
+.py-status.ready { color: var(--ok); border-color: rgb(62 230 160 / .5); }
+.py-status.loading { color: var(--gold); border-color: rgb(255 200 87 / .5); }
+.py-status.fail { color: var(--bad); border-color: rgb(255 122 144 / .5); }
+.grid .cap { font-family: var(--mono); font-size: 12px; color: var(--muted); padding: 6px 10px; }
+.grid .scalar { font-family: var(--display); font-size: 40px; font-weight: 900; color: var(--cyan); padding: 10px 16px; font-variant-numeric: tabular-nums; }
+.grid pre.stdout { font-family: var(--mono); font-size: 13px; color: #cfe3f5; padding: 8px 12px; margin: 0; white-space: pre-wrap; border-bottom: 1px solid var(--line); }
+/* vista de presentador */
+.reveal { position: fixed !important; inset: 0; }
+.presenter-ui { display: none; }
+body.presenter .reveal { inset: auto; left: 20px; top: 64px; width: calc(60vw - 30px); height: calc((60vw - 30px) * 9 / 16); border-radius: 14px; border: 1px solid var(--line); overflow: hidden; }
+body.presenter .deck-foot, body.presenter .tool-btns, body.presenter .notes-panel { display: none !important; }
+body.presenter .presenter-ui { display: block; }
+.pv-top { position: fixed; left: 20px; top: 14px; right: 20px; height: 38px; display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: .06em; }
+.pv-top b { color: var(--gold); text-transform: uppercase; letter-spacing: .14em; }
+.pv-link { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); }
+.pv-link.on { color: var(--ok); border-color: rgb(62 230 160 / .5); }
+.pv-top .sp { flex: 1; }
+.pv-below { position: fixed; left: 20px; width: calc(60vw - 30px); top: calc(64px + (60vw - 30px) * 9 / 16 + 14px); bottom: 16px; display: flex; flex-direction: column; gap: 12px; }
+.pv-next { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; font-family: var(--body); }
+.pv-next span { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 4px; }
+.pv-next strong { font-family: var(--display); font-size: 22px; color: #fff; font-weight: 800; }
+.pv-next em { font-style: normal; color: var(--gold); font-size: 16px; }
+.pv-ctrl { display: flex; gap: 8px; flex-wrap: wrap; }
+.pv-side { position: fixed; right: 20px; top: 64px; bottom: 16px; width: calc(40vw - 30px); display: flex; flex-direction: column; gap: 12px; font-family: var(--body); }
+.pv-clock { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.pv-clock div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; }
+.pv-clock span { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: block; }
+.pv-clock b { font-family: var(--display); font-size: 28px; white-space: nowrap; font-weight: 900; color: var(--cyan); font-variant-numeric: tabular-nums; }
+.pv-notes { flex: 1; overflow: auto; background: rgb(2 26 51 / .9); border: 1px solid var(--gold); border-radius: 16px; padding: 18px 22px; font-size: 21px; line-height: 1.5; color: var(--ink); }
+.pv-notes h6 { margin: 0 0 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.pv-notes p { margin: 0 0 .7em; }
+.pv-notes code { font-family: var(--mono); font-size: .85em; color: var(--aqua); }
+.pv-notes pre { font-family: var(--mono); font-size: 14px; color: var(--aqua); background: rgb(1 14 28 / .7); padding: 10px 12px; border-radius: 10px; white-space: pre-wrap; }
+.pv-help { font-size: 14px; color: var(--muted); }
+body.has-presenter #notes-toggle { display: none; }
+.tool-btns { position: fixed; right: 200px; bottom: 10px; z-index: 40; display: flex; gap: 6px; align-items: center; }
+.tool-btns button { all: unset; cursor: pointer; font-family: var(--mono); font-size: 12px; color: var(--muted); padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgb(2 26 51 / .7); }
+.tool-btns button:hover, .tool-btns button:focus-visible, .tool-btns button.on { color: var(--gold); border-color: var(--gold); }
+.reveal .progress { height: 4px; color: var(--cyan); }
+.reveal .controls { color: var(--cyan); }
+.reveal .slide-number { background: transparent; font-family: var(--mono); font-size: 13px; color: var(--muted); right: 120px; bottom: 14px; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================ PORTADA -->
+<section class="title-slide" data-transition="zoom" data-mod="">
+  <svg class="logo-ring" viewBox="0 0 64 64" aria-hidden="true"><path d="M45.2 21.6A16.5 16.5 0 1 0 48.5 32" fill="none" stroke="#1df3f4" stroke-width="6.5" stroke-linecap="round"/><circle cx="48.5" cy="19.5" r="4.6" fill="#a2f3f3"/><circle cx="32" cy="32" r="5" fill="#fff"/></svg>
+  <p class="kicker after" style="animation-delay:.1s">Prueba técnica Blend360 · Python para datos</p>
+  <h1><span class="line">pandas desde</span><span class="line"><span class="outline">Quibdó</span> <em>a la prueba</em></span></h1>
+  <p class="lead after">Un año de ventas del Mercado del Pacífico: borojó, bocachico, viche y werregue. 35 ejercicios que se ejecutan en vivo y un cuaderno para practicar en VS Code.</p>
+  <div class="after" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+    <span class="chip">Python y pandas en tu navegador</span><span class="chip">10 módulos</span><span class="chip">Vista de presentador: tecla P</span>
+  </div>
+  <p class="small after" style="margin-top:30px">Material comunitario no oficial, sin relación con Blend360. Flechas para navegar · <b>Esc</b> vista general · <b>F</b> pantalla completa.</p>
+  <svg class="river" viewBox="0 0 640 260" aria-hidden="true"><path d="M0 200 C 120 120, 220 260, 340 170 S 540 90, 640 140" stroke="#1df3f4" stroke-width="3" fill="none"/><path d="M0 230 C 140 160, 240 280, 360 200 S 560 120, 640 170" stroke="#a2f3f3" stroke-width="2" fill="none" opacity=".6"/><path d="M0 250 C 160 200, 260 290, 380 230 S 560 160, 640 200" stroke="#ffc857" stroke-width="2" fill="none" opacity=".5"/></svg>
+  <aside class="notes">
+    <p>Bienvenida. Hoy: pandas, la librería de Python para trabajar con tablas. En la prueba técnica de Blend se reportan problemas de Python orientados a datos, y en el trabajo diario de un consultor de datos pandas se usa todos los días.</p>
+    <p>Todo corre en el navegador: la primera vez que se ejecuta algo, Python y pandas tardan unos segundos en cargar. Además hay un cuaderno de Jupyter con los mismos ejercicios para practicar en VS Code.</p>
+  </aside>
+</section>
+
+<section data-mod="Ruta de la sesión">
+  <h2>La ruta de hoy</h2>
+  <div class="agenda" id="agenda"></div>
+  <p class="small" style="margin-top:18px">Haz clic en un módulo para ir directo. Cada módulo explica, muestra un ejemplo en vivo y termina con ejercicios.</p>
+  <aside class="notes"><p>Diez módulos. Los cuatro primeros son la base; del 6 al 10 está lo que más se pregunta: groupby, merge, fechas y reorganizar tablas. Si el grupo ya sabe lo básico, saltar al módulo 06.</p></aside>
+</section>
+
+<section data-mod="Antes de empezar">
+  <h2>Dos formas de practicar</h2>
+  <div class="cols">
+    <div class="card fragment rise"><h4>En esta presentación</h4><p>Cada ejercicio tiene un editor: escribes código de pandas, lo ejecutas y la presentación comprueba si el resultado es correcto. La última línea de la celda es lo que se muestra, igual que en Jupyter.</p>
+      <p style="margin-top:12px"><span class="chip">Ctrl + Enter</span> <span class="chip">Shift + Enter</span> ejecutan</p></div>
+    <div class="card fragment rise"><h4>En VS Code con Jupyter</h4><p>La carpeta de práctica trae los dos CSV, <code>cuaderno_pandas.ipynb</code> con los 35 ejercicios y <code>comprobar.py</code>, que te dice ✓ o ✗ en cada celda. También hay un cuaderno con las soluciones.</p>
+      <p style="margin-top:12px"><code>comprobar(5, resultado)</code> · <code>pista(5)</code> · <code>solucion(5)</code></p></div>
+  </div>
+  <p class="small fragment rise" style="margin-top:22px">La última sección de la presentación explica paso a paso cómo abrir el cuaderno en VS Code.</p>
+  <aside class="notes"><p>Explicar que el cuaderno y la presentación usan exactamente los mismos datos y el mismo comprobador. Recomendación: en la sesión seguimos la presentación; en casa, el cuaderno, sin mirar las soluciones.</p></aside>
+</section>
+
+<section data-mod="Los datos">
+  <h2>Mercado del Pacífico <span class="small">· 2024</span></h2>
+  <div class="cols c-55">
+    <div class="card">
+      <h4>ventas_mercado_pacifico.csv <span class="chip">421 filas · 12 columnas</span></h4>
+      <p>Una fila por producto vendido dentro de un pedido.</p>
+      <div class="colgrid">
+        <span>pedido_id</span><span>fecha</span><span>cliente_id</span><span>municipio</span><span>departamento</span><span>canal</span>
+        <span>producto</span><span>categoria</span><span>cantidad</span><span>precio_unitario</span><span>estado</span><span>calificacion</span>
+      </div>
+      <p class="small" style="margin-top:10px">230 pedidos · 12 productos en 4 categorías · precios en pesos colombianos.</p>
+    </div>
+    <div>
+      <div class="card fragment rise"><h4>clientes.csv <span class="chip">42 filas</span></h4><p>Sucio a propósito: «  quibdó», «ISTMINA », «quibdo», segmentos en minúscula, 3 correos vacíos y 2 filas duplicadas.</p></div>
+      <div class="card fragment rise" style="margin-top:12px"><h4>Fiestas de San Pacho</h4><p>Del 20 de septiembre al 4 de octubre suben las ventas de artesanías y bebidas. Diciembre también es temporada alta.</p></div>
+      <div class="card fragment rise" style="margin-top:12px"><h4>Trampas</h4><p>Pedidos cancelados, calificaciones vacías (NaN), descuentos en el precio y 4 clientes que nunca compraron.</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Los datos son inventados pero con forma real: un año de ventas de una tienda de Quibdó. La granularidad es clave: una fila es un producto dentro de un pedido, no un pedido. Por eso para contar pedidos se usa nunique.</p></aside>
+</section>
+
+<!-- ============================================================ 01 ANATOMÍA -->
+<section class="divider" id="m1" data-transition="zoom" data-mod="Módulo 01" data-background-gradient="radial-gradient(circle at 80% 20%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">01</div><h2>Anatomía de un DataFrame</h2>
+  <p class="lead">Una tabla con índice, columnas con nombre y un tipo por columna.</p>
+  <aside class="notes"><p>Antes de escribir código, entender el objeto. Casi todos los errores de pandas vienen de no saber si se tiene un DataFrame o una Series, o de olvidarse del índice.</p></aside>
+</section>
+
+<section data-mod="01 · Anatomía">
+  <h2>Las piezas de un DataFrame</h2>
+  <div class="cols c-55">
+    <div class="anat" id="anat">
+      <div class="tbl-wrap"><table class="t">
+        <tr><th class="ix">índice</th><th>fecha</th><th class="sc">producto</th><th>cantidad</th><th>precio_unitario</th></tr>
+        <tr><td class="ix">0</td><td>2024-01-04</td><td class="sc">Borojó (unidad)</td><td class="num">20</td><td class="num">6.000</td></tr>
+        <tr><td class="ix">1</td><td>2024-01-05</td><td class="sc">Camarón de río (kg)</td><td class="num">1</td><td class="num">40.000</td></tr>
+        <tr><td class="ix">2</td><td>2024-01-05</td><td class="sc">Tambora de chirimía</td><td class="num">1</td><td class="num">280.000</td></tr>
+        <tr class="dt"><td class="ix">dtype</td><td>datetime64</td><td class="sc">str</td><td class="num">int64</td><td class="num">int64</td></tr>
+      </table></div>
+      <span class="fragment trigger" data-fragment-index="0" data-target="anat" data-add="s1"></span>
+      <span class="fragment trigger" data-fragment-index="1" data-target="anat" data-add="s2"></span>
+      <span class="fragment trigger" data-fragment-index="2" data-target="anat" data-add="s3"></span>
+    </div>
+    <div>
+      <div class="card fragment rise" data-fragment-index="0"><h4>Índice</h4><p>La etiqueta de cada fila. Por defecto 0, 1, 2…; después de un <code>groupby</code> pasa a ser la clave del grupo.</p></div>
+      <div class="card fragment rise" data-fragment-index="1" style="margin-top:12px"><h4>Series</h4><p>Cada columna es una Series: valores + índice. <code>ventas['producto']</code> devuelve una.</p></div>
+      <div class="card fragment rise" data-fragment-index="2" style="margin-top:12px"><h4>dtype</h4><p>Un tipo por columna. Si una fecha llega como texto, no se puede usar <code>.dt</code>: léela con <code>parse_dates</code>.</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Avanzar tres veces: se ilumina el índice, luego una columna (la Series) y luego la fila de tipos. En pandas 3 el texto se muestra como «str»; en versiones anteriores como «object».</p></aside>
+</section>
+
+<section data-mod="01 · Anatomía">
+  <h2>Leer el CSV</h2>
+  <div class="cols c-55">
+    <div>
+<pre class="live" data-demo="head"><code class="language-python" data-trim>
+# En el cuaderno: ventas = pd.read_csv('datos/ventas_mercado_pacifico.csv',
+#                                       parse_dates=['fecha'])
+ventas.head(3)
+</code></pre>
+    </div>
+    <div>
+      <div class="tbl-wrap"><table class="t" style="font-size:17px">
+        <tr><th>Parámetro de read_csv</th><th>Para qué</th></tr>
+        <tr class="fragment rise"><td><code>parse_dates=['fecha']</code></td><td>Convierte la columna a fecha</td></tr>
+        <tr class="fragment rise"><td><code>sep=';'</code></td><td>CSV separado por punto y coma (Excel en español)</td></tr>
+        <tr class="fragment rise"><td><code>encoding='latin-1'</code></td><td>Si las tildes salen raras</td></tr>
+        <tr class="fragment rise"><td><code>usecols=[...]</code></td><td>Leer solo algunas columnas</td></tr>
+        <tr class="fragment rise"><td><code>dtype={'cliente_id': str}</code></td><td>Forzar un tipo</td></tr>
+      </table></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Ejecutar el bloque: en la presentación los datos ya están cargados en la variable ventas. Señalar que la fecha sale como fecha y no como texto gracias a parse_dates.</p><p>En Colombia muchos CSV exportados de Excel vienen con punto y coma: sep=';' es la pregunta más común al empezar.</p></aside>
+</section>
+
+<!-- ============================================================ 02 EXPLORAR -->
+<section class="divider" id="m2" data-transition="zoom" data-mod="Módulo 02" data-background-gradient="radial-gradient(circle at 20% 20%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">02</div><h2>Explorar antes de analizar</h2>
+  <p class="lead">Cinco comandos que se escriben en los primeros dos minutos.</p>
+  <div class="learn"><span class="chip">shape · head · info</span><span class="chip">describe</span><span class="chip">value_counts · nunique</span></div>
+  <aside class="notes"><p>Explorar primero evita sorpresas: columnas con NaN, tipos equivocados, categorías mal escritas.</p></aside>
+</section>
+
+<section data-mod="02 · Explorar">
+  <div class="cols c-55">
+    <div>
+      <h3>El primer vistazo</h3>
+      <div class="tbl-wrap"><table class="t" style="font-size:18px">
+        <tr><th>Comando</th><th>Qué responde</th></tr>
+        <tr class="fragment rise"><td><code>df.shape</code></td><td>¿Cuántas filas y columnas?</td></tr>
+        <tr class="fragment rise"><td><code>df.head()</code> · <code>df.sample(5)</code></td><td>¿Cómo se ven los datos?</td></tr>
+        <tr class="fragment rise"><td><code>df.info()</code></td><td>Tipos y cuántos no nulos por columna</td></tr>
+        <tr class="fragment rise"><td><code>df.describe()</code></td><td>Media, mínimo, cuartiles, máximo</td></tr>
+        <tr class="fragment rise"><td><code>df['col'].value_counts()</code></td><td>¿Qué valores hay y cuántas veces?</td></tr>
+        <tr class="fragment rise"><td><code>df['col'].nunique()</code></td><td>¿Cuántos valores distintos?</td></tr>
+      </table></div>
+    </div>
+    <div>
+      <h3>Pruébalo</h3>
+<pre class="live" data-demo="describe"><code class="language-python" data-trim>
+ventas[['cantidad', 'precio_unitario']].describe().round(0)
+</code></pre>
+    </div>
+  </div>
+  <aside class="notes"><p>describe muestra que la cantidad típica es baja pero hay compras de hasta 20 unidades (borojó al por mayor). El precio va de 6.000 a 420.000: mucha dispersión por las artesanías.</p></aside>
+</section>
+
+<section data-ex="1"></section>
+<section data-ex="2"></section>
+<section data-ex="3"></section>
+<section data-ex="4"></section>
+
+<!-- ============================================================ 03 SELECCIONAR Y FILTRAR -->
+<section class="divider" id="m3" data-transition="zoom" data-mod="Módulo 03" data-background-gradient="radial-gradient(circle at 70% 80%, #5a3d0a 0%, #021a33 55%)">
+  <div class="num">03</div><h2>Seleccionar y filtrar</h2>
+  <p class="lead">Elegir columnas, quedarse con filas: el WHERE de pandas.</p>
+  <div class="learn"><span class="chip">[] · loc · iloc</span><span class="chip">máscaras booleanas</span><span class="chip">isin · between · query</span></div>
+  <aside class="notes"><p>Aquí se pierde más tiempo en las pruebas: errores de paréntesis y de and/or.</p></aside>
+</section>
+
+<section data-mod="03 · Seleccionar">
+  <h2><em>loc</em> o <em class="gold">iloc</em></h2>
+  <div class="tbl-wrap"><table class="t">
+    <tr><th>Escribes</th><th>Obtienes</th><th>Selecciona por</th></tr>
+    <tr class="fragment rise"><td><code>ventas['producto']</code></td><td>Series (una columna)</td><td>nombre</td></tr>
+    <tr class="fragment rise"><td><code>ventas[['producto', 'cantidad']]</code></td><td>DataFrame (varias columnas)</td><td>lista de nombres</td></tr>
+    <tr class="fragment rise"><td><code>ventas.loc[5, 'producto']</code></td><td>un valor</td><td><strong>etiqueta</strong> de fila y columna</td></tr>
+    <tr class="fragment rise"><td><code>ventas.loc[mascara, ['a', 'b']]</code></td><td>filas filtradas, columnas elegidas</td><td>máscara + nombres</td></tr>
+    <tr class="fragment rise"><td><code>ventas.iloc[0:3, 0:2]</code></td><td>primeras 3 filas, 2 columnas</td><td><strong class="gold">posición</strong> (el final no se incluye)</td></tr>
+  </table></div>
+  <p class="lead fragment rise" style="margin-top:16px">Regla: <code>loc</code> = nombres y máscaras · <code>iloc</code> = números de posición. En <code>loc</code> el final del rango <strong>sí</strong> se incluye.</p>
+  <aside class="notes"><p>Pregunta típica de opción múltiple: diferencia entre loc e iloc, y que loc[0:3] incluye el 3 mientras iloc[0:3] no.</p></aside>
+</section>
+
+<section data-mod="03 · Filtrar">
+  <h2>Cómo funciona una <em>máscara</em></h2>
+  <div class="cols c-55">
+    <div class="mask" id="mask">
+      <div class="tbl-wrap"><table class="t">
+        <tr><th>producto</th><th>categoria</th><th class="num">cantidad</th><th class="mk">máscara</th></tr>
+        <tr class="m1"><td>Canasto de werregue</td><td>Artesanías</td><td class="num">2</td><td class="mk ok">True</td></tr>
+        <tr class="m0"><td>Borojó (unidad)</td><td>Cosechas</td><td class="num">20</td><td class="mk bad">False</td></tr>
+        <tr class="m0"><td>Tambora de chirimía</td><td>Artesanías</td><td class="num">1</td><td class="mk bad">False</td></tr>
+        <tr class="m1"><td>Aretes de chaquira</td><td>Artesanías</td><td class="num">3</td><td class="mk ok">True</td></tr>
+        <tr class="m0"><td>Viche (botella)</td><td>Bebidas</td><td class="num">4</td><td class="mk bad">False</td></tr>
+      </table></div>
+      <span class="fragment trigger" data-target="mask" data-add="s1"></span>
+      <span class="fragment trigger" data-target="mask" data-add="s2"></span>
+    </div>
+    <div>
+<pre><code class="language-python" data-trim data-line-numbers="1-2|3">
+mascara = (ventas['categoria'] == 'Artesanías') & \
+          (ventas['cantidad'] >= 2)
+ventas[mascara]
+</code></pre>
+      <p class="small fragment rise" style="margin-top:12px">Cada condición produce una Series de True/False. <code>&amp;</code> las combina fila por fila y <code>ventas[mascara]</code> se queda con las True.</p>
+      <p class="small fragment rise"><span class="bad">Error típico:</span> <code>and</code> en lugar de <code>&amp;</code>, o quitar los paréntesis: <code>a == 1 &amp; b == 2</code> se evalúa mal por la precedencia.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Avanzar: aparece la columna de True/False y luego las filas False se desvanecen. Eso es todo lo que hace un filtro en pandas.</p></aside>
+</section>
+
+<section data-mod="03 · Filtrar">
+  <h2>Atajos para filtrar</h2>
+  <div class="cols">
+    <div>
+      <div class="tbl-wrap"><table class="t" style="font-size:18px">
+        <tr><th>SQL</th><th>pandas</th></tr>
+        <tr><td><code>IN ('Quibdó', 'Tadó')</code></td><td><code>s.isin(['Quibdó', 'Tadó'])</code></td></tr>
+        <tr><td><code>BETWEEN a AND b</code></td><td><code>s.between(a, b)</code></td></tr>
+        <tr><td><code>LIKE '%werregue%'</code></td><td><code>s.str.contains('werregue')</code></td></tr>
+        <tr><td><code>IS NULL</code></td><td><code>s.isna()</code></td></tr>
+        <tr><td><code>NOT (...)</code></td><td><code>~mascara</code></td></tr>
+      </table></div>
+    </div>
+    <div>
+<pre class="live" data-demo="query"><code class="language-python" data-trim>
+(ventas.query("categoria == 'Bebidas' and cantidad >= 5")
+       [['fecha', 'municipio', 'producto', 'cantidad']]
+       .head())
+</code></pre>
+      <p class="small" style="margin-top:8px"><code>query</code> acepta <code>and</code>/<code>or</code> dentro del texto y se lee como SQL.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Quien viene de SQL se siente cómodo con query. En entrevistas igual piden entender las máscaras, porque es lo que se usa en la mayoría del código real.</p></aside>
+</section>
+
+<section data-ex="5"></section>
+<section data-ex="6"></section>
+<section data-ex="7"></section>
+
+<!-- ============================================================ 04 COLUMNAS NUEVAS -->
+<section class="divider" id="m4" data-transition="zoom" data-mod="Módulo 04" data-background-gradient="radial-gradient(circle at 30% 70%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">04</div><h2>Columnas nuevas y orden</h2>
+  <p class="lead">Calcular sobre columnas enteras, sin bucles.</p>
+  <div class="learn"><span class="chip">vectorizar</span><span class="chip">assign</span><span class="chip">np.where · pd.cut</span><span class="chip">sort_values · nlargest</span></div>
+  <aside class="notes"><p>La palabra clave del módulo es vectorizar: operar sobre la columna completa. Es más corto y mucho más rápido que un for.</p></aside>
+</section>
+
+<section data-mod="04 · Columnas nuevas">
+  <h2>Vectorizar: la columna entera de una vez</h2>
+  <div class="cols c-55">
+    <div>
+<pre class="live" data-demo="assign"><code class="language-python" data-trim>
+(ventas
+   .assign(ingreso=ventas['cantidad'] * ventas['precio_unitario'],
+           tipo=np.where(ventas['cantidad'] >= 10, 'Mayorista', 'Detal'))
+   [['producto', 'cantidad', 'ingreso', 'tipo']]
+   .sort_values('ingreso', ascending=False)
+   .head())
+</code></pre>
+    </div>
+    <div>
+      <h3>Del más rápido al más lento</h3>
+      <div class="speed">
+        <div class="fragment rise"><span>Vectorizado <code>a * b</code>, <code>np.where</code></span><i style="--w:100%"></i></div>
+        <div class="fragment rise"><span><code>.map(dict)</code>, <code>.str</code></span><i style="--w:55%"></i></div>
+        <div class="fragment rise"><span><code>.apply(func)</code> por fila</span><i style="--w:12%"></i></div>
+        <div class="fragment rise"><span><code>for</code> con <code>iterrows()</code></span><i style="--w:2%"></i></div>
+      </div>
+      <p class="small fragment rise" style="margin-top:12px">En entrevistas preguntan: «¿cómo optimizarías este código?». Respuesta: cambia el <code>apply</code> o el bucle por una operación vectorizada.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Las barras son ilustrativas del orden de velocidad, no medidas exactas. En tablas grandes la diferencia entre vectorizar e iterrows es de cientos de veces.</p><p>assign no modifica ventas: devuelve una copia con columnas nuevas. Por eso encaja en cadenas de métodos.</p></aside>
+</section>
+
+<section data-ex="8"></section>
+<section data-ex="9"></section>
+<section data-ex="10"></section>
+<section data-ex="11"></section>
+
+<!-- ============================================================ 05 LIMPIEZA -->
+<section class="divider" id="m5" data-transition="zoom" data-mod="Módulo 05" data-background-gradient="radial-gradient(circle at 80% 70%, #5a3d0a 0%, #021a33 55%)">
+  <div class="num">05</div><h2>Limpieza de datos</h2>
+  <p class="lead">El 80% del trabajo real: faltantes, duplicados y texto inconsistente.</p>
+  <div class="learn"><span class="chip">isna · fillna · dropna</span><span class="chip">duplicated</span><span class="chip">.str</span><span class="chip">astype</span></div>
+  <aside class="notes"><p>Siempre preguntan por limpieza. Usamos clientes.csv, que trae los problemas típicos de un archivo hecho a mano.</p></aside>
+</section>
+
+<section data-mod="05 · Limpieza">
+  <h2>Antes y después</h2>
+  <div class="cols c-55">
+    <div>
+      <div class="clean" id="clean">
+        <div class="tbl-wrap"><table class="t mini">
+          <tr><th>municipio original</th><th>limpio</th></tr>
+          <tr><td><code>"  quibdó"</code></td><td class="cl">Quibdó</td></tr>
+          <tr><td><code>"ISTMINA "</code></td><td class="cl">Istmina</td></tr>
+          <tr><td><code>"quibdo"</code></td><td class="cl">Quibdó</td></tr>
+          <tr><td><code>" Quibdó "</code></td><td class="cl">Quibdó</td></tr>
+          <tr><td><code>"Bahia Solano"</code></td><td class="cl">Bahía Solano</td></tr>
+        </table></div>
+        <span class="fragment trigger" data-target="clean" data-add="s1"></span>
+      </div>
+<pre style="margin-top:12px"><code class="language-python" data-trim data-line-numbers="1|2|3">
+m = clientes['municipio'].str.strip()      # quita espacios
+m = m.str.title()                           # «Quibdó», «Istmina»
+m = m.replace({'Quibdo': 'Quibdó', 'Bahia Solano': 'Bahía Solano'})
+</code></pre>
+    </div>
+    <div>
+      <div class="tbl-wrap"><table class="t" style="font-size:17px">
+        <tr><th>Problema</th><th>Detectar</th><th>Arreglar</th></tr>
+        <tr class="fragment rise"><td>Faltantes</td><td><code>isna().sum()</code></td><td><code>fillna()</code> · <code>dropna()</code></td></tr>
+        <tr class="fragment rise"><td>Duplicados</td><td><code>duplicated().sum()</code></td><td><code>drop_duplicates()</code></td></tr>
+        <tr class="fragment rise"><td>Texto</td><td><code>value_counts()</code></td><td><code>.str.strip()</code> · <code>.str.title()</code></td></tr>
+        <tr class="fragment rise"><td>Tipos</td><td><code>dtypes</code></td><td><code>astype()</code> · <code>pd.to_datetime()</code></td></tr>
+      </table></div>
+      <p class="small fragment rise" style="margin-top:12px">¿Rellenar o borrar un NaN? Depende: un correo vacío se rellena con «sin correo»; una venta sin precio quizá se descarta. Dilo en voz alta en la entrevista.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Al avanzar, la columna limpia aparece. Siempre mirar value_counts antes y después: es la forma de comprobar que la limpieza funcionó.</p><p>Las tres líneas se pueden encadenar en una sola: clientes['municipio'].str.strip().str.title().replace(...)</p></aside>
+</section>
+
+<section data-ex="12"></section>
+<section data-ex="13"></section>
+<section data-ex="14"></section>
+<section data-ex="15"></section>
+<section data-ex="16"></section>
+
+<!-- ============================================================ 06 GROUPBY -->
+<section class="divider" id="m6" data-transition="zoom" data-mod="Módulo 06" data-background-gradient="radial-gradient(circle at 20% 80%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">06</div><h2>groupby</h2>
+  <p class="lead">Dividir, aplicar, combinar: el GROUP BY de pandas.</p>
+  <div class="learn"><span class="chip">sum · mean · nunique</span><span class="chip">agg con nombre</span><span class="chip">transform</span></div>
+  <aside class="notes"><p>El tema más importante de pandas para análisis. Si se domina groupby, se resuelven la mitad de las preguntas.</p></aside>
+</section>
+
+<section data-mod="06 · groupby">
+  <h2>Dividir → aplicar → combinar</h2>
+  <div class="sac" id="sac">
+    <div class="sac-col">
+      <p class="kicker">tabla</p>
+      <div class="r g0">Artesanías · 840.000</div><div class="r g1">Bebidas · 180.000</div><div class="r g0">Artesanías · 75.000</div>
+      <div class="r g2">Cosechas · 120.000</div><div class="r g1">Bebidas · 90.000</div><div class="r g2">Cosechas · 30.000</div>
+    </div>
+    <div class="sac-col fragment rise" data-fragment-index="1">
+      <p class="kicker">1 · dividir</p>
+      <div class="grp"><div class="r g0">840.000</div><div class="r g0">75.000</div></div>
+      <div class="grp"><div class="r g1">180.000</div><div class="r g1">90.000</div></div>
+      <div class="grp"><div class="r g2">120.000</div><div class="r g2">30.000</div></div>
+    </div>
+    <div class="sac-col fragment rise" data-fragment-index="2">
+      <p class="kicker">2 · aplicar sum()</p>
+      <div class="grp"><div class="r g0">915.000</div></div>
+      <div class="grp"><div class="r g1">270.000</div></div>
+      <div class="grp"><div class="r g2">150.000</div></div>
+    </div>
+    <div class="sac-col fragment rise" data-fragment-index="3">
+      <p class="kicker">3 · combinar</p>
+      <div class="tbl-wrap"><table class="t mini">
+        <tr><th>categoria</th><th class="num">ingreso</th></tr>
+        <tr><td class="hl0">Artesanías</td><td class="num">915.000</td></tr>
+        <tr><td class="hl1">Bebidas</td><td class="num">270.000</td></tr>
+        <tr><td class="hl2">Cosechas</td><td class="num">150.000</td></tr>
+      </table></div>
+    </div>
+  </div>
+<pre class="fragment rise" data-fragment-index="3" style="margin-top:16px"><code class="language-python" data-trim>
+ventas.groupby('categoria')['ingreso'].sum()     # la categoría queda en el índice
+</code></pre>
+  <aside class="notes"><p>Avanzar tres veces: se divide por categoría, se suma cada grupo y se juntan los resultados. Recordar: la clave queda como índice; con reset_index() o as_index=False vuelve a ser columna.</p></aside>
+</section>
+
+<section data-mod="06 · groupby">
+  <h2><em>agg</em> resume · <em class="gold">transform</em> conserva</h2>
+  <div class="cols">
+    <div>
+<pre class="live" data-demo="agg"><code class="language-python" data-trim>
+v = ventas.assign(ingreso=ventas['cantidad'] * ventas['precio_unitario'])
+(v.groupby('canal')
+  .agg(pedidos=('pedido_id', 'nunique'),
+       ingreso=('ingreso', 'sum'),
+       calificacion=('calificacion', 'mean'))
+  .round(2))
+</code></pre>
+    </div>
+    <div>
+<pre class="live" data-demo="transform"><code class="language-python" data-trim>
+v = ventas.assign(ingreso=ventas['cantidad'] * ventas['precio_unitario'])
+v['total_pedido'] = v.groupby('pedido_id')['ingreso'].transform('sum')
+v['pct_del_pedido'] = (100 * v['ingreso'] / v['total_pedido']).round(1)
+v[['pedido_id', 'producto', 'ingreso', 'total_pedido', 'pct_del_pedido']].head()
+</code></pre>
+    </div>
+  </div>
+  <p class="small fragment rise" style="margin-top:12px"><code>agg</code> devuelve <strong>una fila por grupo</strong>. <code>transform</code> devuelve <strong>una fila por fila original</strong>, con el valor del grupo: es la función de ventana de SQL.</p>
+  <aside class="notes"><p>Ejecutar ambos. A la izquierda, tres filas (una por canal). A la derecha, las mismas filas de ventas con el total del pedido al lado, para calcular qué porcentaje del pedido es cada producto.</p></aside>
+</section>
+
+<section data-ex="17"></section>
+<section data-ex="18"></section>
+<section data-ex="19"></section>
+<section data-ex="20"></section>
+
+<!-- ============================================================ 07 MERGE -->
+<section class="divider" id="m7" data-transition="zoom" data-mod="Módulo 07" data-background-gradient="radial-gradient(circle at 75% 25%, #5a3d0a 0%, #021a33 55%)">
+  <div class="num">07</div><h2>merge: unir tablas</h2>
+  <p class="lead">El JOIN de pandas y sus dos trampas: claves duplicadas y filas perdidas.</p>
+  <aside class="notes"><p>Todo lo que vimos de JOIN en SQL aplica igual aquí. El parámetro how elige el tipo de unión.</p></aside>
+</section>
+
+<section data-mod="07 · merge">
+  <h2>El parámetro <em>how</em></h2>
+  <div class="joins">
+    <div class="j fragment rise"><div class="venn" data-type="inner"></div><b>how='inner'</b><p>Por defecto: solo con pareja</p></div>
+    <div class="j fragment rise"><div class="venn" data-type="left"></div><b>how='left'</b><p>Todo lo de la izquierda</p></div>
+    <div class="j fragment rise"><div class="venn" data-type="right"></div><b>how='right'</b><p>Todo lo de la derecha</p></div>
+    <div class="j fragment rise"><div class="venn" data-type="full"></div><b>how='outer'</b><p>Todo de ambos lados</p></div>
+    <div class="j fragment rise"><div class="venn" data-type="anti"></div><b>indicator=True</b><p>Filtra <code>'left_only'</code></p></div>
+  </div>
+<pre class="fragment rise" style="margin-top:20px"><code class="language-python" data-trim>
+ventas.merge(clientes_limpio, on='cliente_id', how='left', validate='many_to_one')
+</code></pre>
+  <p class="small fragment rise" style="margin-top:10px"><code>validate='many_to_one'</code> lanza un error si la clave se repite en la tabla derecha: evita duplicar ventas sin darte cuenta.</p>
+  <aside class="notes"><p>El valor por defecto de how es inner: si un cliente no está en la otra tabla, sus ventas desaparecen sin aviso. En análisis casi siempre se quiere left.</p><p>Si las columnas se llaman distinto: left_on='id_cliente', right_on='cliente_id'.</p></aside>
+</section>
+
+<section data-ex="21"></section>
+<section data-ex="22"></section>
+<section data-ex="23"></section>
+
+<!-- ============================================================ 08 FECHAS -->
+<section class="divider" id="m8" data-transition="zoom" data-mod="Módulo 08" data-background-gradient="radial-gradient(circle at 50% 30%, #0b5d86 0%, #021a33 60%)">
+  <div class="num">08</div><h2>Fechas y series de tiempo</h2>
+  <p class="lead">Ventas por mes, crecimiento, promedios móviles y acumulados.</p>
+  <div class="learn"><span class="chip">.dt</span><span class="chip">resample</span><span class="chip">shift · pct_change</span><span class="chip">rolling · cumsum</span></div>
+  <aside class="notes"><p>Los reportes de negocio casi siempre son por periodo. Este módulo es el que más se parece al trabajo de un analista.</p></aside>
+</section>
+
+<section data-mod="08 · Fechas">
+  <h2>Ingreso mensual 2024 <span class="small">· millones de COP, sin cancelados</span></h2>
+  <div class="bars" id="bars"></div>
+  <div class="cols" style="margin-top:16px; align-items:center">
+    <p class="small fragment rise">Las barras doradas son septiembre y octubre, con las <strong>Fiestas de San Pacho</strong>; diciembre es el pico del año.</p>
+<pre class="fragment rise"><code class="language-python" data-trim>
+v.set_index('fecha').resample('MS')['ingreso'].sum()
+</code></pre>
+  </div>
+  <div hidden>
+<pre class="live" data-demo="mensual"><code class="language-python" data-trim>
+v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=ventas['cantidad'] * ventas['precio_unitario'])
+v.set_index('fecha').resample('MS')['ingreso'].sum()
+</code></pre>
+  </div>
+  <aside class="notes"><p>Las barras se calcularon con los datos reales del CSV. resample necesita la fecha en el índice; 'MS' significa inicio de mes. Con groupby también se puede: v.groupby(v['fecha'].dt.to_period('M'))['ingreso'].sum().</p></aside>
+</section>
+
+<section data-mod="08 · Fechas">
+  <h2>Mirar el mes anterior</h2>
+  <div class="cols c-55">
+    <div class="tbl-wrap"><table class="t mini">
+      <tr><th>mes</th><th class="num">ingreso</th><th class="num fragment rise" data-fragment-index="1">shift()</th><th class="num fragment rise" data-fragment-index="2">pct_change</th><th class="num fragment rise" data-fragment-index="3">rolling(3)</th><th class="num fragment rise" data-fragment-index="4">cumsum</th></tr>
+      <tr><td>ene</td><td class="num">4,99</td><td class="num fragment rise bad" data-fragment-index="1">NaN</td><td class="num fragment rise bad" data-fragment-index="2">NaN</td><td class="num fragment rise bad" data-fragment-index="3">NaN</td><td class="num fragment rise" data-fragment-index="4">4,99</td></tr>
+      <tr><td>feb</td><td class="num">3,96</td><td class="num fragment rise" data-fragment-index="1">4,99</td><td class="num fragment rise" data-fragment-index="2">−20,6%</td><td class="num fragment rise bad" data-fragment-index="3">NaN</td><td class="num fragment rise" data-fragment-index="4">8,94</td></tr>
+      <tr><td>mar</td><td class="num">6,97</td><td class="num fragment rise" data-fragment-index="1">3,96</td><td class="num fragment rise" data-fragment-index="2">+76,2%</td><td class="num fragment rise" data-fragment-index="3">5,31</td><td class="num fragment rise" data-fragment-index="4">15,92</td></tr>
+      <tr><td>abr</td><td class="num">3,63</td><td class="num fragment rise" data-fragment-index="1">6,97</td><td class="num fragment rise" data-fragment-index="2">−47,9%</td><td class="num fragment rise" data-fragment-index="3">4,85</td><td class="num fragment rise" data-fragment-index="4">19,55</td></tr>
+    </table></div>
+    <div>
+      <p class="fragment rise" data-fragment-index="1"><strong>shift()</strong> baja la columna una fila: el valor del mes anterior. Es el <code>LAG</code> de SQL.</p>
+      <p class="fragment rise" data-fragment-index="2"><strong>pct_change()</strong> = (actual − anterior) / anterior.</p>
+      <p class="fragment rise" data-fragment-index="3"><strong>rolling(3).mean()</strong>: promedio de este mes y los dos anteriores.</p>
+      <p class="fragment rise" data-fragment-index="4"><strong>cumsum()</strong>: lo acumulado hasta el mes.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Valores en millones de pesos, de los datos reales. Los NaN del principio son normales: no hay mes anterior o no hay ventana completa. Con min_periods=1 el rolling no deja NaN.</p></aside>
+</section>
+
+<section data-ex="24"></section>
+<section data-ex="25"></section>
+<section data-ex="26"></section>
+<section data-ex="27"></section>
+
+<!-- ============================================================ 09 RESHAPE -->
+<section class="divider" id="m9" data-transition="zoom" data-mod="Módulo 09" data-background-gradient="radial-gradient(circle at 30% 30%, #0a4f7a 0%, #021a33 60%)">
+  <div class="num">09</div><h2>Reorganizar tablas</h2>
+  <p class="lead">De largo a ancho y de vuelta: pivot_table, crosstab y melt.</p>
+  <aside class="notes"><p>Los reportes se presentan en formato ancho (una columna por mes); los análisis y gráficos suelen pedir formato largo.</p></aside>
+</section>
+
+<section data-mod="09 · Reorganizar">
+  <h2>Largo ⇄ ancho</h2>
+  <div class="cols" style="grid-template-columns: 1fr auto 1fr; align-items:center">
+    <div class="tbl-wrap"><table class="t mini">
+      <tr><th>categoria</th><th>trimestre</th><th class="num">ingreso</th></tr>
+      <tr><td class="hl0">Artesanías</td><td>1</td><td class="num">8,46 M</td></tr>
+      <tr><td class="hl0">Artesanías</td><td>2</td><td class="num">7,45 M</td></tr>
+      <tr><td class="hl1">Bebidas</td><td>1</td><td class="num">2,54 M</td></tr>
+      <tr><td class="hl1">Bebidas</td><td>2</td><td class="num">2,41 M</td></tr>
+    </table><p class="small" style="padding:8px 12px">largo: una fila por combinación</p></div>
+    <div class="arrows"><span class="fragment rise" data-fragment-index="1">pivot_table →</span><span class="fragment rise" data-fragment-index="2">← melt</span></div>
+    <div class="tbl-wrap fragment rise" data-fragment-index="1"><table class="t mini">
+      <tr><th>categoria</th><th class="num">1</th><th class="num">2</th></tr>
+      <tr><td class="hl0">Artesanías</td><td class="num">8,46 M</td><td class="num">7,45 M</td></tr>
+      <tr><td class="hl1">Bebidas</td><td class="num">2,54 M</td><td class="num">2,41 M</td></tr>
+    </table><p class="small" style="padding:8px 12px">ancho: una columna por trimestre</p></div>
+  </div>
+<pre class="live fragment rise" data-fragment-index="2" data-demo="crosstab" style="margin-top:16px"><code class="language-python" data-trim>
+pd.crosstab(ventas['categoria'], ventas['canal'], margins=True, margins_name='Total')
+</code></pre>
+  <aside class="notes"><p>pivot_table: index son las filas, columns las columnas, values y aggfunc lo que va en cada celda. melt hace lo contrario. crosstab es un atajo para contar combinaciones; con margins agrega totales.</p></aside>
+</section>
+
+<section data-ex="28"></section>
+<section data-ex="29"></section>
+<section data-ex="30"></section>
+
+<!-- ============================================================ 10 PATRONES -->
+<section class="divider" id="m10" data-transition="zoom" data-mod="Módulo 10" data-background-gradient="radial-gradient(circle at 70% 70%, #5a0a2a 0%, #021a33 55%)">
+  <div class="num">10</div><h2>Patrones y errores comunes</h2>
+  <p class="lead">Lo que ya sabes de SQL, en pandas, y lo que no debes hacer.</p>
+  <aside class="notes"><p>Último módulo: traducir SQL a pandas y evitar los errores que delatan poca experiencia.</p></aside>
+</section>
+
+<section data-mod="10 · SQL ⇄ pandas">
+  <h2>SQL ⇄ pandas</h2>
+  <div class="tbl-wrap"><table class="t" style="font-size:17px">
+    <tr><th>SQL</th><th>pandas</th></tr>
+    <tr class="fragment rise"><td><code>SELECT a, b FROM t WHERE x &gt; 5</code></td><td><code>t.loc[t['x'] &gt; 5, ['a', 'b']]</code></td></tr>
+    <tr class="fragment rise"><td><code>GROUP BY k</code> + <code>SUM(v)</code></td><td><code>t.groupby('k')['v'].sum()</code></td></tr>
+    <tr class="fragment rise"><td><code>HAVING SUM(v) &gt; 100</code></td><td><code>g = ...sum(); g[g &gt; 100]</code></td></tr>
+    <tr class="fragment rise"><td><code>LEFT JOIN u ON t.k = u.k</code></td><td><code>t.merge(u, on='k', how='left')</code></td></tr>
+    <tr class="fragment rise"><td><code>ORDER BY v DESC LIMIT 5</code></td><td><code>t.nlargest(5, 'v')</code></td></tr>
+    <tr class="fragment rise"><td><code>CASE WHEN … THEN … END</code></td><td><code>np.where(…)</code> · <code>np.select([...], [...])</code></td></tr>
+    <tr class="fragment rise"><td><code>ROW_NUMBER() OVER (PARTITION BY k ORDER BY v)</code></td><td><code>t.groupby('k')['v'].rank(method='first')</code></td></tr>
+    <tr class="fragment rise"><td><code>LAG(v) OVER (PARTITION BY k ORDER BY f)</code></td><td><code>t.sort_values('f').groupby('k')['v'].shift()</code></td></tr>
+    <tr class="fragment rise"><td><code>AVG(v) OVER (PARTITION BY k)</code></td><td><code>t.groupby('k')['v'].transform('mean')</code></td></tr>
+  </table></div>
+  <aside class="notes"><p>Quien vio la presentación de SQL reconoce cada patrón. En la prueba puede salir el mismo problema para resolver en SQL y en pandas.</p></aside>
+</section>
+
+<section data-mod="10 · Errores comunes">
+  <h2>Cinco errores que se notan</h2>
+  <div class="cols c3" style="grid-template-columns: repeat(3, 1fr)">
+    <div class="card fragment rise"><h4><span class="bad">✗</span> <code>and</code> / <code>or</code></h4><p>En máscaras se usa <code>&amp;</code>, <code>|</code>, <code>~</code> con paréntesis.</p></div>
+    <div class="card fragment rise"><h4><span class="bad">✗</span> Índice encadenado</h4><p><code>df[m]['col'] = 0</code> puede no guardar nada (SettingWithCopy). Usa <code>df.loc[m, 'col'] = 0</code>.</p></div>
+    <div class="card fragment rise"><h4><span class="bad">✗</span> <code>apply</code> para todo</h4><p>Si existe una operación vectorizada (<code>*</code>, <code>.str</code>, <code>np.where</code>), úsala.</p></div>
+    <div class="card fragment rise"><h4><span class="bad">✗</span> Olvidar el índice</h4><p>Tras <code>groupby</code> la clave es índice: <code>reset_index()</code> o <code>as_index=False</code> antes de unir.</p></div>
+    <div class="card fragment rise"><h4><span class="bad">✗</span> Contar filas como pedidos</h4><p>Si una fila es una línea, los pedidos se cuentan con <code>nunique()</code>.</p></div>
+    <div class="card fragment rise"><h4><span class="ok">✓</span> Encadenar métodos</h4><p><code>(df.query(...).assign(...).groupby(...).agg(...))</code> se lee de arriba abajo.</p></div>
+  </div>
+  <aside class="notes"><p>El índice encadenado es una pregunta frecuente de entrevista: explicar que df[m] puede devolver una copia, así que asignar sobre ella no cambia df.</p></aside>
+</section>
+
+<section data-ex="31"></section>
+<section data-ex="32"></section>
+<section data-ex="33"></section>
+<section data-ex="34"></section>
+<section data-ex="35"></section>
+
+<!-- ============================================================ AUTOEVALUACIÓN -->
+<section data-mod="Autoevaluación" data-transition="convex">
+  <h2>Responde sin mirar <span class="small">· toca cada tarjeta</span></h2>
+  <div class="flips">
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>01</span><p>¿Qué devuelve ventas['producto'] y qué ventas[['producto']]?</p></div><div class="b">Una Series y un DataFrame de una columna.</div></div></div>
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>02</span><p>¿loc[0:3] e iloc[0:3] devuelven lo mismo?</p></div><div class="b">No siempre: loc usa etiquetas e incluye el 3; iloc usa posiciones y no lo incluye.</div></div></div>
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>03</span><p>¿Por qué falla ventas[a == 1 and b == 2]?</p></div><div class="b">and no funciona con Series: usa (a == 1) &amp; (b == 2), con paréntesis.</div></div></div>
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>04</span><p>¿Diferencia entre agg y transform?</p></div><div class="b">agg da una fila por grupo; transform devuelve un valor por cada fila original.</div></div></div>
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>05</span><p>Tras un merge hay más filas que antes. ¿Qué pasó?</p></div><div class="b">La clave estaba repetida en la tabla derecha. Revisa duplicados o usa validate='many_to_one'.</div></div></div>
+    <div class="flip" tabindex="0"><div class="in"><div class="f"><span>06</span><p>¿mean() cuenta los NaN?</p></div><div class="b">No: los ignora y promedia solo los valores presentes.</div></div></div>
+  </div>
+  <aside class="notes"><p>Pedir respuestas en voz alta o por chat antes de girar cada tarjeta.</p></aside>
+</section>
+
+<section data-mod="Tu avance" id="progreso">
+  <h2>Tu avance</h2>
+  <p class="lead">Verde: comprobado. Dorado: miraste la solución. Toca un número para ir al ejercicio.</p>
+  <div class="bar"><i id="pbar"></i></div>
+  <p class="small" id="ptext" style="margin-top:8px"></p>
+  <div class="dots" id="dots"></div>
+  <div class="actions"><button class="btn" id="reset-progress" type="button">Reiniciar avance</button></div>
+  <aside class="notes"><p>El avance queda guardado en el navegador de cada persona.</p></aside>
+</section>
+
+<section data-mod="Laboratorio libre" id="lab">
+  <h2>Laboratorio libre</h2>
+  <div class="lab workbench" data-free="1">
+    <div>
+      <p class="small">Toca una tabla para ver sus primeras filas. Están cargadas como <code>ventas</code> y <code>clientes</code>, con <code>pd</code> y <code>np</code>.</p>
+      <div class="schema-list" id="schema-list"></div>
+    </div>
+    <div>
+      <div class="editor"><pre aria-hidden="true"><code></code></pre><textarea id="lab-editor" spellcheck="false" wrap="off" aria-label="Editor de Python del laboratorio"># Escribe cualquier código de pandas; la última línea se muestra
+(ventas.groupby(['municipio', 'categoria'])['cantidad'].sum()
+       .unstack(fill_value=0))</textarea></div>
+      <div class="actions"><button class="btn primary run" type="button">Ejecutar <kbd>Ctrl</kbd>+<kbd>Enter</kbd></button></div>
+      <div class="out"><div class="status">Cada ejecución parte de los datos originales.</div><div class="grid"></div></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Espacio para preguntas del público. Si Python no carga (por ejemplo en el enlace compartido), aquí no se puede ejecutar: usar el cuaderno en VS Code.</p></aside>
+</section>
+
+<section data-mod="Practicar en VS Code">
+  <h2>El cuaderno en <em>VS Code</em></h2>
+  <div class="cols c-55">
+    <ol class="steps">
+      <li class="fragment rise">Instala <strong>Python 3.10+</strong> y <strong>VS Code</strong>.</li>
+      <li class="fragment rise">En VS Code, instala las extensiones <strong>Python</strong> y <strong>Jupyter</strong> de Microsoft.</li>
+      <li class="fragment rise"><em>Archivo → Abrir carpeta</em> y elige la carpeta de práctica (la que tiene <code>datos/</code>).</li>
+      <li class="fragment rise">Terminal: <code>python -m venv .venv</code>, actívalo y ejecuta <code>pip install -r requirements.txt</code>.</li>
+      <li class="fragment rise">Abre <code>cuaderno_pandas.ipynb</code> y en <strong>Seleccionar kernel</strong> elige <code>.venv</code>.</li>
+      <li class="fragment rise">Ejecuta cada celda con <strong>Shift + Enter</strong> y revisa con <code>comprobar(n, resultado)</code>.</li>
+    </ol>
+    <div>
+      <div class="card"><h4>Carpeta de práctica</h4>
+        <div class="tree"><span>pandas-quibdo/</span><span>├ datos/ventas_mercado_pacifico.csv</span><span>├ datos/clientes.csv</span><span>├ cuaderno_pandas.ipynb</span><span>├ cuaderno_pandas_soluciones.ipynb</span><span>├ comprobar.py · ejercicios.json</span><span>└ requirements.txt</span></div>
+      </div>
+      <p class="small" style="margin-top:12px">Activar el entorno: en Windows <code>.venv\Scripts\activate</code>; en macOS o Linux <code>source .venv/bin/activate</code>.</p>
+    </div>
+  </div>
+  <aside class="notes"><p>Explicar que comprobar.py y ejercicios.json deben quedarse en la misma carpeta que el cuaderno, porque el cuaderno los importa. Si VS Code no muestra el kernel, reiniciar VS Code después de crear el entorno.</p></aside>
+</section>
+
+<section data-mod="Cierre" data-transition="zoom">
+  <h2>El día de la prueba</h2>
+  <div class="cols">
+    <ul>
+      <li class="fragment rise">Explora primero: <code>shape</code>, <code>head</code>, <code>info</code>, <code>value_counts</code>.</li>
+      <li class="fragment rise">Pregúntate la granularidad: ¿una fila es un pedido o una línea?</li>
+      <li class="fragment rise">Construye por pasos y mira el resultado de cada uno.</li>
+      <li class="fragment rise">Vectoriza; evita <code>apply</code> y los bucles si hay otra forma.</li>
+      <li class="fragment rise">Revisa NaN, duplicados, cancelados y el índice tras el <code>groupby</code>.</li>
+      <li class="fragment rise">Explica en voz alta qué haces y por qué.</li>
+    </ul>
+    <div class="card fragment rise">
+      <h4>Para seguir practicando</h4>
+      <p>Repite sin mirar los ejercicios 18, 20, 22, 25, 28 y 31: son los patrones que más se repiten.</p>
+      <p style="margin-top:12px">Guía completa: <a href="https://frank1808k.github.io/blend360/03-python/pandas.html" target="_blank" rel="noopener">frank1808k.github.io/blend360</a> · presentación de SQL «SQL desde Quibdó».</p>
+    </div>
+  </div>
+  <p class="kicker" style="margin-top:34px">Desde Quibdó para la prueba. Éxitos.</p>
+  <aside class="notes"><p>Cierre. Recordar que el cuaderno queda para practicar en casa y que los seis ejercicios clave se repiten en dos días, con cronómetro.</p></aside>
+</section>
+
+</div>
+</div>
+
+<div class="deck-foot" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M45.2 21.6A16.5 16.5 0 1 0 48.5 32" fill="none" stroke="#1df3f4" stroke-width="6.5" stroke-linecap="round"/><circle cx="48.5" cy="19.5" r="4.6" fill="#a2f3f3"/><circle cx="32" cy="32" r="5" fill="#fff"/></svg>pandas desde Quibdó · Mercado del Pacífico 2024</div>
+<div class="tool-btns"><span class="py-status" id="py-status">Python: sin cargar</span><button type="button" id="presenter-toggle" title="Convertir esta pestaña en la vista de presentador (P)">Presentador · P</button><button type="button" id="notes-toggle" title="Notas del presentador (N)">Notas · N</button><button type="button" id="go-lab" title="Ir al laboratorio libre">Laboratorio</button></div>
+<div class="presenter-ui" aria-label="Vista de presentador">
+  <div class="pv-top"><b>Vista de presentador</b><span class="pv-link" id="pv-link">Buscando la pestaña del público…</span><span class="sp"></span><span>En Meet comparte la <strong>otra</strong> pestaña</span><button type="button" class="btn" id="pv-exit">Salir</button></div>
+  <div class="pv-below">
+    <div class="pv-next" id="pv-next"></div>
+    <div class="pv-ctrl"><button type="button" class="btn" id="pv-prev">Anterior</button><button type="button" class="btn primary" id="pv-fwd">Siguiente</button><button type="button" class="btn" id="pv-overview">Vista general</button></div>
+    <p class="pv-help">Puedes avanzar, ejecutar consultas y escribir desde aquí: la pestaña del público hace lo mismo al instante.</p>
+  </div>
+  <div class="pv-side">
+    <div class="pv-clock"><div><span>Transcurrido</span><b id="pv-elapsed">00:00</b></div><div><span>Diapositiva</span><b id="pv-count">1 / 1</b></div><div><span>Hora</span><b id="pv-now">--:--</b></div></div>
+    <div class="actions" style="margin:0"><button type="button" class="btn" id="pv-reset">Reiniciar cronómetro</button></div>
+    <div class="pv-notes"><h6>Notas</h6><div id="pv-notes"></div></div>
+  </div>
+</div>
+<div class="notes-panel" id="notes-panel" role="region" aria-live="polite" aria-label="Notas del presentador"><h6>Notas del presentador</h6><div id="notes-body"></div></div>
+
+<script type="application/json" id="deck-data">{"ventas":"pedido_id,fecha,cliente_id,municipio,departamento,canal,producto,categoria,cantidad,precio_unitario,estado,calificacion\n1,2024-01-04,30,Acandí,Chocó,WhatsApp,Borojó (unidad),Cosechas,20,6000,entregado,5\n2,2024-01-05,26,Istmina,Chocó,Web,Camarón de río (kg),Pescados,1,40000,cancelado,\n2,2024-01-05,26,Istmina,Chocó,Web,Tambora de chirimía,Artesanías,1,280000,cancelado,\n3,2024-01-07,15,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,4,38000,entregado,3\n3,2024-01-07,15,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,4,35000,entregado,3\n3,2024-01-07,15,Quibdó,Chocó,WhatsApp,Canasto de werregue,Artesanías,2,420000,entregado,3\n4,2024-01-09,13,Acandí,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,\n5,2024-01-10,32,Condoto,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,4\n6,2024-01-13,12,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,252000,cancelado,\n6,2024-01-13,12,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,1,40500,cancelado,\n7,2024-01-15,6,Istmina,Chocó,WhatsApp,Arrechón (botella),Bebidas,1,38000,entregado,1\n8,2024-01-18,5,Quibdó,Chocó,Web,Aretes de chaquira,Artesanías,2,22500,entregado,5\n9,2024-01-19,31,Cali,Valle del Cauca,Tienda física,Viche (botella),Bebidas,1,45000,entregado,4\n10,2024-01-20,1,Medellín,Antioquia,Tienda física,Bocachico (kg),Pescados,10,18000,entregado,5\n10,2024-01-20,1,Medellín,Antioquia,Tienda física,Arrechón (botella),Bebidas,5,34200,entregado,5\n11,2024-01-20,17,Bahía Solano,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,3\n11,2024-01-20,17,Bahía Solano,Chocó,WhatsApp,Aretes de chaquira,Artesanías,2,25000,entregado,3\n12,2024-01-20,35,Quibdó,Chocó,WhatsApp,Canasto de werregue,Artesanías,1,420000,cancelado,\n12,2024-01-20,35,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,cancelado,\n13,2024-01-22,12,Quibdó,Chocó,Tienda física,Chontaduro (racimo),Cosechas,3,15000,entregado,4\n13,2024-01-22,12,Quibdó,Chocó,Tienda física,Aretes de chaquira,Artesanías,2,25000,entregado,4\n13,2024-01-22,12,Quibdó,Chocó,Tienda física,Arrechón (botella),Bebidas,2,38000,entregado,4\n14,2024-01-23,12,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,4\n14,2024-01-23,12,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,4,45000,entregado,4\n15,2024-01-25,30,Acandí,Chocó,Web,Bocachico (kg),Pescados,7,18000,entregado,3\n16,2024-01-27,9,Tadó,Chocó,WhatsApp,Bocachico (kg),Pescados,11,18000,entregado,\n17,2024-01-27,20,Condoto,Chocó,Tienda física,Canasto de werregue,Artesanías,2,420000,entregado,5\n17,2024-01-27,20,Condoto,Chocó,Tienda física,Bocachico (kg),Pescados,9,16200,entregado,5\n18,2024-01-28,31,Cali,Valle del Cauca,Web,Arrechón (botella),Bebidas,5,38000,entregado,5\n18,2024-01-28,31,Cali,Valle del Cauca,Web,Camarón de río (kg),Pescados,4,40000,entregado,5\n19,2024-01-29,5,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,3,25000,entregado,\n20,2024-01-30,16,Quibdó,Chocó,WhatsApp,Plátano primitivo (racimo),Cosechas,10,12000,cancelado,\n20,2024-01-30,16,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,1,38000,cancelado,\n20,2024-01-30,16,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,2,60000,cancelado,\n21,2024-01-31,28,Condoto,Chocó,Web,Canasto de werregue,Artesanías,2,420000,cancelado,\n22,2024-02-01,9,Tadó,Chocó,Tienda física,Mochila de damagua,Artesanías,1,60000,cancelado,\n22,2024-02-01,9,Tadó,Chocó,Tienda física,Tambora de chirimía,Artesanías,1,280000,cancelado,\n23,2024-02-04,21,Quibdó,Chocó,WhatsApp,Plátano primitivo (racimo),Cosechas,6,12000,entregado,5\n24,2024-02-08,1,Medellín,Antioquia,Tienda física,Bocachico (kg),Pescados,2,18000,entregado,\n24,2024-02-08,1,Medellín,Antioquia,Tienda física,Camarón de río (kg),Pescados,4,36000,entregado,\n25,2024-02-08,7,Condoto,Chocó,Tienda física,Bocachico (kg),Pescados,5,18000,entregado,1\n25,2024-02-08,7,Condoto,Chocó,Tienda física,Plátano primitivo (racimo),Cosechas,4,10800,entregado,1\n26,2024-02-11,22,Bogotá,Cundinamarca,WhatsApp,Arrechón (botella),Bebidas,6,38000,entregado,4\n26,2024-02-11,22,Bogotá,Cundinamarca,WhatsApp,Camarón de río (kg),Pescados,4,40000,entregado,4\n27,2024-02-15,7,Condoto,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,3\n27,2024-02-15,7,Condoto,Chocó,WhatsApp,Canasto de werregue,Artesanías,1,420000,entregado,3\n27,2024-02-15,7,Condoto,Chocó,WhatsApp,Pargo rojo (kg),Pescados,7,35000,entregado,3\n27,2024-02-15,7,Condoto,Chocó,WhatsApp,Mochila de damagua,Artesanías,1,60000,entregado,3\n28,2024-02-15,33,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,4,31500,entregado,5\n29,2024-02-18,3,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,2,38000,entregado,4\n29,2024-02-18,3,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,4,45000,entregado,4\n30,2024-02-20,21,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,2,35000,entregado,\n30,2024-02-20,21,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,4,25000,entregado,\n31,2024-02-21,21,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,5\n32,2024-02-21,37,Istmina,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,enviado,\n33,2024-02-23,33,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,3,38000,entregado,4\n33,2024-02-23,33,Quibdó,Chocó,WhatsApp,Camarón de río (kg),Pescados,2,40000,entregado,4\n34,2024-02-25,28,Condoto,Chocó,Tienda física,Aretes de chaquira,Artesanías,2,25000,entregado,4\n34,2024-02-25,28,Condoto,Chocó,Tienda física,Tambora de chirimía,Artesanías,1,280000,entregado,4\n34,2024-02-25,28,Condoto,Chocó,Tienda física,Borojó (unidad),Cosechas,9,6000,entregado,4\n35,2024-02-29,3,Quibdó,Chocó,Tienda física,Arrechón (botella),Bebidas,1,34200,entregado,\n35,2024-02-29,3,Quibdó,Chocó,Tienda física,Borojó (unidad),Cosechas,18,6000,entregado,\n35,2024-02-29,3,Quibdó,Chocó,Tienda física,Aretes de chaquira,Artesanías,3,22500,entregado,\n36,2024-02-29,25,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,\n37,2024-03-02,4,Quibdó,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,7,15000,entregado,\n37,2024-03-02,4,Quibdó,Chocó,WhatsApp,Borojó (unidad),Cosechas,4,6000,entregado,\n37,2024-03-02,4,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,6,45000,entregado,\n38,2024-03-04,5,Quibdó,Chocó,WhatsApp,Plátano primitivo (racimo),Cosechas,8,12000,entregado,5\n39,2024-03-05,9,Tadó,Chocó,Web,Pargo rojo (kg),Pescados,8,35000,enviado,\n40,2024-03-06,25,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,3,35000,entregado,5\n41,2024-03-07,12,Quibdó,Chocó,WhatsApp,Bocachico (kg),Pescados,7,18000,entregado,\n41,2024-03-07,12,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,5,45000,entregado,\n42,2024-03-07,18,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,3,35000,entregado,2\n42,2024-03-07,18,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,1,45000,entregado,2\n43,2024-03-09,10,Bahía Solano,Chocó,Web,Aretes de chaquira,Artesanías,3,25000,entregado,2\n44,2024-03-09,26,Istmina,Chocó,Web,Tambora de chirimía,Artesanías,1,252000,entregado,4\n44,2024-03-09,26,Istmina,Chocó,Web,Camarón de río (kg),Pescados,1,40000,entregado,4\n45,2024-03-10,18,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,1,45000,entregado,4\n45,2024-03-10,18,Quibdó,Chocó,WhatsApp,Borojó (unidad),Cosechas,19,6000,entregado,4\n45,2024-03-10,18,Quibdó,Chocó,WhatsApp,Bocachico (kg),Pescados,1,18000,entregado,4\n46,2024-03-10,37,Istmina,Chocó,WhatsApp,Mochila de damagua,Artesanías,1,60000,entregado,3\n46,2024-03-10,37,Istmina,Chocó,WhatsApp,Arrechón (botella),Bebidas,2,34200,entregado,3\n47,2024-03-11,36,Medellín,Antioquia,Tienda física,Aretes de chaquira,Artesanías,1,25000,entregado,2\n47,2024-03-11,36,Medellín,Antioquia,Tienda física,Camarón de río (kg),Pescados,5,40000,entregado,2\n47,2024-03-11,36,Medellín,Antioquia,Tienda física,Plátano primitivo (racimo),Cosechas,6,12000,entregado,2\n48,2024-03-12,18,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,2,25000,entregado,5\n48,2024-03-12,18,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,6,45000,entregado,5\n49,2024-03-13,9,Tadó,Chocó,Tienda física,Bocachico (kg),Pescados,6,18000,entregado,\n49,2024-03-13,9,Tadó,Chocó,Tienda física,Canasto de werregue,Artesanías,2,420000,entregado,\n50,2024-03-13,13,Acandí,Chocó,Tienda física,Borojó (unidad),Cosechas,8,6000,entregado,2\n50,2024-03-13,13,Acandí,Chocó,Tienda física,Chontaduro (racimo),Cosechas,5,15000,entregado,2\n51,2024-03-14,15,Quibdó,Chocó,Web,Viche (botella),Bebidas,6,45000,cancelado,\n51,2024-03-14,15,Quibdó,Chocó,Web,Camarón de río (kg),Pescados,4,40000,cancelado,\n52,2024-03-16,12,Quibdó,Chocó,WhatsApp,Borojó (unidad),Cosechas,13,6000,entregado,5\n52,2024-03-16,12,Quibdó,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,1,15000,entregado,5\n52,2024-03-16,12,Quibdó,Chocó,WhatsApp,Plátano primitivo (racimo),Cosechas,10,12000,entregado,5\n52,2024-03-16,12,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,4,22500,entregado,5\n53,2024-03-17,25,Quibdó,Chocó,Web,Tambora de chirimía,Artesanías,1,280000,entregado,5\n53,2024-03-17,25,Quibdó,Chocó,Web,Borojó (unidad),Cosechas,4,6000,entregado,5\n53,2024-03-17,25,Quibdó,Chocó,Web,Mochila de damagua,Artesanías,2,54000,entregado,5\n54,2024-03-18,15,Quibdó,Chocó,Web,Borojó (unidad),Cosechas,16,6000,entregado,\n54,2024-03-18,15,Quibdó,Chocó,Web,Bocachico (kg),Pescados,4,18000,entregado,\n54,2024-03-18,15,Quibdó,Chocó,Web,Plátano primitivo (racimo),Cosechas,8,10800,entregado,\n55,2024-03-24,16,Quibdó,Chocó,WhatsApp,Canasto de werregue,Artesanías,2,420000,entregado,\n56,2024-03-26,14,Medellín,Antioquia,Tienda física,Pargo rojo (kg),Pescados,8,31500,entregado,4\n56,2024-03-26,14,Medellín,Antioquia,Tienda física,Canasto de werregue,Artesanías,1,420000,entregado,4\n56,2024-03-26,14,Medellín,Antioquia,Tienda física,Chontaduro (racimo),Cosechas,5,15000,entregado,4\n57,2024-03-28,2,Tadó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,1,25000,entregado,\n58,2024-03-28,29,Cali,Valle del Cauca,Web,Viche (botella),Bebidas,3,45000,entregado,4\n58,2024-03-28,29,Cali,Valle del Cauca,Web,Tambora de chirimía,Artesanías,1,280000,entregado,4\n58,2024-03-28,29,Cali,Valle del Cauca,Web,Chontaduro (racimo),Cosechas,7,15000,entregado,4\n59,2024-03-29,3,Quibdó,Chocó,WhatsApp,Bocachico (kg),Pescados,8,16200,entregado,4\n60,2024-04-02,36,Medellín,Antioquia,WhatsApp,Camarón de río (kg),Pescados,2,40000,entregado,4\n61,2024-04-04,37,Istmina,Chocó,WhatsApp,Aretes de chaquira,Artesanías,2,25000,entregado,3\n61,2024-04-04,37,Istmina,Chocó,WhatsApp,Pargo rojo (kg),Pescados,5,35000,entregado,3\n62,2024-04-07,26,Istmina,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,2,15000,entregado,4\n62,2024-04-07,26,Istmina,Chocó,WhatsApp,Aretes de chaquira,Artesanías,1,22500,entregado,4\n62,2024-04-07,26,Istmina,Chocó,WhatsApp,Canasto de werregue,Artesanías,2,420000,entregado,4\n62,2024-04-07,26,Istmina,Chocó,WhatsApp,Borojó (unidad),Cosechas,5,6000,entregado,4\n63,2024-04-08,7,Condoto,Chocó,Tienda física,Aretes de chaquira,Artesanías,4,25000,entregado,5\n63,2024-04-08,7,Condoto,Chocó,Tienda física,Canasto de werregue,Artesanías,2,378000,entregado,5\n64,2024-04-13,33,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,7,31500,entregado,\n64,2024-04-13,33,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,1,60000,entregado,\n64,2024-04-13,33,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,3,22500,entregado,\n65,2024-04-20,23,Turbo,Antioquia,WhatsApp,Bocachico (kg),Pescados,10,18000,entregado,2\n65,2024-04-20,23,Turbo,Antioquia,WhatsApp,Aretes de chaquira,Artesanías,1,25000,entregado,2\n65,2024-04-20,23,Turbo,Antioquia,WhatsApp,Mochila de damagua,Artesanías,3,60000,entregado,2\n66,2024-04-20,35,Quibdó,Chocó,Tienda física,Bocachico (kg),Pescados,7,18000,entregado,\n67,2024-04-21,30,Acandí,Chocó,WhatsApp,Bocachico (kg),Pescados,5,18000,entregado,\n67,2024-04-21,30,Acandí,Chocó,WhatsApp,Camarón de río (kg),Pescados,2,40000,entregado,\n67,2024-04-21,30,Acandí,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,1,15000,entregado,\n68,2024-04-26,7,Condoto,Chocó,Web,Viche (botella),Bebidas,5,45000,enviado,\n68,2024-04-26,7,Condoto,Chocó,Web,Tambora de chirimía,Artesanías,1,280000,enviado,\n69,2024-05-01,18,Quibdó,Chocó,Web,Pargo rojo (kg),Pescados,8,35000,cancelado,\n69,2024-05-01,18,Quibdó,Chocó,Web,Borojó (unidad),Cosechas,6,5400,cancelado,\n70,2024-05-02,28,Condoto,Chocó,Tienda física,Aretes de chaquira,Artesanías,4,25000,entregado,5\n70,2024-05-02,28,Condoto,Chocó,Tienda física,Tambora de chirimía,Artesanías,1,280000,entregado,5\n71,2024-05-03,23,Turbo,Antioquia,WhatsApp,Camarón de río (kg),Pescados,5,40000,entregado,\n71,2024-05-03,23,Turbo,Antioquia,WhatsApp,Tambora de chirimía,Artesanías,1,252000,entregado,\n72,2024-05-04,12,Quibdó,Chocó,Tienda física,Tambora de chirimía,Artesanías,1,280000,entregado,4\n73,2024-05-05,18,Quibdó,Chocó,WhatsApp,Plátano primitivo (racimo),Cosechas,9,12000,enviado,\n73,2024-05-05,18,Quibdó,Chocó,WhatsApp,Borojó (unidad),Cosechas,18,6000,enviado,\n73,2024-05-05,18,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,1,60000,enviado,\n74,2024-05-10,8,Istmina,Chocó,WhatsApp,Viche (botella),Bebidas,4,40500,entregado,5\n75,2024-05-10,15,Quibdó,Chocó,Tienda física,Borojó (unidad),Cosechas,19,6000,enviado,\n75,2024-05-10,15,Quibdó,Chocó,Tienda física,Viche (botella),Bebidas,1,45000,enviado,\n76,2024-05-14,36,Medellín,Antioquia,Web,Arrechón (botella),Bebidas,5,38000,entregado,4\n77,2024-05-16,32,Condoto,Chocó,Tienda física,Aretes de chaquira,Artesanías,1,25000,entregado,\n78,2024-05-16,35,Quibdó,Chocó,Tienda física,Bocachico (kg),Pescados,10,18000,entregado,5\n78,2024-05-16,35,Quibdó,Chocó,Tienda física,Chontaduro (racimo),Cosechas,7,13500,entregado,5\n78,2024-05-16,35,Quibdó,Chocó,Tienda física,Aretes de chaquira,Artesanías,3,25000,entregado,5\n78,2024-05-16,35,Quibdó,Chocó,Tienda física,Plátano primitivo (racimo),Cosechas,7,10800,entregado,5\n79,2024-05-21,7,Condoto,Chocó,WhatsApp,Arrechón (botella),Bebidas,1,38000,entregado,\n79,2024-05-21,7,Condoto,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,1,15000,entregado,\n80,2024-05-21,16,Quibdó,Chocó,Web,Tambora de chirimía,Artesanías,1,280000,entregado,4\n81,2024-05-26,10,Bahía Solano,Chocó,WhatsApp,Viche (botella),Bebidas,6,45000,entregado,5\n81,2024-05-26,10,Bahía Solano,Chocó,WhatsApp,Arrechón (botella),Bebidas,5,38000,entregado,5\n82,2024-06-01,19,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,4,22500,entregado,\n83,2024-06-02,25,Quibdó,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,1,15000,entregado,4\n83,2024-06-02,25,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,2,45000,entregado,4\n83,2024-06-02,25,Quibdó,Chocó,WhatsApp,Plátano primitivo (racimo),Cosechas,7,12000,entregado,4\n84,2024-06-03,22,Bogotá,Cundinamarca,Web,Arrechón (botella),Bebidas,2,38000,entregado,\n84,2024-06-03,22,Bogotá,Cundinamarca,Web,Pargo rojo (kg),Pescados,7,31500,entregado,\n84,2024-06-03,22,Bogotá,Cundinamarca,Web,Viche (botella),Bebidas,6,45000,entregado,\n84,2024-06-03,22,Bogotá,Cundinamarca,Web,Mochila de damagua,Artesanías,2,60000,entregado,\n85,2024-06-08,4,Quibdó,Chocó,Tienda física,Camarón de río (kg),Pescados,2,40000,entregado,\n86,2024-06-08,10,Bahía Solano,Chocó,Tienda física,Tambora de chirimía,Artesanías,1,280000,entregado,\n86,2024-06-08,10,Bahía Solano,Chocó,Tienda física,Pargo rojo (kg),Pescados,1,35000,entregado,\n87,2024-06-09,16,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,3,60000,entregado,4\n88,2024-06-09,36,Medellín,Antioquia,Tienda física,Bocachico (kg),Pescados,5,18000,entregado,4\n89,2024-06-12,3,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,4,22500,entregado,\n89,2024-06-12,3,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,3,38000,entregado,\n90,2024-06-12,36,Medellín,Antioquia,WhatsApp,Pargo rojo (kg),Pescados,5,35000,enviado,\n90,2024-06-12,36,Medellín,Antioquia,WhatsApp,Tambora de chirimía,Artesanías,1,280000,enviado,\n90,2024-06-12,36,Medellín,Antioquia,WhatsApp,Mochila de damagua,Artesanías,2,60000,enviado,\n91,2024-06-13,31,Cali,Valle del Cauca,Tienda física,Borojó (unidad),Cosechas,17,6000,entregado,5\n92,2024-06-14,13,Acandí,Chocó,WhatsApp,Viche (botella),Bebidas,1,45000,entregado,3\n93,2024-06-16,29,Cali,Valle del Cauca,WhatsApp,Chontaduro (racimo),Cosechas,3,13500,enviado,\n93,2024-06-16,29,Cali,Valle del Cauca,WhatsApp,Tambora de chirimía,Artesanías,1,280000,enviado,\n93,2024-06-16,29,Cali,Valle del Cauca,WhatsApp,Canasto de werregue,Artesanías,2,378000,enviado,\n94,2024-06-21,21,Quibdó,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,5,13500,entregado,3\n95,2024-06-23,10,Bahía Solano,Chocó,WhatsApp,Mochila de damagua,Artesanías,1,60000,entregado,4\n96,2024-06-23,24,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,\n96,2024-06-23,24,Quibdó,Chocó,WhatsApp,Borojó (unidad),Cosechas,15,6000,entregado,\n96,2024-06-23,24,Quibdó,Chocó,WhatsApp,Canasto de werregue,Artesanías,1,420000,entregado,\n96,2024-06-23,24,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,1,60000,entregado,\n97,2024-06-24,18,Quibdó,Chocó,Tienda física,Camarón de río (kg),Pescados,1,40000,cancelado,\n98,2024-06-25,25,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,1,38000,entregado,\n99,2024-06-25,37,Istmina,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,5,15000,entregado,5\n99,2024-06-25,37,Istmina,Chocó,WhatsApp,Plátano primitivo (racimo),Cosechas,1,12000,entregado,5\n99,2024-06-25,37,Istmina,Chocó,WhatsApp,Arrechón (botella),Bebidas,6,34200,entregado,5\n100,2024-06-25,37,Istmina,Chocó,Web,Plátano primitivo (racimo),Cosechas,4,12000,entregado,\n101,2024-06-28,25,Quibdó,Chocó,Tienda física,Plátano primitivo (racimo),Cosechas,3,12000,entregado,\n101,2024-06-28,25,Quibdó,Chocó,Tienda física,Viche (botella),Bebidas,5,45000,entregado,\n101,2024-06-28,25,Quibdó,Chocó,Tienda física,Chontaduro (racimo),Cosechas,7,15000,entregado,\n102,2024-06-29,2,Tadó,Chocó,WhatsApp,Viche (botella),Bebidas,5,45000,entregado,5\n102,2024-06-29,2,Tadó,Chocó,WhatsApp,Canasto de werregue,Artesanías,1,420000,entregado,5\n103,2024-06-29,33,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,\n104,2024-07-02,14,Medellín,Antioquia,Web,Viche (botella),Bebidas,4,45000,entregado,5\n104,2024-07-02,14,Medellín,Antioquia,Web,Canasto de werregue,Artesanías,1,420000,entregado,5\n104,2024-07-02,14,Medellín,Antioquia,Web,Tambora de chirimía,Artesanías,1,280000,entregado,5\n105,2024-07-05,34,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,2,35000,enviado,\n106,2024-07-06,34,Quibdó,Chocó,Web,Viche (botella),Bebidas,1,45000,entregado,5\n106,2024-07-06,34,Quibdó,Chocó,Web,Pargo rojo (kg),Pescados,1,35000,entregado,5\n107,2024-07-08,28,Condoto,Chocó,WhatsApp,Canasto de werregue,Artesanías,1,420000,entregado,4\n107,2024-07-08,28,Condoto,Chocó,WhatsApp,Arrechón (botella),Bebidas,1,38000,entregado,4\n107,2024-07-08,28,Condoto,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,4\n108,2024-07-09,33,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,1,60000,cancelado,\n108,2024-07-09,33,Quibdó,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,3,15000,cancelado,\n108,2024-07-09,33,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,2,35000,cancelado,\n109,2024-07-11,16,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,2,31500,enviado,\n109,2024-07-11,16,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,3,38000,enviado,\n109,2024-07-11,16,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,1,60000,enviado,\n110,2024-07-14,4,Quibdó,Chocó,Tienda física,Plátano primitivo (racimo),Cosechas,10,10800,entregado,5\n111,2024-07-16,22,Bogotá,Cundinamarca,Tienda física,Borojó (unidad),Cosechas,16,6000,entregado,4\n112,2024-07-16,26,Istmina,Chocó,Web,Chontaduro (racimo),Cosechas,7,15000,enviado,\n113,2024-07-20,12,Quibdó,Chocó,Web,Plátano primitivo (racimo),Cosechas,9,12000,cancelado,\n114,2024-07-21,28,Condoto,Chocó,Tienda física,Pargo rojo (kg),Pescados,8,31500,entregado,\n114,2024-07-21,28,Condoto,Chocó,Tienda física,Viche (botella),Bebidas,3,40500,entregado,\n114,2024-07-21,28,Condoto,Chocó,Tienda física,Arrechón (botella),Bebidas,5,38000,entregado,\n114,2024-07-21,28,Condoto,Chocó,Tienda física,Chontaduro (racimo),Cosechas,4,15000,entregado,\n115,2024-07-22,9,Tadó,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,8,15000,entregado,\n115,2024-07-22,9,Tadó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,4,35000,entregado,\n116,2024-07-23,18,Quibdó,Chocó,Tienda física,Pargo rojo (kg),Pescados,4,35000,enviado,\n116,2024-07-23,18,Quibdó,Chocó,Tienda física,Bocachico (kg),Pescados,12,18000,enviado,\n117,2024-07-27,3,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,1,60000,entregado,4\n118,2024-07-28,7,Condoto,Chocó,WhatsApp,Camarón de río (kg),Pescados,3,40000,entregado,5\n119,2024-07-29,37,Istmina,Chocó,WhatsApp,Pargo rojo (kg),Pescados,6,35000,entregado,3\n119,2024-07-29,37,Istmina,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,4,15000,entregado,3\n120,2024-07-30,14,Medellín,Antioquia,WhatsApp,Camarón de río (kg),Pescados,5,36000,entregado,4\n120,2024-07-30,14,Medellín,Antioquia,WhatsApp,Arrechón (botella),Bebidas,2,38000,entregado,4\n121,2024-07-31,21,Quibdó,Chocó,WhatsApp,Camarón de río (kg),Pescados,2,40000,entregado,5\n122,2024-08-02,1,Medellín,Antioquia,WhatsApp,Arrechón (botella),Bebidas,6,38000,entregado,4\n123,2024-08-02,35,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,5,34200,entregado,4\n123,2024-08-02,35,Quibdó,Chocó,WhatsApp,Camarón de río (kg),Pescados,4,40000,entregado,4\n124,2024-08-03,20,Condoto,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,7,15000,entregado,\n124,2024-08-03,20,Condoto,Chocó,WhatsApp,Camarón de río (kg),Pescados,5,40000,entregado,\n125,2024-08-05,8,Istmina,Chocó,Web,Borojó (unidad),Cosechas,6,6000,entregado,5\n126,2024-08-09,13,Acandí,Chocó,WhatsApp,Camarón de río (kg),Pescados,5,40000,entregado,4\n127,2024-08-10,16,Quibdó,Chocó,Web,Plátano primitivo (racimo),Cosechas,7,12000,entregado,4\n127,2024-08-10,16,Quibdó,Chocó,Web,Mochila de damagua,Artesanías,1,60000,entregado,4\n127,2024-08-10,16,Quibdó,Chocó,Web,Borojó (unidad),Cosechas,10,6000,entregado,4\n127,2024-08-10,16,Quibdó,Chocó,Web,Pargo rojo (kg),Pescados,5,35000,entregado,4\n128,2024-08-13,21,Quibdó,Chocó,Tienda física,Canasto de werregue,Artesanías,2,420000,entregado,5\n128,2024-08-13,21,Quibdó,Chocó,Tienda física,Aretes de chaquira,Artesanías,4,25000,entregado,5\n129,2024-08-14,29,Cali,Valle del Cauca,WhatsApp,Viche (botella),Bebidas,1,45000,entregado,4\n130,2024-08-16,12,Quibdó,Chocó,WhatsApp,Borojó (unidad),Cosechas,8,6000,entregado,\n131,2024-08-17,36,Medellín,Antioquia,WhatsApp,Borojó (unidad),Cosechas,2,6000,entregado,5\n131,2024-08-17,36,Medellín,Antioquia,WhatsApp,Tambora de chirimía,Artesanías,1,252000,entregado,5\n132,2024-08-19,28,Condoto,Chocó,Web,Mochila de damagua,Artesanías,1,60000,entregado,\n132,2024-08-19,28,Condoto,Chocó,Web,Chontaduro (racimo),Cosechas,5,13500,entregado,\n133,2024-08-21,26,Istmina,Chocó,Web,Tambora de chirimía,Artesanías,1,280000,entregado,\n134,2024-08-26,3,Quibdó,Chocó,Tienda física,Mochila de damagua,Artesanías,3,60000,entregado,2\n134,2024-08-26,3,Quibdó,Chocó,Tienda física,Viche (botella),Bebidas,4,45000,entregado,2\n135,2024-08-26,24,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,4,45000,entregado,5\n135,2024-08-26,24,Quibdó,Chocó,WhatsApp,Camarón de río (kg),Pescados,5,40000,entregado,5\n136,2024-08-27,21,Quibdó,Chocó,Web,Viche (botella),Bebidas,3,45000,entregado,2\n136,2024-08-27,21,Quibdó,Chocó,Web,Canasto de werregue,Artesanías,1,420000,entregado,2\n137,2024-08-28,16,Quibdó,Chocó,WhatsApp,Camarón de río (kg),Pescados,2,40000,entregado,\n138,2024-08-29,9,Tadó,Chocó,WhatsApp,Canasto de werregue,Artesanías,2,420000,entregado,5\n139,2024-08-30,9,Tadó,Chocó,Web,Bocachico (kg),Pescados,9,18000,entregado,\n140,2024-08-31,1,Medellín,Antioquia,WhatsApp,Chontaduro (racimo),Cosechas,6,15000,entregado,3\n140,2024-08-31,1,Medellín,Antioquia,WhatsApp,Viche (botella),Bebidas,2,45000,entregado,3\n141,2024-09-01,15,Quibdó,Chocó,Web,Tambora de chirimía,Artesanías,1,280000,entregado,\n142,2024-09-02,22,Bogotá,Cundinamarca,WhatsApp,Camarón de río (kg),Pescados,1,40000,entregado,\n143,2024-09-04,12,Quibdó,Chocó,Tienda física,Bocachico (kg),Pescados,5,18000,entregado,5\n143,2024-09-04,12,Quibdó,Chocó,Tienda física,Arrechón (botella),Bebidas,6,38000,entregado,5\n143,2024-09-04,12,Quibdó,Chocó,Tienda física,Borojó (unidad),Cosechas,18,6000,entregado,5\n144,2024-09-07,5,Quibdó,Chocó,Web,Viche (botella),Bebidas,5,45000,entregado,5\n145,2024-09-07,29,Cali,Valle del Cauca,Tienda física,Viche (botella),Bebidas,1,40500,entregado,5\n145,2024-09-07,29,Cali,Valle del Cauca,Tienda física,Canasto de werregue,Artesanías,1,420000,entregado,5\n146,2024-09-10,22,Bogotá,Cundinamarca,Tienda física,Viche (botella),Bebidas,4,40500,entregado,5\n147,2024-09-11,36,Medellín,Antioquia,WhatsApp,Arrechón (botella),Bebidas,5,38000,entregado,4\n148,2024-09-17,6,Istmina,Chocó,Tienda física,Bocachico (kg),Pescados,12,16200,entregado,\n149,2024-09-17,13,Acandí,Chocó,Web,Mochila de damagua,Artesanías,3,60000,entregado,4\n150,2024-09-20,32,Condoto,Chocó,Web,Arrechón (botella),Bebidas,2,38000,entregado,4\n151,2024-09-21,3,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,2,45000,entregado,\n152,2024-09-22,23,Turbo,Antioquia,WhatsApp,Pargo rojo (kg),Pescados,6,35000,entregado,\n153,2024-09-22,31,Cali,Valle del Cauca,Tienda física,Viche (botella),Bebidas,4,45000,entregado,4\n153,2024-09-22,31,Cali,Valle del Cauca,Tienda física,Camarón de río (kg),Pescados,3,40000,entregado,4\n154,2024-09-24,2,Tadó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,1,25000,entregado,\n155,2024-09-26,21,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,4\n155,2024-09-26,21,Quibdó,Chocó,WhatsApp,Canasto de werregue,Artesanías,2,378000,entregado,4\n156,2024-09-26,34,Quibdó,Chocó,Tienda física,Canasto de werregue,Artesanías,1,420000,entregado,\n156,2024-09-26,34,Quibdó,Chocó,Tienda física,Camarón de río (kg),Pescados,3,40000,entregado,\n157,2024-09-27,23,Turbo,Antioquia,WhatsApp,Tambora de chirimía,Artesanías,1,280000,enviado,\n158,2024-09-27,25,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,2,22500,entregado,5\n158,2024-09-27,25,Quibdó,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,4,15000,entregado,5\n158,2024-09-27,25,Quibdó,Chocó,WhatsApp,Camarón de río (kg),Pescados,1,40000,entregado,5\n159,2024-09-28,15,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,2,25000,entregado,\n159,2024-09-28,15,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,252000,entregado,\n160,2024-09-29,1,Medellín,Antioquia,Tienda física,Viche (botella),Bebidas,5,45000,entregado,\n160,2024-09-29,1,Medellín,Antioquia,Tienda física,Canasto de werregue,Artesanías,1,378000,entregado,\n161,2024-09-29,22,Bogotá,Cundinamarca,WhatsApp,Bocachico (kg),Pescados,1,18000,entregado,4\n161,2024-09-29,22,Bogotá,Cundinamarca,WhatsApp,Aretes de chaquira,Artesanías,4,25000,entregado,4\n161,2024-09-29,22,Bogotá,Cundinamarca,WhatsApp,Canasto de werregue,Artesanías,2,420000,entregado,4\n162,2024-09-29,30,Acandí,Chocó,Tienda física,Canasto de werregue,Artesanías,2,420000,entregado,5\n163,2024-09-30,13,Acandí,Chocó,WhatsApp,Viche (botella),Bebidas,5,45000,enviado,\n163,2024-09-30,13,Acandí,Chocó,WhatsApp,Mochila de damagua,Artesanías,3,60000,enviado,\n164,2024-10-01,8,Istmina,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,\n165,2024-10-01,12,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,2,38000,entregado,\n166,2024-10-01,14,Medellín,Antioquia,Web,Aretes de chaquira,Artesanías,2,25000,entregado,5\n166,2024-10-01,14,Medellín,Antioquia,Web,Viche (botella),Bebidas,4,45000,entregado,5\n167,2024-10-01,19,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,4,25000,entregado,5\n168,2024-10-01,21,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,5,38000,cancelado,\n168,2024-10-01,21,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,cancelado,\n169,2024-10-01,24,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,1,60000,entregado,5\n169,2024-10-01,24,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,4,45000,entregado,5\n170,2024-10-01,34,Quibdó,Chocó,Web,Mochila de damagua,Artesanías,1,60000,entregado,4\n170,2024-10-01,34,Quibdó,Chocó,Web,Pargo rojo (kg),Pescados,3,35000,entregado,4\n170,2024-10-01,34,Quibdó,Chocó,Web,Viche (botella),Bebidas,1,45000,entregado,4\n170,2024-10-01,34,Quibdó,Chocó,Web,Tambora de chirimía,Artesanías,1,280000,entregado,4\n171,2024-10-02,24,Quibdó,Chocó,Web,Canasto de werregue,Artesanías,2,420000,entregado,5\n171,2024-10-02,24,Quibdó,Chocó,Web,Viche (botella),Bebidas,2,45000,entregado,5\n172,2024-10-04,3,Quibdó,Chocó,Web,Canasto de werregue,Artesanías,1,378000,entregado,5\n173,2024-10-04,6,Istmina,Chocó,Web,Borojó (unidad),Cosechas,8,5400,entregado,2\n174,2024-10-04,28,Condoto,Chocó,WhatsApp,Viche (botella),Bebidas,4,45000,entregado,3\n175,2024-10-06,33,Quibdó,Chocó,Tienda física,Plátano primitivo (racimo),Cosechas,5,12000,entregado,4\n175,2024-10-06,33,Quibdó,Chocó,Tienda física,Borojó (unidad),Cosechas,9,6000,entregado,4\n175,2024-10-06,33,Quibdó,Chocó,Tienda física,Pargo rojo (kg),Pescados,6,35000,entregado,4\n175,2024-10-06,33,Quibdó,Chocó,Tienda física,Arrechón (botella),Bebidas,6,38000,entregado,4\n176,2024-10-11,13,Acandí,Chocó,Web,Chontaduro (racimo),Cosechas,8,15000,enviado,\n177,2024-10-11,24,Quibdó,Chocó,Web,Viche (botella),Bebidas,3,45000,entregado,3\n177,2024-10-11,24,Quibdó,Chocó,Web,Camarón de río (kg),Pescados,4,40000,entregado,3\n178,2024-10-12,3,Quibdó,Chocó,WhatsApp,Plátano primitivo (racimo),Cosechas,7,12000,enviado,\n179,2024-10-15,33,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,3,34200,entregado,\n180,2024-10-16,22,Bogotá,Cundinamarca,Tienda física,Canasto de werregue,Artesanías,2,420000,cancelado,\n180,2024-10-16,22,Bogotá,Cundinamarca,Tienda física,Chontaduro (racimo),Cosechas,4,15000,cancelado,\n181,2024-10-19,4,Quibdó,Chocó,WhatsApp,Canasto de werregue,Artesanías,1,420000,entregado,\n182,2024-10-21,5,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,4,38000,cancelado,\n182,2024-10-21,5,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,cancelado,\n183,2024-10-21,19,Quibdó,Chocó,Tienda física,Arrechón (botella),Bebidas,5,38000,entregado,\n183,2024-10-21,19,Quibdó,Chocó,Tienda física,Borojó (unidad),Cosechas,14,5400,entregado,\n183,2024-10-21,19,Quibdó,Chocó,Tienda física,Pargo rojo (kg),Pescados,3,35000,entregado,\n184,2024-10-22,29,Cali,Valle del Cauca,Web,Plátano primitivo (racimo),Cosechas,7,10800,entregado,5\n185,2024-10-24,19,Quibdó,Chocó,WhatsApp,Borojó (unidad),Cosechas,10,6000,enviado,\n185,2024-10-24,19,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,enviado,\n185,2024-10-24,19,Quibdó,Chocó,WhatsApp,Plátano primitivo (racimo),Cosechas,7,12000,enviado,\n185,2024-10-24,19,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,4,35000,enviado,\n186,2024-10-30,13,Acandí,Chocó,Web,Aretes de chaquira,Artesanías,4,25000,entregado,2\n186,2024-10-30,13,Acandí,Chocó,Web,Bocachico (kg),Pescados,8,18000,entregado,2\n187,2024-10-30,33,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,4\n187,2024-10-30,33,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,5,45000,entregado,4\n188,2024-10-30,37,Istmina,Chocó,WhatsApp,Camarón de río (kg),Pescados,4,40000,entregado,\n189,2024-11-03,2,Tadó,Chocó,Tienda física,Plátano primitivo (racimo),Cosechas,7,12000,cancelado,\n189,2024-11-03,2,Tadó,Chocó,Tienda física,Tambora de chirimía,Artesanías,1,280000,cancelado,\n189,2024-11-03,2,Tadó,Chocó,Tienda física,Pargo rojo (kg),Pescados,4,35000,cancelado,\n190,2024-11-06,11,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,5\n191,2024-11-09,29,Cali,Valle del Cauca,Web,Tambora de chirimía,Artesanías,1,280000,entregado,\n192,2024-11-10,37,Istmina,Chocó,Tienda física,Canasto de werregue,Artesanías,2,420000,entregado,4\n192,2024-11-10,37,Istmina,Chocó,Tienda física,Borojó (unidad),Cosechas,17,5400,entregado,4\n193,2024-11-12,9,Tadó,Chocó,Web,Aretes de chaquira,Artesanías,1,25000,entregado,5\n193,2024-11-12,9,Tadó,Chocó,Web,Camarón de río (kg),Pescados,3,40000,entregado,5\n193,2024-11-12,9,Tadó,Chocó,Web,Tambora de chirimía,Artesanías,1,280000,entregado,5\n194,2024-11-13,13,Acandí,Chocó,Web,Chontaduro (racimo),Cosechas,4,15000,entregado,4\n195,2024-11-15,21,Quibdó,Chocó,Web,Plátano primitivo (racimo),Cosechas,4,12000,entregado,5\n196,2024-11-20,24,Quibdó,Chocó,Web,Aretes de chaquira,Artesanías,1,25000,entregado,3\n197,2024-11-29,6,Istmina,Chocó,Web,Chontaduro (racimo),Cosechas,2,15000,entregado,\n198,2024-11-29,8,Istmina,Chocó,WhatsApp,Viche (botella),Bebidas,4,45000,cancelado,\n198,2024-11-29,8,Istmina,Chocó,WhatsApp,Chontaduro (racimo),Cosechas,5,15000,cancelado,\n199,2024-11-29,15,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,4\n200,2024-11-30,7,Condoto,Chocó,WhatsApp,Pargo rojo (kg),Pescados,7,35000,entregado,\n201,2024-12-02,9,Tadó,Chocó,WhatsApp,Borojó (unidad),Cosechas,20,6000,entregado,5\n202,2024-12-03,13,Acandí,Chocó,Tienda física,Camarón de río (kg),Pescados,4,40000,entregado,2\n202,2024-12-03,13,Acandí,Chocó,Tienda física,Canasto de werregue,Artesanías,2,420000,entregado,2\n203,2024-12-03,37,Istmina,Chocó,WhatsApp,Mochila de damagua,Artesanías,2,60000,cancelado,\n203,2024-12-03,37,Istmina,Chocó,WhatsApp,Aretes de chaquira,Artesanías,1,22500,cancelado,\n204,2024-12-04,33,Quibdó,Chocó,Tienda física,Borojó (unidad),Cosechas,10,6000,cancelado,\n204,2024-12-04,33,Quibdó,Chocó,Tienda física,Mochila de damagua,Artesanías,2,60000,cancelado,\n204,2024-12-04,33,Quibdó,Chocó,Tienda física,Arrechón (botella),Bebidas,6,38000,cancelado,\n205,2024-12-07,29,Cali,Valle del Cauca,WhatsApp,Viche (botella),Bebidas,6,45000,entregado,4\n206,2024-12-09,3,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,6,38000,entregado,5\n206,2024-12-09,3,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,1,25000,entregado,5\n206,2024-12-09,3,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,3,60000,entregado,5\n207,2024-12-09,12,Quibdó,Chocó,Tienda física,Arrechón (botella),Bebidas,2,38000,entregado,\n207,2024-12-09,12,Quibdó,Chocó,Tienda física,Tambora de chirimía,Artesanías,1,280000,entregado,\n207,2024-12-09,12,Quibdó,Chocó,Tienda física,Plátano primitivo (racimo),Cosechas,3,12000,entregado,\n208,2024-12-09,30,Acandí,Chocó,Tienda física,Pargo rojo (kg),Pescados,8,35000,entregado,4\n208,2024-12-09,30,Acandí,Chocó,Tienda física,Arrechón (botella),Bebidas,3,38000,entregado,4\n208,2024-12-09,30,Acandí,Chocó,Tienda física,Mochila de damagua,Artesanías,2,60000,entregado,4\n208,2024-12-09,30,Acandí,Chocó,Tienda física,Bocachico (kg),Pescados,3,18000,entregado,4\n209,2024-12-10,6,Istmina,Chocó,WhatsApp,Viche (botella),Bebidas,4,45000,entregado,5\n209,2024-12-10,6,Istmina,Chocó,WhatsApp,Canasto de werregue,Artesanías,1,420000,entregado,5\n210,2024-12-11,3,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,1,45000,entregado,\n210,2024-12-11,3,Quibdó,Chocó,WhatsApp,Arrechón (botella),Bebidas,1,34200,entregado,\n211,2024-12-11,4,Quibdó,Chocó,WhatsApp,Aretes de chaquira,Artesanías,2,25000,entregado,\n211,2024-12-11,4,Quibdó,Chocó,WhatsApp,Pargo rojo (kg),Pescados,3,35000,entregado,\n212,2024-12-11,16,Quibdó,Chocó,WhatsApp,Canasto de werregue,Artesanías,1,420000,entregado,5\n212,2024-12-11,16,Quibdó,Chocó,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,5\n213,2024-12-14,16,Quibdó,Chocó,Tienda física,Bocachico (kg),Pescados,11,18000,entregado,5\n214,2024-12-15,1,Medellín,Antioquia,Tienda física,Chontaduro (racimo),Cosechas,1,13500,entregado,\n214,2024-12-15,1,Medellín,Antioquia,Tienda física,Mochila de damagua,Artesanías,2,60000,entregado,\n214,2024-12-15,1,Medellín,Antioquia,Tienda física,Arrechón (botella),Bebidas,1,38000,entregado,\n215,2024-12-15,14,Medellín,Antioquia,WhatsApp,Mochila de damagua,Artesanías,1,54000,entregado,5\n215,2024-12-15,14,Medellín,Antioquia,WhatsApp,Canasto de werregue,Artesanías,2,420000,entregado,5\n216,2024-12-17,14,Medellín,Antioquia,WhatsApp,Arrechón (botella),Bebidas,6,38000,entregado,3\n216,2024-12-17,14,Medellín,Antioquia,WhatsApp,Viche (botella),Bebidas,4,45000,entregado,3\n216,2024-12-17,14,Medellín,Antioquia,WhatsApp,Tambora de chirimía,Artesanías,1,280000,entregado,3\n216,2024-12-17,14,Medellín,Antioquia,WhatsApp,Chontaduro (racimo),Cosechas,8,15000,entregado,3\n217,2024-12-17,19,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,2,60000,entregado,5\n218,2024-12-20,3,Quibdó,Chocó,Web,Tambora de chirimía,Artesanías,1,280000,entregado,\n218,2024-12-20,3,Quibdó,Chocó,Web,Arrechón (botella),Bebidas,3,38000,entregado,\n218,2024-12-20,3,Quibdó,Chocó,Web,Bocachico (kg),Pescados,8,18000,entregado,\n219,2024-12-20,17,Bahía Solano,Chocó,WhatsApp,Aretes de chaquira,Artesanías,2,22500,entregado,5\n220,2024-12-22,15,Quibdó,Chocó,WhatsApp,Bocachico (kg),Pescados,3,18000,entregado,5\n220,2024-12-22,15,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,2,60000,entregado,5\n221,2024-12-22,29,Cali,Valle del Cauca,WhatsApp,Canasto de werregue,Artesanías,1,420000,enviado,\n221,2024-12-22,29,Cali,Valle del Cauca,WhatsApp,Bocachico (kg),Pescados,1,18000,enviado,\n222,2024-12-26,2,Tadó,Chocó,Web,Arrechón (botella),Bebidas,4,38000,enviado,\n222,2024-12-26,2,Tadó,Chocó,Web,Mochila de damagua,Artesanías,1,60000,enviado,\n222,2024-12-26,2,Tadó,Chocó,Web,Borojó (unidad),Cosechas,17,6000,enviado,\n223,2024-12-26,29,Cali,Valle del Cauca,Tienda física,Bocachico (kg),Pescados,9,18000,enviado,\n224,2024-12-27,37,Istmina,Chocó,WhatsApp,Borojó (unidad),Cosechas,16,6000,enviado,\n225,2024-12-28,18,Quibdó,Chocó,WhatsApp,Plátano primitivo (racimo),Cosechas,2,12000,enviado,\n225,2024-12-28,18,Quibdó,Chocó,WhatsApp,Mochila de damagua,Artesanías,3,60000,enviado,\n226,2024-12-29,13,Acandí,Chocó,WhatsApp,Arrechón (botella),Bebidas,6,38000,enviado,\n227,2024-12-30,2,Tadó,Chocó,Web,Tambora de chirimía,Artesanías,1,280000,enviado,\n228,2024-12-31,5,Quibdó,Chocó,Tienda física,Canasto de werregue,Artesanías,1,420000,enviado,\n229,2024-12-31,31,Cali,Valle del Cauca,WhatsApp,Aretes de chaquira,Artesanías,3,25000,enviado,\n229,2024-12-31,31,Cali,Valle del Cauca,WhatsApp,Viche (botella),Bebidas,2,45000,enviado,\n230,2024-12-31,35,Quibdó,Chocó,WhatsApp,Viche (botella),Bebidas,1,45000,enviado,\n","clientes":"cliente_id,nombre,correo,municipio,departamento,segmento,fecha_registro\n1,Yeison Palacios,yeison1@correo.co,Medellín,Antioquia,Hogar,2023-10-10\n2,Marleny Copete,marleny2@correo.co,Tadó,Chocó,Tienda,2024-05-21\n3,Jeferson Ibargüen,jeferson3@correo.co,  quibdó,Chocó,Tienda,2023-08-12\n4,Brayan Serna,brayan4@correo.co,Quibdó,Chocó,Hogar,2024-06-17\n5,Ana Lucía Valencia,,Quibdó,Chocó,Restaurante,2023-11-09\n6,Yeison Mosquera,yeison6@correo.co,Istmina,Chocó,Hogar,2024-01-09\n7,Dayana Lemos,dayana7@correo.co,Condoto,Chocó,Restaurante,2023-12-27\n8,Wilmer Hinestroza,wilmer8@correo.co,ISTMINA ,Chocó,Restaurante,2023-07-09\n9,Ana Lucía Chaverra,ana9@correo.co,Tadó,Chocó,hogar,2023-09-08\n10,Brayan Córdoba,brayan10@correo.co,Bahía Solano,Chocó,Restaurante,2023-11-05\n11,Marleny Mosquera,marleny11@correo.co,Quibdó,Chocó,Hogar,2023-10-05\n12,Yeison Valencia,yeison12@correo.co,quibdo,Chocó,Hogar,2024-09-27\n13,Luz Marina Lemos,luz13@correo.co,Acandí,Chocó,Restaurante,2024-01-12\n14,Jeferson Murillo,jeferson14@correo.co,Medellín,Antioquia,tienda,2023-08-30\n15,Wilmer Mena,wilmer15@correo.co,Quibdó,Chocó,Hogar,2023-12-20\n7,Dayana Lemos,dayana7@correo.co,Condoto,Chocó,Restaurante,2023-12-27\n16,Leidy Rentería,leidy16@correo.co,Quibdó,Chocó,Tienda,2023-12-29\n17,Edwin Perea,edwin17@correo.co,Bahia Solano,Chocó,Hogar,2023-07-13\n18,Darwin Lemos,darwin18@correo.co,Quibdó,Chocó,Hogar,2024-05-22\n19,Edwin Moreno,edwin19@correo.co,Quibdó,Chocó,Hogar,2023-06-26\n20,Neyla Copete,neyla20@correo.co,Condoto,Chocó,Hogar,2023-06-09\n21,Ana Lucía Rentería,,Quibdó,Chocó,Hogar,2024-08-25\n22,Ana Lucía Hinestroza,ana22@correo.co,Bogotá,Cundinamarca,Hogar,2023-08-09\n23,Arley Palacios,arley23@correo.co,Turbo,Antioquia,Tienda,2023-11-09\n24,Jeferson Córdoba,jeferson24@correo.co,Quibdó,Chocó,Tienda,2024-07-02\n25,Darwin Moreno,darwin25@correo.co, Quibdó ,Chocó,Tienda,2024-01-06\n26,Wilmer Valencia,wilmer26@correo.co,Istmina,Chocó,Hogar,2023-08-03\n27,Faustino Chaverra,faustino27@correo.co,Bogotá,Cundinamarca,Tienda,2023-06-06\n28,Yeison Rentería,yeison28@correo.co,Condoto,Chocó,Tienda,2024-07-05\n29,Harold Moreno,harold29@correo.co,Cali,Valle del Cauca,Hogar,2024-08-17\n30,Yeison Mena,yeison30@correo.co,Acandí,Chocó,hogar,2023-11-16\n31,Edwin Chaverra,edwin31@correo.co,Cali,Valle del Cauca,Tienda,2024-04-29\n32,Yeison Copete,yeison32@correo.co,Condoto,Chocó,Hogar,2024-07-22\n33,Dayana Murillo,,Quibdó,Chocó,Hogar,2023-10-23\n34,Yesenia Mosquera,yesenia34@correo.co,Quibdó,Chocó,Tienda,2024-01-13\n35,Marleny Rentería,marleny35@correo.co,Quibdó,Chocó,Tienda,2024-08-04\n36,Luz Marina Lloreda,luz36@correo.co,Medellín,Antioquia,Hogar,2024-06-19\n37,Brayan Murillo,brayan37@correo.co,Istmina,Chocó,Hogar,2024-05-30\n38,Wilmer Rentería,wilmer38@correo.co,Cali,Valle del Cauca,Restaurante,2023-06-18\n39,Nelly Bejarano,nelly39@correo.co,Nuquí,Chocó,Hogar,2023-12-10\n40,Ana Lucía Perea,ana40@correo.co,Bogotá,Cundinamarca,Hogar,2023-08-21\n22,Ana Lucía Hinestroza,ana22@correo.co,Bogotá,Cundinamarca,Hogar,2023-08-09\n","grader":"\"\"\"Comprobador de los ejercicios de pandas (Mercado del Pacífico).\n\nLo usan el cuaderno de Jupyter y la presentación (que lo ejecuta en el navegador con Pyodide):\n\n    from comprobar import comprobar, pista, solucion\n    resultado = ventas.shape\n    comprobar(1, resultado)     # ✓ o ✗ con el motivo\n\nCompara valores, no nombres: el índice con nombre (por ejemplo `categoria` en un groupby) cuenta como columna,\nun índice numérico sin nombre se ignora y los decimales se comparan redondeados a 2.\n\"\"\"\nimport ast\nimport json\nimport math\nfrom pathlib import Path\n\nimport numpy as np\nimport pandas as pd\n\nHERE = Path(__file__).resolve().parent\n_EJ = None\n\n\ndef ejercicios():\n    global _EJ\n    if _EJ is None:\n        _EJ = {e[\"id\"]: e for e in json.loads((HERE / \"ejercicios.json\").read_text(encoding=\"utf-8\"))}\n    return _EJ\n\n\ndef cargar(carpeta=None):\n    \"\"\"Lee los dos CSV igual que el cuaderno: devuelve (ventas, clientes).\"\"\"\n    datos = Path(carpeta) if carpeta else HERE / \"datos\"\n    ventas = pd.read_csv(datos / \"ventas_mercado_pacifico.csv\", parse_dates=[\"fecha\"])\n    clientes = pd.read_csv(datos / \"clientes.csv\", parse_dates=[\"fecha_registro\"])\n    return ventas, clientes\n\n\ndef ejecutar(codigo, ventas, clientes):\n    \"\"\"Ejecuta una celda y devuelve el valor de su última expresión (como Jupyter).\"\"\"\n    ns = {\"pd\": pd, \"np\": np, \"ventas\": ventas.copy(), \"clientes\": clientes.copy()}\n    arbol = ast.parse(codigo)\n    ultima = None\n    if arbol.body and isinstance(arbol.body[-1], ast.Expr):\n        ultima = ast.Expression(arbol.body.pop().value)\n    exec(compile(arbol, \"<celda>\", \"exec\"), ns)\n    return eval(compile(ultima, \"<celda>\", \"eval\"), ns) if ultima else None\n\n\ndef _celda(v):\n    if isinstance(v, (pd.Timestamp, np.datetime64)):\n        return pd.Timestamp(v).strftime(\"%Y-%m-%d\")\n    try:\n        if pd.isna(v):\n            return None\n    except (TypeError, ValueError):\n        pass\n    if isinstance(v, (bool, np.bool_)):\n        return bool(v)\n    if isinstance(v, (int, np.integer)):\n        return int(v)\n    if isinstance(v, (float, np.floating)):\n        f = float(v)\n        return int(f) if f.is_integer() and abs(f) < 1e15 else round(f, 4)\n    if isinstance(v, pd.Interval):\n        return str(v)\n    return str(v)\n\n\ndef tabla(obj):\n    \"\"\"Convierte un resultado (DataFrame, Series, tupla o escalar) en {tipo, cols, filas}.\"\"\"\n    if isinstance(obj, pd.DataFrame):\n        tipo, df = \"DataFrame\", obj.copy()\n    elif isinstance(obj, pd.Series):\n        tipo, df = \"Series\", obj.to_frame(name=obj.name if obj.name is not None else \"valor\")\n    elif isinstance(obj, (tuple, list)):\n        tipo, df = type(obj).__name__, pd.DataFrame([list(obj)], columns=[f\"[{i}]\" for i in range(len(obj))])\n    elif obj is None:\n        return {\"tipo\": \"None\", \"cols\": [], \"filas\": []}\n    else:\n        tipo, df = type(obj).__name__, pd.DataFrame([[obj]], columns=[\"valor\"])\n    idx = df.index\n    if isinstance(idx, pd.MultiIndex) or any(n is not None for n in idx.names) or not pd.api.types.is_integer_dtype(idx):\n        df = df.reset_index()\n    else:\n        df = df.reset_index(drop=True)\n    cols = [\" · \".join(map(str, c)) if isinstance(c, tuple) else str(c) for c in df.columns]\n    filas = [[_celda(v) for v in fila] for fila in df.itertuples(index=False, name=None)]\n    return {\"tipo\": tipo, \"cols\": cols, \"filas\": filas}\n\n\ndef _clave(fila):\n    return json.dumps([round(v, 2) if isinstance(v, float) else v for v in fila], ensure_ascii=False)\n\n\ndef comparar(t_usuario, t_esperado, ordenado):\n    \"\"\"(ok, mensaje) comparando dos tablas.\"\"\"\n    if len(t_usuario[\"cols\"]) != len(t_esperado[\"cols\"]):\n        return False, f\"Se esperaban {len(t_esperado['cols'])} columnas ({', '.join(t_esperado['cols'])}) y hay {len(t_usuario['cols'])}.\"\n    if len(t_usuario[\"filas\"]) != len(t_esperado[\"filas\"]):\n        return False, f\"Se esperaban {len(t_esperado['filas'])} filas y hay {len(t_usuario['filas'])}.\"\n    a = [_clave(f) for f in t_usuario[\"filas\"]]\n    b = [_clave(f) for f in t_esperado[\"filas\"]]\n    if a == b:\n        return True, \"Correcto.\"\n    if sorted(a) == sorted(b):\n        return (False, \"Los valores son correctos pero el orden no: revisa el ordenamiento.\") if ordenado else (True, \"Correcto.\")\n    return False, \"Mismo tamaño, pero algunos valores no coinciden. Revisa filtros, agrupaciones y cálculos.\"\n\n\ndef esperado(n, ventas=None, clientes=None):\n    if ventas is None:\n        ventas, clientes = cargar()\n    return ejecutar(ejercicios()[str(n)][\"code\"], ventas, clientes)\n\n\ndef comprobar(n, resultado):\n    \"\"\"Imprime ✓ o ✗ comparando tu resultado con el de la solución del ejercicio n.\"\"\"\n    e = ejercicios()[str(n)]\n    if resultado is None:\n        print(f\"… Ejercicio {n} · {e['titulo']}: todavía no hay respuesta. Guarda tu resultado en la variable `resultado`.\")\n        return False\n    ok, msg = comparar(tabla(resultado), tabla(esperado(n)), e.get(\"ordenado\", False))\n    print((\"✓ \" if ok else \"✗ \") + f\"Ejercicio {n} · {e['titulo']}: {msg}\")\n    return ok\n\n\ndef pista(n):\n    \"\"\"Muestra los pasos para pensar el ejercicio n.\"\"\"\n    e = ejercicios()[str(n)]\n    print(f\"Ejercicio {n} · {e['titulo']}\")\n    for i, paso in enumerate(e[\"pasos\"], 1):\n        print(f\"  {i}. {paso.replace('`', '')}\")\n\n\ndef solucion(n):\n    \"\"\"Muestra el código de la solución y la idea clave.\"\"\"\n    e = ejercicios()[str(n)]\n    print(e[\"code\"])\n    print(\"\\nClave:\", e[\"nota\"].replace(\"`\", \"\"))\n\n\n# ---------------------------------------------------------------- para la presentación (Pyodide)\n_CACHE = {}\n\n\ndef _navegador(codigo, n=None):\n    \"\"\"Ejecuta código del navegador y devuelve JSON con el resultado (y la comparación si hay ejercicio).\"\"\"\n    import contextlib\n    import io\n    import traceback\n    salida = io.StringIO()\n    res = {}\n    try:\n        if \"datos\" not in _CACHE:\n            _CACHE[\"datos\"] = cargar(\"datos\")\n        ventas, clientes = _CACHE[\"datos\"]\n        with contextlib.redirect_stdout(salida):\n            valor = ejecutar(codigo, ventas, clientes)\n        res[\"tabla\"] = tabla(valor)\n        res[\"texto\"] = None if isinstance(valor, (pd.DataFrame, pd.Series)) or valor is None else repr(valor)\n        if n is not None:\n            if n not in _CACHE:\n                _CACHE[n] = tabla(ejecutar(ejercicios()[n][\"code\"], ventas, clientes))\n            ok, msg = comparar(res[\"tabla\"], _CACHE[n], ejercicios()[n].get(\"ordenado\", False))\n            if valor is None:\n                ok, msg = False, \"La última línea no devuelve nada: termina con la expresión del resultado (por ejemplo, el DataFrame).\"\n            res[\"ok\"], res[\"msg\"] = ok, msg\n    except Exception as exc:  # noqa: BLE001 - se muestra al usuario\n        linea = traceback.format_exception_only(type(exc), exc)[-1].strip()\n        res[\"error\"] = linea\n    res[\"stdout\"] = salida.getvalue()[-3000:]\n    return json.dumps(res, ensure_ascii=False, default=str)\n\n\nif __name__ == \"__main__\":\n    v, c = cargar()\n    malos = [n for n in ejercicios() if not comparar(tabla(esperado(n, v, c)), tabla(esperado(n, v, c)), True)[0]]\n    print(\"Todas las soluciones corren\" if not malos else f\"Fallan: {malos}\")\n","items":[{"id":"1","nivel":"basico","titulo":"Dimensiones","en":"How many rows and columns does `ventas` have?","es":"¿Cuántas filas y columnas tiene `ventas`?","code":"ventas.shape","nota":"`shape` es un atributo (sin paréntesis) y devuelve una tupla `(filas, columnas)`.","pasos":["Todo DataFrame sabe su tamaño: no hay que contar nada.","`ventas.shape` → `(filas, columnas)`."],"ordenado":false},{"id":"2","nivel":"basico","titulo":"Columnas y primeras filas","en":"Show the columns `pedido_id`, `producto` and `cantidad` of the first 5 rows.","es":"Muestra las columnas `pedido_id`, `producto` y `cantidad` de las primeras 5 filas.","code":"ventas[['pedido_id', 'producto', 'cantidad']].head(5)","nota":"Doble corchete: la lista de columnas va dentro de `[...]`. Con un solo nombre obtienes una Series.","pasos":["Varias columnas → pasa una lista: `ventas[['a', 'b']]`.","`.head(5)` corta las primeras 5 filas."],"ordenado":true},{"id":"3","nivel":"basico","titulo":"Valores únicos","en":"How many distinct customers and distinct products appear in the sales?","es":"¿Cuántos clientes distintos y cuántos productos distintos aparecen en las ventas?","code":"ventas[['cliente_id', 'producto']].nunique()","nota":"`nunique()` cuenta valores distintos por columna e ignora los NaN.","pasos":["Selecciona las dos columnas.","`.nunique()` devuelve un conteo por columna."],"ordenado":false},{"id":"4","nivel":"basico","titulo":"Frecuencias","en":"How many sale lines does each category have? Most frequent first.","es":"¿Cuántas líneas de venta tiene cada categoría? La más frecuente primero.","code":"ventas['categoria'].value_counts()","nota":"`value_counts()` ya ordena de mayor a menor. Con `normalize=True` da proporciones.","pasos":["Una sola columna → Series.","`value_counts()` cuenta cuántas veces aparece cada valor."],"ordenado":true},{"id":"5","nivel":"basico","titulo":"Filtro con dos condiciones","en":"Return `pedido_id`, `producto` and `cantidad` of the `Artesanías` lines with a quantity of 2 or more.","es":"Devuelve `pedido_id`, `producto` y `cantidad` de las líneas de `Artesanías` con cantidad de 2 o más.","code":"ventas.loc[(ventas['categoria'] == 'Artesanías') & (ventas['cantidad'] >= 2),\n           ['pedido_id', 'producto', 'cantidad']]","nota":"Con máscaras se usa `&` y `|` (no `and`/`or`) y cada condición va entre paréntesis.","pasos":["Cada condición es una Series de True/False (una máscara).","Únelas con `&`, cada una entre paréntesis.","`.loc[filas, columnas]` filtra y elige columnas a la vez."],"ordenado":false},{"id":"6","nivel":"basico","titulo":"isin","en":"How many sale lines from `Istmina` or `Tadó` were NOT cancelled?","es":"¿Cuántas líneas de venta de `Istmina` o `Tadó` NO fueron canceladas?","code":"ventas[ventas['municipio'].isin(['Istmina', 'Tadó']) & (ventas['estado'] != 'cancelado')].shape[0]","nota":"`isin([...])` equivale al `IN (...)` de SQL. `len(df)` también cuenta filas.","pasos":["`isin` reemplaza varios `==` unidos con `|`.","Combina con la condición de estado.","Cuenta filas con `.shape[0]` o `len()`."],"ordenado":false},{"id":"7","nivel":"basico","titulo":"Fechas: Fiestas de San Pacho","en":"How many distinct orders were placed during the San Pacho festivities (2024-09-20 to 2024-10-04, inclusive)?","es":"¿Cuántos pedidos distintos se hicieron durante las Fiestas de San Pacho (del 2024-09-20 al 2024-10-04, inclusive)?","code":"ventas.loc[ventas['fecha'].between('2024-09-20', '2024-10-04'), 'pedido_id'].nunique()","nota":"`between` incluye ambos extremos. Cuenta pedidos con `nunique`: un pedido tiene varias líneas.","pasos":["`fecha` ya es datetime (se leyó con `parse_dates`).","`between(inicio, fin)` es inclusivo.","Un pedido aparece en varias filas → `nunique()`."],"ordenado":false},{"id":"8","nivel":"basico","titulo":"Ingreso total","en":"Create the column `ingreso` (quantity × unit price) and return the total revenue of non-cancelled lines.","es":"Crea la columna `ingreso` (cantidad × precio unitario) y devuelve el ingreso total de las líneas no canceladas.","code":"ventas['ingreso'] = ventas['cantidad'] * ventas['precio_unitario']\nventas.loc[ventas['estado'] != 'cancelado', 'ingreso'].sum()","nota":"Las operaciones entre columnas son vectorizadas: se calculan para todas las filas a la vez, sin bucles.","pasos":["Multiplica dos columnas: el resultado es una columna nueva.","Filtra los no cancelados con `.loc`.","Suma con `.sum()`."],"ordenado":false},{"id":"9","nivel":"basico","titulo":"Top 5 pedidos","en":"Return the 5 orders with the highest total revenue (all statuses), highest first.","es":"Devuelve los 5 pedidos con mayor ingreso total (en cualquier estado), de mayor a menor.","code":"(ventas.assign(ingreso=ventas['cantidad'] * ventas['precio_unitario'])\n       .groupby('pedido_id')['ingreso'].sum()\n       .nlargest(5))","nota":"`nlargest(n)` equivale a `sort_values(ascending=False).head(n)`, y es más rápido.","pasos":["`assign` crea `ingreso` sin modificar `ventas`.","Un pedido tiene varias líneas: suma por `pedido_id`.","`nlargest(5)` toma los 5 mayores."],"ordenado":true},{"id":"10","nivel":"basico","titulo":"Condición vectorizada","en":"Label each line `Mayorista` if the quantity is 10 or more, otherwise `Detal`, and count each label.","es":"Etiqueta cada línea como `Mayorista` si la cantidad es 10 o más y `Detal` si no, y cuenta cada etiqueta.","code":"tipo = np.where(ventas['cantidad'] >= 10, 'Mayorista', 'Detal')\npd.Series(tipo).value_counts()","nota":"`np.where(condición, si, no)` es el `CASE WHEN` de pandas. Para más de dos casos: `np.select`.","pasos":["`np.where` evalúa la condición fila por fila, vectorizado.","Convierte a Series para usar `value_counts()`."],"ordenado":false},{"id":"11","nivel":"basico","titulo":"Rangos con pd.cut","en":"Classify `precio_unitario` into `Bajo` (≤ 20,000), `Medio` (≤ 100,000) and `Alto` (≤ 500,000) and count the lines in each range, in that order.","es":"Clasifica `precio_unitario` en `Bajo` (≤ 20.000), `Medio` (≤ 100.000) y `Alto` (≤ 500.000) y cuenta las líneas de cada rango, en ese orden.","code":"rango = pd.cut(ventas['precio_unitario'], bins=[0, 20000, 100000, 500000],\n               labels=['Bajo', 'Medio', 'Alto'])\nrango.value_counts().sort_index()","nota":"`pd.cut` usa intervalos cerrados a la derecha: `(0, 20000]`. `sort_index()` respeta el orden de las etiquetas.","pasos":["`bins` son los bordes; `labels`, los nombres.","`value_counts()` ordena por frecuencia: `sort_index()` vuelve al orden Bajo, Medio, Alto."],"ordenado":true},{"id":"12","nivel":"limpieza","titulo":"Contar faltantes","en":"How many missing values does each column of `clientes` have?","es":"¿Cuántos valores faltantes tiene cada columna de `clientes`?","code":"clientes.isna().sum()","nota":"`isna()` da True donde falta el dato; al sumar, cada True vale 1.","pasos":["`isna()` devuelve una tabla de True/False del mismo tamaño.","`.sum()` suma por columna."],"ordenado":false},{"id":"13","nivel":"limpieza","titulo":"Duplicados","en":"How many fully duplicated rows are there in `clientes`?","es":"¿Cuántas filas completamente duplicadas hay en `clientes`?","code":"clientes.duplicated().sum()","nota":"`duplicated()` marca como True las repeticiones (no la primera aparición). `subset=[...]` mira solo algunas columnas.","pasos":["`duplicated()` marca cada fila repetida.","Súmalas para contarlas."],"ordenado":false},{"id":"14","nivel":"limpieza","titulo":"Normalizar texto","en":"Clean the `municipio` column of `clientes` (spaces, capitalisation and missing accents) and count the customers per municipality.","es":"Limpia la columna `municipio` de `clientes` (espacios, mayúsculas y tildes que faltan) y cuenta los clientes por municipio.","code":"municipio = (clientes['municipio'].str.strip().str.title()\n             .replace({'Quibdo': 'Quibdó', 'Bahia Solano': 'Bahía Solano'}))\nmunicipio.value_counts()","nota":"El accesor `.str` aplica métodos de texto a toda la columna. Mira siempre `value_counts()` antes y después de limpiar.","pasos":["`.str.strip()` quita espacios a los lados.","`.str.title()` deja «Quibdó», «Istmina».","`.replace({...})` corrige los que no tienen tilde."],"ordenado":false},{"id":"15","nivel":"limpieza","titulo":"Limpieza completa","en":"Build a clean copy of `clientes`: no duplicates, clean `municipio`, `segmento` capitalised and missing emails replaced by `sin correo`. Return its shape.","es":"Construye una copia limpia de `clientes`: sin duplicados, `municipio` limpio, `segmento` con mayúscula inicial y los correos faltantes como `sin correo`. Devuelve sus dimensiones.","code":"limpio = (clientes.drop_duplicates()\n          .assign(municipio=lambda d: d['municipio'].str.strip().str.title()\n                                   .replace({'Quibdo': 'Quibdó', 'Bahia Solano': 'Bahía Solano'}),\n                  segmento=lambda d: d['segmento'].str.capitalize(),\n                  correo=lambda d: d['correo'].fillna('sin correo')))\nlimpio.shape","nota":"Encadenar métodos (method chaining) deja la limpieza en un solo bloque legible. `lambda d:` se refiere al DataFrame en ese paso.","pasos":["Primero `drop_duplicates()`: 42 → 40 filas.","Cada `assign` reemplaza una columna ya limpia.","`fillna('sin correo')` llena los faltantes."],"ordenado":false},{"id":"16","nivel":"limpieza","titulo":"Promedio con faltantes","en":"What is the average rating per category? Round to 2 decimals.","es":"¿Cuál es la calificación promedio por categoría? Redondea a 2 decimales.","code":"ventas.groupby('categoria')['calificacion'].mean().round(2)","nota":"`mean()` ignora los NaN: promedia solo las líneas calificadas. Para contarlas: `count()`.","pasos":["Agrupa por categoría.","`mean()` salta los NaN solo.","`.round(2)` al final."],"ordenado":false},{"id":"17","nivel":"agrupar","titulo":"Ingreso por categoría","en":"Calculate the revenue of each category (non-cancelled lines), highest first.","es":"Calcula el ingreso de cada categoría (líneas no canceladas), de mayor a menor.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\nv.groupby('categoria')['ingreso'].sum().sort_values(ascending=False)","nota":"Patrón dividir-aplicar-combinar: `groupby(clave)[columna].agregación()`.","pasos":["Filtra y crea `ingreso` en un solo paso.","`groupby('categoria')['ingreso'].sum()`.","Ordena con `sort_values(ascending=False)`."],"ordenado":true},{"id":"18","nivel":"agrupar","titulo":"Agregación con nombre","en":"For each municipality (non-cancelled lines) show the number of distinct orders, units sold and revenue, sorted by revenue (highest first).","es":"Para cada municipio (líneas no canceladas) muestra el número de pedidos distintos, las unidades vendidas y el ingreso, ordenado por ingreso de mayor a menor.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\n(v.groupby('municipio')\n  .agg(pedidos=('pedido_id', 'nunique'), unidades=('cantidad', 'sum'), ingreso=('ingreso', 'sum'))\n  .sort_values('ingreso', ascending=False))","nota":"La agregación con nombre `nuevo=('columna', 'función')` da columnas limpias sin MultiIndex.","pasos":["Una fila por municipio → `groupby('municipio')`.","En `.agg` cada salida es `nombre=(columna, función)`.","Ordena por `ingreso`."],"ordenado":true},{"id":"19","nivel":"agrupar","titulo":"Dos claves","en":"Count the sale lines for every combination of channel and status.","es":"Cuenta las líneas de venta de cada combinación de canal y estado.","code":"ventas.groupby(['canal', 'estado']).size()","nota":"`size()` cuenta filas (incluidos NaN); `count()` cuenta valores no nulos de cada columna.","pasos":["Pasa una lista de claves al `groupby`.","`.size()` da el tamaño de cada grupo.","`.unstack()` lo convierte en tabla."],"ordenado":false},{"id":"20","nivel":"agrupar","titulo":"transform: comparar con el grupo","en":"Find the customers whose total spending (non-cancelled lines) is above the average spending of customers in their municipality.","es":"Encuentra los clientes cuyo gasto total (líneas no canceladas) supera el gasto promedio de los clientes de su municipio.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\ngasto = v.groupby(['municipio', 'cliente_id'], as_index=False)['ingreso'].sum()\ngasto['promedio_municipio'] = gasto.groupby('municipio')['ingreso'].transform('mean')\ngasto[gasto['ingreso'] > gasto['promedio_municipio']]","nota":"`transform` devuelve un valor por fila (no colapsa): es el `AVG(...) OVER (PARTITION BY ...)` de SQL.","pasos":["Primero el gasto por cliente.","`transform('mean')` pone el promedio del municipio en cada fila.","Filtra comparando las dos columnas."],"ordenado":false},{"id":"21","nivel":"agrupar","titulo":"merge: ingreso por segmento","en":"Join the sales (non-cancelled) with the customers table (without duplicates and with `segmento` capitalised) and return the revenue per segment, highest first.","es":"Une las ventas (no canceladas) con la tabla de clientes (sin duplicados y con `segmento` con mayúscula inicial) y devuelve el ingreso por segmento, de mayor a menor.","code":"cli = clientes.drop_duplicates().assign(segmento=lambda d: d['segmento'].str.capitalize())\nv = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\n(v.merge(cli[['cliente_id', 'segmento']], on='cliente_id', how='left')\n  .groupby('segmento')['ingreso'].sum().sort_values(ascending=False))","nota":"`merge(..., on=, how=)` es el JOIN de pandas. Quita duplicados antes de unir o multiplicarás filas.","pasos":["El segmento vive en `clientes`: hay que unir.","Limpia duplicados y mayúsculas antes del merge.","Luego agrupa por segmento."],"ordenado":true},{"id":"22","nivel":"agrupar","titulo":"Anti-join con indicator","en":"Which customers never placed an order? Return `cliente_id` and `nombre`.","es":"¿Qué clientes nunca hicieron un pedido? Devuelve `cliente_id` y `nombre`.","code":"cli = clientes.drop_duplicates()\nm = cli.merge(ventas[['cliente_id']].drop_duplicates(), on='cliente_id', how='left', indicator=True)\nm.loc[m['_merge'] == 'left_only', ['cliente_id', 'nombre']]","nota":"`indicator=True` agrega `_merge` con `both`, `left_only` o `right_only`. Alternativa: `~cli['cliente_id'].isin(ventas['cliente_id'])`.","pasos":["LEFT merge desde clientes conserva a todos.","`indicator=True` dice de dónde vino cada fila.","Los `left_only` no tienen ventas."],"ordenado":false},{"id":"23","nivel":"agrupar","titulo":"Cuidado con el merge","en":"Compare the number of rows of `ventas` with the rows after merging it with `clientes` as it is (with duplicates). Return both numbers.","es":"Compara el número de filas de `ventas` con las filas después de unirla con `clientes` tal como está (con duplicados). Devuelve los dos números.","code":"len(ventas), len(ventas.merge(clientes, on='cliente_id'))","nota":"Si la clave se repite en la tabla derecha, cada venta de ese cliente se duplica. `validate='many_to_one'` lanza un error en ese caso.","pasos":["Cuenta filas antes y después.","Si crecen, la clave no era única en `clientes`."],"ordenado":false},{"id":"24","nivel":"tiempo","titulo":"Ingreso mensual","en":"Return the monthly revenue of 2024 (non-cancelled lines) using `resample`.","es":"Devuelve el ingreso mensual de 2024 (líneas no canceladas) usando `resample`.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\nv.set_index('fecha').resample('MS')['ingreso'].sum()","nota":"`resample` agrupa por periodos de tiempo; necesita la fecha en el índice. `'MS'` = inicio de mes.","pasos":["`resample` trabaja sobre un índice de fechas: `set_index('fecha')`.","`'MS'` agrupa por mes.","Suma el ingreso."],"ordenado":true},{"id":"25","nivel":"tiempo","titulo":"Crecimiento mes a mes","en":"Calculate the month-over-month revenue growth as a percentage, rounded to 1 decimal.","es":"Calcula el crecimiento del ingreso mes a mes en porcentaje, redondeado a 1 decimal.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\nmensual = v.set_index('fecha').resample('MS')['ingreso'].sum()\n(mensual.pct_change() * 100).round(1)","nota":"`pct_change()` = (actual − anterior) / anterior. Es el `LAG` de SQL en una sola función; `shift(1)` trae la fila anterior.","pasos":["Parte del ingreso mensual.","`pct_change()` compara cada mes con el anterior.","×100 y redondea."],"ordenado":true},{"id":"26","nivel":"tiempo","titulo":"Promedio móvil","en":"Calculate the 3-month rolling average of the monthly revenue, rounded to the nearest peso.","es":"Calcula el promedio móvil de 3 meses del ingreso mensual, redondeado al peso.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\nmensual = v.set_index('fecha').resample('MS')['ingreso'].sum()\nmensual.rolling(3).mean().round(0)","nota":"`rolling(3)` toma la fila actual y las 2 anteriores: los dos primeros meses dan NaN. `min_periods=1` lo evita.","pasos":["Ventana de 3 filas: `rolling(3)`.","Aplica `.mean()`.","Los primeros meses no tienen ventana completa."],"ordenado":true},{"id":"27","nivel":"tiempo","titulo":"Acumulado del año","en":"Return the cumulative (running) revenue month by month.","es":"Devuelve el ingreso acumulado mes a mes.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\nmensual = v.set_index('fecha').resample('MS')['ingreso'].sum()\nmensual.cumsum()","nota":"`cumsum()` es el `SUM(...) OVER (ORDER BY ...)` de SQL. Con `groupby(...).cumsum()` se reinicia por grupo.","pasos":["Parte del ingreso mensual.","`cumsum()` va sumando lo anterior."],"ordenado":true},{"id":"28","nivel":"tiempo","titulo":"pivot_table","en":"Build a table with one row per category, one column per quarter and the revenue (non-cancelled lines) in each cell.","es":"Construye una tabla con una fila por categoría, una columna por trimestre y el ingreso (líneas no canceladas) en cada celda.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\n(v.assign(trimestre=v['fecha'].dt.quarter)\n  .pivot_table(index='categoria', columns='trimestre', values='ingreso', aggfunc='sum', fill_value=0))","nota":"`pivot_table` = groupby de dos claves + unstack. El accesor `.dt` extrae partes de una fecha: `.dt.month`, `.dt.quarter`, `.dt.day_name()`.","pasos":["Crea el trimestre con `.dt.quarter`.","`index` = filas, `columns` = columnas, `values` + `aggfunc` = la celda."],"ordenado":false},{"id":"29","nivel":"tiempo","titulo":"crosstab en porcentaje","en":"For each channel, what percentage of its lines is in each status? Round to 1 decimal.","es":"Para cada canal, ¿qué porcentaje de sus líneas está en cada estado? Redondea a 1 decimal.","code":"(pd.crosstab(ventas['canal'], ventas['estado'], normalize='index') * 100).round(1)","nota":"`normalize='index'` hace que cada fila sume 100%. `'columns'` normaliza por columna y `'all'` sobre el total.","pasos":["`pd.crosstab(filas, columnas)` cuenta combinaciones.","`normalize='index'` da proporciones por fila.","×100 y redondea."],"ordenado":false},{"id":"30","nivel":"tiempo","titulo":"melt: de ancho a largo","en":"Turn the category × quarter table of exercise 28 back into long format: columns `categoria`, `trimestre` and `ingreso`.","es":"Vuelve a formato largo la tabla categoría × trimestre del ejercicio 28: columnas `categoria`, `trimestre` e `ingreso`.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\ntabla = (v.assign(trimestre=v['fecha'].dt.quarter)\n           .pivot_table(index='categoria', columns='trimestre', values='ingreso', aggfunc='sum', fill_value=0))\ntabla.reset_index().melt(id_vars='categoria', var_name='trimestre', value_name='ingreso')","nota":"`melt` es lo contrario de `pivot`: cada columna se vuelve filas. Muchos gráficos y modelos piden formato largo.","pasos":["`reset_index()` saca `categoria` del índice.","`id_vars` se queda fija; el resto se apila.","Nombra las nuevas columnas con `var_name` y `value_name`."],"ordenado":false},{"id":"31","nivel":"reto","titulo":"Top 2 productos por categoría","en":"For each category, return the 2 products with the most units sold (non-cancelled lines).","es":"Para cada categoría, devuelve los 2 productos con más unidades vendidas (líneas no canceladas).","code":"u = (ventas[ventas['estado'] != 'cancelado']\n     .groupby(['categoria', 'producto'], as_index=False)['cantidad'].sum())\nu.sort_values(['categoria', 'cantidad'], ascending=[True, False]).groupby('categoria').head(2)","nota":"Ordenar y luego `groupby(...).head(n)` es el «top N por grupo» de pandas (el `ROW_NUMBER() <= n` de SQL).","pasos":["Unidades por producto y categoría.","Ordena por categoría y, dentro, por unidades de mayor a menor.","`groupby('categoria').head(2)`."],"ordenado":true},{"id":"32","nivel":"reto","titulo":"Ranking denso de clientes","en":"Rank customers by total spending (non-cancelled lines) with a dense rank and return the top 5.","es":"Ordena a los clientes por gasto total (líneas no canceladas) con un ranking denso y devuelve los 5 primeros.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\ng = v.groupby('cliente_id')['ingreso'].sum().sort_values(ascending=False).to_frame()\ng['puesto'] = g['ingreso'].rank(method='dense', ascending=False).astype(int)\ng.head(5)","nota":"`rank(method=...)`: `'first'` = ROW_NUMBER, `'min'` = RANK, `'dense'` = DENSE_RANK.","pasos":["Gasto por cliente con `groupby`.","`rank(method='dense', ascending=False)`.","Ordena y toma 5."],"ordenado":true},{"id":"33","nivel":"reto","titulo":"Efecto San Pacho","en":"Compare the average DAILY revenue of `Artesanías` and `Bebidas` during San Pacho (15 days, 2024-09-20 to 2024-10-04) with the rest of 2024 (351 days). Round to the nearest peso.","es":"Compara el ingreso promedio DIARIO de `Artesanías` y `Bebidas` durante San Pacho (15 días, del 2024-09-20 al 2024-10-04) con el resto de 2024 (351 días). Redondea al peso.","code":"v = ventas[ventas['estado'] != 'cancelado'].assign(ingreso=lambda d: d['cantidad'] * d['precio_unitario'])\nv = v[v['categoria'].isin(['Artesanías', 'Bebidas'])]\nen_fiestas = v['fecha'].between('2024-09-20', '2024-10-04')\npd.Series({'San Pacho': v.loc[en_fiestas, 'ingreso'].sum() / 15,\n           'Resto del año': v.loc[~en_fiestas, 'ingreso'].sum() / 351}).round(0)","nota":"Para comparar periodos de distinta duración, normaliza por día. `~` invierte una máscara.","pasos":["Filtra las dos categorías.","Una máscara para las fechas de fiestas; `~máscara` para el resto.","Divide cada total entre sus días."],"ordenado":false},{"id":"34","nivel":"reto","titulo":"Clientes frecuentes","en":"Frequent customers: what percentage of the customers who bought placed 8 or more orders? Round to 1 decimal.","es":"Clientes frecuentes: ¿qué porcentaje de los clientes que compraron hizo 8 pedidos o más? Redondea a 1 decimal.","code":"pedidos = ventas.groupby('cliente_id')['pedido_id'].nunique()\nround(100 * (pedidos >= 8).mean(), 1)","nota":"El promedio de una máscara True/False es la proporción de True: un truco muy usado para tasas.","pasos":["Pedidos distintos por cliente.","`pedidos >= 8` da True/False.","`.mean()` de booleanos = proporción de True."],"ordenado":false},{"id":"35","nivel":"reto","titulo":"Días entre compras","en":"On average, how many days pass between two consecutive orders of the same customer? Round to 1 decimal.","es":"En promedio, ¿cuántos días pasan entre dos pedidos consecutivos del mismo cliente? Redondea a 1 decimal.","code":"p = ventas[['cliente_id', 'pedido_id', 'fecha']].drop_duplicates().sort_values(['cliente_id', 'fecha'])\np['anterior'] = p.groupby('cliente_id')['fecha'].shift()\nround((p['fecha'] - p['anterior']).dt.days.mean(), 1)","nota":"`groupby(...).shift()` trae la fila anterior dentro del grupo: es el `LAG(...) OVER (PARTITION BY ...)` de SQL.","pasos":["Una fila por pedido: quita duplicados.","Ordena por cliente y fecha; `shift()` por cliente trae el pedido anterior.","La resta de fechas da días con `.dt.days`."],"ordenado":false}],"expected":{"1":{"tipo":"tuple","cols":["[0]","[1]"],"filas":[[421,12]]},"2":{"tipo":"DataFrame","cols":["pedido_id","producto","cantidad"],"filas":[[1,"Borojó (unidad)",20],[2,"Camarón de río (kg)",1],[2,"Tambora de chirimía",1],[3,"Arrechón (botella)",4],[3,"Pargo rojo (kg)",4]]},"3":{"tipo":"Series","cols":["index","valor"],"filas":[["cliente_id",36],["producto",12]]},"4":{"tipo":"Series","cols":["categoria","count"],"filas":[["Artesanías",155],["Bebidas",92],["Pescados",89],["Cosechas",85]]},"5":{"tipo":"DataFrame","cols":["pedido_id","producto","cantidad"],"filas":[[3,"Canasto de werregue",2],[8,"Aretes de chaquira",2],[11,"Aretes de chaquira",2],[13,"Aretes de chaquira",2],[17,"Canasto de werregue",2],[19,"Aretes de chaquira",3],[20,"Mochila de damagua",2],[21,"Canasto de werregue",2],[30,"Aretes de chaquira",4],[34,"Aretes de chaquira",2],[35,"Aretes de chaquira",3],[43,"Aretes de chaquira",3],[48,"Aretes de chaquira",2],[49,"Canasto de werregue",2],[52,"Aretes de chaquira",4],[53,"Mochila de damagua",2],[55,"Canasto de werregue",2],[61,"Aretes de chaquira",2],[62,"Canasto de werregue",2],[63,"Aretes de chaquira",4],[63,"Canasto de werregue",2],[64,"Aretes de chaquira",3],[65,"Mochila de damagua",3],[70,"Aretes de chaquira",4],[78,"Aretes de chaquira",3],[82,"Aretes de chaquira",4],[84,"Mochila de damagua",2],[87,"Mochila de damagua",3],[89,"Aretes de chaquira",4],[90,"Mochila de damagua",2],[93,"Canasto de werregue",2],[128,"Canasto de werregue",2],[128,"Aretes de chaquira",4],[134,"Mochila de damagua",3],[138,"Canasto de werregue",2],[149,"Mochila de damagua",3],[155,"Canasto de werregue",2],[158,"Aretes de chaquira",2],[159,"Aretes de chaquira",2],[161,"Aretes de chaquira",4],[161,"Canasto de werregue",2],[162,"Canasto de werregue",2],[163,"Mochila de damagua",3],[166,"Aretes de chaquira",2],[167,"Aretes de chaquira",4],[171,"Canasto de werregue",2],[180,"Canasto de werregue",2],[186,"Aretes de chaquira",4],[192,"Canasto de werregue",2],[202,"Canasto de werregue",2],[203,"Mochila de damagua",2],[204,"Mochila de damagua",2],[206,"Mochila de damagua",3],[208,"Mochila de damagua",2],[211,"Aretes de chaquira",2],[214,"Mochila de damagua",2],[215,"Canasto de werregue",2],[217,"Mochila de damagua",2],[219,"Aretes de chaquira",2],[220,"Mochila de damagua",2]]},"6":{"tipo":"int","cols":["valor"],"filas":[[52]]},"7":{"tipo":"int","cols":["valor"],"filas":[[25]]},"8":{"tipo":"int64","cols":["valor"],"filas":[[65681800]]},"9":{"tipo":"Series","cols":["pedido_id","ingreso"],"filas":[[3,1132000],[93,1076500],[155,1036000],[27,1005000],[202,1000000]]},"10":{"tipo":"Series","cols":["index","count"],"filas":[["Detal",392],["Mayorista",29]]},"11":{"tipo":"Series","cols":["precio_unitario","count"],"filas":[["Bajo",113],["Medio",223],["Alto",85]]},"12":{"tipo":"Series","cols":["index","valor"],"filas":[["cliente_id",0],["nombre",0],["correo",3],["municipio",0],["departamento",0],["segmento",0],["fecha_registro",0]]},"13":{"tipo":"int64","cols":["valor"],"filas":[[2]]},"14":{"tipo":"Series","cols":["municipio","count"],"filas":[["Quibdó",15],["Condoto",5],["Istmina",4],["Bogotá",4],["Medellín",3],["Cali",3],["Tadó",2],["Bahía Solano",2],["Acandí",2],["Turbo",1],["Nuquí",1]]},"15":{"tipo":"tuple","cols":["[0]","[1]"],"filas":[[40,7]]},"16":{"tipo":"Series","cols":["categoria","calificacion"],"filas":[["Artesanías",4.16],["Bebidas",4.05],["Cosechas",4.11],["Pescados",3.91]]},"17":{"tipo":"Series","cols":["categoria","ingreso"],"filas":[["Artesanías",36836500],["Bebidas",12039600],["Pescados",11347800],["Cosechas",5457900]]},"18":{"tipo":"DataFrame","cols":["municipio","pedidos","unidades","ingreso"],"filas":[["Quibdó",95,731,27552700],["Medellín",19,140,7214500],["Condoto",18,120,7022000],["Istmina",21,135,5414500],["Acandí",16,120,4724000],["Tadó",13,106,4522000],["Cali",14,84,4289600],["Bogotá",6,55,2330500],["Turbo",4,27,1327000],["Bahía Solano",6,22,1285000]]},"19":{"tipo":"Series","cols":["canal","estado","valor"],"filas":[["Tienda física","cancelado",11],["Tienda física","entregado",93],["Tienda física","enviado",6],["Web","cancelado",8],["Web","entregado",69],["Web","enviado",9],["WhatsApp","cancelado",18],["WhatsApp","entregado",176],["WhatsApp","enviado",31]]},"20":{"tipo":"DataFrame","cols":["municipio","cliente_id","ingreso","promedio_municipio"],"filas":[["Acandí",13,2885000,2362000],["Bahía Solano",10,910000,642500],["Cali",29,3327600,2144800],["Condoto",7,2917200,1755500],["Condoto",28,2433000,1755500],["Istmina",26,1599500,1353625],["Istmina",37,2431400,1353625],["Medellín",14,3815000,2404833.3333],["Quibdó",3,2821500,1836846.6667],["Quibdó",12,2507000,1836846.6667],["Quibdó",15,2581400,1836846.6667],["Quibdó",16,2894000,1836846.6667],["Quibdó",21,3248500,1836846.6667],["Quibdó",24,2720000,1836846.6667],["Quibdó",33,2107600,1836846.6667],["Tadó",9,3233000,2261000]]},"21":{"tipo":"Series","cols":["segmento","ingreso"],"filas":[["Hogar",35727000],["Tienda",21903600],["Restaurante",8051200]]},"22":{"tipo":"DataFrame","cols":["cliente_id","nombre"],"filas":[[27,"Faustino Chaverra"],[38,"Wilmer Rentería"],[39,"Nelly Bejarano"],[40,"Ana Lucía Perea"]]},"23":{"tipo":"tuple","cols":["[0]","[1]"],"filas":[[421,449]]},"24":{"tipo":"Series","cols":["fecha","ingreso"],"filas":[["2024-01-01",4986800],["2024-02-01",3957900],["2024-03-01",6972400],["2024-04-01",3632500],["2024-05-01",3142100],["2024-06-01",6279700],["2024-07-01",4339500],["2024-08-01",5740500],["2024-09-01",7967900],["2024-10-01",6440000],["2024-11-01",2604800],["2024-12-01",9617700]]},"25":{"tipo":"Series","cols":["fecha","ingreso"],"filas":[["2024-01-01",null],["2024-02-01",-20.6],["2024-03-01",76.2],["2024-04-01",-47.9],["2024-05-01",-13.5],["2024-06-01",99.9],["2024-07-01",-30.9],["2024-08-01",32.3],["2024-09-01",38.8],["2024-10-01",-19.2],["2024-11-01",-59.6],["2024-12-01",269.2]]},"26":{"tipo":"Series","cols":["fecha","ingreso"],"filas":[["2024-01-01",null],["2024-02-01",null],["2024-03-01",5305700],["2024-04-01",4854267],["2024-05-01",4582333],["2024-06-01",4351433],["2024-07-01",4587100],["2024-08-01",5453233],["2024-09-01",6015967],["2024-10-01",6716133],["2024-11-01",5670900],["2024-12-01",6220833]]},"27":{"tipo":"Series","cols":["fecha","ingreso"],"filas":[["2024-01-01",4986800],["2024-02-01",8944700],["2024-03-01",15917100],["2024-04-01",19549600],["2024-05-01",22691700],["2024-06-01",28971400],["2024-07-01",33310900],["2024-08-01",39051400],["2024-09-01",47019300],["2024-10-01",53459300],["2024-11-01",56064100],["2024-12-01",65681800]]},"28":{"tipo":"DataFrame","cols":["categoria","1","2","3","4"],"filas":[["Artesanías",8462500,7449000,9878000,11047000],["Bebidas",2542600,2408200,3435000,3653800],["Cosechas",1575600,1265100,1219500,1397700],["Pescados",3336400,1932000,3515400,2564000]]},"29":{"tipo":"DataFrame","cols":["canal","cancelado","entregado","enviado"],"filas":[["Tienda física",10,84.5,5.5],["Web",9.3,80.2,10.5],["WhatsApp",8,78.2,13.8]]},"30":{"tipo":"DataFrame","cols":["categoria","trimestre","ingreso"],"filas":[["Artesanías",1,8462500],["Bebidas",1,2542600],["Cosechas",1,1575600],["Pescados",1,3336400],["Artesanías",2,7449000],["Bebidas",2,2408200],["Cosechas",2,1265100],["Pescados",2,1932000],["Artesanías",3,9878000],["Bebidas",3,3435000],["Cosechas",3,1219500],["Pescados",3,3515400],["Artesanías",4,11047000],["Bebidas",4,3653800],["Cosechas",4,1397700],["Pescados",4,2564000]]},"31":{"tipo":"DataFrame","cols":["categoria","producto","cantidad"],"filas":[["Artesanías","Aretes de chaquira",89],["Artesanías","Mochila de damagua",49],["Bebidas","Viche (botella)",155],["Bebidas","Arrechón (botella)",137],["Cosechas","Borojó (unidad)",356],["Cosechas","Chontaduro (racimo)",128],["Pescados","Bocachico (kg)",189],["Pescados","Pargo rojo (kg)",136]]},"32":{"tipo":"DataFrame","cols":["cliente_id","ingreso","puesto"],"filas":[[14,3815000,1],[29,3327600,2],[21,3248500,3],[9,3233000,4],[7,2917200,5]]},"33":{"tipo":"Series","cols":["index","valor"],"filas":[["San Pacho",536067],["Resto del año",116339]]},"34":{"tipo":"float64","cols":["valor"],"filas":[[30.6]]},"35":{"tipo":"float64","cols":["valor"],"filas":[[48.4]]}},"demos":{"head":{"tipo":"DataFrame","cols":["pedido_id","fecha","cliente_id","municipio","departamento","canal","producto","categoria","cantidad","precio_unitario","estado","calificacion"],"filas":[[1,"2024-01-04",30,"Acandí","Chocó","WhatsApp","Borojó (unidad)","Cosechas",20,6000,"entregado",5],[2,"2024-01-05",26,"Istmina","Chocó","Web","Camarón de río (kg)","Pescados",1,40000,"cancelado",null],[2,"2024-01-05",26,"Istmina","Chocó","Web","Tambora de chirimía","Artesanías",1,280000,"cancelado",null]]},"describe":{"tipo":"DataFrame","cols":["index","cantidad","precio_unitario"],"filas":[["count",421,421],["mean",4,91864],["std",4,126299],["min",1,5400],["25%",1,18000],["50%",3,38000],["75%",5,60000],["max",20,420000]]},"query":{"tipo":"DataFrame","cols":["fecha","municipio","producto","cantidad"],"filas":[["2024-01-20","Medellín","Arrechón (botella)",5],["2024-01-28","Cali","Arrechón (botella)",5],["2024-02-11","Bogotá","Arrechón (botella)",6],["2024-03-02","Quibdó","Viche (botella)",6],["2024-03-07","Quibdó","Viche (botella)",5]]},"assign":{"tipo":"DataFrame","cols":["producto","cantidad","ingreso","tipo"],"filas":[["Canasto de werregue",2,840000,"Detal"],["Canasto de werregue",2,840000,"Detal"],["Canasto de werregue",2,840000,"Detal"],["Canasto de werregue",2,840000,"Detal"],["Canasto de werregue",2,840000,"Detal"]]},"agg":{"tipo":"DataFrame","cols":["canal","pedidos","ingreso","calificacion"],"filas":[["Tienda física",53,20746100,4],["Web",50,14245600,4.14],["WhatsApp",127,37637500,4.09]]},"transform":{"tipo":"DataFrame","cols":["pedido_id","producto","ingreso","total_pedido","pct_del_pedido"],"filas":[[1,"Borojó (unidad)",120000,120000,100],[2,"Camarón de río (kg)",40000,320000,12.5],[2,"Tambora de chirimía",280000,320000,87.5],[3,"Arrechón (botella)",152000,1132000,13.4],[3,"Pargo rojo (kg)",140000,1132000,12.4]]},"mensual":{"tipo":"Series","cols":["fecha","ingreso"],"filas":[["2024-01-01",4986800],["2024-02-01",3957900],["2024-03-01",6972400],["2024-04-01",3632500],["2024-05-01",3142100],["2024-06-01",6279700],["2024-07-01",4339500],["2024-08-01",5740500],["2024-09-01",7967900],["2024-10-01",6440000],["2024-11-01",2604800],["2024-12-01",9617700]]},"crosstab":{"tipo":"DataFrame","cols":["categoria","Tienda física","Web","WhatsApp","Total"],"filas":[["Artesanías",34,32,89,155],["Bebidas",20,18,54,92],["Cosechas",27,19,39,85],["Pescados",29,17,43,89],["Total",110,86,225,421]]}}}</script><!-- DECK-DATA-END -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+(() => {
+"use strict";
+const DATA = JSON.parse(document.getElementById("deck-data").textContent);
+const EX = Object.fromEntries(DATA.items.map(i => [i.id, i]));
+const LEVEL = {
+  basico: { label: "Nivel básico", min: 3 },
+  limpieza: { label: "Limpieza", min: 4 },
+  agrupar: { label: "groupby y merge", min: 6 },
+  tiempo: { label: "Fechas y reshape", min: 6 },
+  reto: { label: "Reto de entrevista", min: 10 },
+};
+const TABLES = ["ventas", "clientes"];
+const PYODIDE = "https://cdn.jsdelivr.net/pyodide/v0.26.4/full/";
+const STORE = "mercado-pacifico-pandas-v1";
+const INFRAME = window.self !== window.top;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const md = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const ICON_PLAY = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>';
+const ICON_CLOCK = '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 6v3l2 1.5M6 1.5h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+
+// ---------------------------------------------------------------- avance guardado en el navegador
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(STORE) || "{}") || {}; } catch { progress = {}; }
+function save() { try { localStorage.setItem(STORE, JSON.stringify(progress)); } catch { /* sin almacenamiento */ } }
+function mark(id, state) {
+  const prev = progress[id];
+  if (prev === "ok" || prev === state) return;
+  progress[id] = state; save(); paintProgress();
+}
+
+// ---------------------------------------------------------------- diapositivas generadas
+const agenda = [["m1", "Anatomía de un DataFrame", "Índice, Series, dtype"], ["m2", "Explorar", "Ej. 1–4"], ["m3", "Seleccionar y filtrar", "Ej. 5–7"],
+  ["m4", "Columnas nuevas", "Ej. 8–11"], ["m5", "Limpieza", "Ej. 12–16"], ["m6", "groupby", "Ej. 17–20"], ["m7", "merge", "Ej. 21–23"],
+  ["m8", "Fechas", "Ej. 24–27"], ["m9", "Reorganizar tablas", "Ej. 28–30"], ["m10", "Patrones y errores", "Ej. 31–35"]];
+document.getElementById("agenda").innerHTML = agenda.map(([id, t, x], i) =>
+  `<button type="button" class="fragment rise" data-goto="${id}"><span class="n">${String(i + 1).padStart(2, "0")}</span><span class="t">${t}</span><span class="x">${x}</span></button>`).join("");
+
+function editorHTML(id, value) {
+  return `<div class="editor"><pre aria-hidden="true"><code></code></pre><textarea id="ed-${id}" spellcheck="false" wrap="off" aria-label="Tu código para el ejercicio ${id}">${esc(value)}</textarea></div>`;
+}
+document.querySelectorAll("section[data-ex]").forEach(sec => {
+  const it = EX[sec.dataset.ex], lv = LEVEL[it.nivel];
+  const used = TABLES.filter(t => new RegExp(`\\b${t}\\b`).test(it.code));
+  let draft = `# Ejercicio ${it.id}: escribe tu código; la última línea es el resultado\n`;
+  try { draft = localStorage.getItem(`${STORE}:draft:${it.id}`) || draft; } catch { /* sin almacenamiento */ }
+  sec.classList.add("ex");
+  let prev = sec.previousElementSibling;
+  while (prev && !prev.classList.contains("divider")) prev = prev.previousElementSibling;
+  const modName = prev ? `${prev.querySelector(".num").textContent} · ${prev.querySelector("h2").textContent}` : "";
+  sec.dataset.mod = `${modName} · ejercicio ${it.id} de ${DATA.items.length}`;
+  sec.dataset.transition = "slide-in fade-out";
+  sec.innerHTML = `
+    <div class="ex-head"><span class="lvl lvl-${it.nivel}">${lv.label}</span><span class="done-badge">✓ resuelto</span>
+      <button type="button" class="timer" data-min="${lv.min}" title="Iniciar o pausar el cronómetro">${ICON_CLOCK}<span>${lv.min}:00</span></button></div>
+    <h3 class="ex-title">${esc(it.titulo)}</h3>
+    <div class="ex-grid workbench" data-id="${it.id}">
+      <div>
+        <p class="q-en">${md(it.en)}</p>
+        <p class="q-es">${md(it.es)}</p>
+        <div class="tables">${used.map(t => `<span class="chip">${t}</span>`).join("")}</div>
+        <div class="think"><span class="kicker">Cómo pensarlo</span><ol>${it.pasos.map(x => `<li class="fragment rise">${md(x)}</li>`).join("")}</ol></div>
+        <div class="note" hidden><b>Clave:</b> ${md(it.nota)}</div>
+      </div>
+      <div>
+        ${editorHTML(it.id, draft)}
+        <div class="actions">
+          <button type="button" class="btn primary run">${ICON_PLAY} Ejecutar <kbd>Ctrl</kbd>+<kbd>Enter</kbd></button>
+          <button type="button" class="btn check">Comprobar</button>
+          <button type="button" class="btn sol">Ver solución</button>
+          <button type="button" class="btn clear">Limpiar</button>
+        </div>
+        <div class="out"><div class="status">Escribe tu código y ejecútalo. «Comprobar» compara tu resultado con el esperado.</div><div class="grid"></div></div>
+      </div>
+    </div>
+    <aside class="notes">
+      <p><strong>Ejercicio ${it.id} · ${esc(it.titulo)}</strong> (${lv.label}, ${lv.min} min). Leer el enunciado en inglés en voz alta y pedir que identifiquen qué tabla, qué filtro y qué forma tiene el resultado (número, Series o DataFrame).</p>
+      <p>Explicación paso a paso (cada paso aparece al avanzar): ${it.pasos.map((x, i) => `${i + 1}) ${md(x)}`).join(" ")}</p>
+      <p>Pista corta si se traban: ${md(hint(it))}</p>
+      <p>Idea clave: ${md(it.nota)}</p>
+      <p>Solución:</p><pre style="font-size:12px;white-space:pre-wrap">${esc(it.code)}</pre>
+    </aside>`;
+  if (progress[it.id] === "ok") sec.classList.add("solved");
+});
+function hint(it) {
+  const c = it.code, h = [];
+  if (c.includes("groupby")) h.push("agrupa con groupby");
+  if (c.includes("merge")) h.push("une las tablas con merge");
+  if (c.includes("transform")) h.push("usa transform para conservar las filas");
+  if (c.includes("resample")) h.push("pon la fecha en el índice y usa resample");
+  if (c.includes(".str.")) h.push("limpia el texto con el accesor .str");
+  if (c.includes("cancelado")) h.push("excluye los pedidos cancelados");
+  if (c.includes("nunique")) h.push("cuenta pedidos con nunique, no con filas");
+  return h.length ? h.join("; ") + "." : "empieza por explorar la columna que necesitas.";
+}
+
+// Diagramas de Venn
+let vennN = 0;
+document.querySelectorAll(".venn").forEach(el => {
+  const t = el.dataset.type, n = vennN++;
+  const A = ["left", "full", "anti"].includes(t), B = ["right", "full"].includes(t), I = ["inner", "left", "right", "full"].includes(t);
+  const fill = "rgba(29,243,244,.55)", bg = "#052846";
+  el.innerHTML = `<svg viewBox="0 0 200 124" role="img" aria-label="${t}">
+    <defs><clipPath id="vA${n}"><circle cx="78" cy="62" r="50"/></clipPath></defs>
+    <circle cx="78" cy="62" r="50" fill="${A ? fill : bg}"/>
+    <circle cx="122" cy="62" r="50" fill="${B ? fill : bg}"/>
+    <circle cx="122" cy="62" r="50" fill="${I ? fill : bg}" clip-path="url(#vA${n})"/>
+    <circle cx="78" cy="62" r="50" fill="none" stroke="#a2f3f3" stroke-width="2"/>
+    <circle cx="122" cy="62" r="50" fill="none" stroke="#a2f3f3" stroke-width="2"/>
+    <text x="52" y="68" fill="#eaf6ff" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">A</text>
+    <text x="136" y="68" fill="#eaf6ff" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">B</text></svg>`;
+});
+
+// Lista de tablas del laboratorio
+const COLS = {
+  ventas: "pedido_id, fecha, cliente_id, municipio, departamento, canal, producto, categoria, cantidad, precio_unitario, estado, calificacion",
+  clientes: "cliente_id, nombre, correo, municipio, departamento, segmento, fecha_registro",
+};
+document.getElementById("schema-list").innerHTML = TABLES.map(t => `<button type="button" data-table="${t}"><b>${t}</b><span>${COLS[t]}</span></button>`).join("");
+
+// Botones «Ejecutar» bajo los bloques de código en vivo
+document.querySelectorAll("pre.live").forEach(pre => {
+  const bar = document.createElement("div");
+  bar.className = "live-bar";
+  bar.innerHTML = `<button type="button" class="btn primary live-run">${ICON_PLAY} Ejecutar</button><span class="small">Python y pandas en tu navegador</span>`;
+  const out = document.createElement("div");
+  out.className = "live-out";
+  // El código original se guarda antes de que el resaltado parta el código en filas de tabla.
+  const raw = pre.querySelector("code").textContent.replace(/^\n+|\s+$/g, "");
+  const indent = Math.min(...raw.split("\n").filter(l => l.trim()).map(l => l.match(/^ */)[0].length));
+  pre.dataset.sql = raw.split("\n").map(l => l.slice(indent)).join("\n");
+  pre.after(bar); bar.after(out);
+  if (pre.classList.contains("fragment")) { bar.classList.add("fragment", "rise"); bar.dataset.fragmentIndex = pre.dataset.fragmentIndex; }
+});
+
+// ---------------------------------------------------------------- motor: Python + pandas en WebAssembly (Pyodide)
+// Corre en la página. Si no se puede descargar (sin internet o en un visor que bloquea la descarga), la presentación
+// muestra los resultados esperados, calculados con pandas al construirla.
+let enginePromise = null, engineFailed = false;
+const pyStatus = document.getElementById("py-status");
+function setPy(cls, text) { pyStatus.className = "py-status " + cls; pyStatus.textContent = text; }
+function loadScript(src) {
+  return new Promise((ok, fail) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = fail; document.head.appendChild(s); });
+}
+function engine() {
+  if (!enginePromise) {
+    setPy("loading", "Python: cargando pandas…");
+    enginePromise = (async () => {
+      await loadScript(PYODIDE + "pyodide.js");
+      const py = await window.loadPyodide({ indexURL: PYODIDE });
+      await py.loadPackage(["pandas"]);
+      py.FS.mkdirTree("/home/pyodide/datos");
+      py.FS.writeFile("/home/pyodide/datos/ventas_mercado_pacifico.csv", DATA.ventas);
+      py.FS.writeFile("/home/pyodide/datos/clientes.csv", DATA.clientes);
+      py.FS.writeFile("/home/pyodide/ejercicios.json", JSON.stringify(DATA.items));
+      py.FS.writeFile("/home/pyodide/comprobar.py", DATA.grader);
+      py.runPython("import os, sys, warnings\nos.chdir('/home/pyodide')\nsys.path.insert(0, '/home/pyodide')\nwarnings.simplefilter('ignore')\nimport comprobar\ncomprobar._navegador('ventas.shape')");
+      setPy("ready", "Python: listo");
+      return py;
+    })().catch(e => { enginePromise = null; engineFailed = true; setPy("fail", "Python: no disponible aquí"); throw e; });
+  }
+  return enginePromise;
+}
+async function execPy(code, n) {
+  const py = await engine();
+  py.globals.set("_codigo", code);
+  py.globals.set("_n", n ?? null);
+  return JSON.parse(py.runPython("comprobar._navegador(_codigo, _n)"));
+}
+const nf = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 2 });
+function cell(v, col) {
+  if (v === null) return '<td class="null">NaN</td>';
+  if (typeof v === "number") return `<td class="n">${/_id$|^id$|^\[\d\]$|^trimestre$|^\d$/.test(col) ? v : nf.format(v)}</td>`;
+  if (typeof v === "boolean") return `<td>${v ? "True" : "False"}</td>`;
+  return `<td>${esc(v)}</td>`;
+}
+function renderGrid(target, res, caption) {
+  const t = res.tabla || { cols: [], filas: [] };
+  let html = res.stdout ? `<pre class="stdout">${esc(res.stdout)}</pre>` : "";
+  if (t.tipo && t.tipo !== "None" && t.cols.length === 1 && t.filas.length === 1 && !["DataFrame", "Series"].includes(t.tipo)) {
+    const v = t.filas[0][0];
+    html += `<div class="cap">${esc(caption || t.tipo)}</div><div class="scalar">${typeof v === "number" ? nf.format(v) : esc(res.texto ?? v)}</div>`;
+  } else if (t.cols.length) {
+    const rows = t.filas.slice(0, 200);
+    html += `<div class="cap">${esc(caption || t.tipo)} · ${t.filas.length}${t.filas.length >= 60 ? "+" : ""} fila${t.filas.length === 1 ? "" : "s"}</div><table><thead><tr>${t.cols.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${
+      rows.map((row, i) => `<tr style="animation-delay:${Math.min(i, 20) * 25}ms">${row.map((v, j) => cell(v, t.cols[j])).join("")}</tr>`).join("")}</tbody></table>`;
+  }
+  target.innerHTML = html;
+}
+function setStatus(el, cls, html) { el.className = "status" + (cls ? " " + cls : ""); el.innerHTML = html; }
+const OFFLINE = "Python no está disponible en esta vista (por ejemplo, en el enlace compartido o sin internet). Abre el archivo de la presentación en Chrome o usa el cuaderno de VS Code para ejecutar tu código.";
+
+// ---------------------------------------------------------------- editor con resaltado
+let hljs = null;
+function paint(ta) {
+  const code = ta.previousElementSibling.firstElementChild;
+  const text = ta.value + (ta.value.endsWith("\n") ? " " : "");
+  code.innerHTML = hljs ? hljs.highlight(text, { language: "python", ignoreIllegals: true }).value : esc(text);
+  ta.previousElementSibling.scrollTop = ta.scrollTop; ta.previousElementSibling.scrollLeft = ta.scrollLeft;
+}
+document.addEventListener("input", e => {
+  if (e.target.matches(".editor textarea")) {
+    paint(e.target);
+    const wb = e.target.closest(".workbench");
+    if (wb && wb.dataset.id) { try { localStorage.setItem(`${STORE}:draft:${wb.dataset.id}`, e.target.value); } catch { /* sin almacenamiento */ } }
+  }
+});
+document.addEventListener("scroll", e => { if (e.target.matches && e.target.matches(".editor textarea")) paint(e.target); }, true);
+document.addEventListener("keydown", e => {
+  const ta = e.target;
+  if (!ta.matches || !ta.matches(".editor textarea")) return;
+  if ((e.ctrlKey || e.metaKey || e.shiftKey) && e.key === "Enter") { e.preventDefault(); runBench(ta.closest(".workbench")); }
+  else if (e.key === "Tab") {
+    e.preventDefault();
+    const s = ta.selectionStart; ta.setRangeText("    ", s, ta.selectionEnd, "end"); paint(ta);
+  }
+  e.stopPropagation();
+}, true);
+
+async function runBench(wb, check = false) {
+  const ta = wb.querySelector("textarea"), status = wb.querySelector(".status"), grid = wb.querySelector(".grid");
+  const code = ta.value;
+  if (!code.replace(/#[^\n]*/g, "").trim()) { setStatus(status, "warn", "El editor está vacío: escribe tu código."); return null; }
+  setStatus(status, "", enginePromise ? "Ejecutando…" : "Cargando Python y pandas (unos segundos la primera vez)…");
+  const t0 = performance.now();
+  try {
+    const r = await execPy(code, check ? wb.dataset.id : null);
+    const ms = Math.round(performance.now() - t0);
+    if (r.error) { grid.innerHTML = r.stdout ? `<pre class="stdout">${esc(r.stdout)}</pre>` : ""; setStatus(status, "err", `Error de Python: ${esc(r.error)}`); return null; }
+    renderGrid(grid, r);
+    if (check) {
+      if (r.ok) {
+        setStatus(status, "okk", `✓ ${esc(r.msg)} Tu resultado coincide con el esperado.`);
+        wb.querySelector(".note").hidden = false;
+        wb.closest("section").classList.add("solved");
+        mark(wb.dataset.id, "ok");
+      } else setStatus(status, "err", `✗ ${esc(r.msg)}`);
+    } else setStatus(status, "", `Listo · ${ms} ms`);
+    return r;
+  } catch (err) {
+    if (engineFailed && wb.dataset.id) {
+      renderGrid(grid, { tabla: DATA.expected[wb.dataset.id] }, "Resultado esperado de la solución");
+      setStatus(status, "warn", OFFLINE);
+    } else { grid.innerHTML = ""; setStatus(status, engineFailed ? "warn" : "err", engineFailed ? OFFLINE : `Error: ${esc(err.message || err)}`); }
+    return null;
+  }
+}
+function checkBench(wb) { return runBench(wb, true); }
+async function showSolution(wb) {
+  const item = EX[wb.dataset.id], ta = wb.querySelector("textarea");
+  const text = item.code;
+  const step = Math.max(2, Math.ceil(text.length / 70));
+  for (let i = 0; i <= text.length; i += step) { ta.value = text.slice(0, i); paint(ta); await sleep(14); }
+  ta.value = text; paint(ta);
+  wb.querySelector(".note").hidden = false;
+  if (engineFailed) {
+    renderGrid(wb.querySelector(".grid"), { tabla: DATA.expected[item.id] }, "Resultado esperado de la solución");
+    setStatus(wb.querySelector(".status"), "warn", "Resultado calculado con pandas al preparar la presentación.");
+  } else await runBench(wb);
+  mark(item.id, "seen");
+}
+
+// ---------------------------------------------------------------- cronómetros
+function startTimer(btn) {
+  if (btn._t) { clearInterval(btn._t); btn._t = null; btn.classList.remove("run"); return; }
+  btn._left ??= Number(btn.dataset.min) * 60;
+  btn.classList.add("run");
+  const label = btn.querySelector("span");
+  const tick = () => {
+    btn._left--;
+    const s = Math.abs(btn._left);
+    label.textContent = `${btn._left < 0 ? "+" : ""}${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+    btn.classList.toggle("warn", btn._left <= 60 && btn._left > 0);
+    btn.classList.toggle("over", btn._left <= 0);
+  };
+  btn._t = setInterval(tick, 1000);
+}
+
+// ---------------------------------------------------------------- clics
+document.addEventListener("click", async e => {
+  const t = e.target.closest("button, .flip");
+  if (!t) return;
+  const wb = t.closest(".workbench");
+  if (t.matches(".run") && wb) runBench(wb);
+  else if (t.matches(".check") && wb) checkBench(wb);
+  else if (t.matches(".sol") && wb) showSolution(wb);
+  else if (t.matches(".clear") && wb) { const ta = wb.querySelector("textarea"); ta.value = ""; paint(ta); ta.focus(); }
+  else if (t.matches(".timer")) startTimer(t);
+  else if (t.matches(".flip")) t.classList.toggle("on");
+  else if (t.matches(".live-run")) {
+    const pre = t.closest(".live-bar").previousElementSibling, out = t.closest(".live-bar").nextElementSibling;
+    out.innerHTML = `<div class="out"><div class="status">${enginePromise ? "Ejecutando…" : "Cargando Python y pandas…"}</div><div class="grid"></div></div>`;
+    const st = out.querySelector(".status"), grid = out.querySelector(".grid");
+    try {
+      const r = await execPy(pre.dataset.sql);
+      if (r.error) setStatus(st, "err", `Error de Python: ${esc(r.error)}`);
+      else { renderGrid(grid, r); setStatus(st, "okk", "Listo"); }
+    } catch {
+      const d = DATA.demos[pre.dataset.demo];
+      if (d) { renderGrid(grid, { tabla: d }, "Resultado calculado con pandas"); setStatus(st, "warn", "Python no está disponible en esta vista: este es el resultado guardado."); }
+      else setStatus(st, "warn", OFFLINE);
+    }
+  }
+  else if (t.dataset.goto) goTo(document.getElementById(t.dataset.goto));
+  else if (t.dataset.ex) goTo(document.querySelector(`section[data-ex="${t.dataset.ex}"]`));
+  else if (t.dataset.table) {
+    const ta = document.getElementById("lab-editor");
+    ta.value = `${t.dataset.table}.head(10)`; paint(ta);
+    runBench(ta.closest(".workbench"));
+  }
+  else if (t.id === "copy-schema") {
+    const msg = document.getElementById("copy-msg");
+    try { await navigator.clipboard.writeText(DATA.schema); msg.textContent = "Script copiado. Pégalo en sqlite3, DB Browser o sqliteonline.com."; }
+    catch { const ta = document.getElementById("lab-editor"); ta.value = DATA.schema; paint(ta); ta.select(); msg.textContent = "No se pudo copiar automáticamente: el script quedó seleccionado en el editor."; }
+  }
+  else if (t.id === "reset-progress") { progress = {}; save(); document.querySelectorAll("section.solved").forEach(s => s.classList.remove("solved")); paintProgress(); }
+  else if (t.id === "notes-toggle") toggleNotes();
+  else if (t.id === "go-lab") goTo(document.getElementById("lab"));
+});
+document.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.matches && e.target.matches(".flip")) e.target.classList.toggle("on"); });
+// ---------------------------------------------------------------- vista de presentador sincronizada
+// Dos pestañas con el mismo enlace se hablan por BroadcastChannel: la del público (compartida en Meet) y la del
+// presentador (notas, cronómetro y siguiente diapositiva). Navegación, clics y código escrito se copian al instante.
+let PRESENTER = /^#?presentador$/i.test(location.hash);
+let remote = false, peerSeen = false, startAt = Date.now();
+const chan = "BroadcastChannel" in window ? new BroadcastChannel("mercado-pacifico-pandas-sync") : null;
+const NOSYNC = new Set(["notes-toggle", "presenter-toggle", "pv-exit", "pv-reset", "pv-prev", "pv-fwd", "pv-overview", "reset-progress", "copy-schema"]);
+const clickables = () => [...document.querySelectorAll(".reveal button, .reveal .flip")];
+function send(msg) { if (chan && !remote) chan.postMessage(msg); }
+function sendNav() { const i = Reveal.getIndices(); send({ t: "nav", h: i.h, v: i.v || 0, f: i.f ?? -1 }); }
+function hello() { send({ t: "hello", role: PRESENTER ? "presenter" : "audience" }); }
+function setLinked(role) {
+  peerSeen = true;
+  if (PRESENTER) { const l = document.getElementById("pv-link"); l.textContent = "Conectado con la pestaña del público"; l.classList.add("on"); }
+  else if (role === "presenter") { document.body.classList.add("has-presenter"); panel.classList.remove("on"); notesBtn.classList.remove("on"); }
+}
+if (chan) chan.onmessage = ({ data: m }) => {
+  if (m.t === "hello") { setLinked(m.role); send({ t: "here", role: PRESENTER ? "presenter" : "audience" }); sendNav(); }
+  else if (m.t === "here") setLinked(m.role);
+  else if (m.t === "nav") {
+    const i = Reveal.getIndices();
+    if (i.h !== m.h || (i.v || 0) !== m.v || (i.f ?? -1) !== m.f) { remote = true; try { Reveal.slide(m.h, m.v, m.f); } finally { remote = false; } }
+  }
+  else if (m.t === "click") { const el = clickables()[m.i]; if (el) { remote = true; try { el.click(); } finally { remote = false; } } }
+  else if (m.t === "code") { const ta = document.getElementById(m.id); if (ta) { ta.value = m.v; paint(ta); } }
+  else if (m.t === "overview") { remote = true; try { Reveal.toggleOverview(m.on); } finally { remote = false; } }
+};
+document.addEventListener("click", e => {
+  const t = e.target.closest(".reveal button, .reveal .flip");
+  if (t && !NOSYNC.has(t.id)) send({ t: "click", i: clickables().indexOf(t) });
+}, true);
+document.addEventListener("input", e => { if (e.target.matches(".editor textarea")) send({ t: "code", id: e.target.id, v: e.target.value }); });
+function slideTitle(sl) {
+  if (!sl) return "Fin de la presentación";
+  const h = sl.querySelector(".ex-title, h1, h2, h3");
+  return (h ? h.textContent : sl.dataset.mod || "").replace(/\s+/g, " ").trim();
+}
+function updatePresenter() {
+  if (!PRESENTER) return;
+  const cur = Reveal.getCurrentSlide(), all = Reveal.getSlides(), k = all.indexOf(cur);
+  const n = cur.querySelector("aside.notes");
+  document.getElementById("pv-notes").innerHTML = n ? n.innerHTML : "<p>Esta diapositiva no tiene notas.</p>";
+  document.getElementById("pv-count").textContent = `${k + 1} / ${all.length}`;
+  const pending = cur.querySelectorAll(".fragment:not(.visible):not(.trigger)").length;
+  document.getElementById("pv-next").innerHTML = pending
+    ? `<span>Siguiente clic</span><strong>Muestra el siguiente paso</strong> <em>· quedan ${pending} en esta diapositiva</em>`
+    : `<span>Siguiente diapositiva</span><strong>${esc(slideTitle(all[k + 1]))}</strong>`;
+}
+function tickClock() {
+  const s = Math.floor((Date.now() - startAt) / 1000);
+  document.getElementById("pv-elapsed").textContent = `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
+  document.getElementById("pv-now").textContent = new Date().toLocaleTimeString("es-CO", { hour: "2-digit", minute: "2-digit", hour12: false });
+}
+setInterval(tickClock, 1000);
+function setPresenter(on) {
+  PRESENTER = on;
+  document.body.classList.toggle("presenter", on);
+  if (on) { Reveal.configure({ hash: false }); panel.classList.remove("on"); startAt = Date.now(); tickClock(); updatePresenter(); }
+  setTimeout(() => Reveal.layout(), 50);
+  peerSeen = false; hello();
+}
+document.addEventListener("click", e => {
+  const id = e.target.closest("button")?.id;
+  if (id === "presenter-toggle") setPresenter(true);
+  else if (id === "pv-exit") setPresenter(false);
+  else if (id === "pv-prev") Reveal.prev();
+  else if (id === "pv-fwd") Reveal.next();
+  else if (id === "pv-overview") { Reveal.toggleOverview(); send({ t: "overview", on: Reveal.isOverview() }); }
+  else if (id === "pv-reset") { startAt = Date.now(); tickClock(); }
+});
+
+function goTo(sec) { if (sec) { const i = Reveal.getIndices(sec); Reveal.slide(i.h, i.v); } }
+
+// ---------------------------------------------------------------- progreso
+function paintProgress() {
+  const ids = DATA.items.map(i => i.id);
+  const ok = ids.filter(id => progress[id] === "ok").length, seen = ids.filter(id => progress[id] === "seen").length;
+  document.getElementById("dots").innerHTML = ids.map(id => `<button type="button" data-ex="${id}" class="${progress[id] || ""}" title="Ejercicio ${id}: ${esc(EX[id].titulo)}">${id}</button>`).join("");
+  document.getElementById("pbar").style.width = `${(ok / ids.length) * 100}%`;
+  document.getElementById("ptext").textContent = `${ok} de ${ids.length} comprobados · ${seen} con solución vista`;
+}
+paintProgress();
+
+// ---------------------------------------------------------------- notas en pantalla
+const panel = document.getElementById("notes-panel"), notesBody = document.getElementById("notes-body"), notesBtn = document.getElementById("notes-toggle");
+function updateNotes() {
+  const n = Reveal.getCurrentSlide().querySelector("aside.notes");
+  notesBody.innerHTML = n ? n.innerHTML : "<p>Esta diapositiva no tiene notas.</p>";
+}
+function toggleNotes() { if (PRESENTER || document.body.classList.contains("has-presenter")) return; panel.classList.toggle("on"); notesBtn.classList.toggle("on", panel.classList.contains("on")); updateNotes(); }
+
+// ---------------------------------------------------------------- reveal
+function onSlide(slide) {
+  // Al volver a una diapositiva, reveal.js muestra sus pasos sin avisar: sincroniza los efectos con lo visible.
+  slide.querySelectorAll(".fragment[data-target]").forEach(f => document.getElementById(f.dataset.target).classList.toggle(f.dataset.add, f.classList.contains("visible")));
+  slide.querySelectorAll(".fragment[data-hl]").forEach(f => document.getElementById(f.dataset.hl).classList.toggle("hl", f.classList.contains("visible")));
+  slide.querySelectorAll(".editor textarea").forEach(paint);
+  slide.querySelectorAll("[data-count]").forEach(el => { if (!el.closest(".fragment")) countUp(el); });
+  if (panel.classList.contains("on")) updateNotes();
+}
+function countUp(el) {
+  {
+    const end = Number(el.dataset.count), t0 = performance.now();
+    const step = now => {
+      const p = Math.min(1, (now - t0) / 900);
+      el.firstChild.nodeValue = String(Math.round(end * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+}
+Reveal.on("fragmentshown", e => {
+  e.fragments.forEach(f => {
+    if (f.dataset.target) document.getElementById(f.dataset.target).classList.add(f.dataset.add);
+    if (f.dataset.hl) document.getElementById(f.dataset.hl).classList.add("hl");
+    f.querySelectorAll("[data-count]").forEach(countUp);
+  });
+});
+Reveal.on("fragmenthidden", e => {
+  e.fragments.forEach(f => {
+    if (f.dataset.target) document.getElementById(f.dataset.target).classList.remove(f.dataset.add);
+    if (f.dataset.hl) document.getElementById(f.dataset.hl).classList.remove("hl");
+  });
+});
+const MES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+(() => {
+  const m = DATA.demos.mensual.filas, max = Math.max(...m.map(r => r[1]));
+  document.getElementById("bars").innerHTML = m.map((r, i) => `<div class="b${i === 8 || i === 9 ? " fest" : ""}"><b>${(r[1] / 1e6).toFixed(1).replace(".", ",")}</b><i data-h="${(100 * r[1] / max).toFixed(1)}%"></i><span>${MES[i]}</span></div>`).join("");
+})();
+Reveal.on("slidechanged", e => { e.currentSlide.querySelectorAll(".bars .b i").forEach(i => { i.style.height = i.dataset.h; }); });
+Reveal.on("ready", e => {
+  hljs = Reveal.getPlugin("highlight").hljs;
+  document.querySelectorAll("section[data-mod]").forEach(s => {
+    if (!s.dataset.mod) return;
+    const tag = document.createElement("div"); tag.className = "mod-tag"; tag.textContent = s.dataset.mod; s.prepend(tag);
+  });
+  onSlide(e.currentSlide);
+  setTimeout(() => engine().catch(() => { /* se muestra el resultado guardado */ }), 1500);
+});
+Reveal.on("slidechanged", e => { onSlide(e.currentSlide); sendNav(); updatePresenter(); });
+Reveal.on("fragmentshown", () => { sendNav(); updatePresenter(); });
+Reveal.on("fragmenthidden", () => { sendNav(); updatePresenter(); });
+Reveal.on("overviewshown", () => send({ t: "overview", on: true }));
+Reveal.on("overviewhidden", () => send({ t: "overview", on: false }));
+Reveal.on("ready", () => { if (PRESENTER) setPresenter(true); else hello(); });
+
+Reveal.initialize({
+  width: 1280, height: 720, margin: 0.04, center: false,
+  hash: !INFRAME && !PRESENTER, embedded: true, controls: true, progress: true, slideNumber: "c/t",
+  transition: "slide", transitionSpeed: "default", backgroundTransition: "fade",
+  autoAnimateDuration: 0.9, autoAnimateEasing: "cubic-bezier(.2,.8,.2,1)",
+  pdfSeparateFragments: false, showNotes: false,
+  keyboard: { 78: () => toggleNotes(), 80: () => setPresenter(!PRESENTER) },   // P: vista de presentador   // N: notas en pantalla (S abre la vista de presentador)
+  plugins: [RevealHighlight, RevealNotes],
+});
+})();
+</script>
+</body>
+</html>

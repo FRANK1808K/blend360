@@ -9,6 +9,7 @@ project:
     - simulador/
     - simulador-aif/
     - presentacion-sql/
+    - presentacion-pandas/
     - assets/
     - guia/
 
@@ -58,6 +59,8 @@ website:
             href: simulador-aif/index.html
           - text: "Presentación SQL desde Quibdó (35 ejercicios en vivo)"
             href: presentacion-sql/index.html
+          - text: "Presentación pandas desde Quibdó (35 ejercicios en vivo)"
+            href: presentacion-pandas/index.html
       - text: "English"
         menu:
           - text: "Home"

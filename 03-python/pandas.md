@@ -11,6 +11,8 @@ pip install pandas
 python3 pandas_practica.py
 ```
 
+**Presentación guiada y cuaderno de Jupyter:** la [presentación «pandas desde Quibdó»](../presentaciones/pandas/index.html) explica cada tema con animaciones y trae 35 ejercicios que se ejecutan y se comprueban en el navegador, con notas para el presentador. Los mismos ejercicios están en el [cuaderno para VS Code](../presentaciones/pandas/cuaderno_pandas.ipynb), con [sus soluciones](../presentaciones/pandas/cuaderno_pandas_soluciones.ipynb) y los datos en [`presentaciones/pandas/datos/`](../presentaciones/pandas/datos/ventas_mercado_pacifico.csv).
+
 ---
 
 ## 1. Conceptos base

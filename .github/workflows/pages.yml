@@ -10,6 +10,7 @@ on:
       - "aws-ai-practitioner/**"
       - "presentaciones/**"
       - "scripts/build_slides.py"
+      - "scripts/build_pandas_slides.py"
       - "**.md"
       - "scripts/build_site.py"
       - ".github/workflows/pages.yml"

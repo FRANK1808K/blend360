@@ -88,8 +88,8 @@ html, body { height: 100%; background: var(--night); color: var(--ink); margin: 
 .reveal table.t td.num, .reveal table.t th.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); }
 
 /* código */
-.reveal pre { width: 100%; margin: 0; box-shadow: none; font-size: 19px; line-height: 1.5; }
-.reveal pre code { font-family: var(--mono); max-height: 520px; padding: 18px 20px; border-radius: 14px; background: rgb(1 14 28 / .75) !important; border: 1px solid var(--line); color: #dbeafe; }
+.reveal pre { position: relative; width: 100%; margin: 0; box-shadow: none; font-size: 19px; line-height: 1.5; }
+.reveal pre code { font-family: var(--mono); max-height: 520px; padding: 18px 20px; border-radius: 14px; background: #020f1e !important; border: 1px solid var(--line); color: #dbeafe; }
 .hljs-keyword, .hljs-built_in { color: var(--cyan); font-weight: 600; }
 .hljs-string { color: var(--gold); }
 .hljs-number { color: #ffa3b4; }
@@ -1680,6 +1680,9 @@ function toggleNotes() { if (PRESENTER || document.body.classList.contains("has-
 
 // ---------------------------------------------------------------- reveal
 function onSlide(slide) {
+  // Al volver a una diapositiva, reveal.js muestra sus pasos sin avisar: sincroniza los efectos con lo visible.
+  slide.querySelectorAll(".fragment[data-target]").forEach(f => document.getElementById(f.dataset.target).classList.toggle(f.dataset.add, f.classList.contains("visible")));
+  slide.querySelectorAll(".fragment[data-hl]").forEach(f => document.getElementById(f.dataset.hl).classList.toggle("hl", f.classList.contains("visible")));
   slide.querySelectorAll(".editor textarea").forEach(paint);
   slide.querySelectorAll("[data-count]").forEach(el => { if (!el.closest(".fragment")) countUp(el); });
   if (panel.classList.contains("on")) updateNotes();

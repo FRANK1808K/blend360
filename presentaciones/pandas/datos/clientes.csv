@@ -1,0 +1,43 @@
+cliente_id,nombre,correo,municipio,departamento,segmento,fecha_registro
+1,Yeison Palacios,yeison1@correo.co,Medellín,Antioquia,Hogar,2023-10-10
+2,Marleny Copete,marleny2@correo.co,Tadó,Chocó,Tienda,2024-05-21
+3,Jeferson Ibargüen,jeferson3@correo.co,  quibdó,Chocó,Tienda,2023-08-12
+4,Brayan Serna,brayan4@correo.co,Quibdó,Chocó,Hogar,2024-06-17
+5,Ana Lucía Valencia,,Quibdó,Chocó,Restaurante,2023-11-09
+6,Yeison Mosquera,yeison6@correo.co,Istmina,Chocó,Hogar,2024-01-09
+7,Dayana Lemos,dayana7@correo.co,Condoto,Chocó,Restaurante,2023-12-27
+8,Wilmer Hinestroza,wilmer8@correo.co,ISTMINA ,Chocó,Restaurante,2023-07-09
+9,Ana Lucía Chaverra,ana9@correo.co,Tadó,Chocó,hogar,2023-09-08
+10,Brayan Córdoba,brayan10@correo.co,Bahía Solano,Chocó,Restaurante,2023-11-05
+11,Marleny Mosquera,marleny11@correo.co,Quibdó,Chocó,Hogar,2023-10-05
+12,Yeison Valencia,yeison12@correo.co,quibdo,Chocó,Hogar,2024-09-27
+13,Luz Marina Lemos,luz13@correo.co,Acandí,Chocó,Restaurante,2024-01-12
+14,Jeferson Murillo,jeferson14@correo.co,Medellín,Antioquia,tienda,2023-08-30
+15,Wilmer Mena,wilmer15@correo.co,Quibdó,Chocó,Hogar,2023-12-20
+7,Dayana Lemos,dayana7@correo.co,Condoto,Chocó,Restaurante,2023-12-27
+16,Leidy Rentería,leidy16@correo.co,Quibdó,Chocó,Tienda,2023-12-29
+17,Edwin Perea,edwin17@correo.co,Bahia Solano,Chocó,Hogar,2023-07-13
+18,Darwin Lemos,darwin18@correo.co,Quibdó,Chocó,Hogar,2024-05-22
+19,Edwin Moreno,edwin19@correo.co,Quibdó,Chocó,Hogar,2023-06-26
+20,Neyla Copete,neyla20@correo.co,Condoto,Chocó,Hogar,2023-06-09
+21,Ana Lucía Rentería,,Quibdó,Chocó,Hogar,2024-08-25
+22,Ana Lucía Hinestroza,ana22@correo.co,Bogotá,Cundinamarca,Hogar,2023-08-09
+23,Arley Palacios,arley23@correo.co,Turbo,Antioquia,Tienda,2023-11-09
+24,Jeferson Córdoba,jeferson24@correo.co,Quibdó,Chocó,Tienda,2024-07-02
+25,Darwin Moreno,darwin25@correo.co, Quibdó ,Chocó,Tienda,2024-01-06
+26,Wilmer Valencia,wilmer26@correo.co,Istmina,Chocó,Hogar,2023-08-03
+27,Faustino Chaverra,faustino27@correo.co,Bogotá,Cundinamarca,Tienda,2023-06-06
+28,Yeison Rentería,yeison28@correo.co,Condoto,Chocó,Tienda,2024-07-05
+29,Harold Moreno,harold29@correo.co,Cali,Valle del Cauca,Hogar,2024-08-17
+30,Yeison Mena,yeison30@correo.co,Acandí,Chocó,hogar,2023-11-16
+31,Edwin Chaverra,edwin31@correo.co,Cali,Valle del Cauca,Tienda,2024-04-29
+32,Yeison Copete,yeison32@correo.co,Condoto,Chocó,Hogar,2024-07-22
+33,Dayana Murillo,,Quibdó,Chocó,Hogar,2023-10-23
+34,Yesenia Mosquera,yesenia34@correo.co,Quibdó,Chocó,Tienda,2024-01-13
+35,Marleny Rentería,marleny35@correo.co,Quibdó,Chocó,Tienda,2024-08-04
+36,Luz Marina Lloreda,luz36@correo.co,Medellín,Antioquia,Hogar,2024-06-19
+37,Brayan Murillo,brayan37@correo.co,Istmina,Chocó,Hogar,2024-05-30
+38,Wilmer Rentería,wilmer38@correo.co,Cali,Valle del Cauca,Restaurante,2023-06-18
+39,Nelly Bejarano,nelly39@correo.co,Nuquí,Chocó,Hogar,2023-12-10
+40,Ana Lucía Perea,ana40@correo.co,Bogotá,Cundinamarca,Hogar,2023-08-21
+22,Ana Lucía Hinestroza,ana22@correo.co,Bogotá,Cundinamarca,Hogar,2023-08-09

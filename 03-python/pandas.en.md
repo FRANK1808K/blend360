@@ -11,6 +11,8 @@ pip install pandas
 python3 pandas_practica.py
 ```
 
+**Guided deck and Jupyter notebook:** the [«pandas desde Quibdó» slide deck](../presentaciones/pandas/index.html) (in Spanish) explains each topic with animations and includes 35 exercises that run and are checked in the browser, with speaker notes. The same exercises are in the [VS Code notebook](../presentaciones/pandas/cuaderno_pandas.ipynb), with [its solutions](../presentaciones/pandas/cuaderno_pandas_soluciones.ipynb) and the data in [`presentaciones/pandas/datos/`](../presentaciones/pandas/datos/ventas_mercado_pacifico.csv).
+
 ---
 
 ## 1. Core concepts
